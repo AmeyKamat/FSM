@@ -1,13 +1,14 @@
 package fsm.repository.impl;
 
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import fsm.entity.Desk;
 import fsm.entity.LayoutExtremes;
@@ -19,14 +20,14 @@ import fsm.entity.Users;
  * Created by Sarthak on 13-09-2016.
  */
 public class DataLoader {
-    private SessionFactory factory;
+    private static SessionFactory sessionFactory;
+    private static ServiceRegistry serviceRegistry;
     public DataLoader(){
         try {
-            //factory = new Configuration().configure().buildSessionFactory();
-            Configuration configuration=new Configuration();
-            configuration.configure("hibernate.cfg.xml");
-            ServiceRegistryBuilder srb=new ServiceRegistryBuilder().applySettings(configuration.getProperties());
-            factory = configuration.buildSessionFactory(srb.getBootstrapServiceRegistry());
+            Configuration configuration = new Configuration();
+            configuration.configure();
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -34,7 +35,7 @@ public class DataLoader {
         }
     }
     public void saveDesk(List<Desk> desks){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         for(Desk desk:desks){
             session.save(desk);
@@ -44,27 +45,27 @@ public class DataLoader {
     }
 
     public void saveExtremes(LayoutExtremes layoutExtremes) {
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         session.save(layoutExtremes);
         transaction.commit();
         session.close();
     }
     public void saveUser(Users users){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         session.save(users);
         transaction.commit();
         session.close();
     }
     public List<OfficeDetails> getOfficeDetails(){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         List<OfficeDetails> officeDetails=session.createQuery("from OfficeDetails ").list();
         return officeDetails;
     }
     public Users getUser(String id){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         List<Users> usersList=session.createQuery("from Users where id='"+id+"'").list();
         Users user=null;
@@ -74,7 +75,7 @@ public class DataLoader {
         return user;
     }
     public void deleteData(String locationId){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         Query q=session.createQuery("delete Desk where locationId='"+locationId+"'");
         Query q1=session.createQuery("delete LayoutExtremes where layoutId='"+locationId+"'");
@@ -90,13 +91,13 @@ public class DataLoader {
         session.close();
     }
     public List<Desk> getDesks(){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         List<Desk> users = session.createQuery("from Desk").list();
         return users;
     }
     public OfficeDetails getOfficeDetails(String country,String city,String branch,String floor){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         Query query=session.createQuery("from OfficeDetails where country=:country and city=:city and branch=:branch and floor=:floor");
         query.setParameter("country",country);
@@ -113,14 +114,14 @@ public class DataLoader {
         return officeDetailsList.get(0);
     }
     public void saveOfficeDetails(OfficeDetails officeDetails){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         session.save(officeDetails);
         transaction.commit();
         session.close();
     }
     public LayoutExtremes getLayoutExtremes(String country,String city,String branch,String floor){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         OfficeDetails officeDetails=getOfficeDetails(country, city, branch, floor);
         LayoutExtremes layoutExtremes=null;
@@ -140,13 +141,13 @@ public class DataLoader {
         return layoutExtremesList.get(0);
     }
     public LayoutExtremes getLayoutExtremes(){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         LayoutExtremes layoutExtremes = (LayoutExtremes) session.createQuery("from LayoutExtremes ").list().get(0);
         return layoutExtremes;
     }
     public void saveTableData(List<TableData> tableData){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         for(TableData td:tableData){
             session.save(td);
@@ -155,7 +156,7 @@ public class DataLoader {
         session.close();
     }
     public List<TableData> getTableData(String country,String city,String branch,String floor){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         List<TableData> tableData = null;
         OfficeDetails officeDetails=getOfficeDetails(country, city, branch, floor);
@@ -171,7 +172,7 @@ public class DataLoader {
         return tableData;
     }
     public List<TableData> getTableData(){
-        Session session=factory.openSession();
+        Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
         List<TableData>  tableDatas = session.createQuery("from TableData").list();
         return tableDatas;
