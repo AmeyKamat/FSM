@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import fsm.entity.Desk;
-import fsm.entity.LayoutData;
-import fsm.entity.LayoutExtremes;
+import fsm.domain.Desk;
+import fsm.domain.LayoutData;
+import fsm.domain.LayoutExtremes;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Range;

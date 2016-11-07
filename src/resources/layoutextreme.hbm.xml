@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="fsm.entity.LayoutExtremes" table="layout_extremes">
+    <class name="fsm.domain.LayoutExtremes" table="layout_extremes">
         <id name="layoutId" column="layout_id" type="string">
             <generator class="assigned"></generator>
         </id>

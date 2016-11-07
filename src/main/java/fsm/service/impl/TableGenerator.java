@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import fsm.entity.Desk;
-import fsm.entity.LayoutData;
-import fsm.entity.LayoutExtremes;
-import fsm.entity.TableData;
+import fsm.domain.Desk;
+import fsm.domain.LayoutData;
+import fsm.domain.LayoutExtremes;
+import fsm.domain.TableData;
 
 
 

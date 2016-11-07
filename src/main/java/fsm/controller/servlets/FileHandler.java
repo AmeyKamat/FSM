@@ -16,12 +16,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import fsm.entity.Desk;
-import fsm.entity.LayoutData;
-import fsm.entity.LayoutExtremes;
-import fsm.entity.OfficeDetails;
-import fsm.entity.TableData;
-import fsm.repository.impl.DataLoader;
+import fsm.domain.Desk;
+import fsm.domain.LayoutData;
+import fsm.domain.LayoutExtremes;
+import fsm.domain.OfficeDetails;
+import fsm.domain.TableData;
+import fsm.dao.DataLoader;
 import fsm.service.impl.ExcelParser;
 import fsm.service.impl.TableGenerator;
 
@@ -45,7 +45,7 @@ public class FileHandler extends HttpServlet {
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
-			factory.setRepository(new File("F:\\"));
+			factory.setRepository(new File("F:\\"));          // uploading a file to context path
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(maxFileSize);
 			try {
@@ -101,7 +101,7 @@ public class FileHandler extends HttpServlet {
 						dataLoader.saveTableData(tableList);
 					}
 				}
-				response.sendRedirect(request.getContextPath() + "/fsm/resources/views/index2.html");
+				response.sendRedirect(request.getContextPath() + "/resources/views/index2.html");
 			} catch (Exception ex) {
 				System.out.println(ex);
 			}
