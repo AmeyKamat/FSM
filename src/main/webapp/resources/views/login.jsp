@@ -117,7 +117,7 @@
     <input type="submit">
 </form>
 -->
-<link rel="stylesheet" type="text/css" href="/fsm/resources/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
 
 

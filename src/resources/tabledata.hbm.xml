@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="fsm.entity.TableData" table="table_data">
+    <class name="fsm.domain.TableData" table="table_data">
         <id name="tableUid" column="table_uid" type="int">
             <generator class="increment"></generator>
         </id>

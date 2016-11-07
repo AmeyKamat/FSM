@@ -7,26 +7,26 @@
           <element id="module-output" name="ems" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.0" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:javax.inject:2.1.88" />
-          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-server:2.0" />
-          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-client:2.0" />
-          <element id="library" level="project" name="Maven: com.google.guava:guava:14.0.1" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-api:2.1.88" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-utils:2.1.88" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-locator:2.1.88" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:asm-all-repackaged:2.1.88" />
-          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:cglib:2.1.88" />
-          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
-          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-common:2.0" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.16" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:javax.inject:2.4.0-b09" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-common:2.16" />
           <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.bundles.repackaged:jersey-guava:2.16" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-api:2.4.0-b09" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-utils:2.4.0-b09" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b09" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-locator:2.4.0-b09" />
           <element id="library" level="project" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
-          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0" />
-          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-moxy:2.0" />
-          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.moxy:2.5.0-M13" />
-          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.5.0-M13" />
-          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.5.0-M13" />
-          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.antlr:2.3.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-server:2.16" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-client:2.16" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-jaxb:2.16" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-moxy:2.16" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-entity-filtering:2.16" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.moxy:2.5.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.5.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.5.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.antlr:2.5.0" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
@@ -49,7 +49,9 @@
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.15.0-GA" />
           <element id="library" level="project" name="Maven: org.hibernate.common:hibernate-commons-annotations:4.0.1.Final" />
-          <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:4.1.1.Final" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.2.2.Final" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+          <element id="library" level="project" name="Maven: com.fasterxml:classmate:1.1.0" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.2.1.RELEASE" />
