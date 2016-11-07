@@ -7,7 +7,37 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EMS</name>
 	<url>http://maven.apache.org</url>
-	<dependencies>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.glassfish.jersey</groupId>
+                <artifactId>jersey-bom</artifactId>
+                <version>${jersey.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -72,29 +102,8 @@
 			<version>5.1.6</version>
 		</dependency>
 
-		<!-- For Jersey. Think about changing framework to spring rest, or atleast 
+		<!-- For Jersey. Think about changing framework to spring rest, or atleast
 			latest version of jersey -->
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet</artifactId>
-			<version>2.24</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- if you are using Jersey client specific features without the server 
-			side -->
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>2.24</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<!-- Added To ensure compatibility, remove at later stage -->
@@ -111,7 +120,7 @@
 			<artifactId>jxl</artifactId>
 			<version>2.6.12</version>
 		</dependency>
-		
+
 		<!-- Use file uploader of spring instead -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
@@ -149,7 +158,7 @@
 		<spring.version>4.2.1.RELEASE</spring.version>
 		<security.version>4.0.3.RELEASE</security.version>
 		<jdk.version>1.7</jdk.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>4.1.1.Final</hibernate.version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
 	</properties>
 </project>

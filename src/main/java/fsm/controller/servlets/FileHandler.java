@@ -45,7 +45,7 @@ public class FileHandler extends HttpServlet {
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
-			factory.setRepository(new File("F:\\User\\"));
+			factory.setRepository(new File("F:\\"));
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(maxFileSize);
 			try {
@@ -101,7 +101,7 @@ public class FileHandler extends HttpServlet {
 						dataLoader.saveTableData(tableList);
 					}
 				}
-				response.sendRedirect(request.getContextPath() + "/index2.html");
+				response.sendRedirect(request.getContextPath() + "/fsm/resources/views/index2.html");
 			} catch (Exception ex) {
 				System.out.println(ex);
 			}
