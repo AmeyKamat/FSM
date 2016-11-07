@@ -27,7 +27,7 @@ Chair.prototype.drawChair = function() {
  //    chair.set({'hasControls': false});
  //    chair.set({'centeredRotation': true});
  //    chair.set({'angle': that.angle});
- //    chair.set({'entity': 'chair'})
+ //    chair.set({'domain': 'chair'})
  //    chair.set({'deskid': that.deskid});
  //    chair.set({'brid': that.brid});
  //    chair.set({'selectable': false});

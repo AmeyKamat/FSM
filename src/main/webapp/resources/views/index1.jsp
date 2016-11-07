@@ -1,8 +1,8 @@
 <html>
 	<body>
-		<link rel="stylesheet" type="text/css" href="/fsm/resources/css/index.css">
-		<link rel="stylesheet" type="text/css" href="/fsm/resources/lib/font-awesome-4.6.3/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/fsm/resources/lib/bootstrap-3.3.7-dist\css\bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/resources/lib/font-awesome-4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/lib/bootstrap-3.3.7-dist\css\bootstrap.min.css">
 
 		<div class="container">
 			<div class="row">
@@ -107,8 +107,8 @@
 
 		</div>
 		
-		<script type="text/javascript" src="/fsm/resources/lib/jquery-3.1.0/jquery-3.1.0.min.js"></script>
-		<script type="text/javascript" src="/fsm/resources/lib/bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
+		<script type="text/javascript" src="/resources/lib/jquery-3.1.0/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="/resources/lib/bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
 		<script>
 			$("#uploadModal").modal("show")
 			document.getElementById("uploadBtn").onchange = function () {
