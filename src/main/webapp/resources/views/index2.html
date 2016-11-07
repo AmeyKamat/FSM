@@ -1,0 +1,120 @@
+<html>
+	<body>
+		<link rel="stylesheet" type="text/css" href="/fsm/resources/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/fsm/resources/lib/font-awesome-4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/fsm/resources/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/fsm/resources/css/treeview.css">
+		<div id="canvasZoomElement" style="height:100vh; width:100vw; position:relative"><canvas id="workarea"></canvas></div>
+		<div class="context-bar">
+			<!-- <button id="upload" class="btn-circle"><i class="fa fa-upload"></i></button> -->
+			<button id="zoomin" class="btn-circle" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button>
+			<button id="zoomout" class="btn-circle" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button>
+			<!--<input id="slide" onchange="changeZoomLevel()" type="range" min="1" max="100" step="1" value="50" width="100px">-->
+		</div>
+		
+		<span id="tooltip-span"><div id="desk-info"></div><div id="employee-info"></div></span>
+		<span id="loader" class="centered" style="display:none">
+			<p style="text-align: center">
+				<img src="./resources/img/loading.gif" height="50px" width="50px"><br><br>
+				Arranging tables and Chairs
+			</p>
+		</span>
+
+		<div class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" id="errorModal">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<h4 class="modal-title">Error</h4>
+      				</div>
+      				<div class="modal-body">
+        				<div class="row">
+			  				<p>We could not fetch data. Please check your network connection.</p>
+			  			</div>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-primary">Upload</button>
+      				</div>
+    			</div><!-- /.modal-content -->
+  			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<form name="t1" method="post" action="/layoutapp/logout">
+		   <button name="logout" id="logout">Logout</button>
+		 </form>
+
+		<a class="btn btn-default dropdown-toggle" id="explorerDropDown" onmouseover="displayLayoutExplorer()">
+        	Select A Layout
+        	<span class="caret"></span>
+    	</a>
+		<div id="layoutExplorer" class="explorer" onmouseover="displayLayoutExplorer()" onmouseout="hideLayoutExplorer()" style="display:none">
+			<ol class="tree">
+				<li>
+					<label for="folder1">India</label> <input type="checkbox" id="folder1" /> 
+					<ol>
+						<li>
+							<label for="subfolder1">Delhi</label> <input type="checkbox" id="subfolder1" />
+							<ol>
+								<li>
+									<label for="subsubfolder1">Noida</label> <input type="checkbox" id="subsubfolder1" /> 
+								</li>
+							</ol>
+						</li>
+						<li>
+							<label for="subfolder2">Pune</label> <input type="checkbox" id="subfolder2" /> 
+							<ol>
+								<li>
+									<label for="subsubfolder2">Hinjewadi</label> <input type="checkbox" id="subsubfolder2" /> 
+									<ol>
+										<li class="file"><a href="">Floor 1</a></li>
+										<li class="file"><a href="">Floor 2</a></li>
+										<li class="file"><a href="">Floor 3</a></li>
+										<li class="file"><a href="">Floor 4</a></li>
+										<li class="file"><a href="">Floor 5</a></li>
+										<li class="file"><a href="">Floor 6</a></li>
+									</ol>
+								</li>
+								<li>
+									<label for="subsubfolder3">Kharadi</label> <input type="checkbox" id="subsubfolder3" /> 
+									<ol>
+										<li class="file"><a href="">Floor 1</a></li>
+										<li class="file"><a href="">Floor 2</a></li>
+										<li class="file"><a href="#" data-country="India" data-city="Pune" data-branch="Kharadi" data-floor="3">Floor 3</a></li>
+										<li class="file"><a href="">Floor 4</a></li>
+										<li class="file"><a href="">Floor 5</a></li>
+										<li class="file"><a href="">Floor 6</a></li>
+										<li class="file"><a href="">Floor 7</a></li>
+									</ol>
+								</li>
+							</ol>
+						</li>
+					</ol>
+				</li>
+				
+			</ol>
+
+		</div>
+
+		
+
+		<script type="text/javascript" src="/fsm/resources/lib/fabric.js-1.6.4/fabric.min.js"></script>
+		<script type="text/javascript" src="/fsm/resources/lib/jquery-3.1.0/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="/fsm/resources/lib/bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
+		
+
+		<script async="false" type="text/javascript" src="/fsm/resources/js/mockData.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/util.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/uploadFile.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/resizeCanvas.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/zoomAndPan.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/tooltip.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/chairImage.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/explorer.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/chair.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/table.js"></script>
+		<script async="false" type="text/javascript" src="/fsm/resources/js/floor.js"></script>
+
+		<!--<script type="text/javascript" src="./resources/js/parser.js"></script>-->
+		<script type="text/javascript" src="/fsm/resources/js/visualise1.js"></script>
+	</body>
+</html>
