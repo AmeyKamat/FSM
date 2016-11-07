@@ -18,34 +18,32 @@ var ENV = {
 	chairPadding : 0.1
 };
 
- function initialise(){
-   loader.setAttribute('style', "display:block")
-   $.ajax({url: GET_LAYOUT_URL, success: function(result){
-     var floor = new Floor(result);
 
-     loader.setAttribute('style', "display:none")
-     if(result = ""){
-       uploadModal.modal('show');
-     }
-     else{
-       var inputObj = result;
-       $.ajax({url: GET_DESK_URL, success: function(result){
- 		  console.log(result)
-           var deskList = result;
-           floor.setDesks(deskList);
-           floor.createFloorLayout();
-       },
-       error: function(error, statusText){
-         document.getElementById("loader").setAttribute('style', "display:none");
-         errorModal.modal("show");
-       }});
-     }
-   },
-   error: function(error, statusText){
-     document.getElementById("loader").setAttribute('style', "display:none");
-     errorModal.modal("show");
-   }});
- }
+ 
+ function initialise(){
+	  loader.setAttribute('style', "display:block")
+	  $.ajax({url: GET_LAYOUT_URL, success: function(result){
+		  loader.setAttribute('style', "display:none");
+		  var inputObj = result;
+		  var floor = new Floor(inputObj);
+	    
+	    if(result = ""){
+	      uploadModal.modal('show');
+	    }
+	    else{
+	      
+	    	
+	          var desksList = inputObj.tableList;
+	          floor.setDesks(desksList);
+	          floor.createFloorLayout();
+	    } 
+	     
+	  },
+	  error: function(error, statusText){
+	    document.getElementById("loader").setAttribute('style', "display:none");
+	    errorModal.modal("show");
+	  }});
+	}
 
 
 window.onload = function(e){

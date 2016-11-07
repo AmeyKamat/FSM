@@ -25,7 +25,7 @@ public class DataLoader {
     public DataLoader(){
         try {
             Configuration configuration = new Configuration();
-            configuration.configure();
+            configuration.configure("/hibernate.cfg.xml");
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }

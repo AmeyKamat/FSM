@@ -36,8 +36,9 @@ public class FileHandler extends HttpServlet {
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
 		ServletContext context = getServletContext();
+		
 		String filePath = context.getInitParameter("file-upload");
-
+		System.out.println(filePath);
 		// Verify the content type
 		String contentType = request.getContentType();
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -45,7 +46,7 @@ public class FileHandler extends HttpServlet {
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
-			factory.setRepository(new File("F:\\"));          // uploading a file to context path
+			factory.setRepository(new File(filePath));          // uploading a file to context path
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(maxFileSize);
 			try {
@@ -103,7 +104,7 @@ public class FileHandler extends HttpServlet {
 				}
 				response.sendRedirect(request.getContextPath() + "/resources/views/index2.html");
 			} catch (Exception ex) {
-				System.out.println(ex);
+				ex.printStackTrace();
 			}
 		} else {
 			PrintWriter out = response.getWriter();

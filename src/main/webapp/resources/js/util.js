@@ -8,7 +8,7 @@ var LOADING_FILE = "loading.gif";
 /* API paths */
 var source = "http://localhost:8080"
 var GET_LAYOUT_URL = source + "/rest/datafetch";
-//var GET_DESK_URL = source + "/rest/datafetch";
+//var GET_DESK_URL = source + "rest/datafetch";
 var GET_EMPLOYEE_URL = "";
 
 

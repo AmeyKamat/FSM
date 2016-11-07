@@ -7,7 +7,7 @@
     <context-param>
         <param-name>file-upload</param-name>
         <param-value>
-            ${catalina.home}  <!--Uploading a file to this path-->
+            F:\
         </param-value>
         <description>Location to store uploaded file</description>
     </context-param>
