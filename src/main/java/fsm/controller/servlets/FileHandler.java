@@ -89,6 +89,9 @@ public class FileHandler extends HttpServlet {
 						officeDetails = new OfficeDetails(country, city, branch, floor);
 						dataLoader.saveOfficeDetails(officeDetails);
 						officeDetails = dataLoader.getOfficeDetails(country, city, branch, floor);
+						if(fileName.lastIndexOf("\\") != -1){
+							fileName = fileName.substring(fileName.lastIndexOf("\\"));
+						}
 						String path = filePath + fileName;
 						locationId = officeDetails.getOfficeUid() + "";
 						ExcelParser excelParser = new ExcelParser();
