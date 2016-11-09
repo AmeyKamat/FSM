@@ -10,7 +10,7 @@
 					<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" id="uploadModal">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
-								<form action="<%= request.getContextPath() %>/uploadFile" method="post" enctype="multipart/form-data">
+								<form action="<%= request.getContextPath() %>/controller/uploadFile" method="post" enctype="multipart/form-data">
 					  				<div class="modal-header">
 					    				<h4 class="modal-title">File Upload</h4>
 
