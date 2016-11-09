@@ -25,14 +25,14 @@ import fsm.dao.DataLoader;
  */
 
 @Controller
-@Scope("session")
 public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String login(final HttpServletRequest req, ModelMap map) {
 
-		String id = req.getParameter("user");
+		System.out.println("Came here");
+		String id = req.getParameter("username");
 		String password = req.getParameter("password");
 		DataLoader dataLoader = new DataLoader();
 		Users userCheckLogin = dataLoader.getUser(id);
@@ -40,7 +40,8 @@ public class LoginController {
 		if (userCheckLogin == null) {
 
 			map.addAttribute("error_message", "User does not exist");
-			return "login.jsp";
+			System.out.println("Exited here 1");
+			return "login.html";
 
 		} 
 		else {
@@ -50,17 +51,20 @@ public class LoginController {
 				HttpSession session = req.getSession();
 				session.setAttribute("id", id);
 				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
-				return "login.jsp";
+				System.out.println("Exited here 2");
+				return "index1.jsp";
 
 			}
 			else {
 
 				map.addAttribute("error_message", "User does not exist");
-				return "login.jsp";
+				System.out.println("Exited here 3");
+				return "login.html";
 
 			}
 
 		}
+		
 
 	}
 

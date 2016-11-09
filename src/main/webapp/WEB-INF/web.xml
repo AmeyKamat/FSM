@@ -75,7 +75,7 @@
   </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>resources/views/index1.jsp</welcome-file>
+        <welcome-file>resources/views/login.html</welcome-file>
     </welcome-file-list>
 
 
