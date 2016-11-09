@@ -10,23 +10,6 @@
         </param-value>
         <description>Location to store uploaded file</description>
     </context-param>
-    
-    <servlet>
-  	<servlet-name>mvc-dispatcher</servlet-name>
-  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  	
-  	<init-param>
-  		<param-name>contextConfigLocation</param-name>
-  		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
-  	</init-param>
-  	
-  	<load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>mvc-dispatcher</servlet-name>
-  	<url-pattern>/controller/*</url-pattern>
-  </servlet-mapping>
   
     <servlet>
         <servlet-name>FileHandler</servlet-name>
@@ -68,9 +51,25 @@
         <servlet-name>FileHandler</servlet-name>
         <url-pattern>/uploadFile</url-pattern>
     </servlet-mapping>
-	
-	<!-- Dispatcher Servlet -->
-	
+
+ <!--  Adding DispatcherServlet-->
+
+   <servlet>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+  	</init-param>
+  	
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<url-pattern>/controller/*</url-pattern>
+  </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>resources/views/index1.jsp</welcome-file>

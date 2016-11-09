@@ -28,7 +28,7 @@ import fsm.service.impl.TableGenerator;
 /**
  * Created by Sarthak on 13-09-2016.
  */
-public class FileHandler extends HttpServlet {
+public class FileHandlerController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
