@@ -25,26 +25,12 @@
 			<value>/resources/views/</value>
 		</property>
 	
+		<!--
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
+		-->
 		
 	</bean>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
->>>>>>> f92177d09ad9ea870d3e34f75f7a10420926c213
 		
 </beans>

@@ -1,20 +1,17 @@
 package fsm.controller.servlets;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import fsm.domain.Desk;
 import fsm.domain.LayoutData;
@@ -24,32 +21,40 @@ import fsm.domain.TableData;
 import fsm.dao.DataLoader;
 import fsm.service.impl.ExcelParser;
 import fsm.service.impl.TableGenerator;
+import fsm.util.PropertiesUtil;
 
 /**
  * Created by Sarthak on 13-09-2016.
  */
-public class FileHandlerController extends HttpServlet {
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+
+@Controller
+public class FileHandlerController {
+
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	public String handleFiles(HttpServletRequest request) {
+
 		File file;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-		ServletContext context = getServletContext();
-		
-		String filePath = context.getInitParameter("file-upload");
+
+		String filePath = PropertiesUtil.readProperty("file-upload");
 		System.out.println(filePath);
+
 		// Verify the content type
 		String contentType = request.getContentType();
+
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
+
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
-			factory.setRepository(new File(filePath));          // uploading a file to context path
+			factory.setRepository(new File(filePath)); // uploading a file to
+														// context path
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(maxFileSize);
 			try {
+
 				List fileItems = upload.parseRequest(request);
 				Iterator i = fileItems.iterator();
 				while (i.hasNext()) {
@@ -89,7 +94,7 @@ public class FileHandlerController extends HttpServlet {
 						officeDetails = new OfficeDetails(country, city, branch, floor);
 						dataLoader.saveOfficeDetails(officeDetails);
 						officeDetails = dataLoader.getOfficeDetails(country, city, branch, floor);
-						if(fileName.lastIndexOf("\\") != -1){
+						if (fileName.lastIndexOf("\\") != -1) {
 							fileName = fileName.substring(fileName.lastIndexOf("\\"));
 						}
 						String path = filePath + fileName;
@@ -103,32 +108,22 @@ public class FileHandlerController extends HttpServlet {
 						dataLoader.saveDesk(obtaineddesk);
 						dataLoader.saveExtremes(layoutExtremes);
 						dataLoader.saveTableData(tableList);
+
 					}
 				}
-				response.sendRedirect(request.getContextPath() + "/resources/views/index2.html");
+
+				return "index2.html";
+
 			} catch (Exception ex) {
-				ex.printStackTrace();
+
+				return "upload-error.html";
+
 			}
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet upload</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<p>No file uploaded</p>");
-			out.println("</body>");
-			out.println("</html>");
+
+			return "upload-no-file.html";
+
 		}
 	}
 
-	@Override
-	public void init() throws ServletException {
-
-	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
-	}
 }

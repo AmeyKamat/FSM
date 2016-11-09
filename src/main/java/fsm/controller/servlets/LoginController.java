@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import fsm.dao.DataLoader;
  */
 
 @Controller
+@Scope("session")
 public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -34,24 +36,27 @@ public class LoginController {
 		String password = req.getParameter("password");
 		DataLoader dataLoader = new DataLoader();
 		Users userCheckLogin = dataLoader.getUser(id);
+		
 		if (userCheckLogin == null) {
 
 			map.addAttribute("error_message", "User does not exist");
-			return "login";
+			return "login.jsp";
 
-		} else {
+		} 
+		else {
 
 			if (password.equals(userCheckLogin.getPassword())) {
 
 				HttpSession session = req.getSession();
 				session.setAttribute("id", id);
-				resp.sendRedirect(req.getContextPath()); // check filename
+				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
+				return "login.jsp";
 
 			}
 			else {
 
 				map.addAttribute("error_message", "User does not exist");
-				return "login";
+				return "login.jsp";
 
 			}
 
