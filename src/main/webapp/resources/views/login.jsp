@@ -111,6 +111,8 @@
 </style>
 <body>
 
+<h4>${error_message}</h4>
+
 <!--<form action="<%= request.getContextPath() %>/login" method="POST">
     id : <input type="text" name="user" id="user"><br>
     password : <input type="text" name="password" id="password"><br>

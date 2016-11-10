@@ -1,9 +1,10 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
 
 <web-app>
+  
   <display-name>Archetype Created Web Application</display-name>
+    
+    <!--
     <context-param>
         <param-name>file-upload</param-name>
         <param-value>
@@ -11,6 +12,8 @@
         </param-value>
         <description>Location to store uploaded file</description>
     </context-param>
+     -->
+  
     <servlet>
         <servlet-name>FileHandler</servlet-name>
         <servlet-class>fsm.controller.servlets.FileHandler</servlet-class>
@@ -52,9 +55,27 @@
         <url-pattern>/uploadFile</url-pattern>
     </servlet-mapping>
 
+ <!--  Adding DispatcherServlet-->
+
+   <servlet>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+  	</init-param>
+  	
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<url-pattern>/controller/*</url-pattern>
+  </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>resources/views/index1.jsp</welcome-file>
+        <welcome-file>resources/views/login.html</welcome-file>
     </welcome-file-list>
 
 
