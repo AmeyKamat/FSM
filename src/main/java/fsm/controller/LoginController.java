@@ -26,9 +26,20 @@ import fsm.dao.DataLoader;
  */
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
+	
+	
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView showLoginPage() {
+		
+		return new ModelAndView("login.html");
+		
+	}
+	
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView login(final HttpServletRequest req, ModelMap map) {
 
@@ -40,9 +51,9 @@ public class LoginController {
 		
 		if (userCheckLogin == null) {
 
-			map.addAttribute("error_message", "User does not exist");
+			// map.addAttribute("error_message", "User does not exist");
 			System.out.println("Exited here 1");
-			return new ModelAndView("login.html");
+			return new ModelAndView("redirect:/controller/login");
 
 		} 
 		else {
@@ -53,14 +64,14 @@ public class LoginController {
 				session.setAttribute("id", id);
 				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
 				System.out.println("Exited here 2");
-				return new ModelAndView("index1.jsp");
+				return new ModelAndView("redirect:/controller/uploadFile");
 
 			}
 			else {
 
-				map.addAttribute("error_message", "User does not exist");
+				// map.addAttribute("error_message", "User does not exist");
 				System.out.println("Exited here 3");
-				return new ModelAndView("login.html");
+				return new ModelAndView("redirect:/controller/login");
 
 			}
 
