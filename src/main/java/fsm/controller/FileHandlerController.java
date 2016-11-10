@@ -1,4 +1,4 @@
-package fsm.controller.servlets;
+package fsm.controller;
 
 import java.io.File;
 import java.util.Iterator;
