@@ -1,4 +1,4 @@
-package fsm.controller.servlets;
+package fsm.controller;
 
 import java.io.File;
 import java.util.Iterator;
@@ -12,6 +12,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import fsm.domain.Desk;
 import fsm.domain.LayoutData;
@@ -28,10 +29,19 @@ import fsm.util.PropertiesUtil;
  */
 
 @Controller
+@RequestMapping("/uploadFile")
 public class FileHandlerController {
 
-	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public String handleFiles(HttpServletRequest request) {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView showUploadFilePage() {
+		
+		return new ModelAndView("index1.jsp");
+		
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView handleFiles(HttpServletRequest request) {
 
 		File file;
 		int maxFileSize = 5000 * 1024;
@@ -112,16 +122,18 @@ public class FileHandlerController {
 					}
 				}
 
-				return "index2.html";
+				return new ModelAndView("redirect:/controller/floorPlan");
 
 			} catch (Exception ex) {
 
-				return "upload-error.html";
+				// return "upload-error.html";
+				return new ModelAndView("redirect:/controller/uploadFile");
 
 			}
 		} else {
 
-			return "upload-no-file.html";
+			// return "upload-no-file.html";
+			return new ModelAndView("redirect:/controller/uploadFile");
 
 		}
 	}

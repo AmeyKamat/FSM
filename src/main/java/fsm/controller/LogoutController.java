@@ -1,4 +1,4 @@
-package fsm.controller.servlets;
+package fsm.controller;
 
 import java.io.IOException;
 
@@ -13,22 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by TUSHAR on 16-09-2016.
  */
 @Controller
-@Scope("session")
-@RequestMapping("/logout")
 public class LogoutController{
 
-    @RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
-    public String logout(HttpServletRequest request)
+    public ModelAndView logout(HttpServletRequest request)
     {
     	HttpSession logoutSession = request.getSession();
         logoutSession.invalidate();
-    	return "login.jsp";
+        return new ModelAndView("redirect:/controller/login");
     }
     
 }

@@ -1,4 +1,4 @@
-package fsm.controller.servlets;
+package fsm.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import fsm.domain.Users;
 import fsm.dao.DataLoader;
@@ -25,11 +26,22 @@ import fsm.dao.DataLoader;
  */
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	
+	
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public String login(final HttpServletRequest req, ModelMap map) {
+	public ModelAndView showLoginPage() {
+		
+		return new ModelAndView("login.html");
+		
+	}
+	
+
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView login(final HttpServletRequest req, ModelMap map) {
 
 		System.out.println("Came here");
 		String id = req.getParameter("username");
@@ -39,9 +51,9 @@ public class LoginController {
 		
 		if (userCheckLogin == null) {
 
-			map.addAttribute("error_message", "User does not exist");
+			// map.addAttribute("error_message", "User does not exist");
 			System.out.println("Exited here 1");
-			return "login.html";
+			return new ModelAndView("redirect:/controller/login");
 
 		} 
 		else {
@@ -52,14 +64,14 @@ public class LoginController {
 				session.setAttribute("id", id);
 				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
 				System.out.println("Exited here 2");
-				return "index1.jsp";
+				return new ModelAndView("redirect:/controller/uploadFile");
 
 			}
 			else {
 
-				map.addAttribute("error_message", "User does not exist");
+				// map.addAttribute("error_message", "User does not exist");
 				System.out.println("Exited here 3");
-				return "login.html";
+				return new ModelAndView("redirect:/controller/login");
 
 			}
 
