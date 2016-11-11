@@ -11,7 +11,7 @@
 
 # TS Compilation Files #
 *.js.map
-/src/main/webapp/angular-fms/app/*.js
+/src/main/webapp/angular-fms/app/**/*.js
 /src/main/webapp/angular-fms/node_modules/
 /src/main/webapp/angular-fms/.idea/
 
