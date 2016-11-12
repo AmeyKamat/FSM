@@ -1,26 +1,39 @@
 package fsm.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
+
+@Entity
+@javax.persistence.Table(name="USER")
 public class User {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "employee_id")
 	private Employee userEmployee;
+	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
+	
+	@NotNull
 	@Column(name = "username")
 	private String username;
+	
+	@NotNull
 	@Column(name = "password")
 	private String password;
 

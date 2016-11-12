@@ -1,31 +1,46 @@
 package fsm.domain;
 
 import java.util.Set;
-
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+
+@Entity
+@javax.persistence.Table(name="TABLE")
 public class Table {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "floor_id")
 	private Floor floor;
+	
+	@NotNull
 	@Column(name = "top_left_x")
 	private int topLeftX;
+	
+	@NotNull
 	@Column(name = "top_left_y")
 	private int topLeftY;
+	
+	@NotNull
 	@Column(name = "width")
 	private int width;
+	
+	@NotNull
 	@Column(name = "length")
 	private int length;
+	
 	@OneToMany(mappedBy = "table")
 	private Set<Desk> desks;
 

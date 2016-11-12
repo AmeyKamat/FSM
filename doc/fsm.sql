@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`location` (
   `id` INT(11) NOT NULL,
   `city_id` INT(11) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  `location_code` VARCHAR(45) NULL,
+  `location_code` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_city1_idx` (`city_id` ASC),
   CONSTRAINT `fk_location_city1`

@@ -1,33 +1,50 @@
 package fsm.domain;
 
 import java.util.Set;
-
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+
+@Entity
+@javax.persistence.Table(name="FLOOR")
 public class Floor {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
+	
+	@NotNull
 	@Column(name = "floor_code")
 	private String floorCode;
+	
+	@NotNull
 	@Column(name = "min_x")
 	private int minX;
+	
+	@NotNull
 	@Column(name = "min_y")
 	private int minY;
+	
+	@NotNull
 	@Column(name = "max_x")
 	private int maxX;
+	
+	@NotNull
 	@Column(name = "max_y")
 	private int maxY;
+	
 	@OneToMany(mappedBy = "floor")
 	private Set<Table> tables;
 

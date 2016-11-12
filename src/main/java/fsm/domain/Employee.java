@@ -1,28 +1,40 @@
 package fsm.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
+
+@Entity
+@javax.persistence.Table(name="EMPLOYEE")
 public class Employee {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
+	@NotNull
 	@Column(name = "brid")
 	private String brid;
+	
+	@NotNull
 	@Column(name = "name")
 	private String name;
+	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "group_id")
 	private Group group;
+	
 	@OneToOne(mappedBy = "deskEmployee")
 	private Desk desk;
+	 
 	@OneToOne(mappedBy = "userEmployee")
 	private User user;
 
