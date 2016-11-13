@@ -2,34 +2,59 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import fsm.dao.LocationDao;
 import fsm.domain.Location;
 
 public class LocationDaoImpl implements LocationDao {
 
-	public void add(Location location) {
-		// TODO Auto-generated method stub
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	public Integer add(Location location) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Integer locationID = (Integer) session.save(location);
+		return locationID;
 
 	}
 
 	public void remove(int id) {
-		// TODO Auto-generated method stub
+
+		Session session = sessionFactory.getCurrentSession();
+		Location location = get(id);
+
+		if (location != null) {
+			session.delete(location);
+		}
 
 	}
 
 	public void update(Location location) {
-		// TODO Auto-generated method stub
+
+		Session session = sessionFactory.getCurrentSession();
+		session.update(location);
 
 	}
 
-	public void get(int id) {
-		// TODO Auto-generated method stub
+	public Location get(int id) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Location location = (Location) session.get(Location.class, id);
+		return location;
 
 	}
 
 	public List<Location> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Location.class);
+		return criteria.list();
+
 	}
 
 }
