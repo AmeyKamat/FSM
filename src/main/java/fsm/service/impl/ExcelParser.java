@@ -16,10 +16,10 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-/**
- * Created by Sarthak on 13-09-2016.
- */
+
 public class ExcelParser {
+
+
 	private boolean isValidDesk(Cell cell) {
 		if (cell.getContents().isEmpty() || cell.getType() != CellType.NUMBER) {
 			return false;
@@ -28,6 +28,7 @@ public class ExcelParser {
 	}
 
 	public LayoutData getDesk(String path, String location) {
+
 		int minimumX = 0, minimumY = 0, maximumX, maximumY;
 		File workbook = new File(path);
 		List<Desk> desks = new ArrayList<Desk>();

@@ -44,6 +44,16 @@ public class Desk {
 		super();
 	}
 
+	public Desk(Table table, Employee deskEmployee, int tableRow, int tableCol, String deskCode){
+
+		this.table=table;
+		this.deskEmployee=deskEmployee;
+		this.tableRow=tableRow;
+		this.tableCol=tableCol;
+		this.deskCode=deskCode;
+
+	}
+
 	public int getId() {
 		return id;
 	}

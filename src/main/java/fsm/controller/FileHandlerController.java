@@ -20,8 +20,8 @@ import fsm.domain.LayoutExtremes;
 import fsm.domain.OfficeDetails;
 import fsm.domain.TableData;
 import fsm.dao.DataLoader;
-import fsm.service.impl.ExcelParser;
-import fsm.service.impl.TableGenerator;
+import fsm.service.middleLayer.impl.ExcelParser;
+import fsm.service.middleLayer.impl.TableGenerator;
 import fsm.util.PropertiesUtil;
 
 /**

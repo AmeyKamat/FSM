@@ -1,4 +1,4 @@
-package fsm.resource.rest;
+package fsm.RestControllers;
 
 import java.util.List;
 
