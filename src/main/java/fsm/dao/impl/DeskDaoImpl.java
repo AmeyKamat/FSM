@@ -15,7 +15,7 @@ public class DeskDaoImpl implements DeskDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Desk desk) {
+	public Integer addDesk(Desk desk) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer deskID = (Integer) session.save(desk);
@@ -23,10 +23,10 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeDesk(int deskId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Desk desk = get(id);
+		Desk desk = getDeskById(deskId);
 
 		if (desk != null) {
 			session.delete(desk);
@@ -34,22 +34,22 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
-	public void update(Desk desk) {
+	public void updateDesk(Desk desk) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(desk);
 
 	}
 
-	public Desk get(int id) {
+	public Desk getDeskById(int deskId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Desk desk = (Desk) session.get(Desk.class, id);
+		Desk desk = (Desk) session.get(Desk.class, deskId);
 		return desk;
 
 	}
 
-	public List<Desk> getAll() {
+	public List<Desk> getAllDesks() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Desk.class);

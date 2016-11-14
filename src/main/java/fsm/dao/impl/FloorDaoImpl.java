@@ -15,7 +15,7 @@ public class FloorDaoImpl implements FloorDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Floor floor) {
+	public Integer addFloor(Floor floor) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer floorID = (Integer) session.save(floor);
@@ -23,10 +23,10 @@ public class FloorDaoImpl implements FloorDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeFloor(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Floor floor = get(id);
+		Floor floor = getFloorById(floorId);
 
 		if (floor != null) {
 			session.delete(floor);
@@ -34,22 +34,22 @@ public class FloorDaoImpl implements FloorDao {
 
 	}
 
-	public void update(Floor floor) {
+	public void updateFloor(Floor floor) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(floor);
 
 	}
 
-	public Floor get(int id) {
+	public Floor getFloorById(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Floor floor = (Floor) session.get(Floor.class, id);
+		Floor floor = (Floor) session.get(Floor.class, floorId);
 		return floor;
 
 	}
 
-	public List<Floor> getAll() {
+	public List<Floor> getAllFloors() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Floor.class);

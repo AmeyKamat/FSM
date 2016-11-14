@@ -15,7 +15,7 @@ public class CountryDaoImpl implements CountryDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Country country) {
+	public Integer addCountry(Country country) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer countryID = (Integer) session.save(country);
@@ -23,10 +23,10 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeCountry(int countryId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Country country = get(id);
+		Country country = getCountryById(countryId);
 
 		if (country != null) {
 			session.delete(country);
@@ -34,22 +34,22 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
-	public void update(Country country) {
+	public void updateCountry(Country country) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(country);
 
 	}
 
-	public Country get(int id) {
+	public Country getCountryById(int countryId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Country country = (Country) session.get(Country.class, id);
+		Country country = (Country) session.get(Country.class, countryId);
 		return country;
 
 	}
 
-	public List<Country> getAll() {
+	public List<Country> getAllCountries() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Country.class);

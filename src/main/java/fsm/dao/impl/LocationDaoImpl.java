@@ -15,7 +15,7 @@ public class LocationDaoImpl implements LocationDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Location location) {
+	public Integer addLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer locationID = (Integer) session.save(location);
@@ -23,10 +23,10 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeLocation(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Location location = get(id);
+		Location location = getLocationById(locationId);
 
 		if (location != null) {
 			session.delete(location);
@@ -34,22 +34,22 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
-	public void update(Location location) {
+	public void updateLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(location);
 
 	}
 
-	public Location get(int id) {
+	public Location getLocationById(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Location location = (Location) session.get(Location.class, id);
+		Location location = (Location) session.get(Location.class, locationId);
 		return location;
 
 	}
 
-	public List<Location> getAll() {
+	public List<Location> getAllLocations() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Location.class);

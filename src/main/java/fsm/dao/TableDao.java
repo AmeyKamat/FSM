@@ -6,14 +6,14 @@ import fsm.domain.Table;
 
 public interface TableDao {
 
-	public Integer add(Table table);
+	public Integer addTable(Table table);
 
-	public void remove(int id);
+	public void removeTable(int tableId);
 
-	public void update(Table table);
+	public void updateTable(Table table);
 
-	public Table get(int id);
+	public Table getTableById(int tableId);
 
-	public List<Table> getAll();
+	public List<Table> getAllTables();
 
 }

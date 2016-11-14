@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(User user) {
+	public Integer addUser(User user) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer userID = (Integer) session.save(user);
@@ -23,10 +23,10 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeUser(int userId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		User user = get(id);
+		User user = getUserById(userId);
 
 		if (user != null) {
 			session.delete(user);
@@ -34,22 +34,22 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	public void update(User user) {
+	public void updateUser(User user) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(user);
 
 	}
 
-	public User get(int id) {
+	public User getUserById(int userId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		User user = (User) session.get(User.class, id);
+		User user = (User) session.get(User.class, userId);
 		return user;
 
 	}
 
-	public List<User> getAll() {
+	public List<User> getAllUsers() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);

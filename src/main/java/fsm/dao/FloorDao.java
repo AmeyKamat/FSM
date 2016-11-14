@@ -6,14 +6,14 @@ import fsm.domain.Floor;
 
 public interface FloorDao {
 
-	public Integer add(Floor floor);
+	public Integer addFloor(Floor floor);
 
-	public void remove(int id);
+	public void removeFloor(int floorId);
 
-	public void update(Floor floor);
+	public void updateFloor(Floor floor);
 
-	public Floor get(int id);
+	public Floor getFloorById(int floorId);
 
-	public List<Floor> getAll();
+	public List<Floor> getAllFloors();
 
 }

@@ -15,7 +15,7 @@ public class RoleDaoImpl implements RoleDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Role role) {
+	public Integer addRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer roleID = (Integer) session.save(role);
@@ -23,10 +23,10 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeRole(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Role role = get(id);
+		Role role = getRoleById(roleId);
 
 		if (role != null) {
 			session.delete(role);
@@ -34,22 +34,22 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
-	public void update(Role role) {
+	public void updateRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(role);
 
 	}
 
-	public Role get(int id) {
+	public Role getRoleById(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Role role = (Role) session.get(Role.class, id);
+		Role role = (Role) session.get(Role.class, roleId);
 		return role;
 
 	}
 
-	public List<Role> getAll() {
+	public List<Role> getAllRoles() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Role.class);

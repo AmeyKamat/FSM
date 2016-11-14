@@ -15,7 +15,7 @@ public class CityDaoImpl implements CityDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(City city) {
+	public Integer addCity(City city) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer cityID = (Integer) session.save(city);
@@ -23,10 +23,10 @@ public class CityDaoImpl implements CityDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeCity(int cityId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		City city = get(id);
+		City city = getCityById(cityId);
 
 		if (city != null) {
 			session.delete(city);
@@ -34,22 +34,22 @@ public class CityDaoImpl implements CityDao {
 
 	}
 
-	public void update(City city) {
+	public void updateCity(City city) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(city);
 
 	}
 
-	public City get(int id) {
+	public City getCityById(int cityId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		City city = (City) session.get(City.class, id);
+		City city = (City) session.get(City.class, cityId);
 		return city;
 
 	}
 
-	public List<City> getAll() {
+	public List<City> getAllCities() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(City.class);

@@ -6,14 +6,14 @@ import fsm.domain.Location;
 
 public interface LocationDao {
 
-	public Integer add(Location location);
+	public Integer addLocation(Location location);
 
-	public void remove(int id);
+	public void removeLocation(int locationId);
 
-	public void update(Location location);
+	public void updateLocation(Location location);
 
-	public Location get(int id);
+	public Location getLocationById(int locationId);
 
-	public List<Location> getAll();
+	public List<Location> getAllLocations();
 
 }

@@ -15,7 +15,7 @@ public class TableDaoImpl implements TableDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Table table) {
+	public Integer addTable(Table table) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer tableID = (Integer) session.save(table);
@@ -23,10 +23,10 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeTable(int tableId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Table table = get(id);
+		Table table = getTableById(tableId);
 
 		if (table != null) {
 			session.delete(table);
@@ -34,22 +34,22 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
-	public void update(Table table) {
+	public void updateTable(Table table) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(table);
 
 	}
 
-	public Table get(int id) {
+	public Table getTableById(int tableId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Table table = (Table) session.get(Table.class, id);
+		Table table = (Table) session.get(Table.class, tableId);
 		return table;
 
 	}
 
-	public List<Table> getAll() {
+	public List<Table> getAllTables() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Table.class);

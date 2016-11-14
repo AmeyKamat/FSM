@@ -15,7 +15,7 @@ public class GroupDaoImpl implements GroupDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Group group) {
+	public Integer addGroup(Group group) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer groupID = (Integer) session.save(group);
@@ -23,10 +23,10 @@ public class GroupDaoImpl implements GroupDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeGroup(int groupId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Group group = get(id);
+		Group group = getGroupById(groupId);
 
 		if (group != null) {
 			session.delete(group);
@@ -34,22 +34,22 @@ public class GroupDaoImpl implements GroupDao {
 
 	}
 
-	public void update(Group group) {
+	public void updateGroup(Group group) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(group);
 
 	}
 
-	public Group get(int id) {
+	public Group getGroupById(int groupId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Group group = (Group) session.get(Group.class, id);
+		Group group = (Group) session.get(Group.class, groupId);
 		return group;
 
 	}
 
-	public List<Group> getAll() {
+	public List<Group> getAllGroups() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Group.class);

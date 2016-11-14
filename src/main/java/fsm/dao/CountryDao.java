@@ -6,14 +6,14 @@ import fsm.domain.Country;
 
 public interface CountryDao {
 
-	public Integer add(Country country);
+	public Integer addCountry(Country country);
 
-	public void remove(int id);
+	public void removeCountry(int countryId);
 
-	public void update(Country country);
+	public void updateCountry(Country country);
 
-	public Country get(int id);
+	public Country getCountryById(int countryId);
 
-	public List<Country> getAll();
+	public List<Country> getAllCountries();
 
 }
