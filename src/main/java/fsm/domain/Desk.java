@@ -1,111 +1,95 @@
 package fsm.domain;
 
-/**
- * Created by Sarthak on 13-09-2016.
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+
+@Entity
+@javax.persistence.Table(name="DESK")
 public class Desk {
-    private int uId;
-    private int deskId;
-    private int x,y;
-    private int width,height;
-    private String brid;
-    private String locationId;
-    private String hash;
-    @Override
-    public int hashCode(){
-        String hash=x+"|"+y;
-        int hashcode=0;
-        hashcode+=hash.hashCode();
-        return hashcode;
-    }
-    @Override
-    public boolean equals(Object object){
-        Desk toCompare=(Desk)object;
-        if(object instanceof Desk) {
-            if (toCompare.x == this.x && toCompare.y == this.y) {
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
-    public Desk(int deskId, int x, int y, int width, int height, String brid,String locationId) {
-        this.deskId = deskId;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.brid = brid;
-        this.locationId = locationId;
-    }
-    public Desk(int x,int y){
-        this.x=x;
-        this.y=y;
-    }
-    public Desk() {
-    }
 
-    public int getuId() {
-        return uId;
-    }
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "table_id")
+	private Table table;
+	
+	@OneToOne
+	@JoinColumn(name = "employee_id")
+	private Employee deskEmployee;
+	
+	@NotNull
+	@Column(name = "table_row")
+	private int tableRow;
+	
+	@NotNull
+	@Column(name = "table_col")
+	private int tableCol;
+	
+	@NotNull
+	@Column(name = "desk_code")
+	private String deskCode;
 
-    public void setuId(int uId) {
-        this.uId = uId;
-    }
+	public Desk() {
+		super();
+	}
 
-    public String getLocationId() {
-        return locationId;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getBrid() {
-        return brid;
-    }
+	public Table getTable() {
+		return table;
+	}
 
-    public void setBrid(String brid) {
-        this.brid = brid;
-    }
+	public void setTable(Table table) {
+		this.table = table;
+	}
 
-    public int getHeight() {
-        return height;
-    }
+	public Employee getDeskEmployee() {
+		return deskEmployee;
+	}
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
+	public void setDeskEmployee(Employee deskEmployee) {
+		this.deskEmployee = deskEmployee;
+	}
 
-    public int getWidth() {
-        return width;
-    }
+	public int getTableRow() {
+		return tableRow;
+	}
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+	public void setTableRow(int tableRow) {
+		this.tableRow = tableRow;
+	}
 
-    public int getY() {
-        return y;
-    }
+	public int getTableCol() {
+		return tableCol;
+	}
 
-    public void setY(int y) {
-        this.y = y;
-    }
+	public void setTableCol(int tableCol) {
+		this.tableCol = tableCol;
+	}
 
-    public int getX() {
-        return x;
-    }
+	public String getDeskCode() {
+		return deskCode;
+	}
 
-    public void setX(int x) {
-        this.x = x;
-    }
+	public void setDeskCode(String deskCode) {
+		this.deskCode = deskCode;
+	}
 
-    public int getDeskId() {
-        return deskId;
-    }
-
-    public void setDeskId(int deskId) {
-        this.deskId = deskId;
-    }
 }

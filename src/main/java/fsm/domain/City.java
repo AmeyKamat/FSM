@@ -1,6 +1,7 @@
 package fsm.domain;
 
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,31 +13,27 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@javax.persistence.Table(name="LOCATION")
-public class Location {
+@javax.persistence.Table(name="CITY")
+public class City {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private City city;
-	
+	@JoinColumn(name = "country_id")
+	private Country country;
+
 	@NotNull
 	@Column(name = "name")
 	private String name;
-	
-	@NotNull
-	@Column(name = "location_code")
-	private String locationCode;
-	
-	@OneToMany(mappedBy = "location")
-	private Set<Floor> floors;
 
-	public Location() {
+	@OneToMany(mappedBy = "city")
+	private Set<Location> locations;
+
+	public City() {
 		super();
 	}
 
@@ -48,12 +45,12 @@ public class Location {
 		this.id = id;
 	}
 
-	public City getCity() {
-		return city;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCity(City city) {
-		this.city = city;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 	public String getName() {
@@ -64,20 +61,12 @@ public class Location {
 		this.name = name;
 	}
 
-	public String getLocationCode() {
-		return locationCode;
+	public Set<Location> getLocations() {
+		return locations;
 	}
 
-	public void setLocationCode(String locationCode) {
-		this.locationCode = locationCode;
-	}
-
-	public Set<Floor> getFloors() {
-		return floors;
-	}
-
-	public void setFloors(Set<Floor> floors) {
-		this.floors = floors;
+	public void setLocations(Set<Location> locations) {
+		this.locations = locations;
 	}
 
 }
