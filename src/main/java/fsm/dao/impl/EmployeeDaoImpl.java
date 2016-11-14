@@ -15,7 +15,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Employee employee) {
+	public Integer addEmployee(Employee employee) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer employeeID = (Integer) session.save(employee);
@@ -23,10 +23,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
-	public void remove(int id) {
+	public void removeEmployee(int employeeId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Employee employee = get(id);
+		Employee employee = getEmployeeById(employeeId);
 
 		if (employee != null) {
 			session.delete(employee);
@@ -34,22 +34,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
-	public void update(Employee employee) {
+	public void updateEmployee(Employee employee) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(employee);
 
 	}
 
-	public Employee get(int id) {
+	public Employee getEmployeeById(int employeeId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Employee employee = (Employee) session.get(Employee.class, id);
+		Employee employee = (Employee) session.get(Employee.class, employeeId);
 		return employee;
 
 	}
 
-	public List<Employee> getAll() {
+	public List<Employee> getAllEmployees() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Employee.class);
