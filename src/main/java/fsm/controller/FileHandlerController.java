@@ -53,23 +53,23 @@ public class FileHandlerController {
 		// Verify the content type
 		String contentType = request.getContentType();
 
-		if ((contentType.indexOf("multipart/form-data") >= 0)) {
+		if ((contentType.indexOf("multipart/form-data") >= 0)) {//multipart/form-data multipart/form-data
 
-			DiskFileItemFactory factory = new DiskFileItemFactory();
+			DiskFileItemFactory factory = new DiskFileItemFactory();// disk directory in which temporary files will be created above threshol
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
 			factory.setRepository(new File(filePath)); // uploading a file to
 														// context path
-			ServletFileUpload upload = new ServletFileUpload(factory);
+			ServletFileUpload upload = new ServletFileUpload(factory);//creating upload handler
 			upload.setSizeMax(maxFileSize);
 			try {
 
-				List fileItems = upload.parseRequest(request);
+				List fileItems = upload.parseRequest(request);//parse the incoming upload request
 				Iterator i = fileItems.iterator();
 				while (i.hasNext()) {
 					FileItem fi = (FileItem) i.next();
-					if (!fi.isFormField()) {
+					if (!fi.isFormField()) {//true if the instance represents a simple form field; false if it represents an uploaded file.
 						// Get the uploaded file parameters
 						String fieldName = fi.getFieldName();
 						String fileName = fi.getName();
@@ -77,7 +77,7 @@ public class FileHandlerController {
 						long sizeInBytes = fi.getSize();
 						// Write the file
 						if (fileName.lastIndexOf("\\") >= 0) {
-							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")));
+							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
 						} else {
 							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 						}
