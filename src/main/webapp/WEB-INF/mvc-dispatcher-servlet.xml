@@ -32,5 +32,13 @@
 		-->
 		
 	</bean>
+	
+	<!-- register bean for properties file -->
+	<bean id="dbProperties"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 
+    <property name="location" value="classpath:app.properties" />
+ 
+    </bean>
 		
 </beans>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,6 @@ import fsm.domain.TableData;
 import fsm.dao.DataLoader;
 import fsm.service.impl.ExcelParser;
 import fsm.service.impl.TableGenerator;
-import fsm.util.PropertiesUtil;
 
 /**
  * Created by Sarthak on 13-09-2016.
@@ -32,6 +32,9 @@ import fsm.util.PropertiesUtil;
 @RequestMapping("/uploadFile")
 public class FileHandlerController {
 
+	@Value("${file-upload}")
+	private String filePath;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showUploadFilePage() {
 		
@@ -46,30 +49,28 @@ public class FileHandlerController {
 		File file;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-
-		String filePath = PropertiesUtil.readProperty("file-upload");
-		System.out.println(filePath);
-
+         System.out.println("success read app.properties file"+filePath);
+		
 		// Verify the content type
 		String contentType = request.getContentType();
 
-		if ((contentType.indexOf("multipart/form-data") >= 0)) {
+		if ((contentType.indexOf("multipart/form-data") >= 0)) {//multipart/form-data multipart/form-data
 
-			DiskFileItemFactory factory = new DiskFileItemFactory();
+			DiskFileItemFactory factory = new DiskFileItemFactory();// disk directory in which temporary files will be created above threshol
 			factory.setSizeThreshold(maxMemSize);
 
 			// TO DO: Better to pick this up from *.application file
 			factory.setRepository(new File(filePath)); // uploading a file to
 														// context path
-			ServletFileUpload upload = new ServletFileUpload(factory);
+			ServletFileUpload upload = new ServletFileUpload(factory);//creating upload handler
 			upload.setSizeMax(maxFileSize);
 			try {
 
-				List fileItems = upload.parseRequest(request);
+				List fileItems = upload.parseRequest(request);//parse the incoming upload request
 				Iterator i = fileItems.iterator();
 				while (i.hasNext()) {
 					FileItem fi = (FileItem) i.next();
-					if (!fi.isFormField()) {
+					if (!fi.isFormField()) {//true if the instance represents a simple form field; false if it represents an uploaded file.
 						// Get the uploaded file parameters
 						String fieldName = fi.getFieldName();
 						String fileName = fi.getName();
@@ -77,7 +78,7 @@ public class FileHandlerController {
 						long sizeInBytes = fi.getSize();
 						// Write the file
 						if (fileName.lastIndexOf("\\") >= 0) {
-							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")));
+							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
 						} else {
 							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 						}
