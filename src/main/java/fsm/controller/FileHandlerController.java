@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,6 @@ import fsm.domain.TableData;
 import fsm.dao.DataLoader;
 import fsm.service.impl.ExcelParser;
 import fsm.service.impl.TableGenerator;
-import fsm.util.PropertiesUtil;
 
 /**
  * Created by Sarthak on 13-09-2016.
@@ -32,6 +32,9 @@ import fsm.util.PropertiesUtil;
 @RequestMapping("/uploadFile")
 public class FileHandlerController {
 
+	@Value("${file-upload}")
+	private String filePath;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showUploadFilePage() {
 		
@@ -46,10 +49,8 @@ public class FileHandlerController {
 		File file;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-
-		String filePath = PropertiesUtil.readProperty("file-upload");
-		System.out.println(filePath);
-
+         System.out.println("success read app.properties file"+filePath);
+		
 		// Verify the content type
 		String contentType = request.getContentType();
 

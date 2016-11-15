@@ -37,7 +37,7 @@
 	<bean id="dbProperties"
     class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
  
-    <property name="location" value="classpath:prop.properties" />
+    <property name="location" value="classpath:app.properties" />
  
     </bean>
 		
