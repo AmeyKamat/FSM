@@ -48,7 +48,12 @@ public class CityDaoImpl implements CityDao {
 		return city;
 
 	}
-
+	public City getCityByName(String cityName)
+	{
+		Session session = sessionFactory.getCurrentSession();
+		City city = (City) session.get(City.class, cityName);
+		return city;
+	}
 	public List<City> getAllCities() {
 
 		Session session = sessionFactory.getCurrentSession();

@@ -1,16 +1,10 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 import fsm.domain.Desk;
-import fsm.domain.LayoutData;
-import fsm.domain.LayoutExtremes;
-import fsm.domain.TableData;
+import fsm.domain.Floor;
+import fsm.domain.Table;
 
 
 
@@ -21,14 +15,14 @@ public class TableGenerator {
 	private int maxX, maxY;
 	boolean visited[][];
 	HashSet<Desk> deskSet;
-	private int tableNumber = 0;
-	public int tableIds[][];
+	public String tableIds[][];
 
-	private TableData generateTable(Desk desk, String layoutId) {
-		desk = getDesk(desk);
+	private Table generateTable(Desk desk) {
+		Table generatedTable=new Table();
+
+        desk = getDesk(desk);
 		int topLeftX = desk.getX(), topLeftY = desk.getY();
 		int maxPushPointX = 0, maxPushPointY = 0;
-		tableNumber++;
 		List<Desk> desksForCurrentTable = new ArrayList<Desk>();
 		Queue<Desk> queue = new LinkedList<Desk>();
 		Queue<Point> pointQueue = new LinkedList<Point>();
@@ -38,7 +32,7 @@ public class TableGenerator {
 		while (!queue.isEmpty()) {
 			Desk current = queue.remove();
 			Point currentPoint = pointQueue.remove();
-			tableIds[currentPoint.x][currentPoint.y] = current.getDeskId();
+			tableIds[currentPoint.x][currentPoint.y] = current.getDeskCode();
 			if (visited[current.getX()][current.getY()])
 				continue;
 			desksForCurrentTable.add(current);
@@ -52,6 +46,7 @@ public class TableGenerator {
 				maxPushPointX = Math.max(currentPoint.x + 1, maxPushPointX);
 				maxPushPointY = Math.max(currentPoint.y, maxPushPointY);
 			}
+
 			if (deskSet.contains(downDesk)) {
 				downDesk = getDesk(downDesk);
 				queue.add(downDesk);
@@ -60,37 +55,37 @@ public class TableGenerator {
 				maxPushPointY = Math.max(currentPoint.y + 1, maxPushPointY);
 			}
 		}
-		int deskIds[] = new int[desksForCurrentTable.size()];
-		int index = 0;
+		//String deskIds[] = new String[desksForCurrentTable.size()];
+		//int index = 0;
+
 		for (Desk d : desksForCurrentTable) {
-			deskIds[index++] = d.getDeskId();
+            d.setTable(generatedTable);
 		}
 		// System.out.println("For table number "+tableNumber+" Max x
 		// "+maxPushPointX+" Max Y "+maxPushPointY);
-		int finalTable[][] = new int[maxPushPointY + 1][maxPushPointX + 1];
-		for (int i = 0; i <= maxPushPointY; i++) {
-			for (int j = 0; j <= maxPushPointX; j++) {
-				finalTable[i][j] = tableIds[j][i];
-			}
-		}
-		int finalTable1[][];
-		if (maxPushPointX < maxPushPointY) {
-			finalTable1 = new int[maxPushPointX + 1][maxPushPointY + 1];
-			for (int i = 0; i <= maxPushPointY; i++) {
-				for (int j = 0; j <= maxPushPointX; j++) {
-					finalTable1[j][i] = finalTable[i][j];
-				}
-			}
-		} else {
-			finalTable1 = finalTable;
-		}
+		//String finalTable[][] = new String[maxPushPointY + 1][maxPushPointX + 1];
 
-		/*
-		 * for(int i=0;i<=maxPushPointY;i++){ for(int j=0;j<=maxPushPointX;j++){
-		 * System.out.print(finalTable[i][j]+" "); } System.out.println(); }
-		 */
-		return new TableData(tableNumber, desksForCurrentTable, finalTable1, maxPushPointY + 1, maxPushPointX + 1,
-				topLeftX, topLeftY, layoutId);
+
+        for (int i = 0; i <= maxPushPointY; i++)
+            for (int j = 0; j <= maxPushPointX; j++) {
+                getDeskFromCode(desksForCurrentTable,tableIds[j][i]).setTableRow(i);
+                getDeskFromCode(desksForCurrentTable,tableIds[j][i]).setTableCol(j);
+            }
+
+		if (maxPushPointX < maxPushPointY) {
+            for(Desk d:desksForCurrentTable){
+                    int temp=d.getTableRow();
+                    d.setTableRow(d.getTableCol());
+                    d.setTableCol(temp);
+            }
+        }
+
+        generatedTable.setDesks(desksForCurrentTable);
+        generatedTable.setWidth(maxPushPointY+1);
+        generatedTable.setLength(maxPushPointX+1);
+        generatedTable.setTopLeftX(topLeftX);
+        generatedTable.setTopLeftY(topLeftY);
+	return generatedTable;
 	}
 
 	private Desk getDesk(Desk searchDesk) {
@@ -101,14 +96,27 @@ public class TableGenerator {
 		return new Desk();
 	}
 
-	public List<TableData> generateTables(LayoutData layoutData, String layoutId) {
-		LayoutExtremes layoutExtremes = layoutData.getLayoutExtremes();
-		ArrayList<Desk> deskList = (ArrayList<Desk>) layoutData.getDesks();
-		List<TableData> tables = new ArrayList<TableData>();
-		tableIds = new int[1000][1000];
+    private Desk getDeskFromCode(List<Desk> deskList,String deskCode) {
+        for (Desk temp : deskList) {
+            if (temp.getDeskCode().equals(deskCode))
+                return temp;
+        }
+        return null;
+    }
+
+
+    public List<Table> generateTables(Vector floordData) {
+
+
+		List<Desk> deskList = (List<Desk>)floordData.get(0);
+		Floor floor=(Floor)floordData.get(1);
+
+		List<Table> tables = new ArrayList<Table>();
+
+		tableIds = new String[1000][1000];
 		deskSet = new HashSet<Desk>(deskList);
-		maxX = layoutExtremes.getMaximumX();
-		maxY = layoutExtremes.getMaximumY();
+		maxX = floor.getMaxX();
+		maxY = floor.getMaxY();
 		visited = new boolean[maxX + 1][maxY + 1];
 		for (int i = 0; i <= maxX; i++)
 			Arrays.fill(visited[i], false);
@@ -117,7 +125,8 @@ public class TableGenerator {
 				Desk searchDesk = new Desk(i, j);
 				if (deskSet.contains(searchDesk) && !visited[i][j]) {
 					searchDesk = getDesk(searchDesk);
-					TableData generatedTable = generateTable(searchDesk, layoutId);
+					Table generatedTable = generateTable(searchDesk);
+                    generatedTable.setFloor(floor);
 					tables.add(generatedTable);
 				}
 			}

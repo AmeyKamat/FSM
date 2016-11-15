@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.FloorDao;
 import fsm.domain.Floor;

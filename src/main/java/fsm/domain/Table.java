@@ -1,5 +1,8 @@
 package fsm.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="TABLE")
+@JsonIgnoreProperties("floor")
 public class Table {
 
 	@Id
@@ -42,10 +46,18 @@ public class Table {
 	private int length;
 	
 	@OneToMany(mappedBy = "table")
-	private Set<Desk> desks;
+	private List<Desk> desks;
 
 	public Table() {
 		super();
+	}
+
+	public Table(List<Desk> desks,int width,int length, int topLeftX, int topLeftY){
+		this.desks=desks;
+		this.width=width;
+		this.length=length;
+		this.topLeftX=topLeftX;
+		this.topLeftY=topLeftY;
 	}
 
 	public int getId() {
@@ -96,11 +108,11 @@ public class Table {
 		this.length = length;
 	}
 
-	public Set<Desk> getDesks() {
+	public List<Desk> getDesks() {
 		return desks;
 	}
 
-	public void setDesks(Set<Desk> desks) {
+	public void setDesks(List<Desk> desks) {
 		this.desks = desks;
 	}
 

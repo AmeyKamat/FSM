@@ -14,6 +14,8 @@ public interface CityDao {
 
 	public City getCityById(int cityId);
 
+	public City getCityByName(String cityName);
+
 	public List<City> getAllCities();
 
 }

@@ -57,4 +57,16 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
+	@Override
+	public Integer addAllTables(List<Table> tableList) {
+		Session session = sessionFactory.getCurrentSession();
+
+		for(Table tableItem: tableList)
+		{
+			session.save(tableItem);
+		}
+
+		return 1;
+	}
+
 }

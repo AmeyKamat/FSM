@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.TableDao;
 import fsm.domain.Table;
@@ -11,8 +11,11 @@ public class TableServiceImpl implements TableDao {
 	@Autowired
 	private TableDao dao;
 	public Integer addTable(Table table) {
-return dao.addTable(table);
+		return dao.addTable(table);
+	}
 
+	public Integer addAllTables(List<Table> table){
+		return  dao.addAllTables(table);
 	}
 
 	public void removeTable(int tableId) {

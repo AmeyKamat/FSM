@@ -49,6 +49,16 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
+
+	public Location getLocationByName(String locationName) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Location location = (Location) session.get(Location.class, locationName);
+		return location;
+
+	}
+
+
 	public List<Location> getAllLocations() {
 
 		Session session = sessionFactory.getCurrentSession();

@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.EmployeeDao;
 import fsm.domain.Employee;

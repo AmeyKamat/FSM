@@ -3,34 +3,48 @@ package fsm.controller;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
+import fsm.domain.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import fsm.service.*;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import fsm.domain.Desk;
-import fsm.domain.LayoutData;
-import fsm.domain.LayoutExtremes;
-import fsm.domain.OfficeDetails;
-import fsm.domain.TableData;
-import fsm.dao.DataLoader;
-import fsm.service.middleLayer.impl.ExcelParser;
-import fsm.service.middleLayer.impl.TableGenerator;
+import fsm.service.impl.ExcelParser;
+import fsm.service.impl.TableGenerator;
 import fsm.util.PropertiesUtil;
-
-/**
- * Created by Sarthak on 13-09-2016.
- */
 
 @Controller
 @RequestMapping("/uploadFile")
 public class FileHandlerController {
+
+
+//	@Autowired
+//	CountryService daoCountry;
+
+//	@Autowired
+//	CityService daoCity;
+
+	@Autowired
+	LocationService serviceLocation;
+
+	@Autowired
+	FloorService serviceFloor;
+
+	@Autowired
+	TableService serviceTable;
+
+	@Autowired
+	DeskService serviceDesk;
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showUploadFilePage() {
@@ -42,6 +56,8 @@ public class FileHandlerController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView handleFiles(HttpServletRequest request) {
+
+		//accept floorCode and locationId
 
 		File file;
 		int maxFileSize = 5000 * 1024;
@@ -82,42 +98,53 @@ public class FileHandlerController {
 							file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 						}
 						fi.write(file);
-						String country = request.getParameter("country");
-						String city = request.getParameter("city");
-						String branch = request.getParameter("branch");
-						String floor = request.getParameter("floor");
-						if (country == null)
+					//	String country = request.getParameter("country");
+					//	String city = request.getParameter("city");
+						int locationId = Integer.parseInt(request.getParameter("locationId"));
+						String floorCode = request.getParameter("floorCode");
+
+						/*	if (country == null)
 							country = "India";
 						if (city == null)
 							city = "Pune";
-						if (branch == null)
-							branch = "Kharadi";
-						if (floor == null)
-							floor = "3";
+					*/	if (locationId == 0)
+							locationId = 1;
+						if (floorCode == null)
+							floorCode = "3";
 
-						DataLoader dataLoader = new DataLoader();
-						String locationId = "";
-						OfficeDetails officeDetails = dataLoader.getOfficeDetails(country, city, branch, floor);
-						locationId = officeDetails.getOfficeUid() + "";
-						if (officeDetails != null)
-							dataLoader.deleteData(locationId);
-						officeDetails = new OfficeDetails(country, city, branch, floor);
-						dataLoader.saveOfficeDetails(officeDetails);
-						officeDetails = dataLoader.getOfficeDetails(country, city, branch, floor);
+			//			Country country1=daoCountry.getCountryByName(country);
+			//			City city1=daoCity.getCityByName(city);
+						Location location1=serviceLocation.getLocationById(locationId);
+
+
+
+
 						if (fileName.lastIndexOf("\\") != -1) {
 							fileName = fileName.substring(fileName.lastIndexOf("\\"));
 						}
+
 						String path = filePath + fileName;
-						locationId = officeDetails.getOfficeUid() + "";
+
+						//locationId = officeDetails.getOfficeUid() + "";
 						ExcelParser excelParser = new ExcelParser();
-						LayoutData layoutData = excelParser.getDesk(path, locationId);
-						List<Desk> obtaineddesk = layoutData.getDesks();
-						LayoutExtremes layoutExtremes = layoutData.getLayoutExtremes();
+						Vector parsingData=excelParser.parseFloorDetails(path);
+						List<Desk> obtaineddesk=(List<Desk>) parsingData.get(0);
+						Floor floor2=(Floor) parsingData.get(1);
+						floor2.setLocation(location1);
+						floor2.setFloorCode(floorCode);
+
+
 						TableGenerator tableGenerator = new TableGenerator();
-						List<TableData> tableList = tableGenerator.generateTables(layoutData, locationId);
-						dataLoader.saveDesk(obtaineddesk);
-						dataLoader.saveExtremes(layoutExtremes);
-						dataLoader.saveTableData(tableList);
+						List<Table> tableList = tableGenerator.generateTables(parsingData);
+
+						serviceFloor.addFloor(floor2);
+
+						serviceTable.addAllTables(tableList);
+
+						for(Table t: tableList){
+							List<Desk> temp=t.getDesks();
+							serviceDesk.addAllDesk(temp);
+						}
 
 					}
 				}

@@ -49,6 +49,11 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
+	public Country getCountryByName(String countryName) {
+		Session session = sessionFactory.getCurrentSession();
+		Country country = (Country) session.get(Country.class, countryName);
+		return country;
+	}
 	public List<Country> getAllCountries() {
 
 		Session session = sessionFactory.getCurrentSession();

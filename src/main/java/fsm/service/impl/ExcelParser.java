@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Vector;
 
 import fsm.domain.Desk;
-import fsm.domain.LayoutData;
-import fsm.domain.LayoutExtremes;
+import fsm.domain.Floor;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Range;
@@ -27,7 +27,11 @@ public class ExcelParser {
 		return true;
 	}
 
-	public LayoutData getDesk(String path, String location) {
+
+
+	public Vector parseFloorDetails(String path) {  // Returs List of Desk and floor information
+
+		Vector result=new Vector();
 
 		int minimumX = 0, minimumY = 0, maximumX, maximumY;
 		File workbook = new File(path);
@@ -51,14 +55,15 @@ public class ExcelParser {
 			if (!isValidDesk(topLeft)) {
 				continue;
 			}
-			int deskID = Integer.parseInt(topLeft.getContents());
+			String deskID = topLeft.getContents();
 			int y = topLeft.getRow();
 			int x = topLeft.getColumn();
 			int width = 1 + bottomRight.getColumn() - topLeft.getColumn();
 			int height = 1 + bottomRight.getRow() - topLeft.getRow();
-			String brID = "";
-			Desk desk = new Desk(deskID, x, y, width, height, brID, location);
-			mergedCellsValues.add(deskID);
+			//String brID = "";
+
+			Desk desk = new Desk(deskID, x, y, width, height);
+			mergedCellsValues.add(Integer.parseInt(deskID));
 			desks.add(desk);
 
 		}
@@ -76,20 +81,21 @@ public class ExcelParser {
 				if (!isValidDesk(cell)) {
 					continue;
 				}
-				int deskID = Integer.parseInt(cell.getContents());
+				String deskID = cell.getContents();
 				if (!mergedCellsValues.contains(deskID)) {
 					int y = cell.getRow();
 					int x = cell.getColumn();
 					int width = 1;
 					int height = 1;
-					String brID = "";
-					Desk desk = new Desk(deskID, x, y, width, height, brID, location);
+					//String brID = "";
+					Desk desk = new Desk(deskID, x, y, width, height);
 					desks.add(desk);
 				}
 			}
 		}
-		LayoutExtremes layoutExtremes = new LayoutExtremes(location, minimumX, minimumY, maximumX, maximumY);
-		LayoutData layoutData = new LayoutData(layoutExtremes, desks);
-		return layoutData;
+		Floor floor=new Floor(minimumX,minimumY,maximumX,maximumY);
+        result.add(desks);
+        result.add(floor);
+		return result;
 	}
 }

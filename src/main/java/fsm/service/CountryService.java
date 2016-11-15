@@ -1,4 +1,4 @@
-package fsm.service.middleLayer;
+package fsm.service;
 
 import fsm.domain.Country;
 
@@ -13,6 +13,8 @@ public interface CountryService {
 	public void updateCountry(Country country);
 
 	public Country getCountryById(int countryId);
+
+	public Country getCountryByName(String countryName);
 
 	public List<Country> getAllCountries();
 

@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.CityDao;
 import fsm.domain.City;
@@ -25,6 +25,11 @@ public class CityServiceImpl implements CityDao {
 
 	public City getCityById(int cityId) {
 		return dao.getCityById(cityId);
+	}
+
+	@Override
+	public City getCityByName(String cityName) {
+		return dao.getCityByName(cityName);
 	}
 
 	public List<City> getAllCities() {

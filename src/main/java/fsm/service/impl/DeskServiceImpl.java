@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.DeskDao;
 import fsm.domain.Desk;
@@ -13,6 +13,10 @@ public class DeskServiceImpl implements DeskDao {
 
 	public Integer addDesk(Desk desk) {
 		return dao.addDesk(desk);
+	}
+
+	public Integer addAllDesk(List<Desk> desk) {
+		return dao.addAllDesk(desk);
 	}
 
 	public void removeDesk(int deskId) {

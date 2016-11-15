@@ -1,4 +1,4 @@
-package fsm.service.middleLayer;
+package fsm.service;
 
 import fsm.domain.City;
 
@@ -13,6 +13,9 @@ public interface CityService {
 	public void updateCity(City city);
 
 	public City getCityById(int cityId);
+
+	public City getCityByName(String cityName);
+
 
 	public List<City> getAllCities();
 

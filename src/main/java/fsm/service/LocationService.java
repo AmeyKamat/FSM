@@ -1,4 +1,4 @@
-package fsm.service.middleLayer;
+package fsm.service;
 
 import fsm.domain.Location;
 
@@ -13,6 +13,8 @@ public interface LocationService {
 	public void updateLocation(Location location);
 
 	public Location getLocationById(int locationId);
+
+	public Location getLocationByName(String locationName);
 
 	public List<Location> getAllLocations();
 

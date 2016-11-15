@@ -1,4 +1,4 @@
-package fsm.service.middleLayer;
+package fsm.service;
 
 import fsm.domain.Table;
 
@@ -7,6 +7,8 @@ import java.util.List;
 public interface TableService {
 
 	public Integer addTable(Table table);
+
+	public Integer addAllTables(List<Table> table);
 
 	public void removeTable(int tableId);
 

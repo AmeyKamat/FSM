@@ -1,5 +1,10 @@
 package fsm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,13 +18,16 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="FLOOR")
+@JsonRootName(value = "Floor")
+@JsonIgnoreProperties("location")
+@JsonFilter("floorFilter")
 public class Floor {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "location_id")
@@ -50,6 +58,14 @@ public class Floor {
 
 	public Floor() {
 		super();
+	}
+
+
+	public Floor(int minX,int minY, int maxX, int maxY){
+		this.minX=minX;
+		this.minY=minY;
+		this.maxX=maxX;
+		this.maxY=maxY;
 	}
 
 	public int getId() {

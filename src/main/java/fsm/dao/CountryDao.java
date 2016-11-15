@@ -17,4 +17,5 @@ public interface CountryDao {
 
 	public List<Country> getAllCountries();
 
+	Country getCountryByName(String countryName);
 }

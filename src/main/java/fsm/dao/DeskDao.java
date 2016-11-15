@@ -16,4 +16,5 @@ public interface DeskDao {
 
 	public List<Desk> getAllDesks();
 
+    Integer addAllDesk(List<Desk> desk);
 }

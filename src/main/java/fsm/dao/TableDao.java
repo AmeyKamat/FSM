@@ -16,4 +16,5 @@ public interface TableDao {
 
 	public List<Table> getAllTables();
 
+    Integer addAllTables(List<Table> table);
 }

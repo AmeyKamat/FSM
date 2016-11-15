@@ -1,4 +1,4 @@
-package fsm.service.middleLayer;
+package fsm.service;
 
 import fsm.domain.Floor;
 

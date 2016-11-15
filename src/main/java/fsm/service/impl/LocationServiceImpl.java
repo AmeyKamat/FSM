@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.LocationDao;
 import fsm.domain.Location;
@@ -25,6 +25,11 @@ return dao.addLocation(location);
 
 	public Location getLocationById(int locationId) {
 return dao.getLocationById(locationId);
+	}
+
+	@Override
+	public Location getLocationByName(String locationName) {
+		return dao.getLocationByName(locationName);
 	}
 
 	public List<Location> getAllLocations() {

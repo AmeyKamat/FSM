@@ -1,4 +1,4 @@
-package fsm.service.middleLayer.impl;
+package fsm.service.impl;
 
 import fsm.dao.CountryDao;
 import fsm.domain.Country;
@@ -25,6 +25,10 @@ public class CountryServiceImpl implements CountryDao {
 
 	public Country getCountryById(int countryId) {
 		return dao.getCountryById(countryId);
+	}
+
+	public Country getCountryByName(String countryName){
+		return dao.getCountryByName(countryName);
 	}
 
 	public List<Country> getAllCountries() {
