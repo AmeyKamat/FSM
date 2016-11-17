@@ -1,5 +1,5 @@
 import {Coordinate} from "../coordinate/coordinate";
-export class table{
+export class Table{
     leftTopPoint:Coordinate ;
     height:number ;
     width:number ;
