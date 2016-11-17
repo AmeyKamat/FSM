@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import fsm.domain.Users;
-import fsm.dao.DataLoader;
 
 /**
  * Created by TUSHAR on 15-09-2016.
@@ -66,7 +64,7 @@ public class LoginController {
 			if (password.equals(userCheckLogin.getPassword())) {
 
 				HttpSession session = req.getSession();
-				session.setAttribute("id", id);
+				session.setAttribute("id", username);
 				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
 				System.out.println("Exited here 2");
 				return new ModelAndView("redirect:/controller/uploadFile");

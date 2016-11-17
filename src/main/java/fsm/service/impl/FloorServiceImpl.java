@@ -1,7 +1,6 @@
 package fsm.service.impl;
 
 import fsm.dao.FloorDao;
-import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Location;
 import fsm.domain.Table;
@@ -14,13 +13,11 @@ import fsm.service.TableService;
 import fsm.util.PropertiesUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 public class FloorServiceImpl implements FloorService {
 
@@ -71,17 +68,18 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	@Async
-	public void parseInformation(int locationId, String floorCode, String path) {
+	public Floor parseInformation(int locationId, String floorCode, String path) {
 
 		Location location=locationService.getLocationById(locationId);
 
 		FloorObjects parsingData=excelParser.parseFloorDetails(path);
-		parsingData.updateFloor(location,floorCode);
 
 		List<Table> tableList = tableGenerator.generateTables(parsingData);
 
-		floorService.addFloor(parsingData.getFloor());
+		parsingData.updateFloor(location,floorCode,tableList);
+
+
+	/*	floorService.addFloor(parsingData.getFloor());
 
 		tableService.addAllTables(tableList);
 
@@ -89,12 +87,12 @@ public class FloorServiceImpl implements FloorService {
 			List<Desk> temp=t.getDesks();
 			deskService.addAllDesk(temp);
 		}
-
+*/
+		return parsingData.getFloor();
 	}
 
 	@Override
-	@Async
-	public void storeFile(UploadInfo uploadInfo) {
+	public Floor storeFile(UploadInfo uploadInfo) {
 		File file;
 		String filePath = PropertiesUtil.readProperty("file-upload");
 		Iterator i = uploadInfo.getFileItems().iterator();
@@ -127,7 +125,8 @@ public class FloorServiceImpl implements FloorService {
 			}
 		}
 		String path = filePath + uploadInfo.getFileName();
-		parseInformation(uploadInfo.getLocationId(),uploadInfo.getFloorCode(),path);
+		Floor floor=parseInformation(uploadInfo.getLocationId(),uploadInfo.getFloorCode(),path);
+		return floor;
 	}
 
 

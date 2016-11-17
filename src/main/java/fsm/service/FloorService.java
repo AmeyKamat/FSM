@@ -18,7 +18,7 @@ public interface FloorService {
 
 	public List<Floor> getAllFloors();
 
-	public void parseInformation(int locationId,String floorCode,String path);
+	public Floor parseInformation(int locationId, String floorCode, String path);
 
-	public void storeFile(UploadInfo uploadInfo);
+	public Floor storeFile(UploadInfo uploadInfo);
 }

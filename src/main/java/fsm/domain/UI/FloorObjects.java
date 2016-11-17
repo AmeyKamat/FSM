@@ -3,7 +3,9 @@ package fsm.domain.UI;
 import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Location;
+import fsm.domain.Table;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -40,9 +42,10 @@ public class FloorObjects {
         this.floor = floor;
     }
 
-    public void updateFloor(Location location, String floorCode) {
+    public void updateFloor(Location location, String floorCode, List<Table> tableList) {
         this.floor.setFloorCode(floorCode);
         this.floor.setLocation(location);
+        this.floor.setTables(new HashSet<Table>(tableList));
     }
 
 
