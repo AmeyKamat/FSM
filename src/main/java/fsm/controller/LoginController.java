@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fsm.domain.User;
+import fsm.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +32,10 @@ import fsm.dao.DataLoader;
 @RequestMapping("/login")
 public class LoginController {
 	
-	
+
+    @Autowired
+    UserService userService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView showLoginPage() {
@@ -44,11 +50,10 @@ public class LoginController {
 	public ModelAndView login(final HttpServletRequest req, ModelMap map) {
 
 		System.out.println("Came here");
-		String id = req.getParameter("username");
+		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		DataLoader dataLoader = new DataLoader();
-		Users userCheckLogin = dataLoader.getUser(id);
-		
+        User userCheckLogin = userService.getUserByUsername(username);
+
 		if (userCheckLogin == null) {
 
 			// map.addAttribute("error_message", "User does not exist");

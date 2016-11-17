@@ -5,7 +5,7 @@ import java.util.*;
 import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Table;
-
+import fsm.domain.UI.FloorObjects;
 
 
 /**
@@ -19,7 +19,6 @@ public class TableGenerator {
 
 	private Table generateTable(Desk desk) {
 		Table generatedTable=new Table();
-
         desk = getDesk(desk);
 		int topLeftX = desk.getX(), topLeftY = desk.getY();
 		int maxPushPointX = 0, maxPushPointY = 0;
@@ -105,11 +104,11 @@ public class TableGenerator {
     }
 
 
-    public List<Table> generateTables(Vector floordData) {
+    public List<Table> generateTables(FloorObjects floordData) {
 
 
-		List<Desk> deskList = (List<Desk>)floordData.get(0);
-		Floor floor=(Floor)floordData.get(1);
+		List<Desk> deskList = floordData.getDeskList();
+		Floor floor=floordData.getFloor();
 
 		List<Table> tables = new ArrayList<Table>();
 

@@ -3,7 +3,9 @@ package fsm.dao;
 import java.util.List;
 
 import fsm.domain.Floor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FloorDao {
 
 	public Integer addFloor(Floor floor);

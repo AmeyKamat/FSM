@@ -1,24 +1,16 @@
-package fsm.domain;
+package fsm.domain.UI;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.stereotype.Repository;
 
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 
 @Entity
 @javax.persistence.Table(name="CITY")
 @JsonIgnoreProperties("country")
-public class City {
+public class CityUI {
 
 	@Id
 	@GeneratedValue
@@ -28,16 +20,16 @@ public class City {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "country_id")
-	private Country country;
+	private CountryUI country;
 
 	@NotNull
 	@Column(name = "name")
 	private String name;
 
 	@OneToMany(mappedBy = "city")
-	private Set<Location> locations;
+	private Set<LocationUI> locations;
 
-	public City() {
+	public CityUI() {
 		super();
 	}
 
@@ -49,11 +41,11 @@ public class City {
 		this.id = id;
 	}
 
-	public Country getCountry() {
+	public CountryUI getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(CountryUI country) {
 		this.country = country;
 	}
 
@@ -65,11 +57,11 @@ public class City {
 		this.name = name;
 	}
 
-	public Set<Location> getLocations() {
+	public Set<LocationUI> getLocations() {
 		return locations;
 	}
 
-	public void setLocations(Set<Location> locations) {
+	public void setLocations(Set<LocationUI> locations) {
 		this.locations = locations;
 	}
 

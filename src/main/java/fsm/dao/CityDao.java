@@ -3,7 +3,9 @@ package fsm.dao;
 import java.util.List;
 
 import fsm.domain.City;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CityDao {
 
 	public Integer addCity(City city);

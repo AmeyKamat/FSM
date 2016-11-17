@@ -57,7 +57,6 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
-	@Override
 	public Integer addAllDesk(List<Desk> deskList) {
 		Session session = sessionFactory.getCurrentSession();
 

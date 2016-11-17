@@ -1,9 +1,10 @@
 package fsm.service;
 
 import fsm.domain.Desk;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface DeskService {
 
 	public Integer addDesk(Desk desk);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.LocationDao;
@@ -53,9 +54,10 @@ public class LocationDaoImpl implements LocationDao {
 	public Location getLocationByName(String locationName) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Location location = (Location) session.get(Location.class, locationName);
+		Criteria criteria=session.createCriteria(Location.class);
+		criteria.add(Restrictions.eq("name", locationName));
+		Location location=(Location) criteria.uniqueResult();
 		return location;
-
 	}
 
 

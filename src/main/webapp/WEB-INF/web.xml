@@ -4,7 +4,7 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
-	<!-- jersey servlet mapping -->
+	<!--&lt;!&ndash; jersey servlet mapping &ndash;&gt;
 	<servlet>
 		<servlet-name>Jersey Web Application</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer
@@ -19,7 +19,7 @@
 		<servlet-name>Jersey Web Application</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	
+	-->
 
 	<!-- Adding DispatcherServlet -->
 	<servlet>

@@ -9,16 +9,25 @@ import java.util.Vector;
 
 import fsm.domain.Desk;
 import fsm.domain.Floor;
+import fsm.domain.UI.FloorObjects;
+import fsm.factory.DeskFactory;
+import fsm.factory.FloorFactory;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Range;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class ExcelParser {
 
+	@Autowired
+	DeskFactory deskFactory;
+
+	@Autowired
+	FloorFactory floorFactory;
 
 	private boolean isValidDesk(Cell cell) {
 		if (cell.getContents().isEmpty() || cell.getType() != CellType.NUMBER) {
@@ -29,10 +38,7 @@ public class ExcelParser {
 
 
 
-	public Vector parseFloorDetails(String path) {  // Returs List of Desk and floor information
-
-		Vector result=new Vector();
-
+	public FloorObjects parseFloorDetails(String path) {  // Returs List of Desk and floor information
 		int minimumX = 0, minimumY = 0, maximumX, maximumY;
 		File workbook = new File(path);
 		List<Desk> desks = new ArrayList<Desk>();
@@ -62,7 +68,7 @@ public class ExcelParser {
 			int height = 1 + bottomRight.getRow() - topLeft.getRow();
 			//String brID = "";
 
-			Desk desk = new Desk(deskID, x, y, width, height);
+			Desk desk = deskFactory.createDesk(deskID, x, y, width, height);
 			mergedCellsValues.add(Integer.parseInt(deskID));
 			desks.add(desk);
 
@@ -88,14 +94,12 @@ public class ExcelParser {
 					int width = 1;
 					int height = 1;
 					//String brID = "";
-					Desk desk = new Desk(deskID, x, y, width, height);
+					Desk desk = deskFactory.createDesk(deskID, x, y, width, height);
 					desks.add(desk);
 				}
 			}
 		}
-		Floor floor=new Floor(minimumX,minimumY,maximumX,maximumY);
-        result.add(desks);
-        result.add(floor);
-		return result;
+		Floor floor=floorFactory.create(minimumX,minimumY,maximumX,maximumY);
+		return new FloorObjects(desks,floor);
 	}
 }

@@ -3,7 +3,9 @@ package fsm.dao;
 import java.util.List;
 
 import fsm.domain.Desk;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeskDao {
 
 	public Integer addDesk(Desk desk);

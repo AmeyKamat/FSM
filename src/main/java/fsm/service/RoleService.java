@@ -1,9 +1,10 @@
 package fsm.service;
 
 import fsm.domain.Role;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface RoleService {
 
 	public Integer addRole(Role role);
