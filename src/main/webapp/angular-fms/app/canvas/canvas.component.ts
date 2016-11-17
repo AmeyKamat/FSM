@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 @Component({
-    moduleId:Module.id,
+    moduleId:module.id,
     selector:'canvas',
     templateUrl:'canvas.component.html'
 })

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -11,75 +13,32 @@
 
 
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
 
-	<context:component-scan base-package="fsm.controller" />
+	<context:component-scan base-package="fsm.controller"/>
+	
+	<context:annotation-config/>
 
-	<context:annotation-config />
-
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	
 		<property name="prefix">
 			<value>/resources/views/</value>
 		</property>
-
-		<!-- <property name="suffix"> <value>.jsp</value> </property> -->
-
-	</bean>
-
-	<bean
-		id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-
-		<property name="location">
-			<value>/WEB-INF/jdbc.properties</value>
+	
+		<!--
+		<property name="suffix">
+			<value>.jsp</value>
 		</property>
+		-->
+		
 	</bean>
 	
-	<bean
-		id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-
-		<property name="driverClassName">
-			<value>${jdbc.driverClassName}</value>
-		</property>
+	<!-- register bean for properties file -->
+	<bean id="dbProperties"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 
+    <property name="location" value="classpath:app.properties" />
+ 
+    </bean>
 		
-		<property name="url">
-			<value>${jdbc.databaseurl}</value>
-		</property>
-		
-		<property name="username">
-			<value>${jdbc.username}</value>
-		</property>
-		
-		<property name="password">
-			<value>${jdbc.password}</value>
-		</property>
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation">
-			<value>classpath:hibernate.cfg.xml</value>
-		</property>
-		<property name="configurationClass">
-			<value>org.hibernate.cfg.AnnotationConfiguration</value>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
-	</bean>
-
-	<tx:annotation-driven />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 </beans>

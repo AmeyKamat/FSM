@@ -141,6 +141,18 @@
 		</dependency>
 
 
+		<!-- for properties home jsp -->
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>FSM</finalName>
@@ -148,10 +160,61 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>0.0.22</version>
+				<configuration>
+					<workingDirectory>${basedir}/src/main/webapp/angular-fms/</workingDirectory>
+					<outputDirectory>${basedir}/src/main/webapp/angular-fms/</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>npm install</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<nodeVersion>v0.12.2</nodeVersion>
+							<npmVersion>2.9.0</npmVersion>
+						</configuration>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install node and npm</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>compile ts</id>
+						<phase>compile-ts</phase>
+						<configuration>
+							<arguments>run</arguments>
+							<arguments>tsc</arguments>
+						</configuration>
+						<goals>
+							<goal>tsc</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 
