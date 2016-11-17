@@ -4,7 +4,7 @@ import fsm.domain.Country;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface CountryService {
 
 	public Integer addCountry(Country country);

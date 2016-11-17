@@ -4,10 +4,11 @@ import fsm.dao.LocationDao;
 import fsm.domain.Location;
 import fsm.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
 public class LocationServiceImpl implements LocationService {
 
 	@Autowired

@@ -5,7 +5,7 @@ import java.util.List;
 import fsm.domain.Location;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public interface LocationDao {
 
 	public Integer addLocation(Location location);

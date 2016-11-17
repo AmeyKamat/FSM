@@ -5,7 +5,7 @@ import java.util.List;
 import fsm.domain.Table;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public interface TableDao {
 
 	public Integer addTable(Table table);

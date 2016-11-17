@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.CityDao;
 import fsm.domain.City;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CityDaoImpl implements CityDao {
 
 	@Autowired

@@ -13,19 +13,17 @@ import fsm.service.TableService;
 import fsm.util.PropertiesUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-
+@Service
 public class FloorServiceImpl implements FloorService {
 
 	@Autowired
 	private FloorDao dao;
-
-	@Autowired
-	private FloorService floorService;
 
 	@Autowired
 	private TableService tableService;

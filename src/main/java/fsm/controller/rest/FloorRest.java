@@ -42,8 +42,12 @@ public class FloorRest {
 	@Autowired
 	DeskService deskService;
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "hello")
+    public String HelloWorld() {
+        return "Hello World";
+    }
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "getFloorData")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "getFloorData")
     public Floor getParsingInformation(@PathVariable int floorId) {
 		Floor floor=floorService.getFloorById(floorId);
 		return floor;

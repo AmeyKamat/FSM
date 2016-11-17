@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.TableDao;
 import fsm.domain.Table;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TableDaoImpl implements TableDao {
 
 	@Autowired

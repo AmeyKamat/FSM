@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.UserDao;
 import fsm.domain.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired

@@ -4,7 +4,7 @@ import fsm.domain.City;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface CityService {
 
 	public Integer addCity(City city);

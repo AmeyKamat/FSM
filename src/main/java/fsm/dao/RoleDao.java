@@ -5,7 +5,7 @@ import java.util.List;
 import fsm.domain.Role;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public interface RoleDao {
 
 	public Integer addRole(Role role);

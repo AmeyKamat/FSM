@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.CountryDao;
 import fsm.domain.Country;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CountryDaoImpl implements CountryDao {
 
 	@Autowired

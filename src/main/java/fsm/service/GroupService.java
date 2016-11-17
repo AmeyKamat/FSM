@@ -4,7 +4,7 @@ import fsm.domain.Group;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface GroupService {
 
 	public Integer addGroup(Group group);

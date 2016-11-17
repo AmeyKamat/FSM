@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.DeskDao;
 import fsm.domain.Desk;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class DeskDaoImpl implements DeskDao {
 
 	@Autowired

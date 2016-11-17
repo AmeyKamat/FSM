@@ -5,7 +5,7 @@ import java.util.List;
 import fsm.domain.Employee;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public interface EmployeeDao {
 	
 	public Integer addEmployee(Employee employee);

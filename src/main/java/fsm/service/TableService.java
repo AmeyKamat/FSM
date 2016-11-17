@@ -4,7 +4,7 @@ import fsm.domain.Table;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface TableService {
 
 	public Integer addTable(Table table);

@@ -6,11 +6,13 @@ import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Table;
 import fsm.domain.UI.FloorObjects;
+import org.springframework.stereotype.Service;
 
 
 /**
  * Created by Sarthak on 10-09-2016.
  */
+@Service
 public class TableGenerator {
 	private int maxX, maxY;
 	boolean visited[][];
