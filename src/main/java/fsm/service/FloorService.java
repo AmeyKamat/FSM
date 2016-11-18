@@ -21,4 +21,6 @@ public interface FloorService {
 	public Floor parseInformation(int locationId, String floorCode, String path);
 
 	public Floor storeFile(UploadInfo uploadInfo);
+
+	Floor parseInformationForTesting(String s);
 }

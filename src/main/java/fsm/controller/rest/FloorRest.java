@@ -5,7 +5,13 @@ import java.util.*;
 
 import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Location;
@@ -31,7 +37,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class FloorRest {
 
-	private Floor floor;
 
 	@Autowired
 	FloorService floorService;
@@ -55,14 +60,18 @@ public class FloorRest {
 
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publishFloorData" )
-	public boolean publishFloorDetails(boolean publish){
-		if(publish){
+	public boolean publishFloorDetails(boolean publish,HttpServletRequest httpServletRequest){
+
+        HttpSession httpSession=httpServletRequest.getSession();
+        Floor floor=(Floor)httpSession.getAttribute("floor");
+
+        if(publish){
 
 			if(floor==null)
 				return false;
 
 			floorService.addFloor(floor);
-			List<Table> tableList=new ArrayList<Table>(floor.getTables());
+			List<Table> tableList=floor.getTables();
 			tableService.addAllTables(tableList);
 
 			for(Table t: tableList){
@@ -70,7 +79,7 @@ public class FloorRest {
 				deskService.addAllDesk(temp);
 			}
 
-		floor=null;
+		httpSession.removeAttribute("floor");
 		return true;
 
 		}
@@ -80,7 +89,8 @@ public class FloorRest {
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformation")
 	public Floor storingFileThatContainsFloorInformation(HttpServletRequest request) {
-
+        HttpSession httpSession=request.getSession();
+        Floor floor=null;
 		//accept floorCode and locationId
 		String fileName=null;
 
@@ -116,10 +126,21 @@ public class FloorRest {
 			}
 		}
 
+		    httpSession.setAttribute("floor",floor);
 			return floor;
 	}
 
 
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformationTesting")
+    public String storingFileThatContainsFloor() throws JsonProcessingException {
+        Floor floor=floorService.parseInformationForTesting("C:\\Users\\Mohit\\Documents\\GitHub\\FSM\\doc\\FloorPlan.xls");
+
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
+        ObjectMapper objectMapper=new ObjectMapper();
+        return objectMapper.writer(filters).writeValueAsString(floor);
+    }
 
 
 }

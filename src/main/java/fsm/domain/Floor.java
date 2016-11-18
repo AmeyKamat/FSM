@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @javax.persistence.Table(name="FLOOR")
 @JsonRootName(value = "Floor")
-@JsonIgnoreProperties("location")
+//@JsonIgnoreProperties("location")
 @JsonFilter("floorFilter")
 public class Floor {
 
@@ -54,7 +55,7 @@ public class Floor {
 	private int maxY;
 	
 	@OneToMany(mappedBy = "floor")
-	private Set<Table> tables;
+	private List<Table> tables;
 
 	public Floor() {
 		super();
@@ -124,11 +125,11 @@ public class Floor {
 		this.maxY = maxY;
 	}
 
-	public Set<Table> getTables() {
+	public List<Table> getTables() {
 		return tables;
 	}
 
-	public void setTables(Set<Table> tables) {
+	public void setTables(List<Table> tables) {
 		this.tables = tables;
 	}
 

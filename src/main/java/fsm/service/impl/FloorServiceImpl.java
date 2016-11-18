@@ -1,6 +1,7 @@
 package fsm.service.impl;
 
 import fsm.dao.FloorDao;
+import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Location;
 import fsm.domain.Table;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 @Service
@@ -69,12 +72,8 @@ public class FloorServiceImpl implements FloorService {
 	public Floor parseInformation(int locationId, String floorCode, String path) {
 
 		Location location=locationService.getLocationById(locationId);
-
 		FloorObjects parsingData=excelParser.parseFloorDetails(path);
-
 		List<Table> tableList = tableGenerator.generateTables(parsingData);
-
-		parsingData.updateFloor(location,floorCode,tableList);
 
 
 	/*	floorService.addFloor(parsingData.getFloor());
@@ -86,6 +85,25 @@ public class FloorServiceImpl implements FloorService {
 			deskService.addAllDesk(temp);
 		}
 */
+
+		for(Table table: tableList){
+			List<Desk> deskList=table.getDesks();
+			Collections.sort(deskList, (o1, o2) -> {
+
+                if(o1.getTableRow()>o2.getTableRow())
+                    return 1;
+                else if(o1.getTableRow()==o2.getTableRow())
+                    if(o1.getTableCol()>o2.getTableCol())
+                        return 1;
+                    else
+                        return -1;
+                else
+                    return -1;
+            });
+	}
+
+
+		parsingData.updateFloor(location,floorCode,tableList);
 		return parsingData.getFloor();
 	}
 
@@ -125,6 +143,35 @@ public class FloorServiceImpl implements FloorService {
 		String path = filePath + uploadInfo.getFileName();
 		Floor floor=parseInformation(uploadInfo.getLocationId(),uploadInfo.getFloorCode(),path);
 		return floor;
+	}
+
+	@Override
+	public Floor parseInformationForTesting(String path) {
+
+		FloorObjects parsingData=excelParser.parseFloorDetails(path);
+
+		List<Table> tableList = tableGenerator.generateTables(parsingData);
+
+		for(Table table: tableList){
+			List<Desk> deskList=table.getDesks();
+			Collections.sort(deskList, (o1, o2) -> {
+
+                if(o1.getTableRow()>o2.getTableRow())
+                    return 1;
+                else if(o1.getTableRow()==o2.getTableRow())
+                    if(o1.getTableCol()>o2.getTableCol())
+                        return 1;
+                    else
+                        return -1;
+                else
+                    return -1;
+            });
+		}
+
+		parsingData.updateFloor(null,"3",tableList);
+
+		return  parsingData.getFloor();
+
 	}
 
 

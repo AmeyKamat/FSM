@@ -45,7 +45,7 @@ public class FloorObjects {
     public void updateFloor(Location location, String floorCode, List<Table> tableList) {
         this.floor.setFloorCode(floorCode);
         this.floor.setLocation(location);
-        this.floor.setTables(new HashSet<Table>(tableList));
+        this.floor.setTables(tableList);
     }
 
 
