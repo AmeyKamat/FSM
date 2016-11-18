@@ -5,29 +5,20 @@
 
 <hibernate-configuration>
 
-	<session-factory>
-
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/mydb</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
-		<!-- DB schema will be updated if needed -->
-		<!-- <property name="hbm2ddl.auto">update</property> -->
-		<property name="show_sql">true</property>
-		<property name="hbm2ddl.auto">update</property>
-
-		<!-- Domain classes mapping -->
-		<mapping class="fsm.domain.Country" />
-		<mapping class="fsm.domain.City" />
-		<mapping class="fsm.domain.Location" />
-		<mapping class="fsm.domain.Floor" />
-		<mapping class="fsm.domain.Table" />
-		<mapping class="fsm.domain.Desk" />
-		<mapping class="fsm.domain.Employee" />
-		<mapping class="fsm.domain.Group" />
-		<mapping class="fsm.domain.User" />
-		<mapping class="fsm.domain.Role" />
-
-	</session-factory>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/layout_parser</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <mapping resource="desk.hbm.xml"/>
+        <mapping resource="layoutextreme.hbm.xml"/>
+        <mapping resource="tabledata.hbm.xml"/>
+        <mapping resource="officedetails.hbm.xml"/>
+        <mapping resource="users.hbm.xml"/>
+    </session-factory>
 
 </hibernate-configuration>
