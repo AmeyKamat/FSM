@@ -89,9 +89,12 @@ public class TableGenerator {
         }
         for (int i = 0; i <= maxPushPointY; i++)
             for (int j = 0; j <= maxPushPointX; j++) {
-                getDeskFromCode(desksForCurrentTable,tableIds[j][i]).setTableRow(i);
-                getDeskFromCode(desksForCurrentTable,tableIds[j][i]).setTableCol(j);
-                System.out.print(tableIds[j][i]+" ");
+				Desk deskTemp=getDeskFromCode(desksForCurrentTable,tableIds[j][i]);
+				if(deskTemp==null)
+					continue;
+				deskTemp.setTableRow(i);
+                deskTemp.setTableCol(j);
+	            System.out.print(tableIds[j][i]+" ");
             }
         System.out.println();
 

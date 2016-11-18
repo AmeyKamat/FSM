@@ -53,9 +53,12 @@ public class FloorRest {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "getFloorData")
-    public Floor getParsingInformation(@PathVariable int floorId) {
+    public String getParsingInformation(@PathVariable int floorId) throws JsonProcessingException {
 		Floor floor=floorService.getFloorById(floorId);
-		return floor;
+		SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
+		ObjectMapper objectMapper=new ObjectMapper();
+		return objectMapper.writer(filters).writeValueAsString(floor);
 	}
 
 
@@ -88,7 +91,7 @@ public class FloorRest {
 
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformation")
-	public Floor storingFileThatContainsFloorInformation(HttpServletRequest request) {
+	public String storingFileThatContainsFloorInformation(HttpServletRequest request) throws JsonProcessingException {
         HttpSession httpSession=request.getSession();
         Floor floor=null;
 		//accept floorCode and locationId
@@ -127,7 +130,10 @@ public class FloorRest {
 		}
 
 		    httpSession.setAttribute("floor",floor);
-			return floor;
+		SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
+		ObjectMapper objectMapper=new ObjectMapper();
+		return objectMapper.writer(filters).writeValueAsString(floor);
 	}
 
 
