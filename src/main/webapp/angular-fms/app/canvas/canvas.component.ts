@@ -13,10 +13,11 @@ declare var fabric:any;
 export class CanvasComponent implements OnInit,AfterViewInit{
 
     @ViewChild('canvasZoomElement') canvasZoomElement: ElementRef;
-    private canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
+    private canvas:any;
     panning:Boolean = false;
 
     ngOnInit():void{
+        this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
         this.resizeCanvas();
         this.canvas.on('mouse:up', function (e) {
             this.panning = false;
