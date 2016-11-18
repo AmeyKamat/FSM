@@ -8,9 +8,9 @@ export class Chair{
   
   constructor(leftTopPoint: Coordinate, angle: number, deskId: number, brid: string) {
         this.leftTopPoint = leftTopPoint;
-        this.length = length;
-        this.width = width;
-        this.orientation = orientation;
+        this.angle = angle;
+        this.deskId = deskId;
+        this.brid = brid;
   }
   
   getTopLeftPoint(): Coordinate{
