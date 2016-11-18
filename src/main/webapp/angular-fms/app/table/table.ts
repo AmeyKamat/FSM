@@ -29,7 +29,7 @@ export class Table{
       return this.width;
     }
   
-    getChairsInRow(): number{
+    getChairsInRow(): number[]{
       return this.chairsInRow;
     }
   

@@ -13,9 +13,9 @@ export class TableService {
     let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.x), this.adjustY(orientation, tableJSON.y));
     let width: number = this.adjustWidth(orientation, tableJSON.width);
     let length: number = this.adjustLength(orientation, tableJSON.length);
-    let noOfChairsInFirstRow number[] = this.getChairsInRow(tableJSON.desks);
+    let noOfChairsInRow: number[] = this.getChairsInRow(tableJSON.desks);
     
-    return new Table(topLeftPoint, length, width, noOfChairsInFirstRow, orientation);
+    return new Table(topLeftPoint, length, width, noOfChairsInRow, orientation);
   }
   
   private getOrientation(width: number, length: number): Orientation{
@@ -73,7 +73,7 @@ export class TableService {
     return adjustedY;
   }
   
-  private getChairsInRow(): number[]{
+  private getChairsInRow(desks: any): number[]{
     let chairsInRow: number[] = [0,0];
     return chairsInRow;
   }
