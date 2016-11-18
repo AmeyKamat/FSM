@@ -9,19 +9,18 @@ import { Coordinate } from "../coordinate/coordinate";
 import { Orientation } from "../util/orientation";
 
 @Injectable()
-export class TableService {
+export class ChairService {
   private utilService: UtilService;
   
   constructor(utilService: UtilService) {
         this.utilService = utilService;
   }
   
-  public getChair(table: Table, chairJSONString: string): Chair {
-    let chairJSON: any = JSON.parse(chairJSONString);
+  public getChair(table: Table, chairJSON: any): Chair {
     
     let topLeftPoint: Coordinate = new Coordinate(
-                                        this.getAboluteX(table, chairJSON.row, chairJSON.column), 
-                                        this.getAboluteY(table, chairJSON.row, chairJSON.column)
+                                        this.getAbsoluteX(table, chairJSON.row, chairJSON.column), 
+                                        this.getAbsoluteY(table, chairJSON.row, chairJSON.column)
     );
     let chairId = chairJSON.chairId;
     let angle = this.getChairAngle(table.getOrientation(), chairJSON.row);
@@ -29,8 +28,8 @@ export class TableService {
     return new Chair(topLeftPoint, angle, chairId, "");
   }
    
-  private getAboluteX(table: Table, row: number, column: number): number{
-    let calculatedX = number;
+  private getAbsoluteX(table: Table, row: number, column: number): number{
+    let calculatedX: number;
     if(table.getOrientation() == Orientation.Horizontal){
       calculatedX = table.getLeftTopPoint().getX();
       
@@ -48,8 +47,8 @@ export class TableService {
     return calculatedX;
   }
   
-  private getAboluteY(table: Table, row: number, column: number): number{
-    let calculatedY = number;
+  private getAbsoluteY(table: Table, row: number, column: number): number{
+    let calculatedY: number;
     if(table.getOrientation() == Orientation.Horizontal){
       calculatedY = table.getLeftTopPoint().getY();
       
@@ -62,9 +61,9 @@ export class TableService {
       
       let noOfChairsInThisRow = table.getChairsInRow[row]
       let padding = (table.getWidth() - this.utilService.GRIDS_PER_CHAIR*noOfChairsInThisRow)/(2*noOfChairsInThisRow)
-      calculatedX += padding + 2*(column-1)*padding;
+      calculatedY += padding + 2*(column-1)*padding;
     }
-    return calculatedX;
+    return calculatedY;
   }
   
   private getChairAngle(orientation: Orientation, row: number): number{

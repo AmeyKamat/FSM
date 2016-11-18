@@ -6,16 +6,16 @@ import { Orientation } from "../util/orientation";
 
 @Injectable()
 export class TableService {
-  public getTable(tableJSONString: string): Table {
-    let tableJSON: any = JSON.parse(tableJSONString);
+  public getTable(tableJSON: any): Table {
     
+    // Why not JSON as type??
     let orientation: Orientation = this.getOrientation(tableJSON.width, tableJSON.height);
     let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.x), this.adjustY(orientation, tableJSON.y));
     let width: number = this.adjustWidth(orientation, tableJSON.width);
     let length: number = this.adjustLength(orientation, tableJSON.length);
-    let noOfChairsInFirstRow = this.getChairsInRow(tableJson.desks);
+    let noOfChairsInFirstRow number[] = this.getChairsInRow(tableJSON.desks);
     
-    return new Table(topLeftPoint, width, length, orientation);
+    return new Table(topLeftPoint, length, width, noOfChairsInFirstRow, orientation);
   }
   
   private getOrientation(width: number, length: number): Orientation{
@@ -63,7 +63,7 @@ export class TableService {
   }
   
   private adjustY(orientation: Orientation, y: number): number{
-    let adjustedLength: number;
+    let adjustedY: number;
     if(orientation == Orientation.Vertical){
       adjustedY = y;
     }

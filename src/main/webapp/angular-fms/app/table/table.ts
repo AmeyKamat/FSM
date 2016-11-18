@@ -33,10 +33,6 @@ export class Table{
       return this.chairsInRow;
     }
   
-    getNoOfChairsInSecondRow(): number{
-      return this.noOfChairsInSecondRow;
-    }
-  
     getOrientation(): Orientation{
       return this.orientation;
     }

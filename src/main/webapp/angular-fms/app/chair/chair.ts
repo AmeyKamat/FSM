@@ -6,8 +6,8 @@ export class Chair{
   private deskId: number;
   private brid: string;
   
-  constructor(leftTopPoint: Coordinate, angle: number, deskId: number, brid: string) {
-        this.leftTopPoint = leftTopPoint;
+  constructor(topLeftPoint: Coordinate, angle: number, deskId: number, brid: string) {
+        this.topLeftPoint = topLeftPoint;
         this.angle = angle;
         this.deskId = deskId;
         this.brid = brid;
