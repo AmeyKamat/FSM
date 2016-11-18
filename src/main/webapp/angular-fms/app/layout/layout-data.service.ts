@@ -6,6 +6,7 @@ import {Http, Response} from "@angular/http";
 export class LayoutDataService implements OnInit{
     public floorJSON:any;
     public tableJSON:any;
+    public chairJSON:any;
 
     constructor(private http: Http,
                 private utilService:UtilService

@@ -1,5 +1,6 @@
 import {Component, OnInit, ElementRef, AfterViewInit} from "@angular/core";
 import {ViewChild} from "@angular/core/src/metadata/di";
+import {UtilService} from "../util/util.service";
 
 declare var fabric:any;
 
@@ -12,6 +13,9 @@ declare var fabric:any;
 })
 export class CanvasComponent implements OnInit,AfterViewInit{
 
+    constructor(private utilService:UtilService){
+
+    }
     @ViewChild('canvasZoomElement') canvasZoomElement: ElementRef;
     private canvas:any;
     panning:Boolean = false;
@@ -19,21 +23,16 @@ export class CanvasComponent implements OnInit,AfterViewInit{
     ngOnInit():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
         this.resizeCanvas();
-        this.canvas.on('mouse:up', function (e) {
-            this.panning = false;
-        });
-        this.canvas.on('mouse:down', function (e) {
-            this.panning = true;
-        });
-        this.canvas.on('mouse:move', function(e) {
-            if (this.panning && e && e.e) {
-                var delta = new fabric.Point(e.e.movementX, e.e.movementY);
+        this.canvas.on('mouse:up', (e)=> this.panning = false);
+        this.canvas.on('mouse:down',(e)=> this.panning = true);
+        this.canvas.on('mouse:move', (e)=> {if (this.panning && e && e.e) {
+                let delta = new fabric.Point(e.e.movementX, e.e.movementY);
                 this.canvas.relativePan(delta);
             }
         });
     }
     ngAfterViewInit(): void {
-        var canvasZoomElement = this.canvasZoomElement.nativeElement;
+        let canvasZoomElement = this.canvasZoomElement.nativeElement;
         if(canvasZoomElement.addEventListener){
             // IE9, Chrome, Safari, Opera
             canvasZoomElement.addEventListener("mousewheel", this.zoom, false);
@@ -70,10 +69,10 @@ export class CanvasComponent implements OnInit,AfterViewInit{
 
     zoom(e):Boolean{
     console.log("zoom")
-    var evt = window.event || e;
-    var delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
-    var curZoom = this.canvas.getZoom();
-    var newZoom = curZoom + delta/4000;
+    let evt = window.event || e;
+    let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
+    let curZoom = this.canvas.getZoom();
+    let newZoom = curZoom + delta/4000;
     var x = e.offsetX, y = e.offsetY;
     //applying zoom values.
     this.canvas.zoomToPoint({x: x, y: y}, newZoom);
@@ -88,5 +87,28 @@ export class CanvasComponent implements OnInit,AfterViewInit{
         this.canvas.setWidth(window.innerWidth);
 
     }
+
+    drawTable():void{
+    fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
+        this.canvas.add(new fabric.Rect({
+            left: x*ENV.gridSize,
+            top: y*ENV.gridSize,
+            width: width*ENV.gridSize,
+            height: height*ENV.gridSize,
+            fill: '#9f9',
+            originX: 'left',
+            originY: 'top',
+            rx : ENV.tableBorderRadiusRatio*ENV.gridSize,
+            ry: ENV.tableBorderRadiusRatio*ENV.gridSize,
+            hasControls: false,
+            selectable: false,
+            fill: new fabric.Pattern({source:img}),
+            hoverCursor: 'move'
+        }));
+    });
+    this.canvas.renderAll();
+    console.log("Table Drawn")
+};
+
 
 }
