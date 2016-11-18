@@ -73,7 +73,7 @@ export class TableService {
     return adjustedY;
   }
   
-  private getChairsInRow(): number[]{
+  private getChairsInRow(desks: any): number[]{
     let chairsInRow: number[] = [0,0];
     return chairsInRow;
   }
