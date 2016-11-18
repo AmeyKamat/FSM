@@ -45,10 +45,7 @@
   <!-- Hibernate session factory -->
   <bean id="sessionFactory"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-    <property name="dataSource">
-      <ref bean="dataSourceSpringPool"/>
-    </property>
-
+    <property name="dataSource" ref="dataSourceSpringPool"/>
     <property name="hibernateProperties">
       <props>
         <prop key="hibernate.dialect">${jdbc.dialect}</prop>

@@ -90,6 +90,36 @@ public class FloorRest {
 	}
 
 
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publishFloorDataTesting" )
+	public boolean publishFloorDetailsTesting(HttpServletRequest httpServletRequest){
+		boolean publish=true;
+		HttpSession httpSession=httpServletRequest.getSession();
+		Floor floor=(Floor)httpSession.getAttribute("floor");
+
+		if(publish){
+
+			if(floor==null)
+				return false;
+
+			floorService.addFloor(floor);
+			List<Table> tableList=floor.getTables();
+			tableService.addAllTables(tableList);
+
+			for(Table t: tableList){
+				List<Desk> temp=t.getDesks();
+				deskService.addAllDesk(temp);
+			}
+
+			httpSession.removeAttribute("floor");
+			return true;
+
+		}
+		return false;
+	}
+
+
+
+
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformation")
 	public String storingFileThatContainsFloorInformation(HttpServletRequest request) throws JsonProcessingException {
         HttpSession httpSession=request.getSession();
@@ -139,10 +169,13 @@ public class FloorRest {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformationTesting")
-    public String storingFileThatContainsFloor() throws JsonProcessingException {
-        Floor floor=floorService.parseInformationForTesting("C:\\Users\\Mohit\\Documents\\GitHub\\FSM\\doc\\FloorPlan.xls");
+    public String storingFileThatContainsFloor(HttpServletRequest request) throws JsonProcessingException {
+		HttpSession httpSession=request.getSession();
 
-        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+		Floor floor=floorService.parseInformationForTesting("C:\\Users\\Mohit\\Documents\\GitHub\\FSM\\doc\\FloorPlan.xls");
+		httpSession.setAttribute("floor",floor);
+
+		SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
         FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
         ObjectMapper objectMapper=new ObjectMapper();
         return objectMapper.writer(filters).writeValueAsString(floor);
