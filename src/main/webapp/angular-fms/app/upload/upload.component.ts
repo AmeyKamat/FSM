@@ -1,10 +1,9 @@
 import {Component, Injectable, Inject} from '@angular/core';
 import {
     FormBuilder,
-    FormGroup, Validators, AbstractControl
+    FormGroup, Validators
 } from '@angular/forms';
 import {UploadService} from "./upload.service";
-import {Http, Headers} from "@angular/http";
 
 @Component({
     moduleId: module.id,
@@ -13,8 +12,6 @@ import {Http, Headers} from "@angular/http";
 })
 @Injectable()
 export class UploadComponent {
-
-
     myForm: FormGroup;
     submitAttempt:boolean =false ;
 
@@ -36,19 +33,11 @@ export class UploadComponent {
         //this.uploadService.print() ;
     }
 
-
-
-
     onSubmit(value: FormGroup): void {
         this.submitAttempt=true ;
         console.log(JSON.stringify(value.value))
         this.uploadService.acceptFormData(value) ;
-
-
     }
-
-
-
 
 // <!--<label for="skuInput">SKU</label>  -->
 // <!--<input type="text"  -->
@@ -73,6 +62,5 @@ export class UploadComponent {
 //     </form>
 //     </div>
 //     `
-
 
 }

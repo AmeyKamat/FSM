@@ -9,33 +9,33 @@
 	<url>http://maven.apache.org</url>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>${jersey.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <dependencies>
+	<dependencies>
 
 
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet-core</artifactId>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
 
-        </dependency>
+		</dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-moxy</artifactId>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-moxy</artifactId>
 
-        </dependency>
+		</dependency>
 
 
 		<dependency>
@@ -101,7 +101,7 @@
 			<version>5.1.6</version>
 		</dependency>
 
-		<!-- For Jersey. Think about changing framework to spring rest, or atleast
+		<!-- For Jersey. Think about changing framework to spring rest, or atleast 
 			latest version of jersey -->
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -129,17 +129,17 @@
 		</dependency>
 
 
-       <!-- for properties home jsp -->
-        <dependency>
-    <groupId>javax.servlet.jsp.jstl</groupId>
-    <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-    <version>1.2.1</version>
-</dependency>
-<dependency>
-    <groupId>taglibs</groupId>
-    <artifactId>standard</artifactId>
-    <version>1.1.2</version>
-</dependency>
+		<!-- for properties home jsp -->
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -148,10 +148,61 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>0.0.22</version>
+				<configuration>
+					<workingDirectory>${basedir}/src/main/webapp/angular-fms/</workingDirectory>
+					<outputDirectory>${basedir}/src/main/webapp/angular-fms/</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>npm install</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<nodeVersion>v0.12.2</nodeVersion>
+							<npmVersion>2.9.0</npmVersion>
+						</configuration>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install node and npm</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>compile ts</id>
+						<phase>compile-ts</phase>
+						<configuration>
+							<arguments>run</arguments>
+							<arguments>tsc</arguments>
+						</configuration>
+						<goals>
+							<goal>tsc</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 
