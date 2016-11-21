@@ -1,4 +1,4 @@
-import { Coordinate } from "../coordinate/coordinate";
+import { Coordinate } from "../util/coordinate";
 import { Orientation } from "../util/orientation";
 
 export class Table{

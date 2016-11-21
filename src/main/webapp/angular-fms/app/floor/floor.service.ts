@@ -1,12 +1,12 @@
 import {Floor} from "./floor"
-import {Coordinate} from "../coordinate/coordinate";
+import {Coordinate} from "../util/coordinate";
 import {Injectable} from "@angular/core";
 @Injectable()
 export class FloorService{
-    getFloor(floorJSON: any): Floor {
+    getFloor(floorData: any): Floor {
         return new Floor(
-            new Coordinate(floorJSON.minimumX, floorJSON.minimumY),
-            floorJSON.maximumY,  floorJSON.maximumX
+            new Coordinate(floorData.minimumX, floorData.minimumY),
+            floorData.maximumY,  floorData.maximumX
         );
     }
 }

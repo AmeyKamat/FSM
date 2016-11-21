@@ -1,4 +1,4 @@
-import {Coordinate} from "../coordinate/coordinate";
+import {Coordinate} from "../util/coordinate";
 
 export class Floor{
 

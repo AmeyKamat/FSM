@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Table } from "./table";
-import { Coordinate } from "../coordinate/coordinate";
+import { Coordinate } from "../util/coordinate";
 import { Orientation } from "../util/orientation";
 
 @Injectable()

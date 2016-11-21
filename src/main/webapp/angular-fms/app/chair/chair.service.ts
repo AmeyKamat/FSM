@@ -5,7 +5,7 @@ import { UtilService } from '../util/util.service';
 import { Table } from "../table/table";
 import { Chair } from "../chair/chair";
 
-import { Coordinate } from "../coordinate/coordinate";
+import { Coordinate } from "../util/coordinate";
 import { Orientation } from "../util/orientation";
 
 @Injectable()

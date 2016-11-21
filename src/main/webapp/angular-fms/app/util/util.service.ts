@@ -18,5 +18,13 @@ export class UtilService{
     public TABLE_BORDER_RADIUS_RATIO = 0.125;
     public MIN_BLOCK_SIZE_RATIO = 0.1;
     public CHAIR_PADDING = 0.1;
+    public GRID_SIZE;
+
+    public calculateGridSize(floorData:any):void{
+        let xGridSize = window.innerWidth/floorData.maximumX;
+        let yGridSize = window.innerWidth/floorData.maximumY;
+        this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
+    }
+
 
 }
