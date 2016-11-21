@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@javax.persistence.Table(name="TABLE")
+@javax.persistence.Table(name="WORKTABLE")
 @JsonIgnoreProperties("floor")
 public class Table {
 

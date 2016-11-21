@@ -1,5 +1,7 @@
 package fsm.domain.UI;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -7,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @javax.persistence.Table(name="COUNTRY")
+@JsonFilter("countryFilter")
 public class CountryUI {
 
 	@Id

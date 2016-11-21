@@ -1,7 +1,9 @@
 package fsm.service.impl;
 
 import fsm.dao.CityDao;
+import fsm.dao.CountryDao;
 import fsm.domain.City;
+import fsm.domain.Country;
 import fsm.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class CityServiceImpl implements CityService {
 
 	@Autowired
 	private CityDao dao;
+
+	@Autowired
+	private CountryDao daoCountry;
 
 	@Transactional
 	public Integer addCity(City city) {
@@ -43,6 +48,12 @@ public class CityServiceImpl implements CityService {
 	public List<City> getAllCities() {
 
 		return dao.getAllCities();
+	}
+
+	@Transactional
+	public List<City> getAllCities(int countryId) {
+		Country country=daoCountry.getCountryById(countryId);
+		return dao.getAllCities(country);
 	}
 
 }

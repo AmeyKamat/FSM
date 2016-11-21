@@ -46,23 +46,21 @@ public class FloorRest {
 
 	@Autowired
 	DeskService deskService;
+/*
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "hello")
-    public String HelloWorld() {
-        return "Hello World";
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "getFloorData")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "getFloor")
     public String getParsingInformation(@PathVariable int floorId) throws JsonProcessingException {
 		Floor floor=floorService.getFloorById(floorId);
-		SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
-		FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
+		SimpleBeanPropertyFilter floorFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", floorFilter);
 		ObjectMapper objectMapper=new ObjectMapper();
 		return objectMapper.writer(filters).writeValueAsString(floor);
 	}
+*/
 
+/*
 
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publishFloorData" )
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publishFloor" )
 	public boolean publishFloorDetails(boolean publish,HttpServletRequest httpServletRequest){
 
         HttpSession httpSession=httpServletRequest.getSession();
@@ -81,16 +79,17 @@ public class FloorRest {
 				List<Desk> temp=t.getDesks();
 				deskService.addAllDesk(temp);
 			}
-
 		httpSession.removeAttribute("floor");
 		return true;
 
 		}
+		httpSession.removeAttribute("floor");
 		return false;
 	}
 
+*/
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publishFloorDataTesting" )
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="publish" )
 	public boolean publishFloorDetailsTesting(HttpServletRequest httpServletRequest){
 		boolean publish=true;
 		HttpSession httpSession=httpServletRequest.getSession();
@@ -112,12 +111,11 @@ public class FloorRest {
 
 			httpSession.removeAttribute("floor");
 			return true;
-
 		}
 		return false;
 	}
 
-
+/*
 
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformation")
@@ -167,15 +165,15 @@ public class FloorRest {
 	}
 
 
+*/
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parseFloorInformationTesting")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "parse")
     public String storingFileThatContainsFloor(HttpServletRequest request) throws JsonProcessingException {
+
+		Floor floor=floorService.parseInformationForTesting("F:\\testBook.xls");
 		HttpSession httpSession=request.getSession();
-
-		Floor floor=floorService.parseInformationForTesting("C:\\Users\\Mohit\\Documents\\GitHub\\FSM\\doc\\FloorPlan.xls");
 		httpSession.setAttribute("floor",floor);
-
-		SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("location");
         FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
         ObjectMapper objectMapper=new ObjectMapper();
         return objectMapper.writer(filters).writeValueAsString(floor);

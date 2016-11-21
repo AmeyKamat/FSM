@@ -2,6 +2,7 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.domain.Country;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -66,5 +67,13 @@ public class CityDaoImpl implements CityDao {
 		return criteria.list();
 
 	}
+
+	public List<City> getAllCities(Country country) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(City.class);
+		criteria.add(Restrictions.eq("country", country));
+		return criteria.list();
+	}
+
 
 }

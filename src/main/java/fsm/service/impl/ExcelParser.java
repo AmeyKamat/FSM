@@ -43,7 +43,7 @@ public class ExcelParser {
 		int minimumX = 0, minimumY = 0, maximumX, maximumY;
 		File workbook = new File(path);
 		List<Desk> desks = new ArrayList<Desk>();
-		HashSet<Integer> mergedCellsValues = new HashSet<Integer>();
+		HashSet<String> mergedCellsValues = new HashSet<String>();
 		Workbook w = null;
 		try {
 			w = Workbook.getWorkbook(workbook);
@@ -70,7 +70,7 @@ public class ExcelParser {
 			//String brID = "";
 
 			Desk desk = deskFactory.createDesk(deskID, x, y, width, height);
-			mergedCellsValues.add(Integer.parseInt(deskID));
+			mergedCellsValues.add(deskID);
 			desks.add(desk);
 
 		}

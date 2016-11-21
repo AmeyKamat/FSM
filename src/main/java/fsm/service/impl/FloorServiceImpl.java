@@ -43,6 +43,9 @@ public class FloorServiceImpl implements FloorService {
 	@Autowired
 	private TableGenerator tableGenerator;
 
+    @Autowired
+    private ConnectedComponentGraphAlgorithm ccga;
+
 	@Transactional
 	public Integer addFloor(Floor floor) {
 		return dao.addFloor(floor);
@@ -73,8 +76,9 @@ public class FloorServiceImpl implements FloorService {
 
 		Location location=locationService.getLocationById(locationId);
 		FloorObjects parsingData=excelParser.parseFloorDetails(path);
-		List<Table> tableList = tableGenerator.generateTables(parsingData);
+		List<Table> tableList = ccga.DFS_UTIL(parsingData);
 
+//        List<Table> tableList = tableGenerator.generateTables(parsingData);
 
 	/*	floorService.addFloor(parsingData.getFloor());
 
@@ -85,6 +89,7 @@ public class FloorServiceImpl implements FloorService {
 			deskService.addAllDesk(temp);
 		}
 */
+/*
 
 		for(Table table: tableList){
 			List<Desk> deskList=table.getDesks();
@@ -101,6 +106,7 @@ public class FloorServiceImpl implements FloorService {
                     return -1;
             });
 	}
+*/
 
 
 		parsingData.updateFloor(location,floorCode,tableList);
@@ -149,10 +155,10 @@ public class FloorServiceImpl implements FloorService {
 	public Floor parseInformationForTesting(String path) {
 
 		FloorObjects parsingData=excelParser.parseFloorDetails(path);
+        System.out.println(" Desk list size "+parsingData.getDeskList().size());
+		List<Table> tableList = ccga.DFS_UTIL(parsingData);
 
-		List<Table> tableList = tableGenerator.generateTables(parsingData);
-
-		for(Table table: tableList){
+		/*for(Table table: tableList){
 			List<Desk> deskList=table.getDesks();
 			Collections.sort(deskList, (o1, o2) -> {
 
@@ -167,9 +173,8 @@ public class FloorServiceImpl implements FloorService {
                     return -1;
             });
 		}
-
-		parsingData.updateFloor(null,"3",tableList);
-
+*/
+		parsingData.updateFloor(locationService.getLocationById(1),"3",tableList);
 		return  parsingData.getFloor();
 
 	}

@@ -18,4 +18,6 @@ public interface UserService {
 	public List<User> getAllUsers();
 
     User getUserByUsername(String username);
+
+    String checkLogin(String username, String password);
 }

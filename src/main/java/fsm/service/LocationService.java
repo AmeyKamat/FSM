@@ -19,4 +19,5 @@ public interface LocationService {
 
 	public List<Location> getAllLocations();
 
+    List<Location> getAllLocations(int cityId);
 }

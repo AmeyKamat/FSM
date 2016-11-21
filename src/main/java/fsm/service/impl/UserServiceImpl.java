@@ -45,4 +45,16 @@ return dao.getAllUsers();
 		return dao.getUserByUsername(username);
 	}
 
+	@Override
+	public String checkLogin(String username, String password) {
+		User user=getUserByUsername(username);
+		if(user==null)
+			return null;
+		else if(user.getPassword().equals(password))
+			return
+			"EQUAL";
+		else
+			return "NOTEQUAL";
+	}
+
 }

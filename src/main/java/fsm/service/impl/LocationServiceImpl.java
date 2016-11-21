@@ -1,6 +1,8 @@
 package fsm.service.impl;
 
+import fsm.dao.CityDao;
 import fsm.dao.LocationDao;
+import fsm.domain.City;
 import fsm.domain.Location;
 import fsm.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class LocationServiceImpl implements LocationService {
 
 	@Autowired
 	private LocationDao dao;
+
+	@Autowired
+	private CityDao daoCity;
 
 	@Transactional
 	public Integer addLocation(Location location) {
@@ -43,6 +48,12 @@ return dao.getLocationById(locationId);
 	@Transactional
 	public List<Location> getAllLocations() {
 return dao.getAllLocations();
+	}
+
+	@Transactional
+	public List<Location> getAllLocations(int cityId) {
+		City city=daoCity.getCityById(cityId);
+		return dao.getAllLocations(city);
 	}
 
 }

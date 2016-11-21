@@ -4,19 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
 @javax.persistence.Table(name="LOCATION")
-@JsonIgnoreProperties("city")
 @JsonFilter("locationFilter")
 public class Location {
 
@@ -38,7 +31,7 @@ public class Location {
 	@Column(name = "location_code")
 	private String locationCode;
 	
-	@OneToMany(mappedBy = "location")
+	@OneToMany(mappedBy = "location")//,fetch = FetchType.EAGER)
 	private Set<Floor> floors;
 
 	public Location() {

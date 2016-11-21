@@ -2,6 +2,7 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.domain.City;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -69,6 +70,14 @@ public class LocationDaoImpl implements LocationDao {
 		Criteria criteria = session.createCriteria(Location.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public List<Location> getAllLocations(City city) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Location.class);
+		criteria.add(Restrictions.eq("city",city));
+		return criteria.list();
 	}
 
 }

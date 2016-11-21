@@ -1,5 +1,6 @@
 package fsm.domain.UI;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @javax.persistence.Table(name="CITY")
-@JsonIgnoreProperties("country")
+@JsonFilter("cityFilter")
 public class CityUI {
 
 	@Id

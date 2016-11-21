@@ -50,9 +50,12 @@ public class LoginController {
 		System.out.println("Came here");
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-        User userCheckLogin = userService.getUserByUsername(username);
 
-		if (userCheckLogin == null) {
+		String result=userService.checkLogin(username,password);
+		//User userCheckLogin = userService.getUserByUsername(username);
+
+
+		if (result==null) {
 
 			// map.addAttribute("error_message", "User does not exist");
 			System.out.println("Exited here 1");
@@ -61,7 +64,7 @@ public class LoginController {
 		} 
 		else {
 
-			if (password.equals(userCheckLogin.getPassword())) {
+			if (result.equals("EQUAL")) {
 
 				HttpSession session = req.getSession();
 				session.setAttribute("id", username);
