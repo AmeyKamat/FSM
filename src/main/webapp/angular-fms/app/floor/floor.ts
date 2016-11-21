@@ -18,7 +18,7 @@ export class Floor{
     getHeight(): number {
         return this.height;
     }
-    get Width(): number {
+    getWidth(): number {
         return this.width;
     }
 }

@@ -1,41 +1,18 @@
-import {Injectable} from "@angular/core";
-import {FloorService} from "../floor/floor.service";
-import {TableService} from "../table/table.service";
-import {ChairService} from "../chair/chair.service";
-import {Floor} from "../floor/floor";
-import {Table} from "../table/table";
-import {Chair} from "../chair/chair";
-import {CanvasService} from "../canvas/canvas.service";
-import {DataFetchService} from "../util/data-fetch.service";
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
+import {Country} from "./country/country";
+import {DataFetchService} from "../util/data-fetch.service";
 
-Injectable()
+@Injectable()
 export class ExplorerService{
-    public floor:Floor;
-    public tables:Table[]=[];
-    public chairs:Chair[]=[];
-    constructor(
-        private floorService:FloorService,
-        private  tableService:TableService,
-        private chairService:ChairService,
-        private dataFetchService:DataFetchService
-    ){}
-    getFloorData(floorID:number):Observable<any>{
-        return this.dataFetchService.getFloorData(floorID);
+    constructor(private dataFetchService:DataFetchService){
     }
-    loadFloorData(floorData:any): void {
-        this.floor = this.floorService.getFloor(floorData);
-        let tableList= floorData.tables;
-        for(let table of tableList){
-            let newTable = this.tableService.getTable(table);
-            this.tables.push(newTable);
-            let deskList = table.desks;
-            for(let desk of deskList){
-                let newChair = this.chairService.getChair(table, desk);
-                this.chairs.push(newChair);
-            }
-        }
+    getLayoutData(floorID:number):Observable<any>{
+        return this.dataFetchService.getLayoutData(floorID);
     }
-    drawFloor(): void{
+    getCountries():Observable<Country[]>{
+        return this.dataFetchService.getCountries() ;
+         // return this.http.get('').map((response: Response) => <Country[]> response.json());
+ // return[] ;
     }
 }

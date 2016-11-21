@@ -1,8 +1,9 @@
 import {Injectable, OnInit} from "@angular/core";
 import {UtilService} from "./util.service";
-import {Http, Response} from "@angular/http";
+import {Http, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
-import {Floor} from "../floor/floor";
+
+import {Country} from "../explorer/country/country";
 
 @Injectable()
 export class DataFetchService {
@@ -11,12 +12,18 @@ export class DataFetchService {
                 private utilService:UtilService
     ){}
 
-    getFloorData(floorID:number): Observable<any> {
+    getLayoutData(floorID:number): Observable<any> {
+        let params = new URLSearchParams();
+        params.set('floorID', floorID.toString());
         return this.http
-            .get(this.utilService.GET_LAYOUT_URL)
+            .get(this.utilService.GET_LAYOUT_URL,{search : params})
             .map((res: Response) => res.json());
            /* .subscribe(result=> this.floorJSON= result);*/
-
        // this.tableJSON= this.floorJSON.tableList;
+    }
+
+    getCountries():Observable<Country[]>{
+        return this.http.get('').map((response: Response) => <Country[]> response.json());
+// return [new City("Pune",country,[]),new City("Pune",country,[])] ;
     }
 }

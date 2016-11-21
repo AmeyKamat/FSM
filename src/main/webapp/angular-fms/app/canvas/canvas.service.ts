@@ -1,18 +1,21 @@
 import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
+import {Injectable} from "@angular/core";
 declare var fabric:any;
+@Injectable()
 export class CanvasService{
     private canvas:any;
-    panning:Boolean = false;
+    panning:boolean = false;
 
     constructor(private utilService:UtilService){
     }
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
-        this.resizeCanvas();
+        //this.resizeCanvas();
         this.mouseUp();
         this.mouseDown();
         this.mouseMove();
+        this.setupFloor();
     }
     resizeCanvas():void{
         this.canvas.setHeight(window.innerHeight);
@@ -40,7 +43,7 @@ export class CanvasService{
     zoomReset():void{
         this.canvas.setZoom(1);
     }
-    zoom(e):Boolean{
+    zoom(e):boolean{
         let evt = window.event || e;
         let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
         let curZoom = this.canvas.getZoom();
@@ -64,12 +67,12 @@ export class CanvasService{
      canvas.setZoom(canvas.getZoom() / (1 + value));
      }
      }*/
-setupFloor():void{
+    setupFloor():void{
     this.canvas.setBackgroundColor({source: this.utilService.IMG_PATH + this.utilService.FLOOR_PATTERN_FILE, repeat: 'repeat'},
-    ()=> this.canvas.renderAll()
-);
-}
-drawTable(table:Table):void{
+    ()=> this.canvas.renderAll());
+    }
+
+    drawTable(table:Table):void{
     fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
     this.canvas.add(new fabric.Rect({
         left:table.getLeftTopPoint().getX()*this.utilService.GRID_SIZE ,
@@ -84,11 +87,12 @@ drawTable(table:Table):void{
         selectable: false,
         fill: new fabric.Pattern({source:img}),
         hoverCursor: 'move'
-    }));
-});
-this.canvas.renderAll();
-}
-drawChair(chair):void{
+        }));
+    });
+    this.canvas.renderAll();
+    }
+
+    drawChair(chair):void{
     //Seat
     var mid = new fabric.Rect({
         left : chair.x + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
@@ -101,7 +105,7 @@ drawChair(chair):void{
         height : chair.height - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
         rx : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
         ry : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
-    });
+        });
     //Left Arm
     var leftArm = new fabric.Rect({
         left : chair.x + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
@@ -111,7 +115,7 @@ drawChair(chair):void{
         height : chair.height/2,
         rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
         ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
-    });
+        });
     //Right Arm
     var rightArm = new fabric.Rect({
         left : chair.x + chair.width - this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE - this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
@@ -121,7 +125,7 @@ drawChair(chair):void{
         height : chair.height/2,
         rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
         ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
-    });
+        });
     //UpperArm
     var upperArm = new fabric.Rect({
         left : chair.x + chair.width/4,
@@ -134,7 +138,7 @@ drawChair(chair):void{
         height : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
         rx : 0,
         ry : 0
-    });
+        });
     var group = new fabric.Group([leftArm,rightArm,mid,upperArm],{
         left : chair.x + chair.width/2,
         top  : chair.y + chair.height/2,
@@ -145,7 +149,7 @@ drawChair(chair):void{
         fill: "#cccccc",
         entity : "chair",
         deskid: chair.deskid
-    });
+        });
     this.canvas.add(group);
-}
+    }
 }

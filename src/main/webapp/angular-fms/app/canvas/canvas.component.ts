@@ -1,6 +1,4 @@
-import {Component, OnInit, ElementRef, AfterViewInit} from "@angular/core";
-import {ViewChild} from "@angular/core/src/metadata/di";
-import {ExplorerService} from "../explorer/explorer.service";
+import {Component, ElementRef, AfterViewInit, ViewChild, Injectable} from '@angular/core';
 import {CanvasService} from "./canvas.service";
 
 @Component({
@@ -10,14 +8,14 @@ import {CanvasService} from "./canvas.service";
     styleUrls: ['canvas.component.css',
                 'treeview-canvas.component.css']
 })
-export class CanvasComponent implements OnInit,AfterViewInit{
 
-    constructor(private explorerService:ExplorerService,
-                private canvasService:CanvasService
-                ){
+@Injectable()
+export class CanvasComponent implements AfterViewInit{
+
+    constructor(private canvasService:CanvasService){
     }
-    @ViewChild('canvasZoomElement') canvasZoomElement: ElementRef;
 
+    @ViewChild('canvasZoomElement') canvasZoomElement: ElementRef;
     ngAfterViewInit(): void {
         let canvasZoomElement = this.canvasZoomElement.nativeElement;
         if(canvasZoomElement.addEventListener){
@@ -32,11 +30,6 @@ export class CanvasComponent implements OnInit,AfterViewInit{
         }
     }
 
-    ngOnInit():void{
-    this.canvasService.initCanvas();
-
-    }
-
     zoomIn():void{
         this.canvasService.zoomIn();
     }
@@ -47,7 +40,7 @@ export class CanvasComponent implements OnInit,AfterViewInit{
         this.canvasService.zoomReset();
     }
 
-    zoom(e):Boolean{
+    zoom(e):boolean{
     return this.canvasService.zoom(e);
     }
 }

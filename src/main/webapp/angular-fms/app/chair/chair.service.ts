@@ -72,13 +72,13 @@ export class ChairService {
       angle = 0;
     }
     else if(orientation == Orientation.Horizontal && row == 2){
-    var angle = 180;
+      angle = 180;
     }
     else if(orientation == Orientation.Vertical && row == 1){
-      var angle = 270;
+      angle = 270;
     }
     else if(orientation == Orientation.Vertical && row == 2){
-      var angle = 90;
+      angle = 90;
     }
 
     return angle;
