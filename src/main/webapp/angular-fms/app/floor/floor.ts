@@ -12,13 +12,13 @@ export class Floor{
         this.width=width;
     }
 
-    get leftTopPoint(): Coordinate {
+    getLeftTopPoint(): Coordinate {
         return this.leftTopPoint;
     }
-    get height(): number {
+    getHeight(): number {
         return this.height;
     }
-    get width(): number {
+    get Width(): number {
         return this.width;
     }
 }

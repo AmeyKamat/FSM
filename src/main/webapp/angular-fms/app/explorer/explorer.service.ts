@@ -20,7 +20,7 @@ export class ExplorerService{
         private chairService:ChairService,
         private dataFetchService:DataFetchService
     ){}
-    getFloorData(floorID:number):Observable{
+    getFloorData(floorID:number):Observable<any>{
         return this.dataFetchService.getFloorData(floorID);
     }
     loadFloorData(floorData:any): void {

@@ -11,7 +11,7 @@ export class DataFetchService {
                 private utilService:UtilService
     ){}
 
-    getFloorData(floorID:number): Observable {
+    getFloorData(floorID:number): Observable<any> {
         return this.http
             .get(this.utilService.GET_LAYOUT_URL)
             .map((res: Response) => res.json());
