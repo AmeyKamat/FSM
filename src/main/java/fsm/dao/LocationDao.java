@@ -2,8 +2,11 @@ package fsm.dao;
 
 import java.util.List;
 
+import fsm.domain.City;
 import fsm.domain.Location;
+import org.springframework.stereotype.Repository;
 
+//@Repository
 public interface LocationDao {
 
 	public Integer addLocation(Location location);
@@ -14,6 +17,9 @@ public interface LocationDao {
 
 	public Location getLocationById(int locationId);
 
+	public Location getLocationByName(String locationName);
+
 	public List<Location> getAllLocations();
 
+    List<Location> getAllLocations(City city);
 }

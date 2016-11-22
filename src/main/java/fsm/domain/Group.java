@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-@javax.persistence.Table(name="GROUP")
+@javax.persistence.Table(name="GROUP_S")
 public class Group {
 
 	@Id

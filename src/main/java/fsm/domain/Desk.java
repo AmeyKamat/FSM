@@ -1,17 +1,16 @@
 package fsm.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
 @javax.persistence.Table(name="DESK")
+@JsonIgnoreProperties({"table","deskEmployee","x","y","width","height"})
+//@JsonFilter("deskFilter")
 public class Desk {
 
 	@Id
@@ -23,7 +22,7 @@ public class Desk {
 	@ManyToOne
 	@JoinColumn(name = "table_id")
 	private Table table;
-	
+
 	@OneToOne
 	@JoinColumn(name = "employee_id")
 	private Employee deskEmployee;
@@ -40,9 +39,63 @@ public class Desk {
 	@Column(name = "desk_code")
 	private String deskCode;
 
+	@Transient
+	private int x,y,width,height;
+
+
+
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
 	public Desk() {
 		super();
 	}
+
+	public Desk(String deskCode, int x, int y, int width, int height){
+		this.deskCode=deskCode;
+		this.x=x;
+		this.y=y;
+		this.width=width;
+		this.height=height;
+	}
+
+	public Desk(int x, int y) {
+		this.x=x;
+		this.y=y;
+	}
+
+
 
 	public int getId() {
 		return id;

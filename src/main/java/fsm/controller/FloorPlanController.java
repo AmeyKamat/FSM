@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/floorPlan")
 public class FloorPlanController {
 
-	@RequestMapping(method = RequestMethod.GET)
-	// @ResponseBody
-	public String showFloorPlanPage(ModelMap map) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String showFloorPlanPage(ModelMap map) {
 
-		return "index2.html";
-	}
+        return "index2.html";
+    }
 
 }

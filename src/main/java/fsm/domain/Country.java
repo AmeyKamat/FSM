@@ -1,5 +1,7 @@
 package fsm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="COUNTRY")
+@JsonFilter("countryFilter")
 public class Country {
 
 	@Id
@@ -27,6 +30,10 @@ public class Country {
 
 	public Country() {
 		super();
+	}
+
+	public Country(String country) {
+		this.name=country;
 	}
 
 	public int getId() {

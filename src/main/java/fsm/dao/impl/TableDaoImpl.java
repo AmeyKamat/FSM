@@ -1,6 +1,8 @@
 package fsm.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.TableDao;
 import fsm.domain.Table;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TableDaoImpl implements TableDao {
 
 	@Autowired
@@ -49,12 +53,24 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
-	public List<Table> getAllTables() {
+	public Set<Table> getAllTables() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Table.class);
-		return criteria.list();
+		return new HashSet(criteria.list());
 
+	}
+
+
+	public Integer addAllTables(Set<Table> tableList) {
+		Session session = sessionFactory.getCurrentSession();
+
+		for(Table tableItem: tableList)
+		{
+			session.save(tableItem);
+		}
+
+		return 1;
 	}
 
 }

@@ -1,5 +1,9 @@
 package fsm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Repository;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="CITY")
+@JsonFilter("cityFilter")
 public class City {
 
 	@Id
@@ -36,6 +41,7 @@ public class City {
 	public City() {
 		super();
 	}
+
 
 	public int getId() {
 		return id;

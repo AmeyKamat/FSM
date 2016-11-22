@@ -1,136 +1,164 @@
 package fsm.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import fsm.domain.Desk;
-import fsm.domain.LayoutData;
-import fsm.domain.LayoutExtremes;
-import fsm.domain.TableData;
+import fsm.domain.Floor;
+import fsm.domain.Table;
+import fsm.domain.UI.FloorObjects;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
+
+import java.util.*;
+
+@Service
+@RequestScope
+public class TableGenerator { //Uses Connected Component Graph Algorithm
+
+    private class Node {
+
+        Desk desk;
+        boolean visited;
+
+        Node(Desk desk) {
+            this.desk = desk;
+        }
+
+    }
+
+    private class Point {
+
+        int x;
+        int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+    }
+
+    ArrayList<Node> nodes = new ArrayList<Node>();
 
 
+    public void dfs(List<Desk> deskInCurrentTable, Node node, Point relativeCoordinates) {
 
-/**
- * Created by Sarthak on 10-09-2016.
- */
-public class TableGenerator {
-	private int maxX, maxY;
-	boolean visited[][];
-	HashSet<Desk> deskSet;
-	private int tableNumber = 0;
-	public int tableIds[][];
+        node.visited = true;
+        node.desk.setTableRow(relativeCoordinates.y);
+        node.desk.setTableCol(relativeCoordinates.x);
 
-	private TableData generateTable(Desk desk, String layoutId) {
-		desk = getDesk(desk);
-		int topLeftX = desk.getX(), topLeftY = desk.getY();
-		int maxPushPointX = 0, maxPushPointY = 0;
-		tableNumber++;
-		List<Desk> desksForCurrentTable = new ArrayList<Desk>();
-		Queue<Desk> queue = new LinkedList<Desk>();
-		Queue<Point> pointQueue = new LinkedList<Point>();
-		queue.add(desk);
-		Point point = new Point(0, 0);
-		pointQueue.add(point);
-		while (!queue.isEmpty()) {
-			Desk current = queue.remove();
-			Point currentPoint = pointQueue.remove();
-			tableIds[currentPoint.x][currentPoint.y] = current.getDeskId();
-			if (visited[current.getX()][current.getY()])
-				continue;
-			desksForCurrentTable.add(current);
-			visited[current.getX()][current.getY()] = true;
-			Desk rightDesk = new Desk(current.getX() + current.getWidth(), current.getY());
-			Desk downDesk = new Desk(current.getX(), current.getY() + current.getHeight());
-			if (deskSet.contains(rightDesk)) {
-				rightDesk = getDesk(rightDesk);
-				queue.add(rightDesk);
-				pointQueue.add(new Point(currentPoint.x + 1, currentPoint.y));
-				maxPushPointX = Math.max(currentPoint.x + 1, maxPushPointX);
-				maxPushPointY = Math.max(currentPoint.y, maxPushPointY);
-			}
-			if (deskSet.contains(downDesk)) {
-				downDesk = getDesk(downDesk);
-				queue.add(downDesk);
-				pointQueue.add(new Point(currentPoint.x, currentPoint.y + 1));
-				maxPushPointX = Math.max(currentPoint.x, maxPushPointX);
-				maxPushPointY = Math.max(currentPoint.y + 1, maxPushPointY);
-			}
-		}
-		int deskIds[] = new int[desksForCurrentTable.size()];
-		int index = 0;
-		for (Desk d : desksForCurrentTable) {
-			deskIds[index++] = d.getDeskId();
-		}
-		// System.out.println("For table number "+tableNumber+" Max x
-		// "+maxPushPointX+" Max Y "+maxPushPointY);
-		int finalTable[][] = new int[maxPushPointY + 1][maxPushPointX + 1];
-		for (int i = 0; i <= maxPushPointY; i++) {
-			for (int j = 0; j <= maxPushPointX; j++) {
-				finalTable[i][j] = tableIds[j][i];
-			}
-		}
-		int finalTable1[][];
-		if (maxPushPointX < maxPushPointY) {
-			finalTable1 = new int[maxPushPointX + 1][maxPushPointY + 1];
-			for (int i = 0; i <= maxPushPointY; i++) {
-				for (int j = 0; j <= maxPushPointX; j++) {
-					finalTable1[j][i] = finalTable[i][j];
-				}
-			}
-		} else {
-			finalTable1 = finalTable;
-		}
+        deskInCurrentTable.add(node.desk);
 
-		/*
-		 * for(int i=0;i<=maxPushPointY;i++){ for(int j=0;j<=maxPushPointX;j++){
-		 * System.out.print(finalTable[i][j]+" "); } System.out.println(); }
-		 */
-		return new TableData(tableNumber, desksForCurrentTable, finalTable1, maxPushPointY + 1, maxPushPointX + 1,
-				topLeftX, topLeftY, layoutId);
-	}
+        for (int i = 0; i <= 1; i++)
+            for (int j = 0; j <= 1; j++) {
+                if (i == 0 && j == 0)
+                    continue;
 
-	private Desk getDesk(Desk searchDesk) {
-		for (Desk temp : deskSet) {
-			if (temp.getX() == searchDesk.getX() && temp.getY() == searchDesk.getY())
-				return temp;
-		}
-		return new Desk();
-	}
+                Node nodeTraverse = findNeighbours(node.desk.getX() + i * node.desk.getWidth(), node.desk.getY() + j * node.desk.getHeight());
 
-	public List<TableData> generateTables(LayoutData layoutData, String layoutId) {
-		LayoutExtremes layoutExtremes = layoutData.getLayoutExtremes();
-		ArrayList<Desk> deskList = (ArrayList<Desk>) layoutData.getDesks();
-		List<TableData> tables = new ArrayList<TableData>();
-		tableIds = new int[1000][1000];
-		deskSet = new HashSet<Desk>(deskList);
-		maxX = layoutExtremes.getMaximumX();
-		maxY = layoutExtremes.getMaximumY();
-		visited = new boolean[maxX + 1][maxY + 1];
-		for (int i = 0; i <= maxX; i++)
-			Arrays.fill(visited[i], false);
-		for (int i = 0; i <= maxX; i++) {
-			for (int j = 0; j <= maxY; j++) {
-				Desk searchDesk = new Desk(i, j);
-				if (deskSet.contains(searchDesk) && !visited[i][j]) {
-					searchDesk = getDesk(searchDesk);
-					TableData generatedTable = generateTable(searchDesk, layoutId);
-					tables.add(generatedTable);
-				}
-			}
-		}
-		return tables;
-	}
+                if (nodeTraverse != null && !nodeTraverse.visited)
+                    dfs(deskInCurrentTable, nodeTraverse, new Point(relativeCoordinates.x + i, relativeCoordinates.y + j));
 
-	private class Point {
-		int x, y;
+            }
 
-		public Point(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
+    }
+
+    private Node findNeighbours(int x, int y) {
+        for (Node temp : nodes) {
+            if (temp.desk.getX() == x && temp.desk.getY() == y)
+                return temp;
+        }
+        return null;
+    }
+
+    public List<Table> DFS_UTIL(FloorObjects floordData) {
+
+        List<Table> tablesList = new ArrayList<Table>();
+
+        List<Desk> deskList = new ArrayList<>(floordData.getDeskList());
+        Floor floor = floordData.getFloor();
+
+        sortDeskListActualCoordinates(deskList);  //sorting wrt actual coordinates
+
+        for (Desk desk : deskList)
+            nodes.add(new Node(desk));
+
+
+        for (Node node : nodes) {
+            if (!node.visited) {
+                Table table = new Table();
+                ArrayList<Desk> deskInCurrentTable = new ArrayList<>();
+                dfs(deskInCurrentTable, node, new Point(0, 0));   // To get Desks associated with current table
+                populatingTable(table, deskInCurrentTable, node, floor); // populating table object
+                tablesList.add(table);                       //adding it in result
+            }
+        }
+        return tablesList;
+    }
+
+
+    void populatingTable(Table table, List<Desk> deskInCurrentTable, Node node, Floor floor) {
+
+        // sortDeskListRelativeCoordinates(deskSet); //sorting
+
+        TreeSet<Desk> deskSet = new TreeSet<Desk>(new CustomComparator());
+        deskSet.addAll(deskInCurrentTable);
+
+        int maxRow = 0, maxCol = 0, len = 0, width = 0;
+        for (Desk d : deskSet) {
+            d.setTable(table);
+            if (maxCol < d.getTableCol())
+                maxCol = d.getTableCol();
+            if (maxRow < d.getTableRow())
+                maxRow = d.getTableRow();
+        }
+
+        if (maxRow < maxCol) {
+            len = maxCol;
+            width = maxRow;
+        } else {
+            len = maxRow;
+            width = maxCol;
+        }
+        table.setLength(len + 1);  //set max
+        table.setWidth(width + 1);   // set min
+        table.setTopLeftX(node.desk.getX());
+        table.setTopLeftY(node.desk.getY());
+        table.setDesks(deskSet);
+        table.setFloor(floor);
+    }
+
+
+    void sortDeskListActualCoordinates(List<Desk> deskList) {
+
+        Collections.sort(deskList, (o1, o2) -> {   // Sorting desk
+            if (o1.getY() > o2.getY())
+                return 1;
+            else if (o1.getY() == o2.getY())
+                if (o1.getX() > o2.getX())
+                    return 1;
+                else
+                    return -1;
+            else
+                return -1;
+        });
+
+
+    }
+
+    class CustomComparator implements Comparator<Desk> {
+
+        @Override
+        public int compare(Desk o1, Desk o2) {
+            if (o1.getTableRow() > o2.getTableRow())
+                return 1;
+            else if (o1.getTableRow() == o2.getTableRow())
+                if (o1.getTableCol() > o2.getTableCol())
+                    return 1;
+                else
+                    return -1;
+            else
+                return -1;
+        }
+    }
+
+
 }

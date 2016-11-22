@@ -2,14 +2,18 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.domain.Location;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.UserDao;
 import fsm.domain.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
@@ -55,6 +59,16 @@ public class UserDaoImpl implements UserDao {
 		Criteria criteria = session.createCriteria(User.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria=session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("username", username));
+		User user=(User) criteria.uniqueResult();
+		return user;
 	}
 
 }
