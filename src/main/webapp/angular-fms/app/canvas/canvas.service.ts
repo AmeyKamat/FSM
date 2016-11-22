@@ -1,6 +1,8 @@
 import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
 import {Injectable} from "@angular/core";
+import {Layout} from "../layout/layout";
+
 declare var fabric:any;
 @Injectable()
 export class CanvasService{
@@ -9,25 +11,36 @@ export class CanvasService{
 
     constructor(private utilService:UtilService){
     }
+
+    renderLayout(layout:Layout):void{
+        this.initCanvas();
+        this.utilService.calculateGridSize(layout.getFloor());
+        for(let table of layout.getTables()) {
+            this.drawTable(table);
+        }
+        for(let chair of layout.getChairs()){
+            this.drawChair(chair);
+        }
+    }
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
-        //this.resizeCanvas();
-        this.mouseUp();
-        this.mouseDown();
-        this.mouseMove();
+        this.resizeCanvas();
+        this.mouseUpEvent();
+        this.mouseDownEvent();
+        this.mouseMoveEvent();
         this.setupFloor();
     }
     resizeCanvas():void{
         this.canvas.setHeight(window.innerHeight);
         this.canvas.setWidth(window.innerWidth);
     }
-    mouseUp():void{
+    mouseUpEvent():void{
         this.canvas.on('mouse:up', (e)=> this.panning = false);
     }
-    mouseDown():void{
+    mouseDownEvent():void{
         this.canvas.on('mouse:down',(e)=> this.panning = true);
     }
-    mouseMove():void{
+    mouseMoveEvent():void{
     this.canvas.on('mouse:move', (e)=> {if (this.panning && e && e.e) {
         let delta = new fabric.Point(e.e.movementX, e.e.movementY);
         this.canvas.relativePan(delta);
@@ -56,7 +69,8 @@ export class CanvasService{
         }
         return false;
     }
-    /*changeZoomLevel():void{
+    /* Used to add slider functionality
+    changeZoomLevel():void{
      this.canvas.setZoom(1);
      var value=(50-this.value)/100;
      if (value < 0)
@@ -67,6 +81,7 @@ export class CanvasService{
      canvas.setZoom(canvas.getZoom() / (1 + value));
      }
      }*/
+
     setupFloor():void{
     this.canvas.setBackgroundColor({source: this.utilService.IMG_PATH + this.utilService.FLOOR_PATTERN_FILE, repeat: 'repeat'},
     ()=> this.canvas.renderAll());
@@ -97,10 +112,7 @@ export class CanvasService{
     var mid = new fabric.Rect({
         left : chair.x + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
         top :  chair.y + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        //originX : 'center',
-        //originY : 'center',
         stroke : 'grey',
-        //	fill : 'transparent',
         width : chair.width - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
         height : chair.height - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
         rx : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
@@ -130,9 +142,6 @@ export class CanvasService{
     var upperArm = new fabric.Rect({
         left : chair.x + chair.width/4,
         top :  chair.y + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
-        //originX : 'center',
-        //originY : 'center',
-        //fill : 'transparent',
         stroke : 'grey',
         width : chair.width/2,
         height : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,

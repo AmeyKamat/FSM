@@ -5,8 +5,7 @@ import {CanvasService} from "./canvas.service";
     moduleId:module.id,
     selector:'canvas',
     templateUrl:'canvas.component.html',
-    styleUrls: ['canvas.component.css',
-                'treeview-canvas.component.css']
+    styleUrls: ['canvas.component.css']
 })
 
 @Injectable()

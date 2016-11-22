@@ -5,40 +5,31 @@ import {ChairService} from "../chair/chair.service";
 import {Floor} from "../floor/floor";
 import {Table} from "../table/table";
 import {Chair} from "../chair/chair";
-import {CanvasService} from "../canvas/canvas.service";
+import {Layout} from "./layout";
 
 @Injectable()
 export class LayoutService{
-    public floor:Floor;
-    public tables:Table[]=[];
-    public chairs:Chair[]=[];
+
     constructor(
         private floorService:FloorService,
-        private  tableService:TableService,
+        private tableService:TableService,
         private chairService:ChairService,
-        private canvasService:CanvasService
     ){}
 
-    loadLayoutData(layoutData:any): void {
-        this.floor = this.floorService.getFloor(layoutData);
+    getLayout(layoutData:any): Layout {
+        let floor:Floor = this.floorService.getFloor(layoutData);
+        let tables:Table[]=[];
+        let chairs:Chair[]=[];
         let tableList= layoutData.tables;
-        for(let table of tableList){
-            let newTable = this.tableService.getTable(table);
-            this.tables.push(newTable);
-            let deskList = table.desks;
-            for(let desk of deskList){
-                let newChair = this.chairService.getChair(table, desk);
-                this.chairs.push(newChair);
+        for(let tableData of tableList){
+            let table = this.tableService.getTable(tableData);
+            tables.push(table);
+            let deskList = tableData.desks;
+            for(let deskData of deskList){
+                let chair = this.chairService.getChair(tableData, deskData);
+                chairs.push(chair);
             }
         }
-    }
-    drawLayout():void{
-        this.canvasService.initCanvas();
-        for(let table of this.tables) {
-            this.canvasService.drawTable(table);
-        }
-        for(let chair of this.chairs){
-            this.canvasService.drawChair(chair);
-        }
+        return new Layout(floor, tables, chairs);
     }
 }

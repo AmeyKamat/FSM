@@ -1,3 +1,4 @@
+import {Floor} from "../floor/floor";
 export class UtilService{
     /* static paths */
     public IMG_PATH = "/resources/img/";
@@ -20,9 +21,9 @@ export class UtilService{
     public CHAIR_PADDING = 0.1;
     public GRID_SIZE;
 
-    public calculateGridSize(floorData:any):void{
-        let xGridSize = window.innerWidth/floorData.maximumX;
-        let yGridSize = window.innerWidth/floorData.maximumY;
+    public calculateGridSize(floor:Floor):void{
+        let xGridSize = window.innerWidth/floor.getWidth();
+        let yGridSize = window.innerWidth/floor.getHeight();
         this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
     }
 

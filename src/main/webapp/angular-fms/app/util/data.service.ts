@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {UtilService} from "./util.service";
 import {Http, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 import {Country} from "../explorer/country/country";
 
 @Injectable()
-export class DataFetchService {
+export class DataService {
 
     constructor(private http: Http,
                 private utilService:UtilService

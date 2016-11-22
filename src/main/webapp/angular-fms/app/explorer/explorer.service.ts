@@ -1,18 +1,31 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Country} from "./country/country";
-import {DataFetchService} from "../util/data-fetch.service";
+import {Layout} from "../layout/layout";
+import {DataService} from "../util/data.service";
+import {LayoutService} from "../layout/layout.service";
+import {CanvasService} from "../canvas/canvas.service";
 
 @Injectable()
 export class ExplorerService{
-    constructor(private dataFetchService:DataFetchService){
+    constructor(private dataService:DataService,
+                private layoutService:LayoutService,
+                private canvasService:CanvasService){
     }
-    getLayoutData(floorID:number):Observable<any>{
-        return this.dataFetchService.getLayoutData(floorID);
-    }
+
     getCountries():Observable<Country[]>{
-        return this.dataFetchService.getCountries() ;
-         // return this.http.get('').map((response: Response) => <Country[]> response.json());
- // return[] ;
+        return this.dataService.getCountries() ;
+    }
+
+    drawLayout(floorId):void{
+        this.getLayoutData(floorId).
+        subscribe((layoutData)=>{
+            let layout:Layout = this.layoutService.getLayout(layoutData);
+            this.canvasService.renderLayout(layout);
+        });
+
+    }
+    getLayoutData(floorId:number):Observable<any>{
+        return this.dataService.getLayoutData(floorId);
     }
 }
