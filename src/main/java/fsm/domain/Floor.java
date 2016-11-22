@@ -4,16 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
@@ -53,9 +49,10 @@ public class Floor {
 	@NotNull
 	@Column(name = "max_y")
 	private int maxY;
-	
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "floor")
-	private List<Table> tables;
+	private Set<Table> tables;
 
 	public Floor() {
 		super();
@@ -125,11 +122,11 @@ public class Floor {
 		this.maxY = maxY;
 	}
 
-	public List<Table> getTables() {
+	public Set<Table> getTables() {
 		return tables;
 	}
 
-	public void setTables(List<Table> tables) {
+	public void setTables(Set<Table> tables) {
 		this.tables = tables;
 	}
 

@@ -1,16 +1,13 @@
 package fsm.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.*;
 
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 
@@ -44,15 +41,17 @@ public class Table {
 	@NotNull
 	@Column(name = "length")
 	private int length;
-	
+
+    @OrderBy("tableRow,tableCol")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "table")
-	private List<Desk> desks;
+	private Set<Desk> desks;
 
 	public Table() {
 		super();
 	}
 
-	public Table(List<Desk> desks,int width,int length, int topLeftX, int topLeftY){
+	public Table(Set<Desk> desks,int width,int length, int topLeftX, int topLeftY){
 		this.desks=desks;
 		this.width=width;
 		this.length=length;
@@ -108,11 +107,11 @@ public class Table {
 		this.length = length;
 	}
 
-	public List<Desk> getDesks() {
+	public Set<Desk> getDesks() {
 		return desks;
 	}
 
-	public void setDesks(List<Desk> desks) {
+	public void setDesks(Set<Desk> desks) {
 		this.desks = desks;
 	}
 

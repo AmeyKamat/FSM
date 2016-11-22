@@ -1,6 +1,8 @@
 package fsm.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -51,16 +53,16 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
-	public List<Table> getAllTables() {
+	public Set<Table> getAllTables() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Table.class);
-		return criteria.list();
+		return new HashSet(criteria.list());
 
 	}
 
-	@Override
-	public Integer addAllTables(List<Table> tableList) {
+
+	public Integer addAllTables(Set<Table> tableList) {
 		Session session = sessionFactory.getCurrentSession();
 
 		for(Table tableItem: tableList)

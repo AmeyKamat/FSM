@@ -107,7 +107,7 @@ public class TableGenerator {
             }
         }
 
-        generatedTable.setDesks(desksForCurrentTable);
+        generatedTable.setDesks(new HashSet(desksForCurrentTable));
         generatedTable.setWidth(maxPushPointY+1);
         generatedTable.setLength(maxPushPointX+1);
         generatedTable.setTopLeftX(topLeftX);

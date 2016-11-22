@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class TableServiceImpl implements TableService {
 
@@ -18,7 +20,7 @@ public class TableServiceImpl implements TableService {
 	}
 
 	@Transactional
-	public Integer addAllTables(List<Table> table){
+	public Integer addAllTables(Set<Table> table){
 		return  dao.addAllTables(table);
 	}
 
@@ -38,7 +40,7 @@ dao.updateTable(table);
 	}
 
 	@Transactional
-	public List<Table> getAllTables() {
+	public Set<Table> getAllTables() {
 return dao.getAllTables();
 	}
 

@@ -4,12 +4,13 @@ import fsm.domain.Desk;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 public interface DeskService {
 
 	public Integer addDesk(Desk desk);
 
-	public Integer addAllDesk(List<Desk> desk);
+	public Integer addAllDesk(Set<Desk> desk);
 
 	public void removeDesk(int deskId);
 
@@ -17,6 +18,6 @@ public interface DeskService {
 
 	public Desk getDeskById(int deskId);
 
-	public List<Desk> getAllDesks();
+	public Set<Desk> getAllDesks();
 
 }

@@ -18,10 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
 @Service
 public class FloorServiceImpl implements FloorService {
 
@@ -109,7 +107,7 @@ public class FloorServiceImpl implements FloorService {
 */
 
 
-		parsingData.updateFloor(location,floorCode,tableList);
+		parsingData.updateFloor(location,floorCode,new HashSet(tableList));
 		return parsingData.getFloor();
 	}
 
@@ -174,7 +172,7 @@ public class FloorServiceImpl implements FloorService {
             });
 		}
 */
-		parsingData.updateFloor(locationService.getLocationById(1),"3",tableList);
+		parsingData.updateFloor(locationService.getLocationById(1),"4",new HashSet(tableList));
 		return  parsingData.getFloor();
 
 	}

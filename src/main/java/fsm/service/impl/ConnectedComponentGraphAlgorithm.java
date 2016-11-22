@@ -7,10 +7,7 @@ import fsm.domain.UI.FloorObjects;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Mohit on 11/18/2016.
@@ -116,7 +113,7 @@ public class ConnectedComponentGraphAlgorithm {
 
         List<Table> graph_components = new ArrayList<Table>();
 
-        List<Desk> deskList = floordData.getDeskList();
+        List<Desk> deskList = new ArrayList<>(floordData.getDeskList());
         Floor floor = floordData.getFloor();
 
         sortDeskListActualCoordinates(deskList);  //sorting wrt actual coordinates
@@ -139,43 +136,43 @@ public class ConnectedComponentGraphAlgorithm {
 
 
     void populatingTable(Table table,List<Desk> deskInCurrentTable, Node node, Floor floor){
-        sortDeskListRelativeCoordinates(deskInCurrentTable); //sorting
 
-        for(Desk d:deskInCurrentTable)
+        // sortDeskListRelativeCoordinates(deskSet); //sorting
+
+        TreeSet<Desk> deskSet = new TreeSet<Desk>(new CustomComparator());
+        deskSet.addAll(deskInCurrentTable);
+
+        int maxRow=0,maxCol=0,len=0,width=0;
+        for(Desk d:deskSet) {
             d.setTable(table);
+            if(maxCol<d.getTableCol())
+                maxCol=d.getTableCol();
+            if(maxRow<d.getTableRow())
+                maxRow=d.getTableRow();
+        }
 
+        if(maxRow<maxCol)
+        {
+            len=maxCol;
+            width=maxRow;
+        }
+        else{
+            len=maxRow;
+            width=maxCol;
+        }
         // Populating various values of tables
-        Desk lastDeskInTable=deskInCurrentTable.get(deskInCurrentTable.size()-1);
-        int row=lastDeskInTable.getTableRow();
-        int col=lastDeskInTable.getTableCol();
-        table.setLength(row>col?row+1:col+1);  //set max
-        table.setWidth(row<col?row+1:col+1);   // set min
+        Desk lastDeskInTable=deskSet.last();
+     //   int row=lastDeskInTable.getTableRow();
+      //  int col=lastDeskInTable.getTableCol();
+        table.setLength(len+1);  //set max
+        table.setWidth(width+1);   // set min
         table.setTopLeftX(node.desk.getX());
         table.setTopLeftY(node.desk.getY());
-        table.setDesks(deskInCurrentTable);
+        table.setDesks(deskSet);
         table.setFloor(floor);
-
-
     }
 
 
-    void sortDeskListRelativeCoordinates(List<Desk> deskInCurrentTable){
-
-        Collections.sort(deskInCurrentTable, (o1, o2) -> {   // Sorting desk
-
-            if(o1.getTableRow()>o2.getTableRow())
-                return 1;
-            else if(o1.getTableRow()==o2.getTableRow())
-                if(o1.getTableCol()>o2.getTableCol())
-                    return 1;
-                else
-                    return -1;
-            else
-                return -1;
-        });
-
-
-    }
 
     void sortDeskListActualCoordinates(List<Desk> deskList){
 
@@ -194,6 +191,21 @@ public class ConnectedComponentGraphAlgorithm {
 
 
     }
+class CustomComparator implements Comparator<Desk>{
+
+    @Override
+    public int compare(Desk o1, Desk o2) {
+        if(o1.getTableRow()>o2.getTableRow())
+            return 1;
+        else if(o1.getTableRow()==o2.getTableRow())
+            if(o1.getTableCol()>o2.getTableCol())
+                return 1;
+            else
+                return -1;
+        else
+            return -1;
+    }
+}
 
 
 }

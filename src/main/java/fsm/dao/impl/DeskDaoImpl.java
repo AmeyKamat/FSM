@@ -1,6 +1,8 @@
 package fsm.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -51,15 +53,15 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
-	public List<Desk> getAllDesks() {
+	public Set<Desk> getAllDesks() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Desk.class);
-		return criteria.list();
+		return new HashSet(criteria.list());
 
 	}
 
-	public Integer addAllDesk(List<Desk> deskList) {
+	public Integer addAllDesk(Set<Desk> deskList) {
 		Session session = sessionFactory.getCurrentSession();
 
 		 for(Desk desk:deskList)

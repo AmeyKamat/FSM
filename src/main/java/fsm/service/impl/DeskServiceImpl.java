@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class DeskServiceImpl implements DeskService {
 
@@ -20,7 +22,7 @@ public class DeskServiceImpl implements DeskService {
 	}
 
 	@Transactional
-	public Integer addAllDesk(List<Desk> desk) {
+	public Integer addAllDesk(Set<Desk> desk) {
 		return dao.addAllDesk(desk);
 	}
 
@@ -40,7 +42,7 @@ public class DeskServiceImpl implements DeskService {
 	}
 
 	@Transactional
-	public List<Desk> getAllDesks() {
+	public Set<Desk> getAllDesks() {
 		return dao.getAllDesks();
 	}
 

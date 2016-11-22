@@ -1,5 +1,6 @@
 package fsm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @javax.persistence.Table(name="DESK")
 @JsonIgnoreProperties({"table","deskEmployee","x","y","width","height"})
+//@JsonFilter("deskFilter")
 public class Desk {
 
 	@Id

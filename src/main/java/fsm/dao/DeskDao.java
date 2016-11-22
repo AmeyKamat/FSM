@@ -1,6 +1,7 @@
 package fsm.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import fsm.domain.Desk;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public interface DeskDao {
 
 	public Desk getDeskById(int deskId);
 
-	public List<Desk> getAllDesks();
+	public Set<Desk> getAllDesks();
 
-    Integer addAllDesk(List<Desk> desk);
+    Integer addAllDesk(Set<Desk> desk);
 }

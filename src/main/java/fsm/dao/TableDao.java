@@ -1,6 +1,7 @@
 package fsm.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import fsm.domain.Table;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public interface TableDao {
 
 	public Table getTableById(int tableId);
 
-	public List<Table> getAllTables();
+	public Set<Table> getAllTables();
 
-    Integer addAllTables(List<Table> table);
+    Integer addAllTables(Set<Table> table);
 }

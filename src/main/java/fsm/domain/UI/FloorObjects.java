@@ -7,6 +7,7 @@ import fsm.domain.Table;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Mohit on 11/16/2016.
@@ -42,7 +43,7 @@ public class FloorObjects {
         this.floor = floor;
     }
 
-    public void updateFloor(Location location, String floorCode, List<Table> tableList) {
+    public void updateFloor(Location location, String floorCode, Set<Table> tableList) {
         this.floor.setFloorCode(floorCode);
         this.floor.setLocation(location);
         this.floor.setTables(tableList);

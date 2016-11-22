@@ -15,6 +15,7 @@ import fsm.service.TableService;
 import fsm.util.PropertiesUtil;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.hibernate.annotations.Tables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Mohit on 11/21/2016.
@@ -61,7 +63,35 @@ public class FloorRestEndpoints {
         return objectMapper.writer(filters).writeValueAsString(floor);
     }
 
+    @RequestMapping(value = "/country/{countryId}/city/{cityId}/location/{locationId}/floor/{floorId}/tables",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getHierarchyTables() throws JsonProcessingException {
+        Set<Table> tables=tableService.getAllTables();
+        //String[] propIgnore={"location"};
+        //SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept(propIgnore);
+        //FilterProvider filters = new SimpleFilterProvider().addFilter("floorFilter", theFilter);
+        ObjectMapper objectMapper=new ObjectMapper();
+        return objectMapper.writer().writeValueAsString(tables);
+    }
 
+    @RequestMapping(value = "/country/{countryId}/city/{cityId}/location/{locationId}/floor/{floorId}/tables/{tableId}/desks",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getHierarchyDesks() throws JsonProcessingException {
+        Set<Desk> desks=deskService.getAllDesks();
+        String[] propIgnore={"table","deskEmployee","x","y","width","height"};
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept(propIgnore);
+        FilterProvider filters = new SimpleFilterProvider().addFilter("deskFilter", theFilter);
+        ObjectMapper objectMapper=new ObjectMapper();
+        return objectMapper.writer(filters).writeValueAsString(desks);
+    }
+
+    @RequestMapping(value = "/country/{countryId}/city/{cityId}/location/{locationId}/floor/{floorId}/tables/{tableId}/desks/{deskId}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getHierarchyDesk(@PathVariable("deskId") int deskId) throws JsonProcessingException {
+        Desk desk=deskService.getDeskById(deskId);
+        String[] propIgnore={"table","deskEmployee","x","y","width","height"};
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept(propIgnore);
+        FilterProvider filters = new SimpleFilterProvider().addFilter("deskFilter", theFilter);
+        ObjectMapper objectMapper=new ObjectMapper();
+        return objectMapper.writer(filters).writeValueAsString(desk);
+    }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,value ="/country/{countryId}/city/{cityId}/location/{locationId}/floor/publish" )
     public boolean publishFloorDetails(boolean publish,HttpServletRequest httpServletRequest){
@@ -75,11 +105,11 @@ public class FloorRestEndpoints {
                 return false;
 
             floorService.addFloor(floor);
-            List<Table> tableList=floor.getTables();
+            Set<Table> tableList=floor.getTables();
             tableService.addAllTables(tableList);
 
             for(Table t: tableList){
-                List<Desk> temp=t.getDesks();
+                Set<Desk> temp=t.getDesks();
                 deskService.addAllDesk(temp);
             }
             httpSession.removeAttribute("floor");

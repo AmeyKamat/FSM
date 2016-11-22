@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.FloorDao;
@@ -46,7 +47,10 @@ public class FloorDaoImpl implements FloorDao {
 	public Floor getFloorById(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Floor floor = (Floor) session.get(Floor.class, floorId);
+		//Floor floor = (Floor) session.get(Floor.class, floorId);
+		Criteria criteria=session.createCriteria(Floor.class);
+		criteria.add(Restrictions.eq("id",floorId));
+		Floor floor=(Floor)criteria.uniqueResult();
 		return floor;
 
 	}
