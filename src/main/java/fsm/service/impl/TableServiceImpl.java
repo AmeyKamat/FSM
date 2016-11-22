@@ -13,35 +13,36 @@ import java.util.Set;
 @Service
 public class TableServiceImpl implements TableService {
 
-	@Autowired
-	private TableDao dao;
-	public Integer addTable(Table table) {
-		return dao.addTable(table);
-	}
+    @Autowired
+    private TableDao dao;
 
-	@Transactional
-	public Integer addAllTables(Set<Table> table){
-		return  dao.addAllTables(table);
-	}
+    public Integer addTable(Table table) {
+        return dao.addTable(table);
+    }
 
-	@Transactional
-	public void removeTable(int tableId) {
-		dao.removeTable(tableId);
-	}
+    @Transactional
+    public Integer addAllTables(Set<Table> table) {
+        return dao.addAllTables(table);
+    }
 
-	@Transactional
-	public void updateTable(Table table) {
-dao.updateTable(table);
-	}
+    @Transactional
+    public void removeTable(int tableId) {
+        dao.removeTable(tableId);
+    }
 
-	@Transactional
-	public Table getTableById(int tableId) {
-		return dao.getTableById(tableId);
-	}
+    @Transactional
+    public void updateTable(Table table) {
+        dao.updateTable(table);
+    }
 
-	@Transactional
-	public Set<Table> getAllTables() {
-return dao.getAllTables();
-	}
+    @Transactional
+    public Table getTableById(int tableId) {
+        return dao.getTableById(tableId);
+    }
+
+    @Transactional
+    public Set<Table> getAllTables() {
+        return dao.getAllTables();
+    }
 
 }

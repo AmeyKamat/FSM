@@ -2,6 +2,7 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.domain.Location;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -61,6 +62,14 @@ public class FloorDaoImpl implements FloorDao {
 		Criteria criteria = session.createCriteria(Floor.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public List<Floor> getAllFloors(Location location) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria=session.createCriteria(Floor.class);
+		criteria.add(Restrictions.eq("location",location));
+		return criteria.list();
 	}
 
 }

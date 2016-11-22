@@ -13,37 +13,37 @@ import java.util.Set;
 @Service
 public class DeskServiceImpl implements DeskService {
 
-	@Autowired
-	private DeskDao dao;
+    @Autowired
+    private DeskDao dao;
 
-	@Transactional
-	public Integer addDesk(Desk desk) {
-		return dao.addDesk(desk);
-	}
+    @Transactional
+    public Integer addDesk(Desk desk) {
+        return dao.addDesk(desk);
+    }
 
-	@Transactional
-	public Integer addAllDesk(Set<Desk> desk) {
-		return dao.addAllDesk(desk);
-	}
+    @Transactional
+    public Integer addAllDesk(Set<Desk> desk) {
+        return dao.addAllDesk(desk);
+    }
 
-	@Transactional
-	public void removeDesk(int deskId) {
-		dao.removeDesk(deskId);
-	}
+    @Transactional
+    public void removeDesk(int deskId) {
+        dao.removeDesk(deskId);
+    }
 
-	@Transactional
-	public void updateDesk(Desk desk) {
-		dao.updateDesk(desk);
-	}
+    @Transactional
+    public void updateDesk(Desk desk) {
+        dao.updateDesk(desk);
+    }
 
-	@Transactional
-	public Desk getDeskById(int deskId) {
-		return dao.getDeskById(deskId);
-	}
+    @Transactional
+    public Desk getDeskById(int deskId) {
+        return dao.getDeskById(deskId);
+    }
 
-	@Transactional
-	public Set<Desk> getAllDesks() {
-		return dao.getAllDesks();
-	}
+    @Transactional
+    public Set<Desk> getAllDesks() {
+        return dao.getAllDesks();
+    }
 
 }

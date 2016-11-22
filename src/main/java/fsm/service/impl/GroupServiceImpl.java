@@ -8,37 +8,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class GroupServiceImpl implements GroupService {
 
-	@Autowired
-	private GroupDao dao;
-	@Transactional
-	public Integer addGroup(Group group) {
-		return dao.addGroup(group);
+    @Autowired
+    private GroupDao dao;
 
-	}
+    @Transactional
+    public Integer addGroup(Group group) {
+        return dao.addGroup(group);
 
-	@Transactional
-	public void removeGroup(int groupId) {
+    }
 
-		dao.removeGroup(groupId);
-	}
+    @Transactional
+    public void removeGroup(int groupId) {
 
-	@Transactional
-	public void updateGroup(Group group) {
-dao.updateGroup(group);
-	}
+        dao.removeGroup(groupId);
+    }
 
-	@Transactional
-	public Group getGroupById(int groupId) {
-return dao.getGroupById(groupId);
-	}
+    @Transactional
+    public void updateGroup(Group group) {
+        dao.updateGroup(group);
+    }
 
-	@Transactional
-	public List<Group> getAllGroups() {
+    @Transactional
+    public Group getGroupById(int groupId) {
+        return dao.getGroupById(groupId);
+    }
 
-		return dao.getAllGroups();
-	}
+    @Transactional
+    public List<Group> getAllGroups() {
+
+        return dao.getAllGroups();
+    }
 
 }

@@ -8,34 +8,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
-	@Autowired
-	private RoleDao dao;
-	@Transactional
-	public Integer addRole(Role role) {
-		return dao.addRole(role);
-	}
+    @Autowired
+    private RoleDao dao;
 
-	@Transactional
-	public void removeRole(int roleId) {
-		dao.removeRole(roleId);
-	}
+    @Transactional
+    public Integer addRole(Role role) {
+        return dao.addRole(role);
+    }
 
-	@Transactional
-	public void updateRole(Role role) {
-		dao.updateRole(role);
-	}
+    @Transactional
+    public void removeRole(int roleId) {
+        dao.removeRole(roleId);
+    }
 
-	@Transactional
-	public Role getRoleById(int roleId) {
-return dao.getRoleById(roleId);
-	}
+    @Transactional
+    public void updateRole(Role role) {
+        dao.updateRole(role);
+    }
 
-	@Transactional
-	public List<Role> getAllRoles() {
-return dao.getAllRoles();
-	}
+    @Transactional
+    public Role getRoleById(int roleId) {
+        return dao.getRoleById(roleId);
+    }
+
+    @Transactional
+    public List<Role> getAllRoles() {
+        return dao.getAllRoles();
+    }
 
 }

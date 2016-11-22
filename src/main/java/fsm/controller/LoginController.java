@@ -1,89 +1,61 @@
 package fsm.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fsm.domain.User;
 import fsm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-/**
- * Created by TUSHAR on 15-09-2016.
- */
-
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-	
+
 
     @Autowired
     UserService userService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView showLoginPage() {
-		
-		return new ModelAndView("login.html");
-		
-	}
-	
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView showLoginPage() {
 
-	@RequestMapping(method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView login(final HttpServletRequest req, ModelMap map) {
+        return new ModelAndView("login.html");
 
-		System.out.println("Came here");
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-
-		String result=userService.checkLogin(username,password);
-		//User userCheckLogin = userService.getUserByUsername(username);
+    }
 
 
-		if (result==null) {
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView login(final HttpServletRequest req, ModelMap map) {
 
-			// map.addAttribute("error_message", "User does not exist");
-			System.out.println("Exited here 1");
-			return new ModelAndView("redirect:/controller/login");
+        System.out.println("Came here");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String result = userService.checkLogin(username, password);
 
-		} 
-		else {
+        if (result == null) {
+            System.out.println("Exited here 1");
+            return new ModelAndView("redirect:/controller/login");
+        } else {
+            if (result.equals("EQUAL")) {
 
-			if (result.equals("EQUAL")) {
+                HttpSession session = req.getSession();
+                session.setAttribute("id", username);
+                System.out.println("Exited here 2");
+                return new ModelAndView("redirect:/controller/uploadFile");
+            } else {
+                System.out.println("Exited here 3");
+                return new ModelAndView("redirect:/controller/login");
+            }
+        }
 
-				HttpSession session = req.getSession();
-				session.setAttribute("id", username);
-				// TODO: resp.sendRedirect(req.getContextPath()); // check filename
-				System.out.println("Exited here 2");
-				return new ModelAndView("redirect:/controller/uploadFile");
 
-			}
-			else {
-
-				// map.addAttribute("error_message", "User does not exist");
-				System.out.println("Exited here 3");
-				return new ModelAndView("redirect:/controller/login");
-
-			}
-
-		}
-		
-
-	}
+    }
 
 }

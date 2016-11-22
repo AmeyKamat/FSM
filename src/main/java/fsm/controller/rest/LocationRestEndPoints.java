@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by Mohit on 11/21/2016.
- */
+
 @RestController
 public class LocationRestEndPoints {
 
@@ -25,39 +23,27 @@ public class LocationRestEndPoints {
     @Autowired
     private LocationService locationService;
 
-    @GetMapping(value = "/country/{countryId}/city/{cityId}/location/",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getHierarchyLocations(@PathVariable("cityId") int cityId) throws JsonProcessingException {
-        List<Location> locations=locationService.getAllLocations(cityId);
-        String[] ignoreProperties={"floors","city"};
+    @GetMapping(value = "/city/{cityId}/locations/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getLocationsByCity(@PathVariable("cityId") int cityId) throws JsonProcessingException {
+        List<Location> locations = locationService.getAllLocations(cityId);
+        String[] ignoreProperties = {"floors", "city"};
         SimpleBeanPropertyFilter locationFilter = SimpleBeanPropertyFilter.serializeAllExcept(ignoreProperties);
-        FilterProvider filters = new SimpleFilterProvider().addFilter("locationFilter", locationFilter);
-        ObjectMapper objectMapper=new ObjectMapper();
-        objectMapper.setFilterProvider(filters);
-        return  objectMapper.writer(filters).writeValueAsString(locations);
+        FilterProvider filterProvider = new SimpleFilterProvider().addFilter("locationFilter", locationFilter);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setFilterProvider(filterProvider);
+        return objectMapper.writer(filterProvider).writeValueAsString(locations);
     }
 
 
-
-    @GetMapping(value = "/country/{countryId}/city/{cityId}/location/{locationId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getHierarchyLocation(@PathVariable("locationId") int locationId) throws JsonProcessingException {
-        Location location=locationService.getLocationById(locationId);
-        String[] ignoreProperties={"floors","city"};
+    @GetMapping(value = "/locations/{locationId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getLocation(@PathVariable("locationId") int locationId) throws JsonProcessingException {
+        Location location = locationService.getLocationById(locationId);
+        String[] ignoreProperties = {"floors", "city"};
         SimpleBeanPropertyFilter locationFilter = SimpleBeanPropertyFilter.serializeAllExcept(ignoreProperties);
-        FilterProvider filters = new SimpleFilterProvider().addFilter("locationFilter", locationFilter);
-        ObjectMapper objectMapper=new ObjectMapper();
-        objectMapper.setFilterProvider(filters);
-        return  objectMapper.writer(filters).writeValueAsString(location);
-    }
-
-
-    @GetMapping(value = "/country/city/location/",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getHierarchyLocation() throws JsonProcessingException {
-        List<Location> locations=locationService.getAllLocations();
-        String[] ignoreProperties={"city","floors"};
-        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept(ignoreProperties);
-        FilterProvider filters = new SimpleFilterProvider().addFilter("locationFilter", theFilter);
-        ObjectMapper objectMapper=new ObjectMapper();
-        return  objectMapper.writer(filters).writeValueAsString(locations);
+        FilterProvider filterProvider = new SimpleFilterProvider().addFilter("locationFilter", locationFilter);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setFilterProvider(filterProvider);
+        return objectMapper.writer(filterProvider).writeValueAsString(location);
     }
 
 

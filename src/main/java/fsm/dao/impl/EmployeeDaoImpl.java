@@ -14,49 +14,49 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	public Integer addEmployee(Employee employee) {
+    public Integer addEmployee(Employee employee) {
 
-		Session session = sessionFactory.getCurrentSession();
-		Integer employeeID = (Integer) session.save(employee);
-		return employeeID;
+        Session session = sessionFactory.getCurrentSession();
+        Integer employeeID = (Integer) session.save(employee);
+        return employeeID;
 
-	}
+    }
 
-	public void removeEmployee(int employeeId) {
+    public void removeEmployee(int employeeId) {
 
-		Session session = sessionFactory.getCurrentSession();
-		Employee employee = getEmployeeById(employeeId);
+        Session session = sessionFactory.getCurrentSession();
+        Employee employee = getEmployeeById(employeeId);
 
-		if (employee != null) {
-			session.delete(employee);
-		}
+        if (employee != null) {
+            session.delete(employee);
+        }
 
-	}
+    }
 
-	public void updateEmployee(Employee employee) {
+    public void updateEmployee(Employee employee) {
 
-		Session session = sessionFactory.getCurrentSession();
-		session.update(employee);
+        Session session = sessionFactory.getCurrentSession();
+        session.update(employee);
 
-	}
+    }
 
-	public Employee getEmployeeById(int employeeId) {
+    public Employee getEmployeeById(int employeeId) {
 
-		Session session = sessionFactory.getCurrentSession();
-		Employee employee = (Employee) session.get(Employee.class, employeeId);
-		return employee;
+        Session session = sessionFactory.getCurrentSession();
+        Employee employee = (Employee) session.get(Employee.class, employeeId);
+        return employee;
 
-	}
+    }
 
-	public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
 
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Employee.class);
-		return criteria.list();
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Employee.class);
+        return criteria.list();
 
-	}
+    }
 
 }

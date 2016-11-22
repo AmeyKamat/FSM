@@ -4,23 +4,6 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
-	<!--&lt;!&ndash; jersey servlet mapping &ndash;&gt;
-	<servlet>
-		<servlet-name>Jersey Web Application</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer
-		</servlet-class>
-		<init-param>
-			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>fsm/resource/rest</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Jersey Web Application</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-	-->
-
 	<!-- Adding DispatcherServlet -->
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -36,7 +19,7 @@
 
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>/controller/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 	<context-param>
