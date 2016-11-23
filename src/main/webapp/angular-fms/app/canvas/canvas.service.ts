@@ -1,6 +1,8 @@
 import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
+import {Injectable} from "@angular/core";
 declare var fabric:any;
+@Injectable()
 export class CanvasService{
     private canvas:any;
     panning:Boolean = false;

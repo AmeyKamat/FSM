@@ -1,36 +1,52 @@
 <div class="explorer">
+
+
 <ul>
+
+
+
     <li *ngFor="let country of countries">
 
-        <span class="iconButton" (click)="country.toggle()">{{ country.getIcon() }}</span>
+        <!--<span class="iconButton" (click)="this.toggle(country)">-->
+
+             <input type="checkbox" id="country-checkbox" class="example-five-checkbox" (click)="toggleCountry(country)"/>
+    <label id="country-icon" for="country-checkbox" class="example-five">+</label>
+
         {{country.name}}
-        <div *ngIf="country.expanded">
+
+        <!--<div *ngIf="country.expanded">-->
 
             <ul >
                 <li *ngFor="let city of country.cities">
-                    <span class="iconButton" (click)="city.toggle()">{{ city.getIcon() }}</span>
-                    {{city.name}}
-                    <div *ngIf="city.expanded">
-                        <ul>
-                            <li *ngFor="let location of city.locations">
-                                <span class="iconButton" (click)="location.toggle()">{{ location.getIcon() }}</span>
-                                {{locations.name}}
-                                <div *ngIf="location.expanded">
-                                    <ul>
-                                        <li *ngFor="let floor of location.floors"  [class.selected]="floor === selectedFloor"
-                                            (click)="onSelect(floor.id)">
 
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <!--<span class="iconButton" (click)="city.toggle()">-->
+                        <!--&lt;!&ndash;{{ city.getIcon() }}&ndash;&gt;-->
+                    <!--</span>-->
+                    ------
+                    <input type="checkbox" id="city-checkbox" class="example-five-checkbox" (click)="toggleCity(city)"/>
+                    <label id="city-icon" for="city-checkbox" class="example-five">+</label>
+                    {{city.name}}
+                    <!--<div *ngIf="city.expanded">-->
+                        <!--<ul>-->
+                            <!--<li *ngFor="let location of city.locations">-->
+                                <!--<span class="iconButton" (click)="location.toggle()">{{ location.getIcon() }}</span>-->
+                                <!--{{locations.name}}-->
+                                <!--<div *ngIf="location.expanded">-->
+                                    <!--<ul>-->
+                                        <!--<li *ngFor="let floor of location.floors"  [class.selected]="floor === selectedFloor"-->
+                                            <!--(click)="onSelect(floor.id)">-->
+
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
                 </li>
             </ul>
 
-            <!--<tree-view [directories]="dir.directories"></tree-view>-->
-        </div>
+            <!--&lt;!&ndash;<tree-view [directories]="dir.directories"></tree-view>&ndash;&gt;-->
+        <!--</div>-->
     </li>
 </ul>
     </div>

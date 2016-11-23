@@ -8,7 +8,7 @@ import {Chair} from "../chair/chair";
 import {DataFetchService} from "../util/data-fetch.service";
 import {Observable} from "rxjs";
 
-Injectable()
+@Injectable()
 export class LayoutService{
     public floor:Floor;
     public tables:Table[]=[];

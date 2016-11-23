@@ -1,3 +1,6 @@
+import {Injectable} from "@angular/core";
+
+@Injectable()
 export class UtilService{
     /* static paths */
     public IMG_PATH = "/resources/img/";
