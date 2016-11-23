@@ -1,3 +1,4 @@
+import {Floor} from "../floor/floor";
 export class UtilService{
     /* static paths */
     public IMG_PATH = "/resources/img/";
@@ -18,5 +19,13 @@ export class UtilService{
     public TABLE_BORDER_RADIUS_RATIO = 0.125;
     public MIN_BLOCK_SIZE_RATIO = 0.1;
     public CHAIR_PADDING = 0.1;
+    public GRID_SIZE;
+
+    public calculateGridSize(floor:Floor):void{
+        let xGridSize = window.innerWidth/floor.getWidth();
+        let yGridSize = window.innerWidth/floor.getHeight();
+        this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
+    }
+
 
 }
