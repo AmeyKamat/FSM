@@ -1,6 +1,8 @@
 package fsm.domain;
 
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,10 +29,10 @@ public class Group {
 	private Group parentGroup;
 	
 	@OneToMany(mappedBy = "parentGroup")
-	private Set<Group> childGroups;
+	private List<Group> childGroups;
 	
 	@OneToMany(mappedBy = "group")
-	private Set<Employee> employees;
+	private List<Employee> employees;
 
 	public Group() {
 		super();
@@ -60,15 +62,15 @@ public class Group {
 		this.parentGroup = parentGroup;
 	}
 
-	public Set<Group> getChildGroups() {
+	public List<Group> getChildGroups() {
 		return childGroups;
 	}
 
-	public void setChildGroups(Set<Group> childGroups) {
+	public void setChildGroups(List<Group> childGroups) {
 		this.childGroups = childGroups;
 	}
 
-	public Set<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employees;
 	}
 

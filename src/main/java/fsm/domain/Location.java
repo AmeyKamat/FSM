@@ -1,11 +1,18 @@
 package fsm.domain;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 
 @Entity
@@ -31,8 +38,8 @@ public class Location {
 	@Column(name = "location_code")
 	private String locationCode;
 	
-	@OneToMany(mappedBy = "location")//,fetch = FetchType.EAGER)
-	private Set<Floor> floors;
+	@OneToMany(mappedBy = "location")
+	private List<Floor> floors;
 
 	public Location() {
 		super();
@@ -70,11 +77,11 @@ public class Location {
 		this.locationCode = locationCode;
 	}
 
-	public Set<Floor> getFloors() {
+	public List<Floor> getFloors() {
 		return floors;
 	}
 
-	public void setFloors(Set<Floor> floors) {
+	public void setFloors(List<Floor> floors) {
 		this.floors = floors;
 	}
 

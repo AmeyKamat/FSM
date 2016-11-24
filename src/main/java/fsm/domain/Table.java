@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
-@javax.persistence.Table(name="WORKTABLE")
+@javax.persistence.Table(name = "WORKTABLE")
 @JsonIgnoreProperties("floor")
 public class Table {
 
@@ -20,43 +19,44 @@ public class Table {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "floor_id")
 	private Floor floor;
-	
+
 	@NotNull
 	@Column(name = "top_left_x")
 	private int topLeftX;
-	
+
 	@NotNull
 	@Column(name = "top_left_y")
 	private int topLeftY;
-	
+
 	@NotNull
 	@Column(name = "width")
 	private int width;
-	
+
 	@NotNull
 	@Column(name = "length")
 	private int length;
 
-    @OrderBy("tableRow,tableCol")
+	@OrderBy("tableRow,tableCol")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "table")
-	private Set<Desk> desks;
+	private List<Desk> desks;
 
 	public Table() {
 		super();
 	}
 
-	public Table(Set<Desk> desks,int width,int length, int topLeftX, int topLeftY){
-		this.desks=desks;
-		this.width=width;
-		this.length=length;
-		this.topLeftX=topLeftX;
-		this.topLeftY=topLeftY;
+	public Table(int topLeftX, int topLeftY, int width, int length, Floor floor) {
+		super();
+		this.topLeftX = topLeftX;
+		this.topLeftY = topLeftY;
+		this.width = width;
+		this.length = length;
+		this.floor = floor;
 	}
 
 	public int getId() {
@@ -107,11 +107,11 @@ public class Table {
 		this.length = length;
 	}
 
-	public Set<Desk> getDesks() {
+	public List<Desk> getDesks() {
 		return desks;
 	}
 
-	public void setDesks(Set<Desk> desks) {
+	public void setDesks(List<Desk> desks) {
 		this.desks = desks;
 	}
 

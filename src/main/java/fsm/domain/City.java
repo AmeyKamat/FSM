@@ -1,10 +1,6 @@
 package fsm.domain;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.stereotype.Repository;
-
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 
 @Entity
@@ -36,7 +34,7 @@ public class City {
 	private String name;
 
 	@OneToMany(mappedBy = "city")
-	private Set<Location> locations;
+	private List<Location> locations;
 
 	public City() {
 		super();
@@ -67,11 +65,11 @@ public class City {
 		this.name = name;
 	}
 
-	public Set<Location> getLocations() {
+	public List<Location> getLocations() {
 		return locations;
 	}
 
-	public void setLocations(Set<Location> locations) {
+	public void setLocations(List<Location> locations) {
 		this.locations = locations;
 	}
 

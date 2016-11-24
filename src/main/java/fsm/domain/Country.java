@@ -1,14 +1,15 @@
 package fsm.domain;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import java.util.List;
 
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 
 @Entity
@@ -26,7 +27,7 @@ public class Country {
 	private String name;
 	
 	@OneToMany(mappedBy = "country")
-	private Set<City> cities;
+	private List<City> cities;
 
 	public Country() {
 		super();
@@ -52,11 +53,11 @@ public class Country {
 		this.name = name;
 	}
 
-	public Set<City> getCities() {
+	public List<City> getCities() {
 		return cities;
 	}
 
-	public void setCities(Set<City> cities) {
+	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
 

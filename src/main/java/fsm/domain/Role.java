@@ -1,6 +1,7 @@
 package fsm.domain;
 
-import java.util.Set;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Role {
 	private String name;
 	
 	@OneToMany(mappedBy = "role")
-	private Set<User> users;
+	private List<User> users;
 
 	public Role() {
 		super();
@@ -45,11 +46,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public Set<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 

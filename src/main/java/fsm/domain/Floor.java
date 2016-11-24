@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @javax.persistence.Table(name="FLOOR")
 @JsonRootName(value = "Floor")
-//@JsonIgnoreProperties("location")
 @JsonFilter("floorFilter")
 public class Floor {
 
@@ -52,7 +51,7 @@ public class Floor {
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "floor")
-	private Set<Table> tables;
+	private List<Table> tables;
 
 	public Floor() {
 		super();
@@ -122,11 +121,11 @@ public class Floor {
 		this.maxY = maxY;
 	}
 
-	public Set<Table> getTables() {
+	public List<Table> getTables() {
 		return tables;
 	}
 
-	public void setTables(Set<Table> tables) {
+	public void setTables(List<Table> tables) {
 		this.tables = tables;
 	}
 

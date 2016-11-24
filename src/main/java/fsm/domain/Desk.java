@@ -39,63 +39,14 @@ public class Desk {
 	@Column(name = "desk_code")
 	private String deskCode;
 
-	@Transient
-	private int x,y,width,height;
-
-
-
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-
-	public Desk() {
+	public Desk(String deskCode, Table table, int tableRow, int tableCol, Employee deskEmployee) {
 		super();
+		this.deskCode = deskCode;
+		this.table = table;
+		this.tableRow = tableRow;
+		this.tableCol = tableCol;
+		this.deskEmployee = deskEmployee;
 	}
-
-	public Desk(String deskCode, int x, int y, int width, int height){
-		this.deskCode=deskCode;
-		this.x=x;
-		this.y=y;
-		this.width=width;
-		this.height=height;
-	}
-
-	public Desk(int x, int y) {
-		this.x=x;
-		this.y=y;
-	}
-
-
 
 	public int getId() {
 		return id;
