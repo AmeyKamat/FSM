@@ -3,7 +3,6 @@ import {Component} from '@angular/core';
     moduleId: module.id,
     selector: 'my-app',
     templateUrl:'app.component.html'
-    // template: `<explorer></explorer>`
 })
 export class AppComponent {
 

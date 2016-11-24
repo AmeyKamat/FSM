@@ -1,52 +1,35 @@
 import {Component, Injectable, OnInit} from '@angular/core' ;
 import {ExplorerService} from "./explorer.service";
-import {Country} from "./country/country";
-import {Floor} from "./floor/floor";
-import {UtilService} from "../util/util.service";
-import {LayoutService} from "../layout/layout.service";
-import {City} from "./city/city";
+import {Level} from "../Region/floor/level";
+import {Country} from "../Region/country/country";
+
 @Component({
     moduleId:module.id,
     selector:'explorer',
-    templateUrl:'explorer1.component.html',
-    providers:[ExplorerService]
-    })
+    templateUrl:'explorer.component.html'
+})
 
-export class ExplorerComponent implements OnInit{
-     countries: Country[] ;
-     selectedFloor:Floor ;
+@Injectable()
+export class ExplorerComponent implements OnInit {
+    countries: Country[];
+    selectedLevel: Level;
 
-    constructor(private explorerService:ExplorerService,private utilService:UtilService,private layoutService:LayoutService){
-
-
+    constructor(private explorerService: ExplorerService) {
+            console.log("Exploreer constructed") ;
     }
 
     ngOnInit(){
-
-        console.log("explorer initialised") ;
-        // this.countries=[new Country(1,"India",[]),new Country(2,"China",[])] ;
         this.explorerService.getCountries().
-            subscribe((countries)=>
-        {
-            this.countries=countries ;
+        subscribe((countries)=> {
+            this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 console.log("Countries are:"+countries[i].name) ;
-                this.countries[i].expanded=false ;
                 this.countries[i].cities=null ;
 
             }
-        }) ;
-
+        });
     }
-    // public getIcon(country:Country){
-    //
-    //     // console.log("i am being called") ;
-    //     if(country.expanded){
-    //         return '-';
-    //     }
-    //
-    //     return '+';
-    // }
+
     toggleCountry(country)
     {
         // this.cities = !this.expanded;
@@ -55,9 +38,6 @@ export class ExplorerComponent implements OnInit{
         {
             console.log("Inside if block") ;
             // country.cities=[new City("Pune",1,[])] ;
-
-
-
             this.explorerService.getCities().
             subscribe((cities)=>
             {
@@ -69,8 +49,6 @@ export class ExplorerComponent implements OnInit{
 
                 }
             }) ;
-
-
 
         }
         else
@@ -85,7 +63,17 @@ export class ExplorerComponent implements OnInit{
         if(city.locations==null)
         {
             console.log("Inside if block") ;
-            // city.locations=[new City("Pune",1,[])] ;
+            this.explorerService.getLocations().
+            subscribe((locations)=>
+            {
+                city.locations=locations ;
+                for (var i = 0; i < city.locations.length; i++) {
+                     console.log("Countries are:"+city.locations[i].name) ;
+
+                    city.locations[i].levels=null ;
+
+                }
+            }) ;
         }
         else
         {
@@ -94,10 +82,36 @@ export class ExplorerComponent implements OnInit{
     }
 
 
+    toggleLocation(location)
+    {
+        // this.cities = !this.expanded;
+        console.log(" location toggle block") ;
+        if(location.levels==null)
+        {
+            console.log("Inside if block ") ;
+            this.explorerService.getLevels().
+            subscribe((levels)=>
+            {
+                location.levels=levels ;
+                for (var i = 0; i < location.levels.length; i++) {
+                    console.log("levels are:"+levels[i].name) ;
+
+                    // location.locations[i].locations=null ;
+
+                }
+            }) ;
+        }
+        else
+        {
+            location.levels=null ;
+        }
+    }
+
+
+
+    onSelect(id: number) {
+        console.log("on select called ") ;
+        this.explorerService.drawLayout(id);
+    }
+
 }
-//Saurabh's to be added with the floor
-// onSelect(id:number){
-//    let layoutData=this.layoutService.getLayoutData(id) ;
-//     this.utilService.calculateGridSize(layoutData) ;
-//     this.layoutService.loadLayoutData(layoutData ) ;
-// }

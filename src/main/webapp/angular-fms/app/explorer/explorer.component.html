@@ -1,52 +1,50 @@
+<div class="explorer">
 
-<div id="layoutExplorer" class="explorer" >
-    <ol class="tree">
-        <li>
-            <label for="folder1"><div *ngFor="let country of countries">{{country.name}}</div></label>
-            <input type="checkbox" id="folder1" />
-            <ol>
-                <li>
-                    <label for="subfolder1">
 
-                    </label>
-                    <input type="checkbox" id="subfolder1" />
-                    <ol>
-                        <li>
-                            <label for="subsubfolder1">Noida</label> <input type="checkbox" id="subsubfolder1" />
-                        </li>
-                    </ol>
+<ul>
+
+
+
+    <li *ngFor="let country of countries">
+         <input type="checkbox" id="country-checkbox" class="example-five-checkbox" (click)="toggleCountry(country)"/>
+    <label id="country-icon" for="country-checkbox" class="example-five">+</label>
+        {{country.name}}
+            <ul>
+                <li *ngFor="let city of country.cities">
+                    --
+                    <input type="checkbox" id="city-checkbox" class="example-five-checkbox" (click)="toggleCity(city)"/>
+                    <label id="city-icon" for="city-checkbox" class="example-five">+</label>
+                    {{city.name}}
+
+                        <ul>
+                            <li *ngFor="let location of city.locations">
+                                ----
+                                <input type="checkbox" id="location-checkbox" class="example-five-checkbox"(click)="toggleLocation(location)"/>
+                                <label id="location-icon" for="location-checkbox" class="example-five">+</label>
+                                {{location.name}}
+
+                                    <ul>
+
+                                        <li *ngFor="let level of location.levels"
+                                            [class.selected]="level === selectedLevel"
+                                            (click)="onSelect(level.id)">
+
+                                            ------{{level.name}}
+
+                                        </li>
+                                    </ul>
+
+                            </li>
+                        </ul>
+
                 </li>
-                <li>
-                    <label for="subfolder2">Pune</label> <input type="checkbox" id="subfolder2" />
-                    <ol>
-                        <li>
-                            <label for="subsubfolder2">Hinjewadi</label> <input type="checkbox" id="subsubfolder2" />
-                            <ol>
-                                <li class="file"><a href="">Floor 1</a></li>
-                                <li class="file"><a href="">Floor 2</a></li>
-                                <li class="file"><a href="">Floor 3</a></li>
-                                <li class="file"><a href="">Floor 4</a></li>
-                                <li class="file"><a href="">Floor 5</a></li>
-                                <li class="file"><a href="">Floor 6</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <label for="subsubfolder3">Kharadi</label> <input type="checkbox" id="subsubfolder3" />
-                            <ol>
-                                <li class="file"><a href="">Floor 1</a></li>
-                                <li class="file"><a href="">Floor 2</a></li>
-                                <li class="file"><a href="#" data-country="India" data-city="Pune" data-branch="Kharadi" data-floor="3">Floor 3</a></li>
-                                <li class="file"><a href="">Floor 4</a></li>
-                                <li class="file"><a href="">Floor 5</a></li>
-                                <li class="file"><a href="">Floor 6</a></li>
-                                <li class="file"><a href="">Floor 7</a></li>
-                            </ol>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-        </li>
+            </ul>
 
-    </ol>
-
-</div>
+            <!--&lt;!&ndash;<tree-view [directories]="dir.directories"></tree-view>&ndash;&gt;-->
+        <!--</div>-->
+    </li>
+</ul>
+    </div>
+<!--<span class="iconButton" (click)="dir.toggle()">{{dir.getIcon()}}</span>-->
+<!--&lt;!&ndash;<input type="checkbox" [checked]="dir.checked" (click)="dir.check()" /> &ndash;&gt;-->
+<!--{{ dir.name }}-->

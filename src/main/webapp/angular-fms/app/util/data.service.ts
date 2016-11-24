@@ -1,15 +1,15 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {UtilService} from "./util.service";
 import {Http, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/map' ;
-
-
-import {Country} from "../explorer/country/country";
-import {City} from "../explorer/city/city";
+import {City} from "../Region/city/city";
+import {Country} from "../Region/country/country";
+import {Level} from "../Region/floor/level";
+import {Location} from "../Region/location/location";
 
 @Injectable()
-export class DataFetchService {
+export class DataService {
 
     constructor(private http: Http,
                 private utilService:UtilService
@@ -18,26 +18,23 @@ export class DataFetchService {
     getLayoutData(floorID:number): Observable<any> {
         let params = new URLSearchParams();
         params.set('floorID', floorID.toString());
-
-
         return this.http
             .get(this.utilService.GET_LAYOUT_URL,{search : params})
             .map((res: Response) => res.json());
-           /* .subscribe(result=> this.floorJSON= result);*/
-
-       // this.tableJSON= this.floorJSON.tableList;
     }
+
     getCountries():Observable<Country[]>{
-
         return this.http.get('http://localhost:8080/rest/countries').map((response: Response) => <Country[]> response.json());
-// return [new City("Pune",country,[]),new City("Pune",country,[])] ;
-
     }
-    getCities():Observable<City[]>{
 
+    getCities():Observable<City[]> {
         return this.http.get('http://localhost:8080/rest/countries').map((response: Response) => <City[]> response.json());
-// return [new City("Pune",country,[]),new City("Pune",country,[])] ;
-
     }
 
+    getLocations():Observable<Location[]>{
+        return this.http.get('http://localhost:8080/rest/countries').map((response: Response) => <Location[]> response.json());
+    }
+    getLevels():Observable<Level[]>{
+        return this.http.get('http://localhost:8080/rest/countries').map((response: Response) => <Level[]> response.json());
+    }
 }

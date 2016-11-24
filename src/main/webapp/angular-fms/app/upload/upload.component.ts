@@ -1,21 +1,30 @@
-import {Component, Injectable, Inject} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {
     FormBuilder,
     FormGroup, Validators
 } from '@angular/forms';
 import {UploadService} from "./upload.service";
+import {Country} from "../Region/country/country";
+import {City} from "../Region/city/city";
+import {Location} from "../Region/location/location";
+import {Level} from "../Region/floor/level";
+// import {Location} from "../Region/location/location";
 
 @Component({
     moduleId: module.id,
-    selector: '<upload>',
+    selector: 'upload',
     templateUrl: 'upload.component.html'
 })
 @Injectable()
-export class UploadComponent {
+export class UploadComponent implements OnInit{
     myForm: FormGroup;
     submitAttempt:boolean =false ;
+     countries:Country[] ;
+    cities:City[] ;
+    locations:Location[] ;
+    levels:Level[] ;
 
-    constructor(fb: FormBuilder,private uploadService:UploadService) {
+    constructor(fb: FormBuilder, private uploadService:UploadService) {
         console.log("I am constructed") ;
         this.myForm = fb.group({
             'country':['',Validators.required],
@@ -24,7 +33,42 @@ export class UploadComponent {
             'floor':['',Validators.required],
             'upload':['',Validators.required]
         });
+
     }
+    getCities(countryName){
+        console.log("Country selected successfully"+countryName) ;
+        this.uploadService.getCities().subscribe((cities)=> {
+            this.cities = cities;
+            for (var i = 0; i < this.cities.length; i++) {
+                console.log("Countries are:" + cities[i].name);
+                this.cities[i].locations = null;
+
+            }
+        });
+    }
+    getLocations(cityName){
+        this.uploadService.getLocations().subscribe((locations)=> {
+            this.locations = locations;
+            for (var i = 0; i < this.locations.length; i++) {
+                console.log("Countries are:" + locations[i].name);
+                this.locations[i].levels = null;
+
+            }
+        });
+    }
+
+    getLevels(locationName){
+        this.uploadService.getLocations().subscribe((levels)=> {
+            this.levels = levels;
+            for (var i = 0; i < this.levels.length; i++) {
+                console.log("Countries are:" + levels[i].name);
+
+
+            }
+        });
+    }
+
+
 
     changeListener($event): void {
 
@@ -37,8 +81,25 @@ export class UploadComponent {
         this.submitAttempt=true ;
         console.log(JSON.stringify(value.value))
         this.uploadService.acceptFormData(value) ;
+        /*subscribe((layoutData)=> {
+            this.utilService.calculateGridSize(layoutData);
+            this.layoutService.loadLayoutData(layoutData);
+        });*/
     }
 
+getCountries(){
+    this.uploadService.getCountries().subscribe((countries)=> {
+        this.countries = countries;
+        for (var i = 0; i < this.countries.length; i++) {
+            console.log("Countries are:" + countries[i].name);
+            this.countries[i].cities = null;
+
+        }
+    });
+}
+    ngOnInit(){
+       this.getCountries() ;
+    }
 // <!--<label for="skuInput">SKU</label>  -->
 // <!--<input type="text"  -->
 // <!--id="skuInput"  -->

@@ -4,11 +4,9 @@ import {CanvasComponent} from "./canvas/canvas.component";
 import {UploadComponent} from "./upload/upload.component";
 import {ExplorerComponent} from "./explorer/explorer.component";
 
-
-
 const routes: Routes = [
-    {path: '', component:UploadComponent},
-    { path: 'upload',  component: UploadComponent },
+   /* {path: '', component:UploadComponent},*/
+    /*{ path: 'upload',  component: UploadComponent },*/
     { path: 'explorer',  component: ExplorerComponent },
     { path: 'canvas',  component: CanvasComponent }];
 

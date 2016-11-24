@@ -1,30 +1,52 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {Country} from "./country/country";
-import {Response, Http} from "@angular/http";
-import {DataFetchService} from "../util/data-fetch.service";
-import {City} from "./city/city";
+import {Layout} from "../layout/layout";
+import {DataService} from "../util/data.service";
+import {LayoutService} from "../layout/layout.service";
+import {CanvasService} from "../canvas/canvas.service";
+import {Country} from "../Region/country/country";
+import {City} from "../Region/city/city";
+import {Level} from "../Region/floor/level";
 
 @Injectable()
 export class ExplorerService{
-    constructor(private dataFetchService:DataFetchService,private http:Http){
 
+    constructor(private dataService:DataService,
+                private layoutService:LayoutService,
+                private canvasService:CanvasService){
     }
 
     getCountries():Observable<Country[]>{
-
-          return this.dataFetchService.getCountries() ;
-        // return this.http.get('http://localhost:8080/rest/countries').map((response: Response) => <Country[]> response.json());
-
-        //  return this.http.get('').map((response: Response) => <Country[]> response.json());
- // retur[] ;
-
+        return this.dataService.getCountries() ;
     }
 
     getCities():Observable<City[]>{
 
-        return this.dataFetchService.getCities() ;
+        return this.dataService.getCities() ;
 
     }
 
+    getLocations():Observable<Location[]>{
+
+        return this.dataService.getLocations() ;
+
+    }
+
+    getLevels():Observable<Level[]>{
+
+        return this.dataService.getLevels() ;
+
+    }
+
+    drawLayout(floorId):void{
+        this.getLayoutData(floorId).
+        subscribe((layoutData)=>{
+            let layout:Layout = this.layoutService.getLayout(layoutData);
+            this.canvasService.renderLayout(layout);
+        });
+
+    }
+    getLayoutData(floorId:number):Observable<any>{
+        return this.dataService.getLayoutData(floorId);
+    }
 }

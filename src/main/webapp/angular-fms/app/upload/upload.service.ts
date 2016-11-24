@@ -1,6 +1,12 @@
-import {Headers, Http} from "@angular/http";
+import {Headers} from "@angular/http";
 import {FormGroup} from "@angular/forms";
 import {Injectable} from "@angular/core";
+import {Country} from "../Region/country/country";
+import {Observable} from "rxjs";
+import {DataService} from "../util/data.service";
+import {City} from "../Region/city/city";
+import {Location} from "../Region/location/location";
+// import {Location} from "../Region/location/location";
 
 @Injectable()
 export class UploadService{
@@ -13,8 +19,7 @@ export class UploadService{
         console.log("Service is getting cured") ;
     }
 
-
-    constructor(){
+    constructor( private dataService:DataService){
         this.headers = new Headers();
         this.headers.set('Content-Type', 'multipart/form-data');
         this.url = 'http://localhost:8080/test';
@@ -39,7 +44,17 @@ export class UploadService{
          //         headers: this.headers
          //
          //     });
+        /*return this.dataFetchService.postFormData(this.url,this.formData);*/
+    }
+    getCountries():Observable<Country[]>{
+        return this.dataService.getCountries() ;
+    }
 
+    getCities():Observable<City[]>{
+        return this.dataService.getCities() ;
+    }
+    getLocations():Observable<Location[]>{
+        return this.dataService.getLocations() ;
     }
 
 }

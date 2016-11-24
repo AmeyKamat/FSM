@@ -1,4 +1,4 @@
-<div class="modal fade"  data-keyboard="false" tabindex="-1" role="dialog" id="uploadModal">
+<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" id="uploadModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -6,16 +6,17 @@
         <div class="modal-header">
             <h4 class="modal-title">File Upload</h4>
         </div>
-
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" >
                             <label for="select-country">Country: </label>
-                            <select id="select-country" class="form-control" [formControl]="myForm.controls['country']">
+                            <select  (change)="getCities($event.target.value)" id="select-country" class="form-control" [formControl]="myForm.controls['country']" >
                                 <option disabled selected></option>
-                                <option value="India">India</option>
+                                <option *ngFor="let country of countries" >{{country.name}}</option>
+                                <!--<option disabled selected></option>-->
+                                <!--<option value="India">{{country.name}}</option>-->
                             </select>
                         </div>
                     </div>
@@ -25,9 +26,9 @@
                     <div>
                         <div class="col-md-4">
                             <label for="select-city">City: </label>
-                            <select id="select-city" class="form-control" [formControl]="myForm.controls['city']">
+                            <select (change)="getLocations($event.target.value)" id="select-city" class="form-control" [formControl]="myForm.controls['city']">
                                 <option disabled selected></option>
-                                <option value="Pune">Pune</option>
+                                <option *ngFor="let city of cities" >{{city.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -37,9 +38,9 @@
                     <div>
                         <div class="col-md-4">
                             <label for="select-location">Location: </label>
-                            <select id="select-location" class="form-control" [formControl]="myForm.controls['location']">
+                            <select (change)="getLevels($event.target.value)"id="select-location" class="form-control" [formControl]="myForm.controls['location']">
                                 <option disabled selected></option>
-                                <option value="Kharadi">Kharadi</option>
+                                <option *ngFor="let location of locations" >{{location.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -51,7 +52,7 @@
                             <label for="select-floor">Floor: </label>
                             <select id="select-floor" class="form-control" [formControl]="myForm.controls['floor']">
                                 <option disabled selected></option>
-                                <option value="3">3</option>
+                                <option *ngFor="let level of levels" >{{level.name}}</option>
                             </select>
                         </div>
                     </div>
