@@ -1,8 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {
-    FormBuilder,
-    FormGroup, Validators
-} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UploadService} from "./upload.service";
 
 @Component({

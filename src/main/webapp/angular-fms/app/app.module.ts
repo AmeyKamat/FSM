@@ -12,15 +12,12 @@ import {CanvasComponent} from "./canvas/canvas.component";
 import {UploadService} from "./upload/upload.service";
 import {ExplorerService} from "./explorer/explorer.service";
 import {CanvasService} from "./canvas/canvas.service";
-import {CountryService} from "./explorer/country/country.service";
-import {CityService} from "./explorer/city/cityService";
-import {LocationService} from "./explorer/location/location.service";
 import {UtilService} from "./util/util.service";
-import {DataFetchService} from "./util/data.service";
 import {FloorService} from "./floor/floor.service";
 import {ChairService} from "./chair/chair.service";
 import {TableService} from "./table/table.service";
 import {LayoutService} from "./layout/layout.service";
+import {DataService} from "./util/data.service";
 
 @NgModule({
     imports: [ BrowserModule,
@@ -39,11 +36,8 @@ import {LayoutService} from "./layout/layout.service";
     providers:[UploadService,
         ExplorerService,
         CanvasService,
-        CountryService,
-        CityService,
-        LocationService,
         UtilService,
-        DataFetchService,
+        DataService,
         FloorService,
         ChairService,
         TableService,

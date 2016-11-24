@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {Country} from "./country/country";
 import {Layout} from "../layout/layout";
 import {DataService} from "../util/data.service";
 import {LayoutService} from "../layout/layout.service";
 import {CanvasService} from "../canvas/canvas.service";
+import {Country} from "../Region/country/country";
 
 @Injectable()
 export class ExplorerService{
