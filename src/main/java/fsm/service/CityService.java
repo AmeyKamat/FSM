@@ -1,9 +1,9 @@
 package fsm.service;
 
-import fsm.domain.City;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import fsm.domain.City;
+import fsm.domain.Country;
 
 public interface CityService {
 
@@ -15,10 +15,9 @@ public interface CityService {
 
 	public City getCityById(int cityId);
 
-	public City getCityByName(String cityName);
+	public List<City> getCitiesByName(String cityName);
+	
+	public List<City> getCitiesByCountry(Country country);
 
 	public List<City> getAllCities();
-
-	public List<City> getAllCities(int countryId);
-
 }

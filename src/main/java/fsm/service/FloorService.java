@@ -1,9 +1,9 @@
 package fsm.service;
 
-import fsm.domain.Floor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import fsm.domain.Floor;
+import fsm.domain.Location;
 
 public interface FloorService {
 
@@ -17,6 +17,6 @@ public interface FloorService {
 
 	public List<Floor> getAllFloors();
 
-	public List<Floor> getAllFloors(int locationId);
+	public List<Floor> getAllFloorsByLocation(Location location);
 
 }

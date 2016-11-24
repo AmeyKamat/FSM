@@ -1,73 +1,58 @@
 package fsm.service.impl;
 
-import fsm.dao.FloorDao;
-import fsm.domain.Floor;
-import fsm.domain.Location;
-import fsm.domain.Table;
-import fsm.domain.UI.FloorObjects;
-import fsm.service.DeskService;
-import fsm.service.FloorService;
-import fsm.service.LocationService;
-import fsm.service.TableService;
-import fsm.util.PropertiesUtil;
-import org.apache.commons.fileupload.FileItem;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.util.*;
+import fsm.dao.FloorDao;
+import fsm.domain.Floor;
+import fsm.domain.Location;
+import fsm.service.DeskService;
+import fsm.service.FloorService;
+import fsm.service.LocationService;
+import fsm.service.TableService;
 
 @Service
 public class FloorServiceImpl implements FloorService {
 
     @Autowired
-    private FloorDao dao;
-
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private DeskService deskService;
-
-    @Autowired
-    private LocationService locationService;
-
-    @Autowired
-    private ExcelParser excelParser;
-
-    @Autowired
-    private TableGenerator tableGenerator;
+    private FloorDao floorDao;
 
     @Transactional
     public Integer addFloor(Floor floor) {
-        return dao.addFloor(floor);
+        return floorDao.addFloor(floor);
     }
 
+    @Override
     @Transactional
     public void removeFloor(int floorId) {
-        dao.removeFloor(floorId);
+    	floorDao.removeFloor(floorId);
     }
 
+    @Override
     @Transactional
     public void updateFloor(Floor floor) {
-        dao.updateFloor(floor);
+    	floorDao.updateFloor(floor);
     }
 
+    @Override
     @Transactional
     public Floor getFloorById(int floorId) {
-        return dao.getFloorById(floorId);
+        return floorDao.getFloorById(floorId);
     }
 
+    @Override
     @Transactional
     public List<Floor> getAllFloors() {
-        return dao.getAllFloors();
+        return floorDao.getAllFloors();
     }
 
+    @Override
     @Transactional
-    public List<Floor> getAllFloors(int locationId) {
-        Location location = locationService.getLocationById(locationId);
-        return dao.getAllFloors(location);
+    public List<Floor> getAllFloorsByLocation(Location location) {
+        return floorDao.getAllFloorsByLocation(location);
     }
 
 

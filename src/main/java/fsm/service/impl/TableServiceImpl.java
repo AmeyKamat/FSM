@@ -1,48 +1,54 @@
 package fsm.service.impl;
 
-import fsm.dao.TableDao;
-import fsm.domain.Table;
-import fsm.service.TableService;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
+import fsm.dao.TableDao;
+import fsm.domain.Table;
+import fsm.service.TableService;
 
 @Service
 public class TableServiceImpl implements TableService {
 
     @Autowired
-    private TableDao dao;
+    private TableDao tableDao;
 
     public Integer addTable(Table table) {
-        return dao.addTable(table);
+        return tableDao.addTable(table);
     }
 
+    @Override
     @Transactional
-    public Integer addAllTables(Set<Table> table) {
-        return dao.addAllTables(table);
+    public void addAllTables(Collection<Table> tables) {
+        tableDao.addAllTables(tables);
     }
 
+    @Override
     @Transactional
     public void removeTable(int tableId) {
-        dao.removeTable(tableId);
+    	tableDao.removeTable(tableId);
     }
 
+    @Override
     @Transactional
     public void updateTable(Table table) {
-        dao.updateTable(table);
+    	tableDao.updateTable(table);
     }
 
+    @Override
     @Transactional
     public Table getTableById(int tableId) {
-        return dao.getTableById(tableId);
+        return tableDao.getTableById(tableId);
     }
 
+    @Override
     @Transactional
-    public Set<Table> getAllTables() {
-        return dao.getAllTables();
+    public List<Table> getAllTables() {
+        return tableDao.getAllTables();
     }
 
 }

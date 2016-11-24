@@ -14,12 +14,13 @@ import fsm.domain.Desk;
 import fsm.domain.Floor;
 import fsm.domain.Table;
 import fsm.domain.UI.FloorObjects;
+import fsm.parser.ExcelParser;
+import fsm.parser.TableGenerator;
 import fsm.service.DeskService;
 import fsm.service.FloorService;
 import fsm.service.LocationService;
 import fsm.service.TableService;
-import fsm.service.impl.ExcelParser;
-import fsm.service.impl.TableGenerator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

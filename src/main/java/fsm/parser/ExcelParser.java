@@ -1,4 +1,4 @@
-package fsm.service.impl;
+package fsm.parser;
 
 import java.io.File;
 import java.io.IOException;

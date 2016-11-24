@@ -13,31 +13,36 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    private RoleDao dao;
+    private RoleDao roleDao;
 
+    @Override
     @Transactional
     public Integer addRole(Role role) {
-        return dao.addRole(role);
+        return roleDao.addRole(role);
     }
 
+    @Override
     @Transactional
     public void removeRole(int roleId) {
-        dao.removeRole(roleId);
+    	roleDao.removeRole(roleId);
     }
 
+    @Override
     @Transactional
     public void updateRole(Role role) {
-        dao.updateRole(role);
+    	roleDao.updateRole(role);
     }
 
+    @Override
     @Transactional
     public Role getRoleById(int roleId) {
-        return dao.getRoleById(roleId);
+        return roleDao.getRoleById(roleId);
     }
 
+    @Override
     @Transactional
     public List<Role> getAllRoles() {
-        return dao.getAllRoles();
+        return roleDao.getAllRoles();
     }
 
 }

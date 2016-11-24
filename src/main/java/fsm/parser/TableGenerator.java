@@ -1,4 +1,4 @@
-package fsm.service.impl;
+package fsm.parser;
 
 import fsm.domain.Desk;
 import fsm.domain.Floor;

@@ -1,60 +1,63 @@
 package fsm.service.impl;
 
-import fsm.dao.CityDao;
-import fsm.dao.CountryDao;
-import fsm.domain.City;
-import fsm.domain.Country;
-import fsm.service.CityService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import fsm.dao.CityDao;
+import fsm.domain.City;
+import fsm.domain.Country;
+import fsm.service.CityService;
 
 @Service
 public class CityServiceImpl implements CityService {
 
-    @Autowired
-    private CityDao dao;
+	@Autowired
+	private CityDao cityDao;
 
-    @Autowired
-    private CountryDao daoCountry;
+	@Override
+	@Transactional
+	public Integer addCity(City city) {
+		return cityDao.addCity(city);
+	}
 
-    @Transactional
-    public Integer addCity(City city) {
-        return dao.addCity(city);
-    }
+	@Override
+	@Transactional
+	public void removeCity(int cityId) {
+		cityDao.removeCity(cityId);
+	}
 
-    @Transactional
-    public void removeCity(int cityId) {
-        dao.removeCity(cityId);
-    }
+	@Override
+	@Transactional
+	public void updateCity(City city) {
+		cityDao.updateCity(city);
+	}
 
-    @Transactional
-    public void updateCity(City city) {
-        dao.updateCity(city);
-    }
+	@Override
+	@Transactional
+	public City getCityById(int cityId) {
+		return cityDao.getCityById(cityId);
+	}
 
-    @Transactional
-    public City getCityById(int cityId) {
-        return dao.getCityById(cityId);
-    }
+	@Override
+	@Transactional
+	public List<City> getCitiesByName(String cityName) {
+		return cityDao.getCitiesByName(cityName);
+	}
 
-    @Transactional
-    public City getCityByName(String cityName) {
-        return dao.getCityByName(cityName);
-    }
+	@Override
+	@Transactional
+	public List<City> getAllCities() {
 
-    @Transactional
-    public List<City> getAllCities() {
+		return cityDao.getAllCities();
+	}
 
-        return dao.getAllCities();
-    }
-
-    @Transactional
-    public List<City> getAllCities(int countryId) {
-        Country country = daoCountry.getCountryById(countryId);
-        return dao.getAllCities(country);
-    }
+	@Override
+	@Transactional
+	public List<City> getCitiesByCountry(Country country) {
+		return cityDao.getCitiesByCountry(country);
+	}
 
 }

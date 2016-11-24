@@ -1,60 +1,62 @@
 package fsm.service.impl;
 
-import fsm.dao.CityDao;
-import fsm.dao.LocationDao;
-import fsm.domain.City;
-import fsm.domain.Location;
-import fsm.service.LocationService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import fsm.dao.LocationDao;
+import fsm.domain.City;
+import fsm.domain.Location;
+import fsm.service.LocationService;
 
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    @Autowired
-    private LocationDao dao;
+	@Autowired
+	private LocationDao locationDao;
 
-    @Autowired
-    private CityDao daoCity;
+	@Override
+	@Transactional
+	public Integer addLocation(Location location) {
+		return locationDao.addLocation(location);
+	}
 
-    @Transactional
-    public Integer addLocation(Location location) {
-        return dao.addLocation(location);
-    }
+	@Override
+	@Transactional
+	public void removeLocation(int locationId) {
+		locationDao.removeLocation(locationId);
+	}
 
-    @Transactional
-    public void removeLocation(int locationId) {
-        dao.removeLocation(locationId);
-    }
+	@Override
+	@Transactional
+	public void updateLocation(Location location) {
+		locationDao.updateLocation(location);
+	}
 
-    @Transactional
-    public void updateLocation(Location location) {
-        dao.updateLocation(location);
-    }
+	@Override
+	@Transactional
+	public Location getLocationById(int locationId) {
+		return locationDao.getLocationById(locationId);
+	}
 
-    @Transactional
-    public Location getLocationById(int locationId) {
-        return dao.getLocationById(locationId);
-    }
+	@Override
+	@Transactional
+	public List<Location> getLocationsByName(String locationName) {
+		return locationDao.getLocationsByName(locationName);
+	}
 
+	@Override
+	@Transactional
+	public List<Location> getAllLocations() {
+		return locationDao.getAllLocations();
+	}
 
-    @Transactional
-    public Location getLocationByName(String locationName) {
-        return dao.getLocationByName(locationName);
-    }
-
-    @Transactional
-    public List<Location> getAllLocations() {
-        return dao.getAllLocations();
-    }
-
-    @Transactional
-    public List<Location> getAllLocations(int cityId) {
-        City city = daoCity.getCityById(cityId);
-        return dao.getAllLocations(city);
-    }
+	@Override
+	@Transactional
+	public List<Location> getAllLocationsByCity(City city) {
+		return locationDao.getAllLocationsByCity(city);
+	}
 
 }

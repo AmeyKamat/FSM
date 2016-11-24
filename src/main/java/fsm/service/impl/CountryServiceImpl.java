@@ -1,48 +1,55 @@
 package fsm.service.impl;
 
-import fsm.dao.CountryDao;
-import fsm.domain.Country;
-import fsm.service.CountryService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import fsm.dao.CountryDao;
+import fsm.domain.Country;
+import fsm.service.CountryService;
 
 @Service
 public class CountryServiceImpl implements CountryService {
 
-    @Autowired
-    private CountryDao dao;
+	@Autowired
+	private CountryDao countryDao;
 
-    @Transactional
-    public Integer addCountry(Country country) {
-        return dao.addCountry(country);
-    }
+	@Override
+	@Transactional
+	public Integer addCountry(Country country) {
+		return countryDao.addCountry(country);
+	}
 
-    @Transactional
-    public void removeCountry(int countryId) {
-        dao.removeCountry(countryId);
-    }
+	@Override
+	@Transactional
+	public void removeCountry(int countryId) {
+		countryDao.removeCountry(countryId);
+	}
 
-    @Transactional
-    public void updateCountry(Country country) {
-        dao.updateCountry(country);
-    }
+	@Override
+	@Transactional
+	public void updateCountry(Country country) {
+		countryDao.updateCountry(country);
+	}
 
-    @Transactional
-    public Country getCountryById(int countryId) {
-        return dao.getCountryById(countryId);
-    }
+	@Override
+	@Transactional
+	public Country getCountryById(int countryId) {
+		return countryDao.getCountryById(countryId);
+	}
 
-    @Transactional
-    public Country getCountryByName(String countryName) {
-        return dao.getCountryByName(countryName);
-    }
+	@Override
+	@Transactional
+	public Country getCountryByName(String countryName) {
+		return countryDao.getCountryByName(countryName);
+	}
 
-    @Transactional
-    public List<Country> getAllCountries() {
-        return dao.getAllCountries();
-    }
+	@Override
+	@Transactional
+	public List<Country> getAllCountries() {
+		return countryDao.getAllCountries();
+	}
 
 }

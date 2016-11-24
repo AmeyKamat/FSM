@@ -1,9 +1,9 @@
 package fsm.service;
 
-import fsm.domain.Location;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import fsm.domain.City;
+import fsm.domain.Location;
 
 public interface LocationService {
 
@@ -15,9 +15,9 @@ public interface LocationService {
 
 	public Location getLocationById(int locationId);
 
-	public Location getLocationByName(String locationName);
+	public List<Location> getLocationsByName(String locationName);
 
 	public List<Location> getAllLocations();
 
-    List<Location> getAllLocations(int cityId);
+    List<Location> getAllLocationsByCity(City city);
 }

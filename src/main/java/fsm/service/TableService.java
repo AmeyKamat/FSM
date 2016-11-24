@@ -1,16 +1,15 @@
 package fsm.service;
 
-import fsm.domain.Table;
-import org.springframework.stereotype.Service;
-
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+
+import fsm.domain.Table;
 
 public interface TableService {
 
 	public Integer addTable(Table table);
 
-	public Integer addAllTables(Set<Table> table);
+	public void addAllTables(Collection<Table> tables);
 
 	public void removeTable(int tableId);
 
@@ -18,6 +17,6 @@ public interface TableService {
 
 	public Table getTableById(int tableId);
 
-	public Set<Table> getAllTables();
+	public List<Table> getAllTables();
 
 }

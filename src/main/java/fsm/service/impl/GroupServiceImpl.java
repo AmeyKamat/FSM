@@ -1,46 +1,52 @@
 package fsm.service.impl;
 
-import fsm.dao.GroupDao;
-import fsm.domain.Group;
-import fsm.service.GroupService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import fsm.dao.GroupDao;
+import fsm.domain.Group;
+import fsm.service.GroupService;
 
 @Service
 public class GroupServiceImpl implements GroupService {
 
-    @Autowired
-    private GroupDao dao;
+	@Autowired
+	private GroupDao groupDao;
 
-    @Transactional
-    public Integer addGroup(Group group) {
-        return dao.addGroup(group);
+	@Override
+	@Transactional
+	public Integer addGroup(Group group) {
+		return groupDao.addGroup(group);
 
-    }
+	}
 
-    @Transactional
-    public void removeGroup(int groupId) {
+	@Override
+	@Transactional
+	public void removeGroup(int groupId) {
 
-        dao.removeGroup(groupId);
-    }
+		groupDao.removeGroup(groupId);
+	}
 
-    @Transactional
-    public void updateGroup(Group group) {
-        dao.updateGroup(group);
-    }
+	@Override
+	@Transactional
+	public void updateGroup(Group group) {
+		groupDao.updateGroup(group);
+	}
 
-    @Transactional
-    public Group getGroupById(int groupId) {
-        return dao.getGroupById(groupId);
-    }
+	@Override
+	@Transactional
+	public Group getGroupById(int groupId) {
+		return groupDao.getGroupById(groupId);
+	}
 
-    @Transactional
-    public List<Group> getAllGroups() {
+	@Override
+	@Transactional
+	public List<Group> getAllGroups() {
 
-        return dao.getAllGroups();
-    }
+		return groupDao.getAllGroups();
+	}
 
 }

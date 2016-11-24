@@ -1,16 +1,15 @@
 package fsm.service;
 
-import fsm.domain.Desk;
-import org.springframework.stereotype.Service;
-
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+
+import fsm.domain.Desk;
 
 public interface DeskService {
 
 	public Integer addDesk(Desk desk);
 
-	public Integer addAllDesk(Set<Desk> desk);
+	public void addAllDesks(Collection<Desk> desks);
 
 	public void removeDesk(int deskId);
 
@@ -18,6 +17,6 @@ public interface DeskService {
 
 	public Desk getDeskById(int deskId);
 
-	public Set<Desk> getAllDesks();
+	public List<Desk> getAllDesks();
 
 }

@@ -13,31 +13,36 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeDao dao;
+    private EmployeeDao employeeDao;
 
+    @Override
     @Transactional
     public Integer addEmployee(Employee employee) {
-        return dao.addEmployee(employee);
+        return employeeDao.addEmployee(employee);
     }
 
+    @Override
     @Transactional
     public void removeEmployee(int employeeId) {
-        dao.removeEmployee(employeeId);
+    	employeeDao.removeEmployee(employeeId);
     }
 
+    @Override
     @Transactional
     public void updateEmployee(Employee employee) {
-        dao.updateEmployee(employee);
+    	employeeDao.updateEmployee(employee);
     }
 
+    @Override
     @Transactional
     public Employee getEmployeeById(int employeeId) {
-        return dao.getEmployeeById(employeeId);
+        return employeeDao.getEmployeeById(employeeId);
     }
 
+    @Override
     @Transactional
     public List<Employee> getAllEmployees() {
-        return getAllEmployees();
+        return employeeDao.getAllEmployees();
     }
 
 }
