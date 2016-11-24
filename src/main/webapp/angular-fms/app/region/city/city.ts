@@ -26,7 +26,6 @@ export class City{
  }
  getLocations()
  {
-
        this.cityService.getLocations(this).
        subscribe((locations) =>
        {

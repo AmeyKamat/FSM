@@ -4,7 +4,7 @@ import {Layout} from "../layout/layout";
 import {DataService} from "../util/data.service";
 import {LayoutService} from "../layout/layout.service";
 import {CanvasService} from "../canvas/canvas.service";
-import {Country} from "./country/country";
+import {Country} from "../region/country/country";
 
 @Injectable()
 export class ExplorerService{

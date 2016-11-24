@@ -1,5 +1,6 @@
-import {Component, ElementRef, AfterViewInit, ViewChild, Injectable} from '@angular/core';
+import {Component, ElementRef, AfterViewInit, ViewChild, Injectable, Renderer} from '@angular/core';
 import {CanvasService} from "./canvas.service";
+import {AppComponent} from "../app.component";
 
 @Component({
     moduleId:module.id,
@@ -11,12 +12,13 @@ import {CanvasService} from "./canvas.service";
 @Injectable()
 export class CanvasComponent implements AfterViewInit{
 
-    constructor(private canvasService:CanvasService){
+    constructor(private rd: Renderer, private canvasService:CanvasService){
     }
 
-    @ViewChild('canvasZoomElement') canvasZoomElement: ElementRef;
+    @ViewChild('canvass') canvasZoomElement;
     ngAfterViewInit(): void {
         let canvasZoomElement = this.canvasZoomElement.nativeElement;
+        /*this.rd.invokeElementMethod(this.canvasZoomElement.nativeElement,'method');*/
         if(canvasZoomElement.addEventListener){
             // IE9, Chrome, Safari, Opera
             canvasZoomElement.addEventListener("mousewheel", this.zoom, false);

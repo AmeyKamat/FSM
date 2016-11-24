@@ -1,7 +1,7 @@
 import {Component, Injectable, OnInit} from '@angular/core' ;
 import {ExplorerService} from "./explorer.service";
-import {Country} from "./country/country";
-import {Floor} from "./floor/floor";
+import {Country} from "../region/country/country";
+import {Floor} from "../region/floor/floor";
 
 @Component({
     moduleId:module.id,
