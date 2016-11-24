@@ -6,10 +6,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.RoleDao;
 import fsm.domain.Role;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -17,6 +17,7 @@ public class RoleDaoImpl implements RoleDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -25,6 +26,7 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
+	@Override
 	public void removeRole(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -36,6 +38,7 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
+	@Override
 	public void updateRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -43,6 +46,7 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
+	@Override
 	public Role getRoleById(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -51,6 +55,7 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
+	@Override
 	public List<Role> getAllRoles() {
 
 		Session session = sessionFactory.getCurrentSession();

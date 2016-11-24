@@ -1,5 +1,6 @@
 package fsm.dao.impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class TableDaoImpl implements TableDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addTable(Table table) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -27,6 +29,7 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
+	@Override
 	public void removeTable(int tableId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -38,6 +41,7 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
+	@Override
 	public void updateTable(Table table) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -45,6 +49,7 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
+	@Override
 	public Table getTableById(int tableId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -53,24 +58,24 @@ public class TableDaoImpl implements TableDao {
 
 	}
 
-	public Set<Table> getAllTables() {
+	@Override
+	public List<Table> getAllTables() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Table.class);
-		return new HashSet(criteria.list());
+		return criteria.list();
 
 	}
 
-
-	public Integer addAllTables(Set<Table> tableList) {
+	@Override
+	public void addAllTables(Collection<Table> tables) {
 		Session session = sessionFactory.getCurrentSession();
 
-		for(Table tableItem: tableList)
+		for(Table table: tables)
 		{
-			session.save(tableItem);
+			session.save(table);
 		}
 
-		return 1;
 	}
 
 }

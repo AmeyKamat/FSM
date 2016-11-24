@@ -2,16 +2,16 @@ package fsm.dao.impl;
 
 import java.util.List;
 
-import fsm.domain.City;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.LocationDao;
+import fsm.domain.City;
 import fsm.domain.Location;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class LocationDaoImpl implements LocationDao {
@@ -19,6 +19,7 @@ public class LocationDaoImpl implements LocationDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -27,6 +28,7 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
+	@Override
 	public void removeLocation(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -38,6 +40,7 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
+	@Override
 	public void updateLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -45,6 +48,7 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
+	@Override
 	public Location getLocationById(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -53,17 +57,16 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
-
-	public Location getLocationByName(String locationName) {
+	@Override
+	public List<Location> getLocationsByName(String locationName) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria=session.createCriteria(Location.class);
+		Criteria criteria = session.createCriteria(Location.class);
 		criteria.add(Restrictions.eq("name", locationName));
-		Location location=(Location) criteria.uniqueResult();
-		return location;
+		return criteria.list();
 	}
 
-
+	@Override
 	public List<Location> getAllLocations() {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -73,10 +76,10 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public List<Location> getAllLocations(City city) {
+	public List<Location> getAllLocationsByCity(City city) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Location.class);
-		criteria.add(Restrictions.eq("city",city));
+		criteria.add(Restrictions.eq("city", city));
 		return criteria.list();
 	}
 

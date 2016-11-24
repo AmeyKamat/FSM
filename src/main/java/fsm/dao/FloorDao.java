@@ -4,8 +4,6 @@ import java.util.List;
 
 import fsm.domain.Floor;
 import fsm.domain.Location;
-import org.springframework.stereotype.Repository;
-
 
 public interface FloorDao {
 
@@ -19,5 +17,5 @@ public interface FloorDao {
 
 	public List<Floor> getAllFloors();
 
-    List<Floor> getAllFloors(Location location);
+    List<Floor> getAllFloorsByLocation(Location location);
 }

@@ -1,12 +1,9 @@
 package fsm.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import fsm.domain.Country;
-import org.springframework.stereotype.Repository;
-
-//@Repository
+s
 public interface CountryDao {
 
 	public Integer addCountry(Country country);

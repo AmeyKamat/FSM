@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addUser(User user) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -27,6 +28,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
 	public void removeUser(int userId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -38,6 +40,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
 	public void updateUser(User user) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -45,6 +48,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
 	public User getUserById(int userId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -53,6 +57,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
 	public List<User> getAllUsers() {
 
 		Session session = sessionFactory.getCurrentSession();
