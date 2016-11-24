@@ -3,7 +3,7 @@ import {UtilService} from "./util.service";
 import {Http, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/map';
-import {Country} from "../Region/country/country";
+import {Country} from "../explorer/country/country";
 
 @Injectable()
 export class DataService {

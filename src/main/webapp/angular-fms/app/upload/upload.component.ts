@@ -4,7 +4,7 @@ import {UploadService} from "./upload.service";
 
 @Component({
     moduleId: module.id,
-    selector: '<upload>',
+    selector: 'upload',
     templateUrl: 'upload.component.html'
 })
 @Injectable()
