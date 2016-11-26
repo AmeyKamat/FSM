@@ -1,4 +1,4 @@
-export class Floor{
+export class Level{
     id:number ;
     name:String ;
 }

@@ -1,4 +1,7 @@
+import {Injectable} from "@angular/core";
 import {Floor} from "../floor/floor";
+
+@Injectable()
 export class UtilService{
     /* static paths */
     public IMG_PATH = "/resources/img/";
@@ -9,8 +12,11 @@ export class UtilService{
 
     /* API paths */
     public GET_LAYOUT_URL = "/rest/datafetch";
+    public GET_COUNTRY_URL = "http://localhost:8080/rest/countries";
+    public GET_CITY_URL = "http://localhost:8080/rest/countries";
+    public GET_LOCATION_URL = "http://localhost:8080/rest/countries";
+    public GET_LEVEL_URL = "http://localhost:8080/rest/countries";
     public GET_EMPLOYEE_URL = "";
-    //var GET_DESK_URL = "/rest/datafetch";
 
     /*ENV Variables*/
     public GRIDS_PER_CHAIR= 1;
@@ -26,6 +32,4 @@ export class UtilService{
         let yGridSize = window.innerWidth/floor.getHeight();
         this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
     }
-
-
 }

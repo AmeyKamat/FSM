@@ -5,27 +5,42 @@ import {DataService} from "../util/data.service";
 import {LayoutService} from "../layout/layout.service";
 import {CanvasService} from "../canvas/canvas.service";
 import {Country} from "../region/country/country";
+import {City} from "../region/city/city";
+import {Level} from "../region/level/level";
+import {Location} from "../region/location/location";
 
 @Injectable()
-export class ExplorerService{
+export class ExplorerService {
     constructor(private dataService:DataService,
                 private layoutService:LayoutService,
                 private canvasService:CanvasService){
     }
 
-    getCountries():Observable<Country[]>{
+    getCountries():Observable<Country[]> {
         return this.dataService.getCountries() ;
     }
 
-    drawLayout(floorId):void{
+    getCities():Observable<City[]> {
+        return this.dataService.getCities() ;
+    }
+
+    getLocations():Observable<Location[]> {
+        return this.dataService.getLocations() ;
+    }
+
+    getLevels():Observable<Level[]> {
+        return this.dataService.getLevels() ;
+    }
+
+    drawLayout(floorId):void {
         this.getLayoutData(floorId).
-        subscribe((layoutData)=>{
+        subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
             this.canvasService.renderLayout(layout);
         });
-
     }
-    getLayoutData(floorId:number):Observable<any>{
+
+    getLayoutData(floorId:number):Observable<any> {
         return this.dataService.getLayoutData(floorId);
     }
 }

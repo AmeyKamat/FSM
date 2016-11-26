@@ -1,6 +1,5 @@
-import {Component, ElementRef, AfterViewInit, ViewChild, Injectable, Renderer} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {CanvasService} from "./canvas.service";
-import {AppComponent} from "../app.component";
 
 @Component({
     moduleId:module.id,
@@ -10,38 +9,38 @@ import {AppComponent} from "../app.component";
 })
 
 @Injectable()
-export class CanvasComponent implements AfterViewInit{
+export class CanvasComponent {
 
-    constructor(private rd: Renderer, private canvasService:CanvasService){
+    constructor( private canvasService:CanvasService) {
     }
 
-    @ViewChild('canvass') canvasZoomElement;
+    /* Scroll feature to be fixed in next pull request
     ngAfterViewInit(): void {
-        let canvasZoomElement = this.canvasZoomElement.nativeElement;
-        /*this.rd.invokeElementMethod(this.canvasZoomElement.nativeElement,'method');*/
-        if(canvasZoomElement.addEventListener){
+        let canvasZoomElement = this.canvass;
+        this.rd.invokeElementMethod(this.canvasZoomElement.nativeElement,'method');
+        if(canvasZoomElement.addEventListener) {
             // IE9, Chrome, Safari, Opera
             canvasZoomElement.addEventListener("mousewheel", this.zoom, false);
             // Firefox
             canvasZoomElement.addEventListener("DOMMouseScroll", this.zoom, false);
         }
-        else{
+        else {
             // IE 6/7/8
             canvasZoomElement.attachEvent("onmousewheel", this.zoom);
         }
-    }
+    }*/
 
-    zoomIn():void{
+    zoomIn():void {
         this.canvasService.zoomIn();
     }
-    zoomOut():void{
+    zoomOut():void {
         this.canvasService.zoomOut()
     }
-    zoomReset():void{
+    zoomReset():void {
         this.canvasService.zoomReset();
     }
 
-    zoom(e):boolean{
+    zoom(e):boolean {
     return this.canvasService.zoom(e);
     }
 }

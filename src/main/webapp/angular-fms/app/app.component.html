@@ -15,7 +15,6 @@
                 <li ><a routerLink="location">Location <span class="sr-only">(current)</span></a></li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#uploadModal">Upload</a>
-                    <upload></upload>
                 </li>
             </ul>
             <!--search functionality-->
@@ -39,17 +38,14 @@
                     </ul>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
-
-<!--<button (click)="open()"></button>-->
-<!--<div *ngIf="displayModal">-->
-<!--<upload></upload>-->
-<!--<a href="#uploadModal" data-toggle="modal"></a>-->
-<!--</div>-->
+<upload></upload>
 
 <router-outlet></router-outlet>
-<div #canvass style="height:100vh; width:100vw; position:relative" mouse>
+<!-- mouse scroll feature to be implemented
+<div #canvass style="height:100vh; width:100vw; position:relative">
     <canvas id="workarea" width="100vw" height="100vh"></canvas>
-</div>
+</div>-->
+<canvas id="workarea" width="100vw" height="100vh"></canvas>
