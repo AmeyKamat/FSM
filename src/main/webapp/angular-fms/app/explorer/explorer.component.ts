@@ -15,7 +15,6 @@ export class ExplorerComponent implements OnInit {
     selectedLevel: Level;
 
     constructor(private explorerService: ExplorerService) {
-            console.log("Exploreer constructed") ;
     }
 
     ngOnInit(){

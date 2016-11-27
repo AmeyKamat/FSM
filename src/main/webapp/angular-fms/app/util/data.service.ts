@@ -20,7 +20,10 @@ export class DataService {
         params.set('floorId', floorId.toString());
         return this.http
             .get(this.utilService.GET_LAYOUT_URL,{search : params})
-            .map((res: Response) => res.json());
+            .map((response: Response) => response.json());
+    }
+    postLayoutData(something):void {
+
     }
 
     getCountries():Observable<Country[]> {

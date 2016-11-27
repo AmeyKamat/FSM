@@ -9,6 +9,7 @@ export class UtilService{
     public TABLE_PATTERN_FILE = "table_pattern.jpg";
     public FLOOR_PATTERN_FILE = "floor_pattern.jpg";
     public LOADING_FILE = "loading.gif";
+    public WELCOME_SCREEN = "barclays.png";
 
     /* API paths */
     public GET_LAYOUT_URL = "/rest/datafetch";

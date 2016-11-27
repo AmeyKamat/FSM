@@ -33,14 +33,11 @@ export class ExplorerService {
     }
 
     drawLayout(floorId):void {
-        this.getLayoutData(floorId).
+        this.dataService.getLayoutData(floorId).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
+            this.canvasService.showPublish = false;
             this.canvasService.renderLayout(layout);
         });
-    }
-
-    getLayoutData(floorId:number):Observable<any> {
-        return this.dataService.getLayoutData(floorId);
     }
 }
