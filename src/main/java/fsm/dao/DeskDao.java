@@ -1,8 +1,9 @@
 package fsm.dao;
 
+import java.util.Collection;
 import java.util.List;
 
-import fsm.domain.Desk;
+import fsm.model.domain.Desk;
 
 public interface DeskDao {
 
@@ -16,4 +17,5 @@ public interface DeskDao {
 
 	public List<Desk> getAllDesks();
 
+    public void addAllDesks(Collection<Desk> desks);
 }

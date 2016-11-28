@@ -5,16 +5,20 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.CountryDao;
-import fsm.domain.Country;
+import fsm.model.domain.Country;
 
+@Repository
 public class CountryDaoImpl implements CountryDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addCountry(Country country) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -23,6 +27,7 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
+	@Override
 	public void removeCountry(int countryId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -34,6 +39,7 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
+	@Override
 	public void updateCountry(Country country) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -41,6 +47,7 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
+	@Override
 	public Country getCountryById(int countryId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -49,6 +56,16 @@ public class CountryDaoImpl implements CountryDao {
 
 	}
 
+	@Override
+	public Country getCountryByName(String countryName) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Country.class);
+		criteria.add(Restrictions.eq("name", countryName));
+		Country country = (Country) criteria.uniqueResult();
+		return country;
+	}
+
+	@Override
 	public List<Country> getAllCountries() {
 
 		Session session = sessionFactory.getCurrentSession();

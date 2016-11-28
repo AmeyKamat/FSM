@@ -1,8 +1,9 @@
 package fsm.dao;
 
+import java.util.Collection;
 import java.util.List;
 
-import fsm.domain.Table;
+import fsm.model.domain.Table;
 
 public interface TableDao {
 
@@ -16,4 +17,5 @@ public interface TableDao {
 
 	public List<Table> getAllTables();
 
+	void addAllTables(Collection<Table> tables);
 }

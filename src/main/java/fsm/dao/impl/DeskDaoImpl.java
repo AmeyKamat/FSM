@@ -1,20 +1,24 @@
 package fsm.dao.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.DeskDao;
-import fsm.domain.Desk;
+import fsm.model.domain.Desk;
 
+@Repository
 public class DeskDaoImpl implements DeskDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addDesk(Desk desk) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -23,6 +27,7 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
+	@Override
 	public void removeDesk(int deskId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -34,6 +39,7 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
+	@Override
 	public void updateDesk(Desk desk) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -41,6 +47,7 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
+	@Override
 	public Desk getDeskById(int deskId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -49,12 +56,21 @@ public class DeskDaoImpl implements DeskDao {
 
 	}
 
+	@Override
 	public List<Desk> getAllDesks() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Desk.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public void addAllDesks(Collection<Desk> desks) {
+		Session session = sessionFactory.getCurrentSession();
+
+		for (Desk desk : desks)
+			session.save(desk);
 	}
 
 }

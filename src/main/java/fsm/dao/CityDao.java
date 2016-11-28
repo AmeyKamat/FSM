@@ -2,7 +2,8 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.City;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 
 public interface CityDao {
 
@@ -14,6 +15,10 @@ public interface CityDao {
 
 	public City getCityById(int cityId);
 
+	public List<City> getCitiesByName(String cityName);
+
 	public List<City> getAllCities();
+
+	public List<City> getCitiesByCountry(Country country);
 
 }

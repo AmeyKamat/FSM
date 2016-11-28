@@ -1,5 +1,12 @@
-*.class
-*.DS_STORE
+#Eclipse Config Files
+/.settings/
+.classpath
+.project
+.springBeans
+
+#Idea Config Files
+/.idea/
+/src/main/webapp/angular-fms/.idea/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -12,12 +19,14 @@
 # TS Compilation Files #
 *.js.map
 /src/main/webapp/angular-fms/app/**/*.js
+
+#Node and NPM Files
 /src/main/webapp/angular-fms/node_modules/
-/src/main/webapp/angular-fms/.idea/
+/src/main/webapp/angular-fms/node/
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /target/
 
-/.settings/
-/.idea/
+/bin/

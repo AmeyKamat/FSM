@@ -2,7 +2,8 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Location;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
 public interface LocationDao {
 
@@ -14,6 +15,9 @@ public interface LocationDao {
 
 	public Location getLocationById(int locationId);
 
+	public List<Location> getLocationsByName(String locationName);
+
 	public List<Location> getAllLocations();
 
+    List<Location> getAllLocationsByCity(City city);
 }

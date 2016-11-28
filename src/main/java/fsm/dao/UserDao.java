@@ -2,7 +2,7 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.User;
+import fsm.model.domain.User;
 
 public interface UserDao {
 
@@ -15,5 +15,6 @@ public interface UserDao {
 	public User getUserById(int userId);
 
 	public List<User> getAllUsers();
-	
+
+    User getUserByUsername(String username);
 }

@@ -6,15 +6,18 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.EmployeeDao;
-import fsm.domain.Employee;
+import fsm.model.domain.Employee;
 
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
 	public Integer addEmployee(Employee employee) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -23,6 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	@Override
 	public void removeEmployee(int employeeId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -34,6 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	@Override
 	public void updateEmployee(Employee employee) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -41,6 +46,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	@Override
 	public Employee getEmployeeById(int employeeId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -49,6 +55,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	@Override
 	public List<Employee> getAllEmployees() {
 
 		Session session = sessionFactory.getCurrentSession();
