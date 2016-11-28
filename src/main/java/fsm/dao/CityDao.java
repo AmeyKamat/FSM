@@ -2,8 +2,8 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.City;
-import fsm.domain.Country;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 
 public interface CityDao {
 

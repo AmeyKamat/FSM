@@ -2,8 +2,8 @@ package fsm.service;
 
 import java.util.List;
 
-import fsm.domain.Floor;
-import fsm.domain.Location;
+import fsm.model.domain.Floor;
+import fsm.model.domain.Location;
 
 public interface FloorService {
 

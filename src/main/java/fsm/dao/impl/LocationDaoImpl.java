@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fsm.dao.LocationDao;
-import fsm.domain.City;
-import fsm.domain.Location;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
 @Repository
 public class LocationDaoImpl implements LocationDao {

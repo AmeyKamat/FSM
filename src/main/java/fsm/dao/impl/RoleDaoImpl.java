@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fsm.dao.RoleDao;
-import fsm.domain.Role;
+import fsm.model.domain.Role;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {

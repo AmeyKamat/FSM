@@ -1,9 +1,6 @@
 package fsm.util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import fsm.util.PropertiesUtilHelper;
 
 public class PropertiesUtil {
 	

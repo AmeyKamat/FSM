@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsm.dao.FloorDao;
-import fsm.domain.Floor;
-import fsm.domain.Location;
-import fsm.service.DeskService;
+import fsm.model.domain.Floor;
+import fsm.model.domain.Location;
 import fsm.service.FloorService;
-import fsm.service.LocationService;
-import fsm.service.TableService;
 
 @Service
 public class FloorServiceImpl implements FloorService {

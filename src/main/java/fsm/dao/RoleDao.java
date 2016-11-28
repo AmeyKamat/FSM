@@ -2,7 +2,7 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Role;
+import fsm.model.domain.Role;
 
 public interface RoleDao {
 

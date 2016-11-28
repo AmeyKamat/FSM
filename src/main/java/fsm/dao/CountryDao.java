@@ -2,8 +2,8 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Country;
-s
+import fsm.model.domain.Country;
+
 public interface CountryDao {
 
 	public Integer addCountry(Country country);

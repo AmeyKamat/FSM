@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fsm.dao.GroupDao;
-import fsm.domain.Group;
+import fsm.model.domain.Group;
 
 @Repository
 public class GroupDaoImpl implements GroupDao {

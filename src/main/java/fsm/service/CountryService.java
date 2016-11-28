@@ -1,9 +1,8 @@
 package fsm.service;
 
-import fsm.domain.Country;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import fsm.model.domain.Country;
 
 public interface CountryService {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsm.dao.GroupDao;
-import fsm.domain.Group;
+import fsm.model.domain.Group;
 import fsm.service.GroupService;
 
 @Service

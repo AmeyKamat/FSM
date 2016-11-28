@@ -1,9 +1,8 @@
 package fsm.service;
 
-import fsm.domain.Group;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import fsm.model.domain.Group;
 
 public interface GroupService {
 

@@ -11,7 +11,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.TableDao;
-import fsm.domain.Table;
+import fsm.model.domain.Table;
+
 import org.springframework.stereotype.Repository;
 
 @Repository

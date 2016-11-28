@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import fsm.domain.City;
-import fsm.domain.Country;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 import fsm.service.CountryService;
 import fsm.util.JsonFilter;
 

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsm.dao.CityDao;
-import fsm.domain.City;
-import fsm.domain.Country;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 import fsm.service.CityService;
 
 @Service

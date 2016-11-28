@@ -1,7 +1,7 @@
 package fsm.service.impl;
 
 import fsm.dao.EmployeeDao;
-import fsm.domain.Employee;
+import fsm.model.domain.Employee;
 import fsm.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fsm.dao.EmployeeDao;
-import fsm.domain.Employee;
+import fsm.model.domain.Employee;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {

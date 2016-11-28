@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsm.dao.TableDao;
-import fsm.domain.Table;
+import fsm.model.domain.Table;
 import fsm.service.TableService;
 
 @Service

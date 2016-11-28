@@ -1,7 +1,7 @@
 package fsm.service.impl;
 
 import fsm.dao.UserDao;
-import fsm.domain.User;
+import fsm.model.domain.User;
 import fsm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

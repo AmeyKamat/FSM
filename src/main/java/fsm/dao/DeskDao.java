@@ -2,9 +2,8 @@ package fsm.dao;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-import fsm.domain.Desk;
+import fsm.model.domain.Desk;
 
 public interface DeskDao {
 

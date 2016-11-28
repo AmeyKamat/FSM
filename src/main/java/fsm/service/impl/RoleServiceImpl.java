@@ -1,7 +1,7 @@
 package fsm.service.impl;
 
 import fsm.dao.RoleDao;
-import fsm.domain.Role;
+import fsm.model.domain.Role;
 import fsm.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

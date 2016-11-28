@@ -2,8 +2,8 @@ package fsm.service;
 
 import java.util.List;
 
-import fsm.domain.City;
-import fsm.domain.Location;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
 public interface LocationService {
 

@@ -2,9 +2,8 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.City;
-import fsm.domain.Location;
-import org.springframework.stereotype.Repository;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
 public interface LocationDao {
 

@@ -2,8 +2,7 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.User;
-import org.springframework.stereotype.Repository;
+import fsm.model.domain.User;
 
 public interface UserDao {
 

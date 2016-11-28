@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fsm.dao.DeskDao;
-import fsm.domain.Desk;
+import fsm.model.domain.Desk;
 import fsm.service.DeskService;
 
 @Service

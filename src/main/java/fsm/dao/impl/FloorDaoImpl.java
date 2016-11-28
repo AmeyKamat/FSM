@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fsm.dao.FloorDao;
-import fsm.domain.Floor;
-import fsm.domain.Location;
+import fsm.model.domain.Floor;
+import fsm.model.domain.Location;
 
 @Repository
 public class FloorDaoImpl implements FloorDao {
