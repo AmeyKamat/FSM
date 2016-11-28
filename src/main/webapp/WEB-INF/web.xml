@@ -19,7 +19,7 @@
 
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/controller/*</url-pattern>
 	</servlet-mapping>
 
 	<context-param>

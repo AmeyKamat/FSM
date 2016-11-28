@@ -55,16 +55,16 @@
     </property>
     <property name="annotatedClasses">
       <list>
-        <value>fsm.domain.City</value>
-        <value>fsm.domain.Country</value>
-        <value>fsm.domain.Desk</value>
-        <value>fsm.domain.Employee</value>
-        <value>fsm.domain.Floor</value>
-        <value>fsm.domain.Group</value>
-        <value>fsm.domain.Location</value>
-        <value>fsm.domain.Role</value>
-        <value>fsm.domain.Table</value>
-        <value>fsm.domain.User</value>
+        <value>fsm.model.domain.City</value>
+        <value>fsm.model.domain.Country</value>
+        <value>fsm.model.domain.Desk</value>
+        <value>fsm.model.domain.Employee</value>
+        <value>fsm.model.domain.Floor</value>
+        <value>fsm.model.domain.Group</value>
+        <value>fsm.model.domain.Location</value>
+        <value>fsm.model.domain.Role</value>
+        <value>fsm.model.domain.Table</value>
+        <value>fsm.model.domain.User</value>
       </list>
     </property>
 
