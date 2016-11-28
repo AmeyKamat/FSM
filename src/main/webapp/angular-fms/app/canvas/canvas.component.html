@@ -1,6 +1,10 @@
 <div class="context-bar">
-    <button id="zoomin" class="btn-circle" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button>
-    <button id="zoomout" class="btn-circle" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button>
+    <button id="zoomin" class="btn-circle" (click)="zoomIn()"><i class="fa fa-search-plus"></i></button>
+    <button id="zoomout" class="btn-circle" (click)="zoomOut()"><i class="fa fa-search-minus"></i></button>
+    <div *ngIf="showPublish">
+        <button (click)="publish(true)">Publish</button>
+        <button (click)="publish(false)">Cancel</button>
+    </div>
     <!--For Slider
     <input id="slide" onchange="changeZoomLevel()" type="range" min="1" max="100" step="1" value="50" width="100px">-->
 </div>

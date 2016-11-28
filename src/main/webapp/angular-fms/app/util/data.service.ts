@@ -1,9 +1,12 @@
 import {Injectable} from "@angular/core";
 import {UtilService} from "./util.service";
 import {Http, Response, URLSearchParams} from "@angular/http";
+import {City} from "../region/city/city";
+import {Country} from "../region/country/country";
+import {Level} from "../region/level/level";
+import {Location} from "../region/location/location";
 import {Observable} from "rxjs";
-
-import {Country} from "../explorer/country/country";
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
@@ -12,18 +15,37 @@ export class DataService {
                 private utilService:UtilService
     ){}
 
-    getLayoutData(floorID:number): Observable<any> {
+    getLayoutData(floorId:number): Observable<any> {
         let params = new URLSearchParams();
-        params.set('floorID', floorID.toString());
+        params.set('floorId', floorId.toString());
         return this.http
             .get(this.utilService.GET_LAYOUT_URL,{search : params})
-            .map((res: Response) => res.json());
-           /* .subscribe(result=> this.floorJSON= result);*/
-       // this.tableJSON= this.floorJSON.tableList;
+            .map((response: Response) => response.json());
+    }
+    postLayoutData(something):void {
+
     }
 
-    getCountries():Observable<Country[]>{
-        return this.http.get('').map((response: Response) => <Country[]> response.json());
-// return [new City("Pune",country,[]),new City("Pune",country,[])] ;
+    getCountries():Observable<Country[]> {
+        return this.http
+            .get(this.utilService.GET_COUNTRY_URL)
+            .map((response: Response) => <Country[]> response.json());
+    }
+
+    getCities():Observable<City[]> {
+        return this.http
+            .get(this.utilService.GET_CITY_URL)
+            .map((response: Response) => <City[]> response.json());
+    }
+
+    getLocations():Observable<Location[]> {
+        return this.http
+            .get(this.utilService.GET_LOCATION_URL)
+            .map((response: Response) => <Location[]> response.json());
+    }
+    getLevels():Observable<Level[]> {
+        return this.http
+            .get(this.utilService.GET_LEVEL_URL)
+            .map((response: Response) => <Level[]> response.json());
     }
 }

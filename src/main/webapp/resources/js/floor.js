@@ -11,7 +11,7 @@ function Floor(floorJSON){
   console.log(ENV.xGridSize + " " + ENV.yGridSize) 
   ENV.gridSize = (ENV.xGridSize<ENV.yGridSize)?(ENV.xGridSize):(ENV.yGridSize);
 
-  console.log("Floor created.")
+  console.log("Level created.")
 }
 
 Floor.prototype.createFloorLayout = function(){

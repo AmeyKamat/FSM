@@ -27,7 +27,7 @@ function getFloorLayout(event){
 		success: function(result){
 			document.getElementById("loader").setAttribute('style', "display:none");
 			canvas.clear();
-			var floor = new Floor(result);
+			var floor = new Level(result);
 			floor.createFloorLayout();
 		},
 		error: function(error){

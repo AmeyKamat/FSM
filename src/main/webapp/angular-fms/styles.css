@@ -16,12 +16,6 @@ body {
 
 html, body { width:100%; height:100%; margin:0px;}
 
-canvas {
-  height: 100%;
-  width: 100%;
-  display: block;
-}
-
 .tooltip {
   text-decoration:none;
   position:relative;
@@ -108,7 +102,6 @@ canvas {
   /*margin-left: 100px ;*/
 }
 
-
 #explorerDropDown{
   position: fixed;
   top: 0%;
@@ -133,3 +126,21 @@ canvas {
   border-radius: 5px;
 }
 
+
+.example-five {
+  position: relative;
+}
+
+.example-five-checkbox {
+  display:none;
+}
+
+.example-five-checkbox:checked + .example-five:after {
+  content: "-";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+}

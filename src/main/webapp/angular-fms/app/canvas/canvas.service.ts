@@ -1,38 +1,31 @@
+import {Injectable} from "@angular/core";
 import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
-import {Injectable} from "@angular/core";
 import {Layout} from "../layout/layout";
 
 declare var fabric:any;
 @Injectable()
 export class CanvasService{
     private canvas:any;
+    showPublish:boolean = true;
     panning:boolean = false;
 
     constructor(private utilService:UtilService){
     }
-
-    renderLayout(layout:Layout):void{
-        this.initCanvas();
-        this.utilService.calculateGridSize(layout.getFloor());
-        for(let table of layout.getTables()) {
-            this.drawTable(table);
-        }
-        for(let chair of layout.getChairs()){
-            this.drawChair(chair);
-        }
-    }
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
-        this.resizeCanvas();
+        this.canvas.setHeight(window.innerHeight);
+        this.canvas.setWidth(window.innerWidth);
         this.mouseUpEvent();
         this.mouseDownEvent();
         this.mouseMoveEvent();
-        this.setupFloor();
+        //this.setupFloor();
     }
-    resizeCanvas():void{
-        this.canvas.setHeight(window.innerHeight);
-        this.canvas.setWidth(window.innerWidth);
+    renderWelcomePage(){
+        fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
+            (oImg)=> {
+            this.canvas.add(oImg);
+        });
     }
     mouseUpEvent():void{
         this.canvas.on('mouse:up', (e)=> this.panning = false);
@@ -44,8 +37,8 @@ export class CanvasService{
     this.canvas.on('mouse:move', (e)=> {if (this.panning && e && e.e) {
         let delta = new fabric.Point(e.e.movementX, e.e.movementY);
         this.canvas.relativePan(delta);
-    }
-    });
+        }
+        });
     }
     zoomIn():void{
         this.canvas.setZoom(this.canvas.getZoom()*1.1) ;
@@ -57,12 +50,12 @@ export class CanvasService{
         this.canvas.setZoom(1);
     }
     zoom(e):boolean{
+        console.log("mouse scroll event from canvas service");
         let evt = window.event || e;
         let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
         let curZoom = this.canvas.getZoom();
         let newZoom = curZoom + delta/4000;
         var x = e.offsetX, y = e.offsetY;
-        //applying zoom values.
         this.canvas.zoomToPoint({x: x, y: y}, newZoom);
         if(e != null){
             e.preventDefault();
@@ -82,11 +75,15 @@ export class CanvasService{
      }
      }*/
 
-    setupFloor():void{
-    this.canvas.setBackgroundColor({source: this.utilService.IMG_PATH + this.utilService.FLOOR_PATTERN_FILE, repeat: 'repeat'},
-    ()=> this.canvas.renderAll());
+    renderLayout(layout:Layout):void{
+        this.utilService.calculateGridSize(layout.getFloor());
+        for(let table of layout.getTables()) {
+            this.drawTable(table);
+        }
+        for(let chair of layout.getChairs()){
+            this.drawChair(chair);
+        }
     }
-
     drawTable(table:Table):void{
     fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
     this.canvas.add(new fabric.Rect({
