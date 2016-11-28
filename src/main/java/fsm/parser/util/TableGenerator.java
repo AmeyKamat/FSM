@@ -21,40 +21,41 @@ public class TableGenerator {
 	private class Node {
 
 		ParsedDesk desk;
-		boolean visited;
+		boolean queued;
 
 		Node(ParsedDesk desk) {
 			this.desk = desk;
-			this.visited = false;
+			this.queued = false;
 		}
 
 		public ParsedDesk getDesk() {
 			return desk;
 		}
 
-		public boolean isVisited() {
-			return visited;
+		public boolean hasBeenQueued() {
+			return queued;
 		}
 
-		public void markAsVisited() {
-			visited = true;
+		public void markAsQueued() {
+			queued = true;
 		}
 	}
 
 	ArrayList<Node> nodes = new ArrayList<Node>();
 
-	private List<ParsedDesk> getDesksInTable(Node initialNode, Table table) {
+	private List<ParsedDesk> getDesksInTable(Node initialNode, ParsedTable table) {
 
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(initialNode);
+		initialNode.markAsQueued();
 		List<ParsedDesk> desksInTable = new LinkedList<ParsedDesk>();
 
 		while (!queue.isEmpty()) {
 			Node node = queue.remove();
-			node.markAsVisited();
-			node.getDesk().setTable(table);
-			node.getDesk().setTableRow(node.getDesk().getX() - initialNode.getDesk().getX());
-			node.getDesk().setTableCol(node.getDesk().getY() - initialNode.getDesk().getY());
+			node.getDesk().setTableRow(node.getDesk().getX() - initialNode.getDesk().getX() + 1);
+			node.getDesk().setTableCol(node.getDesk().getY() - initialNode.getDesk().getY() + 1);
+			System.out.println(node.getDesk().getDeskCode());
+			table.addDesk(node.getDesk());
 			desksInTable.add(node.getDesk());
 			queue.addAll(this.getNeighbours(node));
 		}
@@ -70,9 +71,12 @@ public class TableGenerator {
 					continue;
 				} else {
 					for (Node temp : nodes) {
-						if (temp.desk.getX() == node.desk.getX() + i * node.desk.getLength()
-								&& temp.desk.getY() == node.desk.getY() + j * node.desk.getWidth() && node.isVisited())
+						if (temp.getDesk().getX() == node.getDesk().getX() + i * node.getDesk().getLength()
+								&& temp.getDesk().getY() == node.getDesk().getY() + j * node.getDesk().getWidth() && !temp.hasBeenQueued()) {
+							temp.markAsQueued();
 							neighbours.add(temp);
+						}
+
 					}
 				}
 			}
@@ -85,12 +89,12 @@ public class TableGenerator {
 		List<ParsedTable> tables = new LinkedList<ParsedTable>();
 		this.sortDesksByAbsoluteCoordinates(desks);
 
-		List<Node> nodes = new LinkedList<Node>();
-		for (ParsedDesk desk : desks)
+		for (ParsedDesk desk : desks) {
 			nodes.add(new Node(desk));
+		}
 
 		for (Node node : nodes) {
-			if (!node.isVisited()) {
+			if (!node.hasBeenQueued()) {
 				ParsedTable table = new ParsedTable();
 				List<ParsedDesk> desksInATable = this.getDesksInTable(node, table);
 				this.buildTable(table, desksInATable, node.getDesk(), floor); 
@@ -100,7 +104,7 @@ public class TableGenerator {
 		return tables;
 	}
 
-	private void buildTable(Table table, List<ParsedDesk> desksInATable, ParsedDesk initialDesk, Floor floor) {
+	private void buildTable(ParsedTable table, List<ParsedDesk> desksInATable, ParsedDesk initialDesk, ParsedFloor floor) {
 
 		int maxRow = 0, maxCol = 0;
 		for (Desk d : desksInATable) {
@@ -110,11 +114,11 @@ public class TableGenerator {
 				maxRow = d.getTableRow();
 		}
 
-		table.setLength(maxCol + 1); // set max
-		table.setWidth(maxRow + 1); // set min
+		table.setLength(maxCol + 1);
+		table.setWidth(maxRow + 1);
 		table.setTopLeftX(initialDesk.getX());
 		table.setTopLeftY(initialDesk.getY());
-		table.setFloor(floor);
+		floor.addTable(table);
 	}
 
 	private void sortDesksByAbsoluteCoordinates(List<ParsedDesk> desks) {

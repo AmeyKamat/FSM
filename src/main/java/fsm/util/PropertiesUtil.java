@@ -1,7 +1,5 @@
 package fsm.util;
 
-import fsm.util.PropertiesUtilHelper;
-
 public class PropertiesUtil {
 	
 	public static String readProperty(String key) {

@@ -7,6 +7,8 @@
 #Idea Config Files
 /.idea/
 /src/main/webapp/angular-fms/.idea/
+*.eml
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

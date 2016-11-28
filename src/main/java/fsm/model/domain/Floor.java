@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @Entity
 @javax.persistence.Table(name="FLOOR")
 @JsonRootName(value = "Floor")
-@JsonFilter("floorFilter")
 public class Floor {
 
 	@Id

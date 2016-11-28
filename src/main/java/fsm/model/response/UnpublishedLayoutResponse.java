@@ -10,14 +10,15 @@ import fsm.model.domain.Floor;
 public class UnpublishedLayoutResponse {
 
 	private Floor floor;
+	private int floorId;
 
 	public UnpublishedLayoutResponse() {
 		super();
 	}
 
-	public UnpublishedLayoutResponse(Floor floor) {
-		super();
+	public UnpublishedLayoutResponse(Floor floor, int floorId) {
 		this.floor = floor;
+		this.floorId = floorId;
 	}
 
 	public Floor getFloor() {
@@ -27,5 +28,12 @@ public class UnpublishedLayoutResponse {
 	public void setFloor(Floor floor) {
 		this.floor = floor;
 	}
-	
+
+	public int getFloorId() {
+		return floorId;
+	}
+
+	public void setFloorId(int floorId) {
+		this.floorId = floorId;
+	}
 }
