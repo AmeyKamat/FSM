@@ -2,11 +2,7 @@ package fsm.model.domain;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -14,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 @Entity
 @javax.persistence.Table(name="COUNTRY")
-@JsonFilter("countryFilter")
+@JsonFilter("filter")
 public class Country {
 
 	@Id
@@ -26,7 +22,7 @@ public class Country {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(mappedBy = "country")
+	@OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
 	private List<City> cities;
 
 	public Country() {

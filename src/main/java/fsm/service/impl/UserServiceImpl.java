@@ -47,11 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
 
     @Override
+    @Transactional
     public String checkLogin(String username, String password) {
         User user = getUserByUsername(username);
         if (user == null)

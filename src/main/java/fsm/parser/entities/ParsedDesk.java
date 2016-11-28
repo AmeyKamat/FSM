@@ -1,7 +1,12 @@
 package fsm.parser.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fsm.model.domain.Desk;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIgnoreProperties({"desk"})
 public class ParsedDesk extends Desk {
 
 	private int x;

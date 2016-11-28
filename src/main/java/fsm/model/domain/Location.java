@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 @Entity
 @javax.persistence.Table(name="LOCATION")
-@JsonFilter("locationFilter")
+@JsonFilter("filter")
 public class Location {
 
 	@Id
