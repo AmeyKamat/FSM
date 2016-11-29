@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@javax.persistence.Table(name="EMPLOYEE")
+@javax.persistence.Table(name="fsm_employee")
 public class Employee {
 
 	@Id

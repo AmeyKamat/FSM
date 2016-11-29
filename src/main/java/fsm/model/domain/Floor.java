@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 
 @Entity
-@javax.persistence.Table(name="FLOOR")
+@javax.persistence.Table(name="fsm_floor")
 @JsonRootName(value = "Floor")
 @JsonFilter(value = "filter")
 public class Floor {

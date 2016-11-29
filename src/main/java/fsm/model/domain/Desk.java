@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@javax.persistence.Table(name="DESK")
+@javax.persistence.Table(name="fsm_desk")
 @JsonIgnoreProperties({"table"})
 public class Desk {
 
