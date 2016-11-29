@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
 import {Layout} from "../layout/layout";
+import {DataService} from "../util/data.service";
 
 declare var fabric:any;
 @Injectable()
@@ -10,7 +11,8 @@ export class CanvasService{
     showPublish:boolean = true;
     panning:boolean = false;
 
-    constructor(private utilService:UtilService){
+    constructor(private utilService:UtilService,
+                private dataService:DataService){
     }
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
@@ -24,6 +26,9 @@ export class CanvasService{
     renderWelcomePage(){
         fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
             (oImg)=> {
+                oImg.set({
+                    left: 500,
+                });
             this.canvas.add(oImg);
         });
     }
@@ -61,6 +66,9 @@ export class CanvasService{
             e.preventDefault();
         }
         return false;
+    }
+    publishDecision(decision:boolean):void{
+        this.dataService.saveUploadData(decision);
     }
     /* Used to add slider functionality
     changeZoomLevel():void{

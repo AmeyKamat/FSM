@@ -14,10 +14,12 @@ export class UtilService{
     /* API paths */
     public GET_LAYOUT_URL = "/rest/datafetch";
     public GET_COUNTRY_URL = "http://localhost:8080/rest/countries";
-    public GET_CITY_URL = "http://localhost:8080/rest/countries";
-    public GET_LOCATION_URL = "http://localhost:8080/rest/countries";
-    public GET_LEVEL_URL = "http://localhost:8080/rest/countries";
+    public GET_CITY_URL = "http://localhost:8080/rest/city";
+    public GET_LOCATION_URL = "http://localhost:8080/rest/location";
+    public GET_LEVEL_URL = "http://localhost:8080/rest/level";
     public GET_EMPLOYEE_URL = "";
+    public POST_UPLOAD_URL = "/rest/datafetch";
+    public SAVE_UPLOAD_DATA_URL="";
 
     /*ENV Variables*/
     public GRIDS_PER_CHAIR= 1;

@@ -5,7 +5,6 @@ import {CanvasService} from "./canvas.service";
     moduleId:module.id,
     selector:'my-canvas',
     templateUrl:'canvas.component.html',
-    styleUrls: ['canvas.component.css']
 })
 
 @Injectable()
@@ -33,12 +32,8 @@ export class CanvasComponent implements OnInit{
     zoom(e):boolean {
     return this.canvasService.zoom(e);
     }
-    publish(decision:boolean):void {
-        if(decision === true){
 
-        }
-        else {
-
-        }
+    publishDecision(decision:boolean):void {
+        this.canvasService.publishDecision(decision);
     }
 }

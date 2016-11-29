@@ -14,15 +14,12 @@ import {Layout} from "../layout/layout";
 @Injectable()
 export class UploadService{
     public file: File;
-    headers: Headers;
     formData:FormData ;
 
     constructor( private dataService:DataService,
                  private layoutService:LayoutService,
                  private canvasService:CanvasService){
-        this.headers = new Headers();
-        this.headers.set('Content-Type', 'multipart/form-data');
-    }
+        }
 
     getCountries():Observable<Country[]> {
         return this.dataService.getCountries() ;
@@ -52,7 +49,7 @@ export class UploadService{
         this.formData.append("city",formGroup.get('city').value) ;
         this.formData.append("location",formGroup.get('location').value) ;
         this.formData.append("floor",formGroup.get('floor').value) ;
-        this.dataService.postLayoutData(this.formData).
+        this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
             this.canvasService.showPublish = true;

@@ -80,9 +80,9 @@ export class UploadComponent implements OnInit{
         this.uploadService.changeListener($event) ;
     }
 
-    onSubmit(value: FormGroup): void {
+    onSubmit(formGroup: FormGroup): void {
         this.submitAttempt=true ;
-        console.log(JSON.stringify(value.value))
-        this.uploadService.acceptFormData(value) ;
+        console.log(JSON.stringify(formGroup.value))
+        this.uploadService.acceptFormData(formGroup) ;
     }
 }
