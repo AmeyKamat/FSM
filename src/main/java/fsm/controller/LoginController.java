@@ -18,9 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
 
-    @Autowired
-    UserService userService;
-
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView showLoginPage() {
@@ -28,33 +25,12 @@ public class LoginController {
         return new ModelAndView("login.html");
 
     }
-
-
+    
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView login(final HttpServletRequest req, ModelMap map) {
+    public ModelAndView authenticateAndLogin() {
 
-        System.out.println("Came here");
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String result = userService.checkLogin(username, password);
-
-        if (result == null) {
-            System.out.println("Exited here 1");
-            return new ModelAndView("redirect:/controller/login");
-        } else {
-            if (result.equals("EQUAL")) {
-
-                HttpSession session = req.getSession();
-                session.setAttribute("id", username);
-                System.out.println("Exited here 2");
-                return new ModelAndView("redirect:/controller/uploadFile");
-            } else {
-                System.out.println("Exited here 3");
-                return new ModelAndView("redirect:/controller/login");
-            }
-        }
-
+        return new ModelAndView("dummyLogout.html");
 
     }
 

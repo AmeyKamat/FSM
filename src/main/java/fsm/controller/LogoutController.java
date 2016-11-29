@@ -15,8 +15,6 @@ public class LogoutController {
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView logout(HttpServletRequest request) {
-        HttpSession logoutSession = request.getSession();
-        logoutSession.invalidate();
         return new ModelAndView("redirect:/controller/login");
     }
 
