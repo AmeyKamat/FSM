@@ -31,8 +31,8 @@ export class ChairService {
     if(table.getOrientation() == Orientation.Horizontal){
       calculatedX = table.getLeftTopPoint().getX();
 
-      let noOfChairsInThisRow = table.getChairsInRow[row]
-      let padding = (table.getLength() - this.utilService.GRIDS_PER_CHAIR*noOfChairsInThisRow)/(2*noOfChairsInThisRow)
+      let noOfChairsInThisRow = table.getChairsInRow[row];
+      let padding = (table.getLength() - this.utilService.GRIDS_PER_CHAIR*noOfChairsInThisRow)/(2*noOfChairsInThisRow);
       calculatedX += padding + 2*(column-1)*padding;
     }
     else if(table.getOrientation() == Orientation.Vertical){
