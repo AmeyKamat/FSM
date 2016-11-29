@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:app.properties" />
+
+    <context:component-scan base-package="fsm">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <task:annotation-driven />
+
+
+
+    <bean id="dataSourceSpringPool" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+    <property name="url" value="${jdbc.databaseurl}" />
+    <property name="driverClassName" value="${jdbc.driverClassName}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+    <property name="removeAbandoned" value="true"/>
+    <property name="initialSize" value="20" />
+    <property name="maxActive" value="30" />
+  </bean>
+
+    <tx:annotation-driven/>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+  <!-- Hibernate session factory -->
+  <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSourceSpringPool"/>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+        <prop key="hibernate.show_sql">true</prop>
+          <prop key="hibernate.hbm2ddl.auto">validate</prop>
+      </props>
+    </property>
+    <property name="annotatedClasses">
+      <list>
+        <value>fsm.model.domain.City</value>
+        <value>fsm.model.domain.Country</value>
+        <value>fsm.model.domain.Desk</value>
+        <value>fsm.model.domain.Employee</value>
+        <value>fsm.model.domain.Floor</value>
+        <value>fsm.model.domain.Group</value>
+        <value>fsm.model.domain.Location</value>
+        <value>fsm.model.domain.Role</value>
+        <value>fsm.model.domain.Table</value>
+        <value>fsm.model.domain.User</value>
+      </list>
+    </property>
+
+  </bean>
+
+
+
+</beans>
