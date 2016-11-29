@@ -256,6 +256,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`fsm_user_role` (
   PRIMARY KEY (`id`),
   INDEX `fk_fsm_user_role_fsm_user1_idx` (`user_id` ASC),
   INDEX `fk_fsm_user_role_fsm_role1_idx` (`role_id` ASC),
+  UNIQUE KEY `id_fsm_user_fsm_role` (`role_id`,`user_id`),
   CONSTRAINT `fk_fsm_user_role_fsm_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `mydb`.`fsm_user` (`id`)
