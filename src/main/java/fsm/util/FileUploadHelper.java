@@ -14,7 +14,7 @@ public class FileUploadHelper {
 
 	public static File storeFile(MultipartFile multipartFile, String fileName, String fileDirectory) {
 		
-		File file = new File(fileDirectory + File.pathSeparator + fileName);
+		File file = new File(fileDirectory + File.separator + fileName);
 		writeToFile(file, readFromMultipartFile(multipartFile));
 		return file;
 	}

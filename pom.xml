@@ -5,7 +5,7 @@
 	<artifactId>FSM</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EMS</name>
+	<name>FSM</name>
 	<url>http://maven.apache.org</url>
 
 
@@ -159,7 +159,7 @@
 					</execution>
 					<execution>
 						<id>compile ts</id>
-						<phase>compile-ts</phase>
+						<phase>compile</phase>
 						<configuration>
 							<arguments>run</arguments>
 							<arguments>tsc</arguments>
