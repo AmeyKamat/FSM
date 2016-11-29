@@ -39,8 +39,6 @@ public class LayoutUploadController {
     public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile,
                                                       @RequestParam("floorId") int floorId) {
 
-        System.out.println(fileDirectory);
-
         File file = null;
         if (!multipartFile.isEmpty()) {
             file = FileUploadHelper.storeFile(multipartFile, multipartFile.getOriginalFilename(), fileDirectory);
@@ -62,9 +60,8 @@ public class LayoutUploadController {
             floor.setId(unpublishedLayout.getFloorId());
             floorService.updateFloor(floor);
         }
-        else {
-            unpublishedLayout.setFloor(null);
-        }
+
+        unpublishedLayout.setFloor(null);
     }
 }
 

@@ -15,13 +15,13 @@ import fsm.util.JsonFilter;
 
 
 @RestController
-@RequestMapping(value = "/floor")
+@RequestMapping(value = "/floors")
 public class FloorRestController {
 
     @Autowired
     FloorService floorService;
 
-    @RequestMapping(value = "/floors/{floorId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{floorId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getFloorById(@PathVariable("floorId") int floorId) throws JsonProcessingException {
         Floor floor = floorService.getFloorById(floorId);
         String[] propsToBeIgnored = {"location"};
