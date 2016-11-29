@@ -2,18 +2,18 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Role;
+import fsm.model.domain.Role;
 
 public interface RoleDao {
 
-	public Integer add(Role role);
+	public Integer addRole(Role role);
 
-	public void remove(int id);
+	public void removeRole(int roleId);
 
-	public void update(Role role);
+	public void updateRole(Role role);
 
-	public Role get(int id);
+	public Role getRoleById(int roleId);
 
-	public List<Role> getAll();
+	public List<Role> getAllRoles();
 	
 }

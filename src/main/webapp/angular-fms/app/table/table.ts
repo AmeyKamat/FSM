@@ -1,17 +1,18 @@
-import { Coordinate } from "../coordinate/coordinate";
+import { Coordinate } from "../util/coordinate";
 import { Orientation } from "../util/orientation";
-
 
 export class Table{
     private leftTopPoint: Coordinate;
     private length: number;
     private width: number;
+    private chairsInRow: number[];
     private orientation: Orientation;
     
-    constructor(leftTopPoint: Coordinate, length: number, width: number, orientation: Orientation) {
+    constructor(leftTopPoint: Coordinate, length: number, width: number, chairsInRow: number[], orientation: Orientation) {
         this.leftTopPoint = leftTopPoint;
         this.length = length;
         this.width = width;
+        this.chairsInRow = chairsInRow;
         this.orientation = orientation;
     }
   
@@ -25,6 +26,10 @@ export class Table{
   
     getWidth(): number{
       return this.width;
+    }
+  
+    getChairsInRow(): number[]{
+      return this.chairsInRow;
     }
   
     getOrientation(): Orientation{

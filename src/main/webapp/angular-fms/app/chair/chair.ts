@@ -1,4 +1,4 @@
-import { Coordinate } from "../coordinate/coordinate";
+import { Coordinate } from "../util/coordinate";
 
 export class Chair{
   private topLeftPoint: Coordinate;
@@ -6,11 +6,11 @@ export class Chair{
   private deskId: number;
   private brid: string;
   
-  constructor(leftTopPoint: Coordinate, angle: number, deskId: number, brid: string) {
-        this.leftTopPoint = leftTopPoint;
-        this.length = length;
-        this.width = width;
-        this.orientation = orientation;
+  constructor(topLeftPoint: Coordinate, angle: number, deskId: number, brid: string) {
+        this.topLeftPoint = topLeftPoint;
+        this.angle = angle;
+        this.deskId = deskId;
+        this.brid = brid;
   }
   
   getTopLeftPoint(): Coordinate{

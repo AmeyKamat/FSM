@@ -5,17 +5,22 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.LocationDao;
-import fsm.domain.Location;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
+@Repository
 public class LocationDaoImpl implements LocationDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Location location) {
+	@Override
+	public Integer addLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer locationID = (Integer) session.save(location);
@@ -23,10 +28,11 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
-	public void remove(int id) {
+	@Override
+	public void removeLocation(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Location location = get(id);
+		Location location = getLocationById(locationId);
 
 		if (location != null) {
 			session.delete(location);
@@ -34,27 +40,47 @@ public class LocationDaoImpl implements LocationDao {
 
 	}
 
-	public void update(Location location) {
+	@Override
+	public void updateLocation(Location location) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(location);
 
 	}
 
-	public Location get(int id) {
+	@Override
+	public Location getLocationById(int locationId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Location location = (Location) session.get(Location.class, id);
+		Location location = (Location) session.get(Location.class, locationId);
 		return location;
 
 	}
 
-	public List<Location> getAll() {
+	@Override
+	public List<Location> getLocationsByName(String locationName) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Location.class);
+		criteria.add(Restrictions.eq("name", locationName));
+		return criteria.list();
+	}
+
+	@Override
+	public List<Location> getAllLocations() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Location.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public List<Location> getAllLocationsByCity(City city) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Location.class);
+		criteria.add(Restrictions.eq("city", city));
+		return criteria.list();
 	}
 
 }

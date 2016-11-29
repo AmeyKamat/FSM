@@ -2,18 +2,18 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Group;
+import fsm.model.domain.Group;
 
 public interface GroupDao {
 
-	public Integer add(Group group);
+	public Integer addGroup(Group group);
 
-	public void remove(int id);
+	public void removeGroup(int groupId);
 
-	public void update(Group group);
+	public void updateGroup(Group group);
 
-	public Group get(int id);
+	public Group getGroupById(int groupId);
 
-	public List<Group> getAll();
-	
+	public List<Group> getAllGroups();
+
 }

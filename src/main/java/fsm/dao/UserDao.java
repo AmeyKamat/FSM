@@ -2,18 +2,19 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.User;
+import fsm.model.domain.User;
 
 public interface UserDao {
 
-	public Integer add(User user);
+	public Integer addUser(User user);
 
-	public void remove(int id);
+	public void removeUser(int userId);
 
-	public void update(User user);
+	public void updateUser(User user);
 
-	public User get(int id);
+	public User getUserById(int userId);
 
-	public List<User> getAll();
-	
+	public List<User> getAllUsers();
+
+    User getUserByUsername(String username);
 }

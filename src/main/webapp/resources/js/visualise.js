@@ -4,7 +4,7 @@ var loader = $("#loader");
 var errorModal = $("#errorModal");
 
 function initialiseFromDummy(floorInput, desksInput){
-  var floor = new Floor(floorInput);
+  var floor = new Level(floorInput);
   floor.setDesks(desksInput)
   floor.createFloorLayout();
 }
@@ -14,7 +14,7 @@ function initialiseFromDummy(floorInput, desksInput){
 function initialise(){
 	   loader.setAttribute('style', "display:block")
 	   $.ajax({url: GET_LAYOUT_URL, success: function(result){
-	     var floor = new Floor(result);
+	     var floor = new Level(result);
 
 	     loader.setAttribute('style', "display:none")
 	     if(result = ""){

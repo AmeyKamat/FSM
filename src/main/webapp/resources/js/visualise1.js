@@ -4,7 +4,7 @@ var loader = document.getElementById("loader");
 var errorModal = $("#errorModal");
 
  function initialiseFromDummy(floorInput, desksInput){
-   var floor = new Floor(floorInput);
+   var floor = new Level(floorInput);
    floor.setDesks(desksInput)
    floor.createFloorLayout();
  }
@@ -25,7 +25,7 @@ var ENV = {
 	  $.ajax({url: GET_LAYOUT_URL, success: function(result){
 		  loader.setAttribute('style', "display:none");
 		  var inputObj = result;
-		  var floor = new Floor(inputObj);
+		  var floor = new Level(inputObj);
 	    
 	    if(result = ""){
 	      uploadModal.modal('show');

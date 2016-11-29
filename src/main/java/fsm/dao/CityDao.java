@@ -2,18 +2,23 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.City;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 
 public interface CityDao {
 
-	public Integer add(City city);
+	public Integer addCity(City city);
 
-	public void remove(int id);
+	public void removeCity(int cityId);
 
-	public void update(City city);
+	public void updateCity(City city);
 
-	public City get(int id);
+	public City getCityById(int cityId);
 
-	public List<City> getAll();
+	public List<City> getCitiesByName(String cityName);
+
+	public List<City> getAllCities();
+
+	public List<City> getCitiesByCountry(Country country);
 
 }

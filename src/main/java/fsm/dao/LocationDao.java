@@ -2,18 +2,22 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Location;
+import fsm.model.domain.City;
+import fsm.model.domain.Location;
 
 public interface LocationDao {
 
-	public Integer add(Location location);
+	public Integer addLocation(Location location);
 
-	public void remove(int id);
+	public void removeLocation(int locationId);
 
-	public void update(Location location);
+	public void updateLocation(Location location);
 
-	public Location get(int id);
+	public Location getLocationById(int locationId);
 
-	public List<Location> getAll();
+	public List<Location> getLocationsByName(String locationName);
 
+	public List<Location> getAllLocations();
+
+    List<Location> getAllLocationsByCity(City city);
 }

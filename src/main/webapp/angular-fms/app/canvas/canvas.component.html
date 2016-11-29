@@ -1,18 +1,23 @@
-<div #canvasZoomElement style="height:100vh; width:100vw; position:relative">
-    <canvas id="workarea"></canvas></div>
 <div class="context-bar">
-    <button id="zoomin" class="btn-circle" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button>
-    <button id="zoomout" class="btn-circle" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button>
-    <!--<input id="slide" onchange="changeZoomLevel()" type="range" min="1" max="100" step="1" value="50" width="100px">-->
+    <button id="zoomin" class="btn-circle" (click)="zoomIn()"><i class="fa fa-search-plus"></i></button>
+    <button id="zoomout" class="btn-circle" (click)="zoomOut()"><i class="fa fa-search-minus"></i></button>
+    <div *ngIf="showPublish">
+        <button (click)="publish(true)">Publish</button>
+        <button (click)="publish(false)">Cancel</button>
+    </div>
+    <!--For Slider
+    <input id="slide" onchange="changeZoomLevel()" type="range" min="1" max="100" step="1" value="50" width="100px">-->
 </div>
-
-<span id="tooltip-span"><div id="desk-info"></div><div id="employee-info"></div></span>
+<span id="tooltip-span">
+    <div id="desk-info"></div><div id="employee-info">
+    </div>
+</span>
 <span id="loader" class="centered" style="display:none">
-			<p style="text-align: center">
-				<img src="/resources/img/loading.gif" height="50px" width="50px"><br><br>
-				Arranging Tables and Chairs
-			</p>
-		</span>
+    <p style="text-align: center">
+        <img src="../../resources/img/loading.gif" height="50px" width="50px"><br><br>
+        Arranging Tables and Chairs
+    </p>
+</span>
 
 <div class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" id="errorModal">
     <div class="modal-dialog" role="document">
@@ -32,22 +37,3 @@
         </div>
     </div>
 </div>
-
-<!--Not my concern-->
-<script async="false" type="text/javascript" src="/resources/js/mockData.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/util.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/uploadFile.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/tooltip.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/chairImage.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/explorer.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/chair.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/table.js"></script>
-
-<!--Done-->
-<script async="false" type="text/javascript" src="/resources/js/resizeCanvas.js"></script>
-<script async="false" type="text/javascript" src="/resources/js/zoomAndPan.js"></script>
-
-<script async="false" type="text/javascript" src="/resources/js/floor.js"></script>
-<script type="text/javascript" src="/resources/js/visualise1.js"></script>
-</body>
-</html>

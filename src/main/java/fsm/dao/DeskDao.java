@@ -1,19 +1,21 @@
 package fsm.dao;
 
+import java.util.Collection;
 import java.util.List;
 
-import fsm.domain.Desk;
+import fsm.model.domain.Desk;
 
 public interface DeskDao {
 
-	public Integer add(Desk desk);
+	public Integer addDesk(Desk desk);
 
-	public void remove(int id);
+	public void removeDesk(int deskId);
 
-	public void update(Desk desk);
+	public void updateDesk(Desk desk);
 
-	public Desk get(int id);
+	public Desk getDeskById(int deskId);
 
-	public List<Desk> getAll();
+	public List<Desk> getAllDesks();
 
+    public void addAllDesks(Collection<Desk> desks);
 }

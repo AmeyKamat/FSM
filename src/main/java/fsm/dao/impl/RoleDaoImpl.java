@@ -6,16 +6,19 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.RoleDao;
-import fsm.domain.Role;
+import fsm.model.domain.Role;
 
+@Repository
 public class RoleDaoImpl implements RoleDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Role role) {
+	@Override
+	public Integer addRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer roleID = (Integer) session.save(role);
@@ -23,10 +26,11 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
-	public void remove(int id) {
+	@Override
+	public void removeRole(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Role role = get(id);
+		Role role = getRoleById(roleId);
 
 		if (role != null) {
 			session.delete(role);
@@ -34,22 +38,25 @@ public class RoleDaoImpl implements RoleDao {
 
 	}
 
-	public void update(Role role) {
+	@Override
+	public void updateRole(Role role) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(role);
 
 	}
 
-	public Role get(int id) {
+	@Override
+	public Role getRoleById(int roleId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Role role = (Role) session.get(Role.class, id);
+		Role role = (Role) session.get(Role.class, roleId);
 		return role;
 
 	}
 
-	public List<Role> getAll() {
+	@Override
+	public List<Role> getAllRoles() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Role.class);

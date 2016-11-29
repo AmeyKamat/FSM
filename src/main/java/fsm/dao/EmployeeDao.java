@@ -2,18 +2,18 @@ package fsm.dao;
 
 import java.util.List;
 
-import fsm.domain.Employee;
+import fsm.model.domain.Employee;
 
 public interface EmployeeDao {
 	
-	public Integer add(Employee employee);
+	public Integer addEmployee(Employee employee);
 
-	public void remove(int id);
+	public void removeEmployee(int employeeId);
 
-	public void update(Employee employee);
+	public void updateEmployee(Employee employee);
 
-	public Employee get(int id);
+	public Employee getEmployeeById(int employeeId);
 
-	public List<Employee> getAll();
+	public List<Employee> getAllEmployees();
 	
 }

@@ -5,17 +5,22 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fsm.dao.FloorDao;
-import fsm.domain.Floor;
+import fsm.model.domain.Floor;
+import fsm.model.domain.Location;
 
+@Repository
 public class FloorDaoImpl implements FloorDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Integer add(Floor floor) {
+	@Override
+	public Integer addFloor(Floor floor) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Integer floorID = (Integer) session.save(floor);
@@ -23,10 +28,11 @@ public class FloorDaoImpl implements FloorDao {
 
 	}
 
-	public void remove(int id) {
+	@Override
+	public void removeFloor(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Floor floor = get(id);
+		Floor floor = getFloorById(floorId);
 
 		if (floor != null) {
 			session.delete(floor);
@@ -34,27 +40,41 @@ public class FloorDaoImpl implements FloorDao {
 
 	}
 
-	public void update(Floor floor) {
+	@Override
+	public void updateFloor(Floor floor) {
 
 		Session session = sessionFactory.getCurrentSession();
 		session.update(floor);
 
 	}
 
-	public Floor get(int id) {
+	@Override
+	public Floor getFloorById(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		Floor floor = (Floor) session.get(Floor.class, id);
+		// Floor floor = (Floor) session.get(Floor.class, floorId);
+		Criteria criteria = session.createCriteria(Floor.class);
+		criteria.add(Restrictions.eq("id", floorId));
+		Floor floor = (Floor) criteria.uniqueResult();
 		return floor;
 
 	}
 
-	public List<Floor> getAll() {
+	@Override
+	public List<Floor> getAllFloors() {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Floor.class);
 		return criteria.list();
 
+	}
+
+	@Override
+	public List<Floor> getAllFloorsByLocation(Location location) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Floor.class);
+		criteria.add(Restrictions.eq("location", location));
+		return criteria.list();
 	}
 
 }
