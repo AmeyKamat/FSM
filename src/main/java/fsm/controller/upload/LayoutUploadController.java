@@ -2,10 +2,11 @@ package fsm.controller.upload;
 
 
 import fsm.model.domain.Floor;
-import fsm.model.response.UnpublishedLayoutResponse;
+import fsm.model.session.UnpublishedLayout;
 import fsm.service.FloorService;
 import fsm.service.ParsingService;
 import fsm.util.FileUploadHelper;
+import fsm.util.JsonFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +23,7 @@ import java.io.File;
 public class LayoutUploadController {
 
     @Autowired
-    UnpublishedLayoutResponse unpublishedLayoutResponse;
+    UnpublishedLayout unpublishedLayout;
 
     @Autowired
     ParsingService parsingService;
@@ -35,7 +36,7 @@ public class LayoutUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public UnpublishedLayoutResponse uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile,
+    public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile,
                                                       @RequestParam("floorId") int floorId) {
 
         System.out.println(fileDirectory);
@@ -46,22 +47,23 @@ public class LayoutUploadController {
 
         }
 
-        unpublishedLayoutResponse.setFloor(parsingService.parseLayout(file));
-        unpublishedLayoutResponse.setFloorId(floorId);
+        unpublishedLayout.setFloor(parsingService.parseLayout(file));
+        unpublishedLayout.setFloorId(floorId);
 
-        return unpublishedLayoutResponse;
+        String[] propsToBeIgnored = {};
+        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);
     }
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void publishLayout(@RequestParam("publish") boolean toBePublished) {
         if(toBePublished) {
-            Floor floor = unpublishedLayoutResponse.getFloor();
-            floor.setId(unpublishedLayoutResponse.getFloorId());
+            Floor floor = unpublishedLayout.getFloor();
+            floor.setId(unpublishedLayout.getFloorId());
             floorService.updateFloor(floor);
         }
         else {
-            unpublishedLayoutResponse.setFloor(null);
+            unpublishedLayout.setFloor(null);
         }
     }
 }

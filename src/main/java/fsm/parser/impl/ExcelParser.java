@@ -71,8 +71,8 @@ public class ExcelParser implements LayoutFileParser{
                     parsedDesks.add(
                     		new ParsedDesk(
                     				cell.getContents(), 
-                    				cell.getRow(), 
-                    				cell.getColumn(), 
+                    				cell.getColumn(),
+                    				cell.getRow(),
                     				1, 
                     				1
                     		)

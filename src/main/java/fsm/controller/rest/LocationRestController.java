@@ -23,14 +23,14 @@ public class LocationRestController {
 	@Autowired
 	private LocationService locationService;
 
-	@RequestMapping(value = "/locations/{locationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{locationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getLocationById(@PathVariable("locationId") int locationId) throws JsonProcessingException {
 		Location location = locationService.getLocationById(locationId);
 		String[] propsToBeIgnored = { "floors", "city" };
 		return JsonFilter.filter(location, propsToBeIgnored);
 	}
 
-	@RequestMapping(value = "/location/{locationId}/floors", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{locationId}/floors", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getFloorsByLocation(@PathVariable("locationId") int locationId) throws JsonProcessingException {
 		List<Floor> floors = locationService.getLocationById(locationId).getFloors();
 		String[] propsToBeIgnored = { "location", "minX", "minY", "maxX", "maxY", "tables" };

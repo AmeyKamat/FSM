@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
@@ -21,8 +23,9 @@ public class Country {
 	@NotNull
 	@Column(name = "name")
 	private String name;
-	
-	@OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "country")
 	private List<City> cities;
 
 	public Country() {

@@ -1,4 +1,4 @@
-package fsm.model.response;
+package fsm.model.session;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -7,16 +7,16 @@ import fsm.model.domain.Floor;
 
 @Component
 @Scope("session")
-public class UnpublishedLayoutResponse {
+public class UnpublishedLayout {
 
 	private Floor floor;
 	private int floorId;
 
-	public UnpublishedLayoutResponse() {
+	public UnpublishedLayout() {
 		super();
 	}
 
-	public UnpublishedLayoutResponse(Floor floor, int floorId) {
+	public UnpublishedLayout(Floor floor, int floorId) {
 		this.floor = floor;
 		this.floorId = floorId;
 	}

@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
@@ -36,7 +38,8 @@ public class Location {
 	@NotNull
 	@Column(name = "location_code")
 	private String locationCode;
-	
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "location")
 	private List<Floor> floors;
 
