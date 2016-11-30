@@ -18,7 +18,7 @@ import fsm.util.JsonFilter;
 
 @RestController
 @RequestMapping(value = "/countries")
-public class CountryRestControler {
+public class CountryRestController {
 
 	@Autowired
 	private CountryService countryService;
