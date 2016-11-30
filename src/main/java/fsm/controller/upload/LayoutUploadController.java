@@ -54,7 +54,7 @@ public class LayoutUploadController {
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void publishLayout(@RequestParam("publish") boolean toBePublished) {
+    public void publishLayout(@RequestParam("toBePublished") boolean toBePublished) {
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
