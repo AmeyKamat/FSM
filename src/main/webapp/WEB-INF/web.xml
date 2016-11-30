@@ -34,7 +34,7 @@
 
 	<!-- home page for the application -->
 	<welcome-file-list>
-		<welcome-file>resources/views/login.html</welcome-file>
+		<welcome-file>resources/login.html</welcome-file>
 	</welcome-file-list>
 
 

@@ -21,7 +21,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
 		<property name="prefix">
-			<value>/resources/views/</value>
+			<value>/resources/</value>
 		</property>
 	</bean>
 
