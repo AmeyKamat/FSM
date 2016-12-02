@@ -8,6 +8,8 @@ import {Country} from "../Region/country/country";
 import {City} from "../Region/city/city";
 import {Level} from "../Region/floor/level";
 
+import {Location} from "../Region/location/location";
+
 @Injectable()
 export class ExplorerService{
 

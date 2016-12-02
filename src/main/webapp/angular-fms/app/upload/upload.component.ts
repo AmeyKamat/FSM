@@ -17,16 +17,16 @@ import {Level} from "../Region/floor/level";
 })
 @Injectable()
 export class UploadComponent implements OnInit{
-    myForm: FormGroup;
+    form: FormGroup;
     submitAttempt:boolean =false ;
      countries:Country[] ;
     cities:City[] ;
     locations:Location[] ;
     levels:Level[] ;
 
-    constructor(fb: FormBuilder, private uploadService:UploadService) {
+    constructor(formBuilder: FormBuilder, private uploadService:UploadService) {
         console.log("I am constructed") ;
-        this.myForm = fb.group({
+        this.form = formBuilder.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],
@@ -104,8 +104,8 @@ getCountries(){
 // <!--<input type="text"  -->
 // <!--id="skuInput"  -->
 // <!--placeholder="SKU"  -->
-// <!--[formControl]="myForm.controls['sku']" > -->
-// <!--<div *ngIf="myForm.controls['sku'].hasError('required')&&submitAttempt"  -->
+// <!--[formControl]="form.controls['sku']" > -->
+// <!--<div *ngIf="form.controls['sku'].hasError('required')&&submitAttempt"  -->
 //     <!--&gt;SKU is required</div>  -->
 // <!--</div>-->
 // <!--<br>-->
@@ -116,7 +116,7 @@ getCountries(){
 // <!--<input type="text"  -->
 // <!--id="balanceIn"  -->
 // <!--placeholder="balance"  -->
-// <!--[formControl]="myForm.controls['balance']">  -->
+// <!--[formControl]="form.controls['balance']">  -->
 // <!--</div>-->
 //
 // <button type="submit">Submit</button>
