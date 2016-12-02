@@ -24,9 +24,7 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView showLoginPage() {
-
         return new ModelAndView("login.html");
-
     }
 
 
@@ -38,7 +36,8 @@ public class LoginController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String result = userService.checkLogin(username, password);
-
+        /* Commented for integrating backend to frontend. Consequently to be uncommented */
+        /*
         if (result == null) {
             System.out.println("Exited here 1");
             return new ModelAndView("redirect:/controller/login");
@@ -53,8 +52,8 @@ public class LoginController {
                 System.out.println("Exited here 3");
                 return new ModelAndView("redirect:/controller/login");
             }
-        }
-
+        }*/
+        return new ModelAndView("index.html");
 
     }
 
