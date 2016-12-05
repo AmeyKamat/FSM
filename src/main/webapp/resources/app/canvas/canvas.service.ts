@@ -8,7 +8,7 @@ declare var fabric:any;
 @Injectable()
 export class CanvasService{
     private canvas:any;
-    showPublish:boolean = true;
+    showPublish:boolean = false;
     panning:boolean = false;
 
     constructor(private utilService:UtilService,

@@ -12,10 +12,10 @@
                             <div>
                                 <div class="col-md-4" >
                                     <label for="select-country">Country: </label>
-                                    <select  (change)="getCities($event.target.value)" id="select-country" class="form-control" [formControl]="myForm.controls['country']" >
+                                    <select  id="select-country" (change)="getCities($event.target.value)" class="form-control" [formControl]="myForm.controls['country']" >
                                         <option disabled selected></option>
-                                        <option *ngFor="let country of countries" >{{country.name}}</option>
-                                        </select>
+                                        <option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -24,9 +24,9 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-city">City: </label>
-                                    <select (change)="getLocations($event.target.value)" id="select-city" class="form-control" [formControl]="myForm.controls['city']">
+                                    <select id="select-city" (change)="getLocations($event.target.value)" class="form-control" [formControl]="myForm.controls['city']">
                                         <option disabled selected></option>
-                                        <option *ngFor="let city of cities" >{{city.name}}</option>
+                                        <option *ngFor="let city of cities" value={{city.id}}>{{city.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -36,9 +36,9 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-location">Location: </label>
-                                    <select (change)="getLevels($event.target.value)"id="select-location" class="form-control" [formControl]="myForm.controls['location']">
+                                    <select id="select-location" (change)="getLevels($event.target.value)" class="form-control" [formControl]="myForm.controls['location']">
                                         <option disabled selected></option>
-                                        <option *ngFor="let location of locations" >{{location.name}}</option>
+                                        <option *ngFor="let location of locations" value={{location.id}}>{{location.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                     <label for="select-floor">Floor: </label>
                                     <select id="select-floor" class="form-control" [formControl]="myForm.controls['floor']">
                                         <option disabled selected></option>
-                                        <option *ngFor="let level of levels" >{{level.name}}</option>
+                                        <option *ngFor="let level of levels" value={{level.id}}>{{level.floorCode}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -61,18 +61,17 @@
                             </label>
                             <div>
                                 <div class="col-md-4">
-                                    <input id="uploadFile" class="form-control" placeholder="No File Selected" disabled="disabled" />
+                                    <input id="uploadFile" class="form-control" placeholder={{uploadFileName}} disabled="disabled" />
                                 </div>
-
                                 <div class="fileUpload btn-circle-sm">
                                     <i class="fa fa-folder"></i>
-                                    <input id="uploadBtn"  type="file" class="upload" [formControl]="myForm.controls['upload']" (change)="changeListener($event)"/>
+                                    <input id="uploadBtn" type="file" class="upload" [formControl]="myForm.controls['upload']" (change)="uploadFileListener($event)"/>
                                 </div>
                             </div>
                         </div>
 
                         <!--<div class="modal-footer">-->
-                        <a class="btn" style="background-color:black; color:white" href="/layoutapp/index2.html">Close</a>
+                        <a class="btn" style="background-color:black; color:white" href="">Close</a>
                         <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="fa fa-upload"></i> Upload</button>
                         <!--</div>-->
                     </div>

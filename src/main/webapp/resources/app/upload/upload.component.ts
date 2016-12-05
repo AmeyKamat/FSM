@@ -16,13 +16,13 @@ import {Level} from "../region/level/level";
 export class UploadComponent implements OnInit{
     myForm: FormGroup;
     submitAttempt:boolean =false ;
+    uploadFileName:string = "No File Selected";
     countries:Country[] ;
     cities:City[] ;
     locations:Location[] ;
     levels:Level[] ;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
-        console.log("I am constructed") ;
         this.myForm = fb.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
@@ -40,49 +40,44 @@ export class UploadComponent implements OnInit{
         this.uploadService.getCountries().subscribe((countries)=> {
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
-                console.log("Countries are:" + countries[i].name);
                 this.countries[i].cities = null;
             }
         });
     }
 
-    getCities(countryName) {
-        console.log("Country selected successfully"+countryName) ;
-        this.uploadService.getCities().subscribe((cities)=> {
+    getCities(countryId:number) {
+        this.uploadService.getCities(countryId).subscribe((cities)=> {
             this.cities = cities;
             for (var i = 0; i < this.cities.length; i++) {
-                console.log("Countries are:" + cities[i].name);
                 this.cities[i].locations = null;
             }
         });
     }
 
-    getLocations(cityName) {
-        this.uploadService.getLocations().subscribe((locations)=> {
+    getLocations(cityId:number) {
+        this.uploadService.getLocations(cityId).subscribe((locations)=> {
             this.locations = locations;
             for (var i = 0; i < this.locations.length; i++) {
-                console.log("Countries are:" + locations[i].name);
                 this.locations[i].levels = null;
             }
         });
     }
 
-    getLevels(locationName) {
-        this.uploadService.getLocations().subscribe((levels)=> {
+    getLevels(locationId:number) {
+        this.uploadService.getLevels(locationId).subscribe((levels)=> {
             this.levels = levels;
-            for (var i = 0; i < this.levels.length; i++) {
-                console.log("Countries are:" + levels[i].name);
-            }
         });
     }
 
-    changeListener($event): void {
-        this.uploadService.changeListener($event) ;
+    uploadFileListener($event): void {
+        let file = $event.target.files[0];
+        this.uploadFileName = file.name;
+        console.log(this.myForm.get('city').value);
+        this.uploadService.setUploadFile(file);
     }
 
     onSubmit(formGroup: FormGroup): void {
         this.submitAttempt=true ;
-        console.log(JSON.stringify(formGroup.value))
         this.uploadService.acceptFormData(formGroup) ;
     }
 }
