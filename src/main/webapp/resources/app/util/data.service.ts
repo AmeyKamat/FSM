@@ -10,13 +10,9 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-    headers: Headers;
+
     constructor(private http: Http,
-                private utilService:UtilService
-    ){
-        this.headers = new Headers();
-        //this.headers.set('Content-Type', 'multipart/form-data');
-    }
+                private utilService:UtilService){}
 
     getCountries():Observable<Country[]> {
         return this.http
@@ -49,7 +45,7 @@ export class DataService {
     postUploadData(formData:FormData):Observable<any> {
         return this.http
             .post("/controller/layoutFile/upload", formData, {
-                headers : this.headers
+                headers : new Headers()
             })
             .map((response: Response) => response.json());
     }
