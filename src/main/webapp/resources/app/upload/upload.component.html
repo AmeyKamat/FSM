@@ -48,7 +48,7 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-floor">Floor: </label>
-                                    <select id="select-floor" class="form-control" [formControl]="myForm.controls['floor']">
+                                    <select id="select-floor" class="form-control" [formControl]="myForm.controls['floorId']">
                                         <option disabled selected></option>
                                         <option *ngFor="let level of levels" value={{level.id}}>{{level.floorCode}}</option>
                                     </select>

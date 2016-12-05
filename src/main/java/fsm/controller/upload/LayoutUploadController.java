@@ -37,9 +37,8 @@ public class LayoutUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String uploadLayoutFile(@FormDataParam("file") MultipartFile multipartFile, @FormDataParam("floorId") int floorId) {
+    public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam("floorId") int floorId) {
 
-        System.out.println("####################### floorID"+ floorId);/*
         File file = null;
         if (!multipartFile.isEmpty()) {
             file = FileUploadHelper.storeFile(multipartFile, multipartFile.getOriginalFilename(), fileDirectory);
@@ -50,8 +49,7 @@ public class LayoutUploadController {
         unpublishedLayout.setFloorId(floorId);
 
         String[] propsToBeIgnored = {};
-        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);*/
-        return null;
+        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);
     }
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)

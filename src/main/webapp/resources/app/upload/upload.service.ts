@@ -46,7 +46,7 @@ export class UploadService{
         this.formData.append("country",formGroup.get('country').value) ;
         this.formData.append("city",formGroup.get('city').value) ;
         this.formData.append("location",formGroup.get('location').value) ;
-        this.formData.append("floor",formGroup.get('floor').value) ;
+        this.formData.append("floorId",formGroup.get('floorId').value) ;
         this.formData.append("file",this.file);
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
