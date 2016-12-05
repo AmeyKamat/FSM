@@ -61,7 +61,7 @@ public class CityDaoImpl implements CityDao {
 	public List<City> getCitiesByName(String cityName) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(City.class);
-		criteria.add(Restrictions.eq("floorCode", cityName));
+		criteria.add(Restrictions.eq("name", cityName));
 		return criteria.list();
 	}
 

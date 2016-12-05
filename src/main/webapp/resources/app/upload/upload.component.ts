@@ -72,6 +72,7 @@ export class UploadComponent implements OnInit{
     uploadFileListener($event): void {
         let file = $event.target.files[0];
         this.uploadFileName = file.name;
+        console.log(this.myForm.get('city').value);
         this.uploadService.setUploadFile(file);
     }
 

@@ -12,14 +12,14 @@ export class UtilService{
     public WELCOME_SCREEN = "barclays.png";
 
     /* API paths */
-    public GET_LAYOUT_URL = "/rest/datafetch";
+    public GET_LAYOUT_URL = `controller/floors`;
     public GET_COUNTRY_URL = "/controller/countries";
     public GET_CITY_URL = "/countries/${countryId}/cities";
     public GET_LOCATION_URL = "";
     public GET_LEVEL_URL = "";
     public GET_EMPLOYEE_URL = "";
     public POST_UPLOAD_URL = "/controller/layoutFile/upload";
-    public SAVE_UPLOAD_DATA_URL="";
+    public SAVE_UPLOAD_DATA_URL=`/controller/layoutFile/publish`;
 
     /*ENV Variables*/
     public GRIDS_PER_CHAIR= 1;

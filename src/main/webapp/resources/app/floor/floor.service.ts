@@ -5,8 +5,8 @@ import {Injectable} from "@angular/core";
 export class FloorService{
     getFloor(floorData: any): Floor {
         return new Floor(
-            new Coordinate(floorData.minimumX, floorData.minimumY),
-            floorData.maximumY,  floorData.maximumX
+            new Coordinate(floorData.minX, floorData.minY),
+            floorData.maxY,  floorData.maxX
         );
     }
 }

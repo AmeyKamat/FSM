@@ -21,7 +21,7 @@ public class Country {
 	private int id;
 
 	@NotNull
-	@Column(name = "floorCode")
+	@Column(name = "name")
 	private String name;
 
 	@LazyCollection(LazyCollectionOption.FALSE)

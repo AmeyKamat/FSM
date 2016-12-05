@@ -20,7 +20,7 @@ public class Role {
 	private int id;
 	
 	@NotNull
-	@Column(name = "floorCode")
+	@Column(name = "name")
 	private String name;
 	
 	@OneToMany(mappedBy = "role")

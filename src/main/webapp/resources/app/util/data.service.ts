@@ -41,10 +41,8 @@ export class DataService {
             .map((response: Response) => <Level[]> response.json());
     }
     getLayoutData(floorId:number): Observable<any> {
-        let params = new URLSearchParams();
-        params.set('floorId', floorId.toString());
         return this.http
-            .get(this.utilService.GET_LAYOUT_URL,{search : params})
+            .get(`${this.utilService.GET_LAYOUT_URL}/${floorId}`)
             .map((response: Response) => response.json());
     }
 
@@ -52,6 +50,7 @@ export class DataService {
         return this.http
             .post("/controller/layoutFile/upload", formData, {
                 headers : this.headers,
+                transformRequest:angular.Id
             })
             .map((response: Response) => response.json());
     }
