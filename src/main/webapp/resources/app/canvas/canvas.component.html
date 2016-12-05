@@ -1,0 +1,39 @@
+<div class="context-bar">
+    <a href="#" id="zoomin" class="btn-circle" (click)="zoomIn()"><i class="glyphicon glyphicon-zoom-in"></i></a>
+    <a href="#" id="zoomout" class="btn-circle" (click)="zoomOut()"><i class="glyphicon glyphicon-zoom-out"></i></a>
+    <div *ngIf="showPublish">
+        <button class= "publish" (click)="publishDecision(true)">Publish <i class="glyphicon glyphicon-floppy-saved"></i></button>
+        <button class= "publish" (click)="publishDecision(false)">Cancel <i class="glyphicon glyphicon-remove-sign"></i></button>
+    </div>
+    <!--For Slider
+    <input id="slide" onchange="changeZoomLevel()" type="range" min="1" max="100" step="1" value="50" width="100px">-->
+</div>
+<span id="tooltip-span">
+    <div id="desk-info"></div><div id="employee-info">
+    </div>
+</span>
+<span id="loader" class="centered" style="display:none">
+    <p style="text-align: center">
+        <img src="../../resources/img/loading.gif" height="50px" width="50px"><br><br>
+        Arranging Tables and Chairs
+    </p>
+</span>
+
+<div class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" id="errorModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p>We could not fetch data. Please check your network connection.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>

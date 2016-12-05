@@ -21,17 +21,13 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView showLoginPage() {
-
         return new ModelAndView("login.html");
-
     }
     
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView authenticateAndLogin() {
-
         return new ModelAndView("dummyLogout.html");
-
     }
 
 }

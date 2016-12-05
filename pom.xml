@@ -5,7 +5,7 @@
 	<artifactId>FSM</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EMS</name>
+	<name>FSM</name>
 	<url>http://maven.apache.org</url>
 
 
@@ -143,18 +143,16 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
-					<workingDirectory>${basedir}/src/main/webapp/angular-fms/</workingDirectory>
-					<outputDirectory>${basedir}/src/main/webapp/angular-fms/</outputDirectory>
+					<workingDirectory>${basedir}/src/main/webapp/resources/</workingDirectory>
+					<installDirectory>${basedir}/src/main/webapp/resources/</installDirectory>
 				</configuration>
 				<executions>
 
 					<execution>
 						<id>npm install</id>
-						<phase>prepare-package</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<nodeVersion>v6.9.1</nodeVersion>
-							<npmVersion>3.10.8</npmVersion>
-							<workingDirectory>${basedir}/src/main/webapp/angular-fms</workingDirectory>
 						</configuration>
 						<goals>
 							<goal>install-node-and-npm</goal>
@@ -162,7 +160,7 @@
 					</execution>
 					<execution>
 						<id>install node and npm</id>
-						<phase>prepare-package</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
@@ -172,13 +170,12 @@
 					</execution>
 					<execution>
 						<id>compile ts</id>
-						<phase>compile-ts</phase>
+						<phase>compile</phase>
 						<configuration>
-							<arguments>run</arguments>
-							<arguments>tsc</arguments>
+							<arguments>run tsc</arguments>
 						</configuration>
 						<goals>
-							<goal>tsc</goal>
+							<goal>npm</goal>
 						</goals>
 					</execution>
 				</executions>
