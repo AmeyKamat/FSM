@@ -23,7 +23,7 @@ export class ExplorerComponent implements OnInit {
         subscribe((countries)=> {
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
-                console.log("Countries are:"+countries[i].name) ;
+                // console.log("Countries are:"+countries[i].name) ;
                 this.countries[i].cities=null ;
 
             }
@@ -33,17 +33,17 @@ export class ExplorerComponent implements OnInit {
     toggleCountry(country)
     {
         // this.cities = !this.expanded;
-        console.log("toggle block") ;
+        console.log("toggle block of country"+country.id) ;
         if(country.cities==null)
         {
-            console.log("Inside if block") ;
+            // console.log("Inside if block") ;
             // country.cities=[new City("Pune",1,[])] ;
             this.explorerService.getCities().
             subscribe((cities)=>
             {
                 country.cities=cities ;
                 for (var i = 0; i < country.cities.length; i++) {
-                    console.log("Countries are:"+cities[i].name) ;
+                    // console.log("Countries are:"+cities[i].name) ;
                     country.cities[i].expanded=false ;
                     country.cities[i].locations=null ;
 
@@ -68,7 +68,7 @@ export class ExplorerComponent implements OnInit {
             {
                 city.locations=locations ;
                 for (var i = 0; i < city.locations.length; i++) {
-                     console.log("Countries are:"+city.locations[i].name) ;
+                     // console.log("Countries are:"+city.locations[i].name) ;
 
                     city.locations[i].levels=null ;
 
@@ -94,7 +94,7 @@ export class ExplorerComponent implements OnInit {
             {
                 location.levels=levels ;
                 for (var i = 0; i < location.levels.length; i++) {
-                    console.log("levels are:"+levels[i].name) ;
+                    // console.log("levels are:"+levels[i].name) ;
 
                     // location.locations[i].locations=null ;
 

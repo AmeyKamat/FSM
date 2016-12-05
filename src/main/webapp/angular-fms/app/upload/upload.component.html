@@ -12,9 +12,10 @@
                     <div>
                         <div class="col-md-4" >
                             <label for="select-country">Country: </label>
+
                             <select  (change)="getCities($event.target.value)" id="select-country" class="form-control" [formControl]="myForm.controls['country']" >
                                 <option disabled selected></option>
-                                <option *ngFor="let country of countries" >{{country.name}}</option>
+                                <option *ngFor="let country of countries">{{country.name}}</option>
                                 <!--<option disabled selected></option>-->
                                 <!--<option value="India">{{country.name}}</option>-->
                             </select>
