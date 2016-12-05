@@ -49,8 +49,7 @@ export class DataService {
     postUploadData(formData:FormData):Observable<any> {
         return this.http
             .post("/controller/layoutFile/upload", formData, {
-                headers : this.headers,
-                transformRequest:angular.Id
+                headers : this.headers
             })
             .map((response: Response) => response.json());
     }

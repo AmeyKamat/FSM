@@ -31,8 +31,8 @@ export class LayoutService{
                 chairs.push(chair);
             }
         }
-        console.log(tables);
-        console.log(chairs);
+        //console.log(tables);
+        //console.log(chairs);
         return new Layout(floor, tables, chairs);
     }
 }
