@@ -32,7 +32,7 @@ public class Location {
 	private City city;
 	
 	@NotNull
-	@Column(name = "name")
+	@Column(name = "floorCode")
 	private String name;
 	
 	@NotNull

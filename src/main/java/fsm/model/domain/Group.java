@@ -20,7 +20,7 @@ public class Group {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "floorCode")
 	private String name;
 	
 	@ManyToOne

@@ -60,7 +60,7 @@ public class CountryDaoImpl implements CountryDao {
 	public Country getCountryByName(String countryName) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Country.class);
-		criteria.add(Restrictions.eq("name", countryName));
+		criteria.add(Restrictions.eq("floorCode", countryName));
 		Country country = (Country) criteria.uniqueResult();
 		return country;
 	}

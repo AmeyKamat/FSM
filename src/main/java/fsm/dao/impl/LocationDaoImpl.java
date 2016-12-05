@@ -62,7 +62,7 @@ public class LocationDaoImpl implements LocationDao {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Location.class);
-		criteria.add(Restrictions.eq("name", locationName));
+		criteria.add(Restrictions.eq("floorCode", locationName));
 		return criteria.list();
 	}
 

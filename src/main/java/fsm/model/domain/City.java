@@ -26,7 +26,7 @@ public class City {
 	private Country country;
 
 	@NotNull
-	@Column(name = "name")
+	@Column(name = "floorCode")
 	private String name;
 
 	@LazyCollection(LazyCollectionOption.FALSE)

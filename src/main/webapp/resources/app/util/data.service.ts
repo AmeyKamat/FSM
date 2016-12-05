@@ -18,6 +18,28 @@ export class DataService {
         this.headers.set('Content-Type', 'multipart/form-data');
     }
 
+    getCountries():Observable<Country[]> {
+        return this.http
+            .get(`/controller/countries`)
+            .map((response: Response) => <Country[]> response.json());
+    }
+
+    getCities(countryId: number):Observable<City[]> {
+        return this.http
+            .get(`/controller/countries/${countryId}/cities`)
+            .map((response: Response) => <City[]> response.json());
+    }
+
+    getLocations(cityId:number):Observable<Location[]> {
+        return this.http
+            .get(`/controller/cities/${cityId}/locations`)
+            .map((response: Response) => <Location[]> response.json());
+    }
+    getLevels(locationId:number):Observable<Level[]> {
+        return this.http
+            .get(`/controller/locations/${locationId}/floors`)
+            .map((response: Response) => <Level[]> response.json());
+    }
     getLayoutData(floorId:number): Observable<any> {
         let params = new URLSearchParams();
         params.set('floorId', floorId.toString());
@@ -28,8 +50,8 @@ export class DataService {
 
     postUploadData(formData:FormData):Observable<any> {
         return this.http
-            .post(this.utilService.POST_UPLOAD_URL, formData, {
-                headers : this.headers
+            .post("/controller/layoutFile/upload", formData, {
+                headers : this.headers,
             })
             .map((response: Response) => response.json());
     }
@@ -38,28 +60,5 @@ export class DataService {
         params.set('decision', decision.toString());
         this.http
             .get(this.utilService.SAVE_UPLOAD_DATA_URL,{search : params});
-    }
-
-    getCountries():Observable<Country[]> {
-        return this.http
-            .get(this.utilService.GET_COUNTRY_URL)
-            .map((response: Response) => <Country[]> response.json());
-    }
-
-    getCities():Observable<City[]> {
-        return this.http
-            .get(this.utilService.GET_CITY_URL)
-            .map((response: Response) => <City[]> response.json());
-    }
-
-    getLocations():Observable<Location[]> {
-        return this.http
-            .get(this.utilService.GET_LOCATION_URL)
-            .map((response: Response) => <Location[]> response.json());
-    }
-    getLevels():Observable<Level[]> {
-        return this.http
-            .get(this.utilService.GET_LEVEL_URL)
-            .map((response: Response) => <Level[]> response.json());
     }
 }

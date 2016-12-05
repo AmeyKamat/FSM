@@ -14,11 +14,11 @@ export class UtilService{
     /* API paths */
     public GET_LAYOUT_URL = "/rest/datafetch";
     public GET_COUNTRY_URL = "/controller/countries";
-    public GET_CITY_URL = "http://localhost:8080/rest/city";
-    public GET_LOCATION_URL = "http://localhost:8080/rest/location";
-    public GET_LEVEL_URL = "http://localhost:8080/rest/level";
+    public GET_CITY_URL = "/countries/${countryId}/cities";
+    public GET_LOCATION_URL = "";
+    public GET_LEVEL_URL = "";
     public GET_EMPLOYEE_URL = "";
-    public POST_UPLOAD_URL = "/rest/datafetch";
+    public POST_UPLOAD_URL = "/controller/layoutFile/upload";
     public SAVE_UPLOAD_DATA_URL="";
 
     /*ENV Variables*/

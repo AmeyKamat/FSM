@@ -24,7 +24,7 @@ public class Employee {
 	private String brid;
 	
 	@NotNull
-	@Column(name = "name")
+	@Column(name = "floorCode")
 	private String name;
 	
 	@NotNull
