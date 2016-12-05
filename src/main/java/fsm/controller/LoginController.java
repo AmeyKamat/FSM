@@ -27,7 +27,7 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView authenticateAndLogin() {
-        return new ModelAndView("dummyLogout.html");
+        return new ModelAndView("redirect: /controller/dummyLogout");
     }
 
 }

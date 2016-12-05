@@ -117,6 +117,12 @@
 			<version>${security.version}</version>
 		</dependency>
 
+		<!-- jstl for jsp page -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -190,5 +196,6 @@
 		<jdk.version>1.8</jdk.version>
 		<hibernate.version>4.1.1.Final</hibernate.version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
+		<jstl.version>1.2</jstl.version>
 	</properties>
 </project>
