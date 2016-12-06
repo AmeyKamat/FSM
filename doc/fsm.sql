@@ -299,7 +299,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_country` (`id`, `name`) VALUES (DEFAULT, 'India');
+INSERT INTO `mydb`.`fsm_country` (`name`) VALUES ('India');
 
 COMMIT;
 
@@ -309,7 +309,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_city` (`id`, `country_id`, `name`) VALUES (DEFAULT, 1, 'Pune');
+INSERT INTO `mydb`.`fsm_city` (`country_id`, `name`) VALUES (1, 'Pune');
 
 COMMIT;
 
@@ -319,7 +319,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_location` (`id`, `city_id`, `name`, `location_code`) VALUES (DEFAULT, 1, 'Kharadi', 'P3');
+INSERT INTO `mydb`.`fsm_location` (`city_id`, `name`, `location_code`) VALUES (1, 'Kharadi', 'P3');
 
 COMMIT;
 
@@ -329,8 +329,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_floor` (`id`, `location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`) VALUES (DEFAULT, 1, 'L2', 0, 0, 100, 100);
-INSERT INTO `mydb`.`fsm_floor` (`id`, `location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`) VALUES (DEFAULT, 1, 'L3', -1, -1, -1, -1);
+INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`) VALUES (1, 'L2', 0, 0, 100, 100);
+INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`) VALUES (1, 'L3', -1, -1, -1, -1);
 
 COMMIT;
 
@@ -340,8 +340,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_table` (`id`, `floor_id`, `top_left_x`, `top_left_y`, `length`, `width`) VALUES (DEFAULT, 1, 20, 20, 3, 2);
-INSERT INTO `mydb`.`fsm_table` (`id`, `floor_id`, `top_left_x`, `top_left_y`, `length`, `width`) VALUES (DEFAULT, 1, 40, 50, 2, 3);
+INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`) VALUES (1, 20, 20, 3, 2);
+INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`) VALUES (1, 40, 50, 2, 3);
 
 COMMIT;
 
@@ -351,9 +351,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_group` (`id`, `name`, `parent_group_id`) VALUES (DEFAULT, 'Barclays', NULL);
-INSERT INTO `mydb`.`fsm_group` (`id`, `name`, `parent_group_id`) VALUES (DEFAULT, 'CCD', 1);
-INSERT INTO `mydb`.`fsm_group` (`id`, `name`, `parent_group_id`) VALUES (DEFAULT, 'BAPI', 1);
+INSERT INTO `mydb`.`fsm_group` (`name`, `parent_group_id`) VALUES ('Barclays', NULL);
+INSERT INTO `mydb`.`fsm_group` (`name`, `parent_group_id`) VALUES ('CCD', 1);
+INSERT INTO `mydb`.`fsm_group` (`name`, `parent_group_id`) VALUES ('BAPI', 1);
 
 COMMIT;
 
@@ -363,9 +363,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_employee` (`id`, `brid`, `name`, `group_id`) VALUES (DEFAULT, 'G01065024', 'Rohit Kumar Singh', 2);
-INSERT INTO `mydb`.`fsm_employee` (`id`, `brid`, `name`, `group_id`) VALUES (DEFAULT, 'G01091385', 'Pooja Sharma', 2);
-INSERT INTO `mydb`.`fsm_employee` (`id`, `brid`, `name`, `group_id`) VALUES (DEFAULT, 'G01000005', 'Tushar Sahay', 3);
+INSERT INTO `mydb`.`fsm_employee` (`brid`, `name`, `group_id`) VALUES ('G01065024', 'Rohit Kumar Singh', 2);
+INSERT INTO `mydb`.`fsm_employee` (`brid`, `name`, `group_id`) VALUES ('G01091385', 'Pooja Sharma', 2);
+INSERT INTO `mydb`.`fsm_employee` (`brid`, `name`, `group_id`) VALUES ('G01000005', 'Tushar Sahay', 3);
 
 COMMIT;
 
@@ -375,17 +375,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 1, NULL, 1, 1, '2-101');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 1, NULL, 1, 2, '2-102');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 1, NULL, 2, 1, '2-103');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 1, NULL, 2, 2, '2-104');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 1, NULL, 2, 3, '2-105');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 1, 1, '2-106');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 1, 2, '2-107');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 1, 3, '2-108');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 2, 1, '2-109');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 2, 2, '2-110');
-INSERT INTO `mydb`.`fsm_desk` (`id`, `table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (DEFAULT, 2, NULL, 2, 3, '2-111');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (1, NULL, 1, 1, '2-101');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (1, NULL, 1, 2, '2-102');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (1, NULL, 2, 1, '2-103');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (1, NULL, 2, 2, '2-104');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (1, NULL, 2, 3, '2-105');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 1, 1, '2-106');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 1, 2, '2-107');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 1, 3, '2-108');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 2, 1, '2-109');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 2, 2, '2-110');
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`) VALUES (2, NULL, 2, 3, '2-111');
 
 COMMIT;
 
@@ -395,8 +395,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_user` (`id`, `employee_id`, `username`, `password`, `enabled`, `accountNonExpired`, `accountNonLocked`, `credentialsNonExpired`) VALUES (DEFAULT, 1, 'Rkumarsingh', '123456', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO `mydb`.`fsm_user` (`id`, `employee_id`, `username`, `password`, `enabled`, `accountNonExpired`, `accountNonLocked`, `credentialsNonExpired`) VALUES (DEFAULT, 2, 'Pshama', '123456', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO `mydb`.`fsm_user` (`employee_id`, `username`, `password`) VALUES (1, 'Rkumarsingh', '123456');
+INSERT INTO `mydb`.`fsm_user` (`employee_id`, `username`, `password`) VALUES (2, 'Pshama', '123456');
 
 COMMIT;
 
@@ -406,8 +406,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_role` (`id`, `role`) VALUES (DEFAULT, 'ADMIN');
-INSERT INTO `mydb`.`fsm_role` (`id`, `role`) VALUES (DEFAULT, 'USER');
+INSERT INTO `mydb`.`fsm_role` (`role`) VALUES ('ADMIN');
+INSERT INTO `mydb`.`fsm_role` (`role`) VALUES ('USER');
 
 COMMIT;
 
@@ -417,9 +417,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_user_role` (`id`, `user_id`, `role_id`) VALUES (DEFAULT, 1, 1);
-INSERT INTO `mydb`.`fsm_user_role` (`id`, `user_id`, `role_id`) VALUES (DEFAULT, 1, 2);
-INSERT INTO `mydb`.`fsm_user_role` (`id`, `user_id`, `role_id`) VALUES (DEFAULT, 2, 2);
+INSERT INTO `mydb`.`fsm_user_role` (`user_id`, `role_id`) VALUES (1, 1);
+INSERT INTO `mydb`.`fsm_user_role` (`user_id`, `role_id`) VALUES (1, 2);
+INSERT INTO `mydb`.`fsm_user_role` (`user_id`, `role_id`) VALUES (2, 2);
 
 COMMIT;
 
