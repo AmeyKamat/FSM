@@ -21,18 +21,17 @@ export class LayoutService{
         let tables:Table[]=[];
         let chairs:Chair[]=[];
         let tableList= layoutData.tables;
-        console.log(tableList);
         for(let tableData of tableList){
             let table = this.tableService.getTable(tableData);
             tables.push(table);
             let deskList = tableData.desks;
             for(let deskData of deskList){
-                let chair = this.chairService.getChair(tableData, deskData);
+                let chair = this.chairService.getChair(table, deskData);
                 chairs.push(chair);
             }
         }
-        //console.log(tables);
-        //console.log(chairs);
+        console.log(tables);
+        console.log(chairs);
         return new Layout(floor, tables, chairs);
     }
 }

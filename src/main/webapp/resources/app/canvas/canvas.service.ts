@@ -84,6 +84,7 @@ export class CanvasService{
      }*/
 
     renderLayout(layout:Layout):void{
+        this.canvas.clear();
         this.utilService.calculateGridSize(layout.getFloor());
         for(let table of layout.getTables()) {
             this.drawTable(table);
@@ -91,6 +92,7 @@ export class CanvasService{
         for(let chair of layout.getChairs()){
             this.drawChair(chair);
         }
+        this.canvas.renderAll();
     }
     drawTable(table:Table):void{
     fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
@@ -109,7 +111,7 @@ export class CanvasService{
         hoverCursor: 'move'
         }));
     });
-    this.canvas.renderAll();
+    //this.canvas.renderAll();
     }
 
     drawChair(chair):void{

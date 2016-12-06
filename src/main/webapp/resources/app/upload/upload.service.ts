@@ -36,18 +36,8 @@ export class UploadService{
     getLevels(locationId:number):Observable<Level[]> {
         return this.dataService.getLevels(locationId) ;
     }
-    setUploadFile(file:File){
-        this.file=file;
-    }
 
-    acceptFormData(formGroup:FormGroup):void {
-        this.formData = new FormData();
-        this.formData.append("name", "layout");
-        this.formData.append("country",formGroup.get('country').value) ;
-        this.formData.append("city",formGroup.get('city').value) ;
-        this.formData.append("location",formGroup.get('location').value) ;
-        this.formData.append("floor",formGroup.get('floor').value) ;
-        this.formData.append("file",this.file);
+    acceptFormData(formData:FormData):void {
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);

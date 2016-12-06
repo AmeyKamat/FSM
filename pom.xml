@@ -137,7 +137,7 @@
 					<!--Watch for changes from files in this directory-->
 					<srcdir>${basedir}/src/main/webapp/resources/app/</srcdir>
 					<!--Refresh the files in this directory if the files change-->
-					<outputdir>${basedir}/src/main/webapp/resources/app/</outputdir>
+					<outputdir>${basedir}/target/FSM/resources/app/</outputdir>
 				</configuration>
 				<executions>
 					<!--<execution>

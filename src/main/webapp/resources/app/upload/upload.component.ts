@@ -15,7 +15,7 @@ import {Level} from "../region/level/level";
 @Injectable()
 export class UploadComponent implements OnInit{
     myForm: FormGroup;
-    submitAttempt:boolean =false ;
+    file:File;
     uploadFileName:string = "No File Selected";
     countries:Country[] ;
     cities:City[] ;
@@ -70,14 +70,19 @@ export class UploadComponent implements OnInit{
     }
 
     uploadFileListener($event): void {
-        let file = $event.target.files[0];
-        this.uploadFileName = file.name;
-        console.log(this.myForm.get('city').value);
-        this.uploadService.setUploadFile(file);
+        this.file = $event.target.files[0];
+        this.uploadFileName = this.file.name;
     }
 
     onSubmit(formGroup: FormGroup): void {
-        this.submitAttempt=true ;
-        this.uploadService.acceptFormData(formGroup) ;
+        let formData = new FormData();
+        formData.append("name", "layout");
+        formData.append("country",formGroup.get('country').value) ;
+        formData.append("city",formGroup.get('city').value) ;
+        formData.append("location",formGroup.get('location').value) ;
+        formData.append("floor",formGroup.get('floor').value) ;
+        formData.append("file",this.file);
+
+        this.uploadService.acceptFormData(formData) ;
     }
 }
