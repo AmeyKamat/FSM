@@ -27,33 +27,23 @@ var UploadComponent = (function () {
     UploadComponent.prototype.ngOnInit = function () {
         this.getCountries();
     };
-    UploadComponent.prototype.getCountries = function () {
-        var _this = this;
-        this.uploadService.getCountries().subscribe(function (countries) {
-            _this.countries = countries;
-            for (var i = 0; i < _this.countries.length; i++) {
-                console.log("Countries are:" + countries[i].name);
-                _this.countries[i].cities = null;
-            }
-        });
-    };
-    UploadComponent.prototype.getCities = function (countryName) {
-        var _this = this;
-        console.log("Country selected successfully" + countryName);
-        this.uploadService.getCities().subscribe(function (cities) {
-            _this.cities = cities;
-            for (var i = 0; i < _this.cities.length; i++) {
-                console.log("Countries are:" + cities[i].name);
-                _this.cities[i].locations = null;
-            }
-        });
+    UploadComponent.prototype.getCities = function () {
+        console.log("Id of  selected country");
+        // this.uploadService.getCities().subscribe((cities)=> {
+        //     this.cities = cities;
+        //     for (var i = 0; i < this.cities.length; i++) {
+        //         // console.log("Countries are:" + cities[i].name);
+        //         this.cities[i].locations = null;
+        //
+        //     }
+        // });
     };
     UploadComponent.prototype.getLocations = function (cityName) {
         var _this = this;
         this.uploadService.getLocations().subscribe(function (locations) {
             _this.locations = locations;
             for (var i = 0; i < _this.locations.length; i++) {
-                console.log("Countries are:" + locations[i].name);
+                // console.log("Countries are:" + locations[i].name);
                 _this.locations[i].levels = null;
             }
         });
@@ -63,7 +53,6 @@ var UploadComponent = (function () {
         this.uploadService.getLocations().subscribe(function (levels) {
             _this.levels = levels;
             for (var i = 0; i < _this.levels.length; i++) {
-                console.log("Countries are:" + levels[i].name);
             }
         });
     };
@@ -72,15 +61,18 @@ var UploadComponent = (function () {
     };
     UploadComponent.prototype.onSubmit = function (formGroup) {
         this.submitAttempt = true;
-        console.log(JSON.stringify(formGroup.value));
-        this.uploadService.acceptFormData(formGroup);
+        this.uploadService.acceptFormData(value);
+        /*subscribe((layoutData)=> {
+            this.utilService.calculateGridSize(layoutData);
+            this.layoutService.loadLayoutData(layoutData);
+        });*/
     };
     UploadComponent.prototype.getCountries = function () {
         var _this = this;
         this.uploadService.getCountries().subscribe(function (countries) {
             _this.countries = countries;
             for (var i = 0; i < _this.countries.length; i++) {
-                console.log("Countries are:" + countries[i].name);
+                console.log("in uploadcomponent Countries are:" + countries[i].name);
                 _this.countries[i].cities = null;
             }
         });

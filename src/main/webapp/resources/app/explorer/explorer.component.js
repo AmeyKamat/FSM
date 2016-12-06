@@ -48,7 +48,6 @@ var ExplorerComponent = (function () {
     ExplorerComponent.prototype.toggleCity = function (city) {
         console.log(" city toggle block");
         if (city.locations == null) {
-            console.log("Inside if block");
             this.explorerService.getLocations().
                 subscribe(function (locations) {
                 city.locations = locations;

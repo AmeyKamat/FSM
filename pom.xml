@@ -5,38 +5,24 @@
 	<artifactId>FSM</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EMS</name>
+	<name>FSM</name>
 	<url>http://maven.apache.org</url>
 
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.glassfish.jersey</groupId>
-				<artifactId>jersey-bom</artifactId>
-				<version>${jersey.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
 
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
 		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet-core</artifactId>
-
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.4</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-moxy</artifactId>
-
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.4</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -60,10 +46,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!--Spring Data rest-->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.4.1</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-webmvc</artifactId>
+			<version>2.5.4.RELEASE</version>
 		</dependency>
 		<!-- Hibernate -->
 		<dependency>
@@ -101,17 +88,6 @@
 			<version>5.1.6</version>
 		</dependency>
 
-		<!-- For Jersey. Think about changing framework to spring rest, or atleast 
-			latest version of jersey -->
-
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<!-- Added To ensure compatibility, remove at later stage -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.0</version>
-		</dependency>
-
 		<!-- JXL for parsing -->
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
 		<dependency>
@@ -129,31 +105,11 @@
 		</dependency>
 
 
-		<!-- for properties home jsp -->
-		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>FSM</finalName>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -162,22 +118,33 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
+<<<<<<< HEAD
 					<workingDirectory>${basedir}/src/main/webapp/angular-fms/</workingDirectory>
 					<InstallDirectory>${basedir}/src/main/webapp/angular-fms/</InstallDirectory>
+=======
+					<workingDirectory>${basedir}/src/main/webapp/resources/</workingDirectory>
+					<installDirectory>${basedir}/src/main/webapp/resources/</installDirectory>
+>>>>>>> 01b203acbe926f0a6af3a8d636bf00c13f440c3b
 				</configuration>
 				<executions>
 					
 					<execution>
 						<id>npm install</id>
-						<phase>prepare-package</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<nodeVersion>v6.9.1</nodeVersion>
-							<npmVersion>3.10.8</npmVersion>
-							<workingDirectory>${basedir}/src/main/webapp/angular-fms</workingDirectory>
 						</configuration>
 						<goals>
 							<goal>install-node-and-npm</goal>
@@ -185,7 +152,7 @@
 					</execution>
 					<execution>
 						<id>install node and npm</id>
-						<phase>prepare-package</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
@@ -195,13 +162,12 @@
 					</execution>
 					<execution>
 						<id>compile ts</id>
-						<phase>compile-ts</phase>
+						<phase>compile</phase>
 						<configuration>
-							<arguments>run</arguments>
-							<arguments>tsc</arguments>
+							<arguments>run tsc</arguments>
 						</configuration>
 						<goals>
-							<goal>tsc</goal>
+							<goal>npm</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -211,7 +177,7 @@
 	</build>
 	<properties>
 		<jersey.version>2.16</jersey.version>
-		<spring.version>4.2.1.RELEASE</spring.version>
+		<spring.version>4.3.3.RELEASE</spring.version>
 		<security.version>4.0.3.RELEASE</security.version>
 		<jdk.version>1.8</jdk.version>
 		<hibernate.version>4.1.1.Final</hibernate.version>

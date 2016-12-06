@@ -35,6 +35,18 @@ export class UploadComponent implements OnInit{
     ngOnInit(){
         this.getCountries() ;
     }
+<<<<<<< HEAD:src/main/webapp/angular-fms/app/upload/upload.component.ts
+    getCities(){
+        console.log("Id of  selected country") ;
+        // this.uploadService.getCities().subscribe((cities)=> {
+        //     this.cities = cities;
+        //     for (var i = 0; i < this.cities.length; i++) {
+        //         // console.log("Countries are:" + cities[i].name);
+        //         this.cities[i].locations = null;
+        //
+        //     }
+        // });
+=======
 
     getCountries() {
         this.uploadService.getCountries().subscribe((countries)=> {
@@ -55,13 +67,14 @@ export class UploadComponent implements OnInit{
                 this.cities[i].locations = null;
             }
         });
+>>>>>>> 01b203acbe926f0a6af3a8d636bf00c13f440c3b:src/main/webapp/resources/app/upload/upload.component.ts
     }
 
     getLocations(cityName) {
         this.uploadService.getLocations().subscribe((locations)=> {
             this.locations = locations;
             for (var i = 0; i < this.locations.length; i++) {
-                console.log("Countries are:" + locations[i].name);
+                // console.log("Countries are:" + locations[i].name);
                 this.locations[i].levels = null;
             }
         });
@@ -71,7 +84,13 @@ export class UploadComponent implements OnInit{
         this.uploadService.getLocations().subscribe((levels)=> {
             this.levels = levels;
             for (var i = 0; i < this.levels.length; i++) {
+<<<<<<< HEAD:src/main/webapp/angular-fms/app/upload/upload.component.ts
+                // console.log("Countries are:" + levels[i].name);
+
+
+=======
                 console.log("Countries are:" + levels[i].name);
+>>>>>>> 01b203acbe926f0a6af3a8d636bf00c13f440c3b:src/main/webapp/resources/app/upload/upload.component.ts
             }
         });
     }
@@ -82,16 +101,20 @@ export class UploadComponent implements OnInit{
 
     onSubmit(formGroup: FormGroup): void {
         this.submitAttempt=true ;
-        console.log(JSON.stringify(formGroup.value))
-        this.uploadService.acceptFormData(formGroup) ;
-    }
 <<<<<<< HEAD:src/main/webapp/angular-fms/app/upload/upload.component.ts
+        // console.log(JSON.stringify(value.value))
+        this.uploadService.acceptFormData(value) ;
+        /*subscribe((layoutData)=> {
+            this.utilService.calculateGridSize(layoutData);
+            this.layoutService.loadLayoutData(layoutData);
+        });*/
+    }
 
 getCountries(){
     this.uploadService.getCountries().subscribe((countries)=> {
         this.countries = countries;
         for (var i = 0; i < this.countries.length; i++) {
-            console.log("Countries are:" + countries[i].name);
+             console.log("in uploadcomponent Countries are:" + countries[i].name);
             this.countries[i].cities = null;
 
         }
@@ -100,30 +123,9 @@ getCountries(){
     ngOnInit(){
        this.getCountries() ;
     }
-// <!--<label for="skuInput">SKU</label>  -->
-// <!--<input type="text"  -->
-// <!--id="skuInput"  -->
-// <!--placeholder="SKU"  -->
-// <!--[formControl]="form.controls['sku']" > -->
-// <!--<div *ngIf="form.controls['sku'].hasError('required')&&submitAttempt"  -->
-//     <!--&gt;SKU is required</div>  -->
-// <!--</div>-->
-// <!--<br>-->
-// <!--<br>-->
-// <!--<br>-->
-// <!--<div>  -->
-// <!--<label for="balanceIn">SKU</label>  -->
-// <!--<input type="text"  -->
-// <!--id="balanceIn"  -->
-// <!--placeholder="balance"  -->
-// <!--[formControl]="form.controls['balance']">  -->
-// <!--</div>-->
-//
-// <button type="submit">Submit</button>
-//     </form>
-//     </div>
-//     `
-
 =======
+        console.log(JSON.stringify(formGroup.value))
+        this.uploadService.acceptFormData(formGroup) ;
+    }
 >>>>>>> 01b203acbe926f0a6af3a8d636bf00c13f440c3b:src/main/webapp/resources/app/upload/upload.component.ts
 }

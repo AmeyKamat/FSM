@@ -52,7 +52,7 @@ export class ExplorerComponent implements OnInit {
     toggleCity(city) {
         console.log(" city toggle block") ;
         if(city.locations==null) {
-            console.log("Inside if block") ;
+
             this.explorerService.getLocations().
             subscribe((locations)=> {
                 city.locations=locations ;
