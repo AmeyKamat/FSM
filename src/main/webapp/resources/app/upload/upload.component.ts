@@ -14,6 +14,7 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
+    submitAttempt:boolean =false ;
     myForm: FormGroup;
     file:File;
     uploadFileName:string = "No File Selected";
@@ -68,7 +69,17 @@ export class UploadComponent implements OnInit{
             this.levels = levels;
         });
     }
+    uploadFileListener($event): void {
+        let file = $event.target.files[0];
+        this.uploadFileName = file.name;
+        this.uploadService.setUploadFile(file);
+    }
 
+    onSubmit(formGroup: FormGroup): void {
+        this.submitAttempt=true ;
+        this.uploadService.acceptFormData(formGroup) ;
+    }
+    /* Need bug fixing after which it will replace above code
     uploadFileListener($event): void {
         this.file = $event.target.files[0];
         this.uploadFileName = this.file.name;
@@ -84,5 +95,5 @@ export class UploadComponent implements OnInit{
         formData.append("file",this.file);
 
         this.uploadService.acceptFormData(formData) ;
-    }
+    }*/
 }
