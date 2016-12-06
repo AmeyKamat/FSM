@@ -16,11 +16,6 @@
 			<version>2.8.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-multipart</artifactId>
-			<version>2.24.1</version>
-		</dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.8.4</version>
@@ -137,10 +132,10 @@
 					<!--Watch for changes from files in this directory-->
 					<srcdir>${basedir}/src/main/webapp/resources/app/</srcdir>
 					<!--Refresh the files in this directory if the files change-->
-					<outputdir>${basedir}/src/main/webapp/resources/app/</outputdir>
+					<outputdir>${basedir}/target/FSM/resources/app/</outputdir>
 				</configuration>
 				<executions>
-					<execution>
+					<!--<execution>
 						<id>install node and npm</id>
 						<phase>generate-resources</phase>
 						<configuration>
@@ -159,7 +154,7 @@
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
-					</execution>
+					</execution>-->
 					<execution>
 						<id>compile ts</id>
 						<goals>
