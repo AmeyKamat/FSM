@@ -22,7 +22,7 @@
 *.js.map
 /src/main/webapp/resources/app/**/*.js
 
-#Node and NPM Files
+# Node and NPM Files
 /src/main/webapp/resources/node_modules/
 /src/main/webapp/resources/node/
 /src/main/webapp/resources/npm-debug.log
@@ -32,3 +32,9 @@ hs_err_pid*
 /target/
 
 /bin/
+
+# Restricting Accesss to app.properties File in Repository
+/config/app.properties
+
+# Temporarily Bolcking pom.xml
+/pom.xml

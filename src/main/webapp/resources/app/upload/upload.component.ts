@@ -27,7 +27,7 @@ export class UploadComponent implements OnInit{
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],
-            'floor':['',Validators.required],
+            'floorId':['',Validators.required],
             'upload':['',Validators.required]
         });
     }

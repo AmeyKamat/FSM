@@ -12,7 +12,7 @@ export class UtilService{
     public WELCOME_SCREEN = "barclays.png";
 
     /* API paths */
-    public GET_LAYOUT_URL = `controller/floors`;
+    public GET_LAYOUT_URL = `/controller/floors`;
     public GET_COUNTRY_URL = "/controller/countries";
     public GET_CITY_URL = "/countries/${countryId}/cities";
     public GET_LOCATION_URL = "";

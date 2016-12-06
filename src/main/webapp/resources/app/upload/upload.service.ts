@@ -13,8 +13,6 @@ import {Layout} from "../layout/layout";
 
 @Injectable()
 export class UploadService{
-    file: File;
-    formData:FormData ;
 
     constructor( private dataService:DataService,
                  private layoutService:LayoutService,
@@ -38,7 +36,7 @@ export class UploadService{
     }
 
     acceptFormData(formData:FormData):void {
-        this.dataService.postUploadData(this.formData).
+        this.dataService.postUploadData(formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
             this.canvasService.showPublish = true;

@@ -17,11 +17,12 @@ export class ChairService {
   public getChair(table: Table, chairJSON: any): Chair {
 
     let topLeftPoint: Coordinate = new Coordinate(
-        this.getAbsoluteX(table, chairJSON.tableRow, chairJSON.tableColumn),
-        this.getAbsoluteY(table, chairJSON.tableRow, chairJSON.tableColumn)
+        this.getAbsoluteX(table, chairJSON.tableRow, chairJSON.tableCol),
+        this.getAbsoluteY(table, chairJSON.tableRow, chairJSON.tableCol)
     );
     let chairId = chairJSON.id;
     let angle = this.getChairAngle(table.getOrientation(), chairJSON.tableRow);
+
     return new Chair(topLeftPoint, angle, chairId, "");
   }
 

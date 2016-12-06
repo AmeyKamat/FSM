@@ -8,7 +8,8 @@ export class TableService {
 
     public getTable(tableJSON: any): Table {
         // Why not JSON as type??
-        let orientation: Orientation = this.getOrientation(tableJSON.width, tableJSON.length);
+
+        let orientation: Orientation = this.getOrientation(tableJSON.length, tableJSON.width);
         let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.topLeftX), this.adjustY(orientation, tableJSON.topLeftY));
         let width: number = this.adjustWidth(orientation, tableJSON.width);
         let length: number = this.adjustLength(orientation, tableJSON.length);
@@ -17,7 +18,7 @@ export class TableService {
         return new Table(topLeftPoint, length, width, noOfChairsInRow, orientation);
     }
 
-    private getOrientation(width: number, length: number): Orientation{
+    private getOrientation(length: number, width: number): Orientation{
         let orientation: Orientation;
         if(length>width){
             orientation = Orientation.Horizontal;

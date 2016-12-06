@@ -7,7 +7,6 @@ import fsm.service.FloorService;
 import fsm.service.ParsingService;
 import fsm.util.FileUploadHelper;
 import fsm.util.JsonFilter;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -37,9 +36,8 @@ public class LayoutUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String uploadLayoutFile(@FormDataParam("file") MultipartFile multipartFile, @FormDataParam("floorId") int floorId) {
-
-        System.out.println("####################### floorID"+ floorId);/*
+    public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam("floorId") int floorId) {
+        System.out.println("trying to upload file");
         File file = null;
         if (!multipartFile.isEmpty()) {
             file = FileUploadHelper.storeFile(multipartFile, multipartFile.getOriginalFilename(), fileDirectory);
@@ -50,8 +48,7 @@ public class LayoutUploadController {
         unpublishedLayout.setFloorId(floorId);
 
         String[] propsToBeIgnored = {};
-        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);*/
-        return null;
+        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);
     }
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)

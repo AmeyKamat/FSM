@@ -48,7 +48,7 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-floor">Floor: </label>
-                                    <select id="select-floor" class="form-control" [formControl]="myForm.controls['floor']">
+                                    <select id="select-floor" class="form-control" [formControl]="myForm.controls['floorId']">
                                         <option disabled selected></option>
                                         <option *ngFor="let level of levels" value={{level.id}}>{{level.floorCode}}</option>
                                     </select>
@@ -72,7 +72,7 @@
 
                         <!--<div class="modal-footer">-->
                         <a class="btn" style="background-color:black; color:white" href="">Close</a>
-                        <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="fa fa-upload"></i> Upload</button>
+                        <button type="submit" class="btn" style="background-color:black; color:white"><i class="fa fa-upload"></i> Upload</button>
                         <!--</div>-->
                     </div>
                 </div>
