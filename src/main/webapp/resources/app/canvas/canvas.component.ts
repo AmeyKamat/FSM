@@ -12,7 +12,6 @@ export class CanvasComponent implements OnInit{
     showPublish:boolean;
     subscription:any;
     ngOnInit(): void {
-      //  this.showPublish = this.canvasService.showPublish;
         this.canvasService.initCanvas();
         this.canvasService.renderWelcomePage();
     }

@@ -14,9 +14,9 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
-    submitAttempt:boolean =false ;
     myForm: FormGroup;
     file:File;
+    submitAttempt:boolean =false ;
     uploadFileName:string = "No File Selected";
     countries:Country[] ;
     cities:City[] ;

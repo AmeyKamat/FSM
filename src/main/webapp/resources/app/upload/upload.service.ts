@@ -51,9 +51,7 @@ export class UploadService{
         this.formData.append("file",this.file);
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
-            console.log(layoutData);
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            console.log(layout);
             this.canvasService.showPublishToggle();
             this.canvasService.renderLayout(layout);
         });
