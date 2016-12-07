@@ -21,10 +21,6 @@ export class CanvasService{
                 private dataService:DataService){
     }
 
-    clearCanvas(){
-        this.canvas.clear();
-    }
-
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
         this.canvas.setHeight(window.innerHeight);
