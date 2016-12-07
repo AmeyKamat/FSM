@@ -31,8 +31,8 @@ export class UtilService{
     public GRID_SIZE;
 
     public calculateGridSize(floor:Floor):void{
-        let xGridSize = window.innerWidth/floor.getWidth();
-        let yGridSize = window.innerWidth/floor.getHeight();
+        let xGridSize = window.innerWidth/floor.getLength();
+        let yGridSize = window.innerWidth/floor.getWidth();
         this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
     }
 }
