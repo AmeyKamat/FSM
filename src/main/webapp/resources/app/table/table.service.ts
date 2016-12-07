@@ -7,7 +7,7 @@ import { Orientation } from "../util/orientation";
 export class TableService {
     public getTable(tableJSON: any): Table {
 
-        // Why not JSON as type??
+        console.log(tableJSON);
         let orientation: Orientation = this.getOrientation(tableJSON.length, tableJSON.width);
         let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.topLeftX), this.adjustY(orientation, tableJSON.topLeftY));
         let width: number = this.adjustWidth(orientation, tableJSON.width);
@@ -83,7 +83,7 @@ export class TableService {
         }
 
         for(let deskNo=0; deskNo<desks.length; deskNo++){
-            chairsInRow[desks[deskNo][rowProperty]]++;
+            chairsInRow[desks[deskNo][rowProperty]-1]++;
         }
 
         return chairsInRow;

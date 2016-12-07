@@ -51,7 +51,8 @@ export class UploadService{
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublish = true;
+            console.log(layout);
+            this.canvasService.setPublishable(true);
             this.canvasService.renderLayout(layout);
         });
     }

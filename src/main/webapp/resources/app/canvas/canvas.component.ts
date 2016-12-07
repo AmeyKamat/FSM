@@ -9,9 +9,7 @@ import {CanvasService} from "./canvas.service";
 
 @Injectable()
 export class CanvasComponent implements OnInit{
-    showPublish:boolean;
     ngOnInit(): void {
-        this.showPublish = this.canvasService.showPublish;
         this.canvasService.initCanvas();
         this.canvasService.renderWelcomePage();
     }
