@@ -10,7 +10,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-
     constructor(private http: Http,
                 private utilService:UtilService){}
 
@@ -38,7 +37,7 @@ export class DataService {
     }
     getLayoutData(floorId:number): Observable<any> {
         return this.http
-            .get(`${this.utilService.GET_LAYOUT_URL}/${floorId}`)
+            .get(`/controller/floors/${floorId}`)
             .map((response: Response) => response.json());
     }
 
@@ -53,6 +52,6 @@ export class DataService {
         let params = new URLSearchParams();
         params.set('decision', decision.toString());
         this.http
-            .get(this.utilService.SAVE_UPLOAD_DATA_URL,{search : params});
+            .get(`/controller/layoutFile/publish`,{search : params});
     }
 }

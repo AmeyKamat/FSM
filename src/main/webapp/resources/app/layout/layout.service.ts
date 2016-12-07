@@ -17,10 +17,10 @@ export class LayoutService{
     ){}
 
     getLayout(layoutData:any): Layout {
-        let floor:Floor = this.floorService.getFloor(layoutData.floor);
+        let floor:Floor = this.floorService.getFloor(layoutData);
         let tables:Table[]=[];
         let chairs:Chair[]=[];
-        let tableList = layoutData.floor.tables;
+        let tableList= layoutData.tables;
         for(let tableData of tableList){
             let table = this.tableService.getTable(tableData);
             tables.push(table);

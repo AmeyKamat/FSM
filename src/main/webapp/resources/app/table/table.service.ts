@@ -5,9 +5,9 @@ import { Orientation } from "../util/orientation";
 
 @Injectable()
 export class TableService {
-    public getTable(tableJSON: any): Table {
 
-        console.log(tableJSON);
+    public getTable(tableJSON: any): Table {
+        // Why not JSON as type??
         let orientation: Orientation = this.getOrientation(tableJSON.length, tableJSON.width);
         let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.topLeftX), this.adjustY(orientation, tableJSON.topLeftY));
         let width: number = this.adjustWidth(orientation, tableJSON.width);

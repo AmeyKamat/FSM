@@ -9,12 +9,18 @@ import {CanvasService} from "./canvas.service";
 
 @Injectable()
 export class CanvasComponent implements OnInit{
+    showPublish:boolean;
+    subscription:any;
+
     ngOnInit(): void {
         this.canvasService.initCanvas();
         this.canvasService.renderWelcomePage();
     }
 
     constructor( private canvasService:CanvasService) {
+        this.showPublish = canvasService.showPublish;
+        this.subscription = this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;
+        });
     }
 
     zoomIn():void {

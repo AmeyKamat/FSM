@@ -48,7 +48,7 @@ public class LayoutUploadController {
         unpublishedLayout.setFloorId(floorId);
 
         String[] propsToBeIgnored = {};
-        return JsonFilter.filter(unpublishedLayout, propsToBeIgnored);
+        return JsonFilter.filter(unpublishedLayout.getFloor(), propsToBeIgnored);
     }
 
     @RequestMapping(value = "/publish", method = RequestMethod.POST)
