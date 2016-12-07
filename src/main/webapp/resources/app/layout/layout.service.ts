@@ -26,7 +26,7 @@ export class LayoutService{
             tables.push(table);
             let deskList = tableData.desks;
             for(let deskData of deskList){
-                let chair = this.chairService.getChair(tableData, deskData);
+                let chair = this.chairService.getChair(table, deskData);
                 chairs.push(chair);
             }
         }

@@ -43,5 +43,4 @@ public class CountryRestController {
 		String[] propsToBeIgnored = { "country", "locations" };
 		return JsonFilter.filter(cities, propsToBeIgnored);
 	}
-
 }

@@ -3,12 +3,14 @@ import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
 import {Layout} from "../layout/layout";
 import {DataService} from "../util/data.service";
+import { Subject }    from 'rxjs/Subject';
 
 declare var fabric:any;
 @Injectable()
 export class CanvasService{
     private canvas:any;
-    showPublish:boolean = true;
+    showPublish:boolean = false;
+    showPublishEmitter: Subject<boolean> = new Subject<boolean>();
     panning:boolean = false;
 
     constructor(private utilService:UtilService,
@@ -23,11 +25,17 @@ export class CanvasService{
         this.mouseMoveEvent();
         //this.setupFloor();
     }
+    showPublishToggle():void{
+        this.showPublish = !this.showPublish;
+        this.showPublishEmitter.next(this.showPublish);
+    }
     renderWelcomePage(){
+        this.clearCanvas();
         fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
             (oImg)=> {
                 oImg.set({
                     left: 500,
+                    selectable:false,
                 });
             this.canvas.add(oImg);
         });
@@ -68,6 +76,8 @@ export class CanvasService{
         return false;
     }
     publishDecision(decision:boolean):void{
+        this.showPublishToggle();
+        this.renderWelcomePage();
         this.dataService.saveUploadData(decision);
     }
     /* Used to add slider functionality
@@ -84,6 +94,7 @@ export class CanvasService{
      }*/
 
     renderLayout(layout:Layout):void{
+        this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
         for(let table of layout.getTables()) {
             this.drawTable(table);
@@ -91,7 +102,13 @@ export class CanvasService{
         for(let chair of layout.getChairs()){
             this.drawChair(chair);
         }
+        //this.canvas.renderAll();
     }
+
+    clearCanvas():void{
+        this.canvas.clear();
+    }
+
     drawTable(table:Table):void{
     fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
     this.canvas.add(new fabric.Rect({
@@ -109,7 +126,7 @@ export class CanvasService{
         hoverCursor: 'move'
         }));
     });
-    this.canvas.renderAll();
+    //this.canvas.renderAll();
     }
 
     drawChair(chair):void{
