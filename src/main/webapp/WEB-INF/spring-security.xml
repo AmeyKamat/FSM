@@ -6,14 +6,13 @@
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/login*" access="hasRole('ROLE_ANONYMOUS')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!-- <intercept-url pattern="/login*" access="hasRole('ROLE_ANONYMOUS')" /> -->
+		<intercept-url pattern="/admin**" access="hasRole('ROLE_USER')" />
 
 		<form-login
 			login-processing-url="/j_spring_security_check"
 			login-page="/login"
-			default-target-url="/dummyLogout"
-			always-use-default-target='true'
+			default-target-url="/welcome"
 			authentication-failure-url="/login?error"
 			username-parameter="username"
 			password-parameter="password" />

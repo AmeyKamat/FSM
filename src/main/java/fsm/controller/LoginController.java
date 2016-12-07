@@ -1,39 +1,29 @@
 package fsm.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import fsm.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
 
-	// Spring Security see this :
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout) {
-
-		ModelAndView model = new ModelAndView();
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+		
 		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
+			model.addAttribute("errorMessage", "Invalid username and password !!!");
 		}
 
 		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
+			model.addAttribute("logoutMessage", "You've been logged out successfully !!!");
 		}
 		
-		model.setViewName("login.jsp");
-
-		return model;
-
+		model.addAttribute("message", "Login Page (Through Model)");
+		
+		return "login";
 	}
-
+	
 }

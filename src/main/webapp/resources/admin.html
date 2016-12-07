@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+</head>
+<body>
+
+	<h1 th:text="${message}">Admin Page (Hardcoded)</h1>
+	
+	<!-- csrt for log out-->
+	<form id="logoutForm" th:action="@{/logout}" method='POST'>
+	  <input type="hidden"
+		name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+	</form>
+	
+	<h2 th:if="${username}" th:text="${'Welcome : ' + username}">
+		Welcome : Anonymous
+	</h2>
+	
+	<a th:if="${username}" href="javascript:formSubmit()">
+		Logout
+	</a>
+
+</body>
+</html>
