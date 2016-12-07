@@ -11,7 +11,7 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@javax.persistence.Table(name = "WORKTABLE")
+@javax.persistence.Table(name = "fsm_table")
 @JsonIgnoreProperties("floor")
 public class Table {
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 
 <script>
@@ -20,6 +21,26 @@
 	}
 </script>
 <style>
+.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
 #login {
 	padding-top: 50px
 }
@@ -121,18 +142,11 @@
 	color: inherit;
 }
 </style>
-<body>
-	<!-- <h4>${error_message}</h4> -->
 
-	<!--<form action="<%= request.getContextPath() %>/login" method="POST">
-    id : <input type="text" floorCode="user" id="user"><br>
-    password : <input type="text" floorCode="password" id="password"><br>
-    <input type="submit">
-</form>
--->
-	<link rel="stylesheet" type="text/css" href="/resources/node_modules\bootstrap\dist\css\bootstrap.min.css">
-
-
+<body onload='document.loginForm.username.focus();'>
+	
+	<link rel="stylesheet" type="text/css"
+		href="/resources/node_modules\bootstrap\dist\css\bootstrap.min.css">
 
 
 	<section id="login">
@@ -141,10 +155,18 @@
 				<div class="col-xs-12">
 					<div class="form-wrap">
 						<h1>Log in</h1>
-						<form role="form" action="/controller/login" method="POST"
+
+						<c:if test="${not empty error}">
+							<div class="error">${error}</div>
+						</c:if>
+						<c:if test="${not empty msg}">
+							<div class="msg">${msg}</div>
+						</c:if>
+
+						<form name="loginForm" role="form" action="<c:url value='j_spring_security_check' />" method="POST"
 							id="login-form" autocomplete="off">
 							<div class="form-group">
-								<label for="username" class="sr-only">Email</label> <input
+								<label for="username" class="sr-only">Username</label> <input
 									type="text" name="username" id="user" class="form-control"
 									placeholder="username">
 							</div>
@@ -159,6 +181,8 @@
 							</div>
 							<input type="submit" id="btn-login"
 								class="btn btn-custom btn-lg btn-block" value="Log in">
+
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						</form>
 						<a href="javascript:;" class="forget" data-toggle="modal"
 							data-target=".forget-modal">Forgot your password?</a>

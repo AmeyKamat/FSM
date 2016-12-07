@@ -9,52 +9,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
+	// Spring Security see this :
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
 
-    @Autowired
-    UserService userService;
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView showLoginPage() {
-        return new ModelAndView("login.html");
-    }
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		
+		model.setViewName("login.jsp");
 
+		return model;
 
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public ModelAndView login(final HttpServletRequest req, ModelMap map) {
-
-        /* Commented for integrating backend to frontend. Consequently to be uncommented */
-        /*
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String result = userService.checkLogin(username, password);
-
-        if (result == null) {
-            System.out.println("Exited here 1");
-            return new ModelAndView("redirect:/controller/login");
-        } else {
-            if (result.equals("EQUAL")) {
-
-                HttpSession session = req.getSession();
-                session.setAttribute("id", username);
-                System.out.println("Exited here 2");
-                return new ModelAndView("redirect:/controller/uploadFile");
-            } else {
-                System.out.println("Exited here 3");
-                return new ModelAndView("redirect:/controller/login");
-            }
-        }*/
-        return new ModelAndView("index.html");
-
-    }
+	}
 
 }
