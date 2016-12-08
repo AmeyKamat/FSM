@@ -83,7 +83,16 @@ export class TableService {
         }
 
         for(let deskNo=0; deskNo<desks.length; deskNo++){
-            chairsInRow[desks[deskNo][rowProperty]-1]++;
+            let row: number;
+
+            if(desks[deskNo][rowProperty] <= 2){
+                row = desks[deskNo][rowProperty];
+            }
+            else{
+                row = 2;
+            }
+
+            chairsInRow[row-1]++;
         }
 
         return chairsInRow;

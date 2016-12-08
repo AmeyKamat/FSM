@@ -6,7 +6,7 @@ export class FloorService{
     getFloor(floorData: any): Floor {
         return new Floor(
             new Coordinate(floorData.minX, floorData.minY),
-            floorData.maxY,  floorData.maxX
+            floorData.maxY - floorData.minY,  floorData.maxX - floorData.minX
         );
     }
 }
