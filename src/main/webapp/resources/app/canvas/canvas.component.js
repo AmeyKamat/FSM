@@ -12,10 +12,14 @@ var core_1 = require('@angular/core');
 var canvas_service_1 = require("./canvas.service");
 var CanvasComponent = (function () {
     function CanvasComponent(canvasService) {
+        var _this = this;
         this.canvasService = canvasService;
+        this.showPublish = canvasService.showPublish;
+        this.subscription = this.canvasService.showPublishEmitter.subscribe(function (value) {
+            _this.showPublish = value;
+        });
     }
     CanvasComponent.prototype.ngOnInit = function () {
-        this.showPublish = this.canvasService.showPublish;
         this.canvasService.initCanvas();
         this.canvasService.renderWelcomePage();
     };

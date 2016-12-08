@@ -6,7 +6,7 @@ import {count} from "rxjs/operator/count";
 
 @Component({
     moduleId:module.id,
-    selector:'my-explorer',
+    selector:'explorer',
     templateUrl:'explorer.component.html'
 })
 

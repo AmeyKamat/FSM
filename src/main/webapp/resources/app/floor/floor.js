@@ -1,15 +1,15 @@
 "use strict";
 var Floor = (function () {
-    function Floor(leftTopPoint, height, width) {
+    function Floor(leftTopPoint, length, width) {
         this.leftTopPoint = leftTopPoint;
-        this.height = height;
+        this.length = length;
         this.width = width;
     }
     Floor.prototype.getLeftTopPoint = function () {
         return this.leftTopPoint;
     };
-    Floor.prototype.getHeight = function () {
-        return this.height;
+    Floor.prototype.getLength = function () {
+        return this.length;
     };
     Floor.prototype.getWidth = function () {
         return this.width;

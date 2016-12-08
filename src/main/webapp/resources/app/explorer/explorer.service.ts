@@ -35,7 +35,6 @@ export class ExplorerService {
         this.dataService.getLayoutData(floorId).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublish = false;
             this.canvasService.renderLayout(layout);
         });
     }

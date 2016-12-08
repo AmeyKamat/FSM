@@ -33,7 +33,6 @@ var UploadComponent = (function () {
             _this.countries = countries;
             for (var i = 0; i < _this.countries.length; i++) {
                 _this.countries[i].cities = null;
-                console.log("countries obtained");
             }
         });
     };
@@ -64,7 +63,6 @@ var UploadComponent = (function () {
     UploadComponent.prototype.uploadFileListener = function ($event) {
         var file = $event.target.files[0];
         this.uploadFileName = file.name;
-        console.log(this.form.get('city').value);
         this.uploadService.setUploadFile(file);
     };
     UploadComponent.prototype.onSubmit = function (formGroup) {

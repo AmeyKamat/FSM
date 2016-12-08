@@ -14,7 +14,9 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
+
     form: FormGroup;
+    file:File;
     submitAttempt:boolean =false ;
     uploadFileName:string = "No File Selected";
     countries:Country[] ;
@@ -41,7 +43,7 @@ export class UploadComponent implements OnInit{
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 this.countries[i].cities = null;
-                console.log("countries obtained") ;
+
             }
         });
     }
@@ -69,15 +71,30 @@ export class UploadComponent implements OnInit{
             this.levels = levels;
         });
     }
-
     uploadFileListener($event): void {
         let file = $event.target.files[0];
         this.uploadFileName = file.name;
-        console.log(this.form.get('city').value);
         this.uploadService.setUploadFile(file);
     }
 
     onSubmit(formGroup: FormGroup): void {
         this.uploadService.acceptFormData(formGroup) ;
     }
+    /* Need bug fixing after which it will replace above code
+    uploadFileListener($event): void {
+        this.file = $event.target.files[0];
+        this.uploadFileName = this.file.name;
+    }
+
+    onSubmit(formGroup: FormGroup): void {
+        let formData = new FormData();
+        formData.append("name", "layout");
+        formData.append("country",formGroup.get('country').value) ;
+        formData.append("city",formGroup.get('city').value) ;
+        formData.append("location",formGroup.get('location').value) ;
+        formData.append("floor",formGroup.get('floor').value) ;
+        formData.append("file",this.file);
+
+        this.uploadService.acceptFormData(formData) ;
+    }*/
 }

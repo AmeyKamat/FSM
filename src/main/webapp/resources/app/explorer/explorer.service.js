@@ -35,7 +35,6 @@ var ExplorerService = (function () {
         this.dataService.getLayoutData(floorId).
             subscribe(function (layoutData) {
             var layout = _this.layoutService.getLayout(layoutData);
-            _this.canvasService.showPublish = false;
             _this.canvasService.renderLayout(layout);
         });
     };

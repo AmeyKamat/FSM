@@ -16,7 +16,7 @@ var explorer_component_1 = require("./explorer/explorer.component");
 var routes = [
     { path: '', component: canvas_component_1.CanvasComponent },
     { path: 'upload', component: upload_component_1.UploadComponent },
-    { path: 'my-explorer', component: explorer_component_1.ExplorerComponent },
+    { path: 'explorer', component: explorer_component_1.ExplorerComponent },
     { path: 'canvas', component: canvas_component_1.CanvasComponent }];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

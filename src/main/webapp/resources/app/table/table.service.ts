@@ -5,8 +5,8 @@ import { Orientation } from "../util/orientation";
 
 @Injectable()
 export class TableService {
-    public getTable(tableJSON: any): Table {
 
+    public getTable(tableJSON: any): Table {
         // Why not JSON as type??
         let orientation: Orientation = this.getOrientation(tableJSON.length, tableJSON.width);
         let topLeftPoint: Coordinate = new Coordinate(this.adjustX(orientation, tableJSON.topLeftX), this.adjustY(orientation, tableJSON.topLeftY));
@@ -83,7 +83,16 @@ export class TableService {
         }
 
         for(let deskNo=0; deskNo<desks.length; deskNo++){
-            chairsInRow[desks[deskNo][rowProperty]]++;
+            let row: number;
+
+            if(desks[deskNo][rowProperty] <= 2){
+                row = desks[deskNo][rowProperty];
+            }
+            else{
+                row = 2;
+            }
+
+            chairsInRow[row-1]++;
         }
 
         return chairsInRow;

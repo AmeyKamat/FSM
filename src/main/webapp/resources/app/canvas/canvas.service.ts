@@ -3,17 +3,24 @@ import {Table} from "../table/table";
 import {UtilService} from "../util/util.service";
 import {Layout} from "../layout/layout";
 import {DataService} from "../util/data.service";
+import { Subject }    from 'rxjs/Subject';
+import {Chair} from "../chair/chair";
 
 declare var fabric:any;
+
 @Injectable()
 export class CanvasService{
-    private canvas:any;
-    showPublish:boolean = false;
+    private canvas: any;
+
+    showPublish: boolean = false;
+    showPublishEmitter: Subject<boolean> = new Subject<boolean>();
+
     panning:boolean = false;
 
     constructor(private utilService:UtilService,
                 private dataService:DataService){
     }
+
     initCanvas():void{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
         this.canvas.setHeight(window.innerHeight);
@@ -23,11 +30,19 @@ export class CanvasService{
         this.mouseMoveEvent();
         //this.setupFloor();
     }
+
+    showPublishToggle():void{
+        this.showPublish = !this.showPublish;
+        this.showPublishEmitter.next(this.showPublish);
+    }
+
     renderWelcomePage(){
+        this.clearCanvas();
         fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
             (oImg)=> {
                 oImg.set({
                     left: 500,
+                    selectable:false,
                 });
             this.canvas.add(oImg);
         });
@@ -68,6 +83,8 @@ export class CanvasService{
         return false;
     }
     publishDecision(decision:boolean):void{
+        this.showPublishToggle();
+        this.renderWelcomePage();
         this.dataService.saveUploadData(decision);
     }
     /* Used to add slider functionality
@@ -84,21 +101,29 @@ export class CanvasService{
      }*/
 
     renderLayout(layout:Layout):void{
+        this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
+        console.log(layout);
         for(let table of layout.getTables()) {
             this.drawTable(table);
         }
         for(let chair of layout.getChairs()){
             this.drawChair(chair);
         }
+        //this.canvas.renderAll();
     }
+
+    clearCanvas():void{
+        this.canvas.clear();
+    }
+
     drawTable(table:Table):void{
     fabric.util.loadImage(this.utilService.IMG_PATH + this.utilService.TABLE_PATTERN_FILE, (img)=>{
     this.canvas.add(new fabric.Rect({
         left:table.getLeftTopPoint().getX()*this.utilService.GRID_SIZE ,
         top: table.getLeftTopPoint().getY()*this.utilService.GRID_SIZE ,
-        width: table.getWidth()*this.utilService.GRID_SIZE,
-        height: table.getLength()*this.utilService.GRID_SIZE,
+        width: table.getLength()*this.utilService.GRID_SIZE,
+        height: table.getWidth()*this.utilService.GRID_SIZE,
         originX: 'left',
         originY: 'top',
         rx : this.utilService.TABLE_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
@@ -109,61 +134,89 @@ export class CanvasService{
         hoverCursor: 'move'
         }));
     });
-    this.canvas.renderAll();
+    //this.canvas.renderAll();
     }
 
-    drawChair(chair):void{
-    //Seat
-    var mid = new fabric.Rect({
-        left : chair.x + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        top :  chair.y + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        stroke : 'grey',
-        width : chair.width - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        height : chair.height - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        rx : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
-        ry : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
+    drawChair(chair: Chair):void{
+        let seat = this.getChairSeat(chair);
+
+        let leftArm = this.getLeftArm(chair);
+
+        let rightArm = this.getRightArm(chair);
+
+        let upperArm = this.getUpperArm(chair);
+
+        let group = this.getChairGroup(chair, leftArm, rightArm, upperArm, seat);
+
+        this.canvas.add(group);
+    }
+
+    private getChairSeat(chair: Chair): any{
+        let mid = new fabric.Rect({
+            left : chair.getTopLeftPoint().getX()*this.utilService.GRID_SIZE + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            top :  chair.getTopLeftPoint().getY()*this.utilService.GRID_SIZE + 2*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE + this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            stroke : 'grey',
+            width : this.utilService.GRID_SIZE - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            height : this.utilService.GRID_SIZE - 4*this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE -2*this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            rx : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
+            ry : this.utilService.CHAIR_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
         });
-    //Left Arm
-    var leftArm = new fabric.Rect({
-        left : chair.x + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
-        top :  chair.y + chair.height/4,
-        stroke : 'grey',
-        width : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        height : chair.height/2,
-        rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
-        ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
+        return mid;
+    }
+
+    private getLeftArm(chair: Chair): any {
+        let leftArm = new fabric.Rect({
+            left : chair.getTopLeftPoint().getX()*this.utilService.GRID_SIZE + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
+            top :  chair.getTopLeftPoint().getY()*this.utilService.GRID_SIZE + 1/4*this.utilService.GRID_SIZE,
+            stroke : 'grey',
+            width : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            height : 1/2*this.utilService.GRID_SIZE,
+            rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
+            ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
         });
-    //Right Arm
-    var rightArm = new fabric.Rect({
-        left : chair.x + chair.width - this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE - this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        top :  chair.y + chair.height/4,
-        stroke : 'grey',
-        width : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        height : chair.height/2,
-        rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
-        ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
+
+        return leftArm;
+    }
+
+    private getRightArm(chair: Chair): any{
+        let rightArm = new fabric.Rect({
+            left : chair.getTopLeftPoint().getX()*this.utilService.GRID_SIZE + this.utilService.GRID_SIZE - this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE - this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            top :  chair.getTopLeftPoint().getY()*this.utilService.GRID_SIZE + 1/4*this.utilService.GRID_SIZE,
+            stroke : 'grey',
+            width : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            height : 1/2*this.utilService.GRID_SIZE,
+            rx : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE,
+            ry : this.utilService.ARM_BORDER_RADIUS_RATIO*this.utilService.GRID_SIZE
         });
-    //UpperArm
-    var upperArm = new fabric.Rect({
-        left : chair.x + chair.width/4,
-        top :  chair.y + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
-        stroke : 'grey',
-        width : chair.width/2,
-        height : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
-        rx : 0,
-        ry : 0
+        return rightArm;
+    }
+
+    private getUpperArm(chair: Chair): any{
+        let upperArm = new fabric.Rect({
+            left : chair.getTopLeftPoint().getX()*this.utilService.GRID_SIZE + 1/4*this.utilService.GRID_SIZE,
+            top :  chair.getTopLeftPoint().getY()*this.utilService.GRID_SIZE + this.utilService.CHAIR_PADDING*this.utilService.GRID_SIZE,
+            stroke : 'grey',
+            width : 1/2*this.utilService.GRID_SIZE,
+            height : this.utilService.MIN_BLOCK_SIZE_RATIO*this.utilService.GRID_SIZE,
+            rx : 0,
+            ry : 0
         });
-    var group = new fabric.Group([leftArm,rightArm,mid,upperArm],{
-        left : chair.x + chair.width/2,
-        top  : chair.y + chair.height/2,
-        originX : 'center',
-        originY : 'center',
-        selectable : false,
-        angle : chair.angle,
-        fill: "#cccccc",
-        entity : "chair",
-        deskid: chair.deskid
+
+        return upperArm;
+    }
+
+    private getChairGroup(chair: Chair, leftArm: any, rightArm: any, upperArm: any, seat: any): any{
+        var group = new fabric.Group([leftArm,rightArm,seat,upperArm],{
+            left : chair.getTopLeftPoint().getX()*this.utilService.GRID_SIZE + 1/2*this.utilService.GRID_SIZE,
+            top  : chair.getTopLeftPoint().getY()*this.utilService.GRID_SIZE + 1/2*this.utilService.GRID_SIZE,
+            originX : 'center',
+            originY : 'center',
+            selectable : false,
+            angle : chair.getAngle(),
+            fill: "#cccccc",
+            entity : "chair",
+            deskid: chair.getDeskId()
         });
-    this.canvas.add(group);
+        return group;
     }
 }

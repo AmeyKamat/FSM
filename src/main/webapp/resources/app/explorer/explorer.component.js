@@ -60,7 +60,7 @@ var ExplorerComponent = (function () {
     ExplorerComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-explorer',
+            selector: 'explorer',
             templateUrl: 'explorer.component.html'
         }),
         core_1.Injectable(), 

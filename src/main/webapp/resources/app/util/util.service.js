@@ -19,14 +19,14 @@ var UtilService = (function () {
         this.LOADING_FILE = "loading.gif";
         this.WELCOME_SCREEN = "barclays.png";
         /* API paths */
-        this.GET_LAYOUT_URL = "controller/floors";
-        this.GET_COUNTRY_URL = "/controller/countries";
-        this.GET_CITY_URL = "/countries/${countryId}/cities";
-        this.GET_LOCATION_URL = "";
-        this.GET_LEVEL_URL = "";
-        this.GET_EMPLOYEE_URL = "";
-        this.POST_UPLOAD_URL = "/controller/layoutFile/upload";
-        this.SAVE_UPLOAD_DATA_URL = "/controller/layoutFile/publish";
+        /*  public GET_LAYOUT_URL = `/controller/floors`;
+            public GET_COUNTRY_URL = "/controller/countries";
+            public GET_CITY_URL = "/countries/${countryId}/cities";
+            public GET_LOCATION_URL = "";
+            public GET_LEVEL_URL = "";
+            public GET_EMPLOYEE_URL = "";
+            public POST_UPLOAD_URL = "/controller/layoutFile/upload";
+            public SAVE_UPLOAD_DATA_URL=`/controller/layoutFile/publish`;*/
         /*ENV Variables*/
         this.GRIDS_PER_CHAIR = 1;
         this.CHAIR_BORDER_RADIUS_RATIO = 0.08;
@@ -36,8 +36,8 @@ var UtilService = (function () {
         this.CHAIR_PADDING = 0.1;
     }
     UtilService.prototype.calculateGridSize = function (floor) {
-        var xGridSize = window.innerWidth / floor.getWidth();
-        var yGridSize = window.innerWidth / floor.getHeight();
+        var xGridSize = window.innerWidth / floor.getLength();
+        var yGridSize = window.innerWidth / floor.getWidth();
         this.GRID_SIZE = (xGridSize < yGridSize) ? (xGridSize) : (yGridSize);
     };
     UtilService = __decorate([

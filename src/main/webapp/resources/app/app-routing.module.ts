@@ -7,7 +7,7 @@ import {ExplorerComponent} from "./explorer/explorer.component";
 const routes: Routes = [
     {path: '', component:CanvasComponent},
     { path: 'upload',  component: UploadComponent },
-    { path: 'my-explorer',  component: ExplorerComponent },
+    { path: 'explorer',  component: ExplorerComponent },
     { path: 'canvas',  component: CanvasComponent }];
 
 @NgModule({

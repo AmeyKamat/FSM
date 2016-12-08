@@ -15,7 +15,7 @@ var FloorService = (function () {
     function FloorService() {
     }
     FloorService.prototype.getFloor = function (floorData) {
-        return new floor_1.Floor(new coordinate_1.Coordinate(floorData.minX, floorData.minY), floorData.maxY, floorData.maxX);
+        return new floor_1.Floor(new coordinate_1.Coordinate(floorData.minX, floorData.minY), floorData.maxY - floorData.minY, floorData.maxX - floorData.minX);
     };
     FloorService = __decorate([
         core_1.Injectable(), 

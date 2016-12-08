@@ -18,23 +18,41 @@ var ChairService = (function () {
         this.utilService = utilService;
     }
     ChairService.prototype.getChair = function (table, chairJSON) {
-        var topLeftPoint = new coordinate_1.Coordinate(this.getAbsoluteX(table, chairJSON.tableRow, chairJSON.tableCol), this.getAbsoluteY(table, chairJSON.tableRow, chairJSON.tableCol));
-        var chairId = chairJSON.id;
-        var angle = this.getChairAngle(table.getOrientation(), chairJSON.tableRow);
+        var row = this.applyCorrectionToRow(table, chairJSON.tableRow);
+        var column = this.applyCorrectionToColumn(table, chairJSON.tableCol);
+        var topLeftPoint = new coordinate_1.Coordinate(this.getAbsoluteX(table, row, column), this.getAbsoluteY(table, row, column));
+        var chairId = chairJSON.deskCode;
+        var angle = this.getChairAngle(table.getOrientation(), row, column);
         return new chair_1.Chair(topLeftPoint, angle, chairId, "");
+    };
+    ChairService.prototype.applyCorrectionToRow = function (table, tableRow) {
+        var row = tableRow;
+        if (table.getOrientation() == orientation_1.Orientation.Horizontal && tableRow > 2) {
+            row = 2;
+        }
+        return row;
+    };
+    ChairService.prototype.applyCorrectionToColumn = function (table, tableCol) {
+        var column = tableCol;
+        if (table.getOrientation() == orientation_1.Orientation.Vertical && tableCol > 2) {
+            column = 2;
+        }
+        return column;
     };
     ChairService.prototype.getAbsoluteX = function (table, row, column) {
         var calculatedX;
         if (table.getOrientation() == orientation_1.Orientation.Horizontal) {
             calculatedX = table.getLeftTopPoint().getX();
-            var noOfChairsInThisRow = table.getChairsInRow[row];
-            var padding = (table.getLength() - this.utilService.GRIDS_PER_CHAIR * noOfChairsInThisRow) / (2 * noOfChairsInThisRow);
-            calculatedX += padding + 2 * (column - 1) * padding;
+            var noOfChairsInThisRow = table.getChairsInRow()[row - 1];
+            var padding = 0;
+            /* For future exploration */
+            //let padding = (table.getLength() - this.utilService.GRIDS_PER_CHAIR*noOfChairsInThisRow)/(2*noOfChairsInThisRow);
+            calculatedX += padding + (column - 1) * (padding + this.utilService.GRIDS_PER_CHAIR);
         }
         else if (table.getOrientation() == orientation_1.Orientation.Vertical) {
-            calculatedX = table.getLeftTopPoint().getX();
-            if (row == 2) {
-                calculatedX += table.getWidth();
+            calculatedX = table.getLeftTopPoint().getX() - 1;
+            if (column >= 2) {
+                calculatedX += table.getLength() + 1;
             }
         }
         return calculatedX;
@@ -42,20 +60,22 @@ var ChairService = (function () {
     ChairService.prototype.getAbsoluteY = function (table, row, column) {
         var calculatedY;
         if (table.getOrientation() == orientation_1.Orientation.Horizontal) {
-            calculatedY = table.getLeftTopPoint().getY();
-            if (row == 2) {
-                calculatedY += table.getWidth();
+            calculatedY = table.getLeftTopPoint().getY() - 1;
+            if (row >= 2) {
+                calculatedY += table.getWidth() + 1;
             }
         }
         else if (table.getOrientation() == orientation_1.Orientation.Vertical) {
             calculatedY = table.getLeftTopPoint().getY();
-            var noOfChairsInThisRow = table.getChairsInRow[row];
-            var padding = (table.getWidth() - this.utilService.GRIDS_PER_CHAIR * noOfChairsInThisRow) / (2 * noOfChairsInThisRow);
-            calculatedY += padding + 2 * (column - 1) * padding;
+            var noOfChairsInThisRow = table.getChairsInRow()[column - 1];
+            var padding = 0;
+            /* for future exploration */
+            //let padding = (table.getWidth() - this.utilService.GRIDS_PER_CHAIR*noOfChairsInThisRow)/(2*noOfChairsInThisRow)
+            calculatedY += padding + (row - 1) * (padding + this.utilService.GRIDS_PER_CHAIR);
         }
         return calculatedY;
     };
-    ChairService.prototype.getChairAngle = function (orientation, row) {
+    ChairService.prototype.getChairAngle = function (orientation, row, column) {
         var angle;
         if (orientation == orientation_1.Orientation.Horizontal && row == 1) {
             angle = 0;
@@ -63,10 +83,10 @@ var ChairService = (function () {
         else if (orientation == orientation_1.Orientation.Horizontal && row == 2) {
             angle = 180;
         }
-        else if (orientation == orientation_1.Orientation.Vertical && row == 1) {
+        else if (orientation == orientation_1.Orientation.Vertical && column == 1) {
             angle = 270;
         }
-        else if (orientation == orientation_1.Orientation.Vertical && row == 2) {
+        else if (orientation == orientation_1.Orientation.Vertical && column == 2) {
             angle = 90;
         }
         return angle;

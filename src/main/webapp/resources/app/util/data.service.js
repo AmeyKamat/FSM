@@ -39,7 +39,7 @@ var DataService = (function () {
     };
     DataService.prototype.getLayoutData = function (floorId) {
         return this.http
-            .get(this.utilService.GET_LAYOUT_URL + "/" + floorId)
+            .get("/controller/floors/" + floorId)
             .map(function (response) { return response.json(); });
     };
     DataService.prototype.postUploadData = function (formData) {
@@ -53,7 +53,7 @@ var DataService = (function () {
         var params = new http_1.URLSearchParams();
         params.set('decision', decision.toString());
         this.http
-            .get(this.utilService.SAVE_UPLOAD_DATA_URL, { search: params });
+            .get("/controller/layoutFile/publish", { search: params });
     };
     DataService = __decorate([
         core_1.Injectable(), 

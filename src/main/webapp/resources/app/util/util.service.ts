@@ -12,14 +12,14 @@ export class UtilService{
     public WELCOME_SCREEN = "barclays.png";
 
     /* API paths */
-    public GET_LAYOUT_URL = `controller/floors`;
+/*  public GET_LAYOUT_URL = `/controller/floors`;
     public GET_COUNTRY_URL = "/controller/countries";
     public GET_CITY_URL = "/countries/${countryId}/cities";
     public GET_LOCATION_URL = "";
     public GET_LEVEL_URL = "";
     public GET_EMPLOYEE_URL = "";
     public POST_UPLOAD_URL = "/controller/layoutFile/upload";
-    public SAVE_UPLOAD_DATA_URL=`/controller/layoutFile/publish`;
+    public SAVE_UPLOAD_DATA_URL=`/controller/layoutFile/publish`;*/
 
     /*ENV Variables*/
     public GRIDS_PER_CHAIR= 1;
@@ -31,8 +31,8 @@ export class UtilService{
     public GRID_SIZE;
 
     public calculateGridSize(floor:Floor):void{
-        let xGridSize = window.innerWidth/floor.getWidth();
-        let yGridSize = window.innerWidth/floor.getHeight();
+        let xGridSize = window.innerWidth/floor.getLength();
+        let yGridSize = window.innerWidth/floor.getWidth();
         this.GRID_SIZE = (xGridSize<yGridSize)?(xGridSize):(yGridSize);
     }
 }

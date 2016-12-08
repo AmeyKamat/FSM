@@ -1,30 +1,28 @@
 <div class="explorer">
-    <ul>
-
-            <li *ngFor="let country of countries ; let i = index">
+    <ul class="exlorer-list">
+        <li *ngFor="let country of countries ; let i = index">
                 <input id="country_{{ i }}" type="checkbox" class="example-five-checkbox" (click)="getCities(country)">
                 <label [attr.for]="'country_' + i" class="example-five">+</label>
                 {{country.name}}
-
-
-            <ul class="menu_diplay_under">
+            <ul class="explorer-list">
                 <li *ngFor="let city of country.cities ; let i=index">
                     <input type="checkbox" id="city_{{i}}" class="example-five-checkbox" (click)="getLocations(city)"/>
+                    &nbsp;&nbsp;
                     <label  [attr.for]="'city_' + i" class="example-five">+</label>
                     {{city.name}}
-
-                    <ul class="menu_diplay_under">
+                    <ul class="explorer-list">
                         <li *ngFor="let location of city.locations ; let i=index">
                             <input type="checkbox" id="location_{{i}}" class="example-five-checkbox"(click)="getLevels(location)"/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <label  [attr.for]="'location_' + i" class="example-five">+</label>
                             {{location.name}}
-
-                            <ul>
-
+                            <ul class="explorer-list">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <li *ngFor="let level of location.levels"
                                     [class.selected]="level === selectedLevel"
                                     (click)="onSelect(level.id)">
                                     {{level.floorCode}}
+
                                 </li>
                             </ul>
                         </li>
@@ -36,4 +34,5 @@
 
         </li>
     </ul>
+
 </div>

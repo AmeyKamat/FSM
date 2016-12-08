@@ -45,7 +45,7 @@ var UploadService = (function () {
         this.dataService.postUploadData(this.formData).
             subscribe(function (layoutData) {
             var layout = _this.layoutService.getLayout(layoutData);
-            _this.canvasService.showPublish = true;
+            _this.canvasService.showPublishToggle();
             _this.canvasService.renderLayout(layout);
         });
     };

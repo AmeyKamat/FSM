@@ -20,10 +20,10 @@ var LayoutService = (function () {
         this.chairService = chairService;
     }
     LayoutService.prototype.getLayout = function (layoutData) {
-        var floor = this.floorService.getFloor(layoutData.floor);
+        var floor = this.floorService.getFloor(layoutData);
         var tables = [];
         var chairs = [];
-        var tableList = layoutData.floor.tables;
+        var tableList = layoutData.tables;
         for (var _i = 0, tableList_1 = tableList; _i < tableList_1.length; _i++) {
             var tableData = tableList_1[_i];
             var table = this.tableService.getTable(tableData);
@@ -35,8 +35,6 @@ var LayoutService = (function () {
                 chairs.push(chair);
             }
         }
-        console.log(tables);
-        console.log(chairs);
         return new layout_1.Layout(floor, tables, chairs);
     };
     LayoutService = __decorate([
