@@ -12,7 +12,6 @@ declare var fabric:any;
 export class CanvasService{
     private canvas: any;
 
-    showPublish: boolean = false;
     showPublishEmitter: Subject<boolean> = new Subject<boolean>();
     showLoaderEmitter: Subject<boolean> = new Subject<boolean>();
 
@@ -32,9 +31,8 @@ export class CanvasService{
         //this.setupFloor();
     }
 
-    showPublishToggle():void{
-        this.showPublish = !this.showPublish;
-        this.showPublishEmitter.next(this.showPublish);
+    showPublishToggle(value:boolean):void{
+        this.showPublishEmitter.next(value);
     }
     showLoaderToggle(value:boolean):void{
         this.showLoaderEmitter.next(value);
@@ -74,7 +72,6 @@ export class CanvasService{
         this.canvas.setZoom(1);
     }
     zoom(e):boolean{
-        console.log("mouse scroll event from canvas service");
         let evt = window.event || e;
         let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
         let curZoom = this.canvas.getZoom();
@@ -87,7 +84,7 @@ export class CanvasService{
         return false;
     }
     publishDecision(decision:boolean):void{
-        this.showPublishToggle();
+        this.showPublishToggle(false);
         this.renderWelcomePage();
         this.dataService.saveUploadData(decision);
     }
@@ -99,7 +96,6 @@ export class CanvasService{
     renderLayout(layout:Layout):void{
         this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
-        console.log(layout);
         for(let table of layout.getTables()) {
             this.drawTable(table);
         }

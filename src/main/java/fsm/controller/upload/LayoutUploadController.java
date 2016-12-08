@@ -50,10 +50,9 @@ public class LayoutUploadController {
         return JsonFilter.filter(unpublishedLayout.getFloor(), propsToBeIgnored);
     }
 
-    @RequestMapping(value = "/publish", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/publish", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void publishLayout(@RequestParam("toBePublished") boolean toBePublished) {
-        System.out.println("******"+toBePublished);
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());

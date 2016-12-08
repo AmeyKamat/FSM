@@ -34,6 +34,7 @@ export class ExplorerService {
 
     drawLayout(floorId):void {
         this.canvasService.showLoaderToggle(true);
+        this.canvasService.showPublishToggle(false);
         this.dataService.getLayoutData(floorId).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);

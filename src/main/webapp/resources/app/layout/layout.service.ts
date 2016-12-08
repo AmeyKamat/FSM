@@ -21,7 +21,6 @@ export class LayoutService{
         let tables:Table[]=[];
         let chairs:Chair[]=[];
         let tableList= layoutData.tables;
-        console.log(tableList);
         for(let tableData of tableList){
             let table = this.tableService.getTable(tableData);
             tables.push(table);

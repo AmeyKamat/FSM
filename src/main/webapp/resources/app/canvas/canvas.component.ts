@@ -9,7 +9,7 @@ import {CanvasService} from "./canvas.service";
 
 @Injectable()
 export class CanvasComponent implements OnInit{
-    showPublish:boolean;
+    showPublish:boolean=false;
     showLoader:boolean=false;
 
     ngOnInit(): void {
@@ -18,7 +18,6 @@ export class CanvasComponent implements OnInit{
     }
 
     constructor( private canvasService:CanvasService) {
-        this.showPublish = canvasService.showPublish;
         this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;});
         this.canvasService.showLoaderEmitter.subscribe((value)=>{this.showLoader=value;});
     }

@@ -42,7 +42,7 @@ export class UploadService{
         this.dataService.postUploadData(formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublishToggle();
+            this.canvasService.showPublishToggle(true);
             this.canvasService.showLoaderToggle(false);
             this.canvasService.renderLayout(layout);
         });
