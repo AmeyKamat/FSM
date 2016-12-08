@@ -64,17 +64,17 @@
                                     <input id="uploadFile" class="form-control" placeholder={{uploadFileName}} disabled="disabled" />
                                 </div>
                                 <div class="fileUpload btn-circle-sm">
-                                    <i class="fa fa-folder"></i>
+                                    <i class="glyphicon glyphicon-folder-close"></i>
                                     <input id="uploadBtn" type="file" class="upload" [formControl]="myForm.controls['upload']" (change)="uploadFileListener($event)"/>
                                 </div>
                             </div>
                         </div>
-
-                        <!--<div class="modal-footer">-->
-                        <a class="btn" style="background-color:black; color:white" href="">Close</a>
-                        <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="fa fa-upload"></i> Upload</button>
-                        <!--</div>-->
                     </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn" style="background-color:black; color:white" href="#" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</a>
+                    <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="glyphicon glyphicon-upload"></i> Upload</button>
                 </div>
             </form>
         </div>
