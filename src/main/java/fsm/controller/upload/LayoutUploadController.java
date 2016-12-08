@@ -37,7 +37,6 @@ public class LayoutUploadController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam("floorId") int floorId) {
-
         File file = null;
         if (!multipartFile.isEmpty()) {
             file = FileUploadHelper.storeFile(multipartFile, multipartFile.getOriginalFilename(), fileDirectory);
@@ -51,9 +50,10 @@ public class LayoutUploadController {
         return JsonFilter.filter(unpublishedLayout.getFloor(), propsToBeIgnored);
     }
 
-    @RequestMapping(value = "/publish", method = RequestMethod.POST)
+    @RequestMapping(value = "/publish", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public void publishLayout(@RequestParam("toBePublished") boolean toBePublished) {
+        System.out.println("******"+toBePublished);
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());

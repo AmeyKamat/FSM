@@ -14,6 +14,7 @@ export class CanvasService{
 
     showPublish: boolean = false;
     showPublishEmitter: Subject<boolean> = new Subject<boolean>();
+    showLoaderEmitter: Subject<boolean> = new Subject<boolean>();
 
     panning:boolean = false;
 
@@ -34,6 +35,9 @@ export class CanvasService{
     showPublishToggle():void{
         this.showPublish = !this.showPublish;
         this.showPublishEmitter.next(this.showPublish);
+    }
+    showLoaderToggle(value:boolean):void{
+        this.showLoaderEmitter.next(value);
     }
 
     renderWelcomePage(){
@@ -87,18 +91,10 @@ export class CanvasService{
         this.renderWelcomePage();
         this.dataService.saveUploadData(decision);
     }
-    /* Used to add slider functionality
-    changeZoomLevel():void{
-     this.canvas.setZoom(1);
-     var value=(50-this.value)/100;
-     if (value < 0)
-     {
-     canvas.setZoom(canvas.getZoom() * (1 - value ));
+
+    changeZoomLevel(value:number):void{
+        this.canvas.setZoom(value);
      }
-     else {
-     canvas.setZoom(canvas.getZoom() / (1 + value));
-     }
-     }*/
 
     renderLayout(layout:Layout):void{
         this.clearCanvas();

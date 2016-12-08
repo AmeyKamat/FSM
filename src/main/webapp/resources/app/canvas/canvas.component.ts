@@ -10,7 +10,7 @@ import {CanvasService} from "./canvas.service";
 @Injectable()
 export class CanvasComponent implements OnInit{
     showPublish:boolean;
-    subscription:any;
+    showLoader:boolean=false;
 
     ngOnInit(): void {
         this.canvasService.initCanvas();
@@ -19,8 +19,8 @@ export class CanvasComponent implements OnInit{
 
     constructor( private canvasService:CanvasService) {
         this.showPublish = canvasService.showPublish;
-        this.subscription = this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;
-        });
+        this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;});
+        this.canvasService.showLoaderEmitter.subscribe((value)=>{this.showLoader=value;});
     }
 
     zoomIn():void {
@@ -35,6 +35,10 @@ export class CanvasComponent implements OnInit{
 
     zoom(e):boolean {
     return this.canvasService.zoom(e);
+    }
+
+    changeZoomLevel(value:number):void{
+        this.canvasService.changeZoomLevel(value);
     }
 
     publishDecision(decision:boolean):void {

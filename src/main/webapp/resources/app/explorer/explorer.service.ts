@@ -33,9 +33,11 @@ export class ExplorerService {
     }
 
     drawLayout(floorId):void {
+        this.canvasService.showLoaderToggle(true);
         this.dataService.getLayoutData(floorId).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
+            this.canvasService.showLoaderToggle(false);
             this.canvasService.renderLayout(layout);
         });
     }

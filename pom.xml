@@ -150,8 +150,8 @@
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
-					</execution>-->
-					<execution>
+					</execution>
+					--><execution>
 						<id>compile ts</id>
 						<goals>
 							<goal>npm</goal>

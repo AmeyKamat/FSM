@@ -38,11 +38,12 @@ export class UploadService{
     }
 
     acceptFormData(formData:FormData):void {
-        console.log(formData);
+        this.canvasService.showLoaderToggle(true);
         this.dataService.postUploadData(formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
             this.canvasService.showPublishToggle();
+            this.canvasService.showLoaderToggle(false);
             this.canvasService.renderLayout(layout);
         });
     }
