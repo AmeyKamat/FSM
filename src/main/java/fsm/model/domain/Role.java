@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
-@javax.persistence.Table(name="ROLE")
+@javax.persistence.Table(name="fsm_role")
 public class Role {
 
 	@Id
@@ -20,12 +22,13 @@ public class Role {
 	private int id;
 	
 	@NotNull
-	@Column(name = "name")
-	private String name;
-	
-	@OneToMany(mappedBy = "role")
-	private List<User> users;
+	@Column(name = "role")
+	private String role;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "role")
+	private List<UserRole> userRoles;
+	
 	public Role() {
 		super();
 	}
@@ -38,20 +41,20 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getRole() {
+		return role;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
 
 }

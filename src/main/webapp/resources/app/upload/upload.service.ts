@@ -36,6 +36,7 @@ export class UploadService{
     getLevels(locationId:number):Observable<Level[]> {
         return this.dataService.getLevels(locationId) ;
     }
+
     setUploadFile(file:File){
         this.file=file;
     }
@@ -51,8 +52,18 @@ export class UploadService{
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublish = true;
+            this.canvasService.showPublishToggle();
             this.canvasService.renderLayout(layout);
         });
     }
+    /*/* Need bug fixing after which it will replace above code
+    acceptFormData(formData:FormData):void {
+        console.log(formData);
+        this.dataService.postUploadData(formData).
+        subscribe((layoutData)=> {
+            let layout:Layout = this.layoutService.getLayout(layoutData);
+            this.canvasService.showPublish = true;
+            this.canvasService.renderLayout(layout);
+        });
+    }*/
 }
