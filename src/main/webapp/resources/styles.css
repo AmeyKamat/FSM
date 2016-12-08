@@ -46,7 +46,7 @@ html, body { width:100%; height:100%; margin:0px;}
   font-size: 16px;
   line-height: 1.33;
   border-radius: 25px;
-  background-color: black;
+  background-color: #00395d;
   color: white;
 }
 
@@ -57,7 +57,7 @@ html, body { width:100%; height:100%; margin:0px;}
   font-size: 25px;
   line-height: 1.33;
   border-radius: 50%;
-  background-color: black;
+  background-color: #00395d;
   color: white;
 }
 
@@ -135,3 +135,34 @@ html, body { width:100%; height:100%; margin:0px;}
 
   background: white;
 }
+.navbar{
+  background-color:#00395d;
+  color:#00395d ;
+
+  /*#00395d*/
+          /*#0074a6*/
+}
+.modal-content{
+  color:#00395d;
+ border-color: #00395d;
+}
+.modal-body{
+  color:#00395d;
+}
+.btn{
+background-color: #00395d;
+  color: white;
+
+}
+.navbar-default .navbar-nav>li>a {
+  color:white ;
+}
+.navbar-default :hover.navbar-nav>li>a:hover {
+  color:lightskyblue ;
+}
+
+.navbar-default .navbar-brand{
+  color:white ;
+}
+
+
