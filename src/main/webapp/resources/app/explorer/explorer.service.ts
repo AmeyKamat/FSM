@@ -8,9 +8,6 @@ import {Country} from "../region/country/country";
 import {City} from "../region/city/city";
 import {Level} from "../region/level/level";
 import {Location} from "../region/location/location";
-
-import {Location} from "../Region/location/location";
-
 @Injectable()
 export class ExplorerService {
     constructor(private dataService:DataService,
@@ -22,16 +19,16 @@ export class ExplorerService {
         return this.dataService.getCountries() ;
     }
 
-    getCities():Observable<City[]> {
-        return this.dataService.getCities() ;
+    getCities(countryId:number):Observable<City[]> {
+        return this.dataService.getCities(countryId) ;
     }
 
-    getLocations():Observable<Location[]> {
-        return this.dataService.getLocations() ;
+    getLocations(cityId:number):Observable<Location[]> {
+        return this.dataService.getLocations(cityId) ;
     }
 
-    getLevels():Observable<Level[]> {
-        return this.dataService.getLevels() ;
+    getLevels(locationId:number):Observable<Level[]> {
+        return this.dataService.getLevels(locationId) ;
     }
 
     drawLayout(floorId):void {

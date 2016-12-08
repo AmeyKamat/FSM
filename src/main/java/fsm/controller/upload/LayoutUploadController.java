@@ -7,6 +7,7 @@ import fsm.service.FloorService;
 import fsm.service.ParsingService;
 import fsm.util.FileUploadHelper;
 import fsm.util.JsonFilter;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -36,8 +37,7 @@ public class LayoutUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile,
-                                                      @RequestParam("floorId") int floorId) {
+    public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam("floorId") int floorId) {
 
         File file = null;
         if (!multipartFile.isEmpty()) {

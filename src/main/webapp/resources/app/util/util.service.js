@@ -19,14 +19,14 @@ var UtilService = (function () {
         this.LOADING_FILE = "loading.gif";
         this.WELCOME_SCREEN = "barclays.png";
         /* API paths */
-        this.GET_LAYOUT_URL = "/rest/datafetch";
+        this.GET_LAYOUT_URL = "controller/floors";
         this.GET_COUNTRY_URL = "/controller/countries";
-        this.GET_CITY_URL = "http://localhost:8080/rest/city";
-        this.GET_LOCATION_URL = "http://localhost:8080/rest/location";
-        this.GET_LEVEL_URL = "http://localhost:8080/rest/level";
+        this.GET_CITY_URL = "/countries/${countryId}/cities";
+        this.GET_LOCATION_URL = "";
+        this.GET_LEVEL_URL = "";
         this.GET_EMPLOYEE_URL = "";
-        this.POST_UPLOAD_URL = "/rest/datafetch";
-        this.SAVE_UPLOAD_DATA_URL = "";
+        this.POST_UPLOAD_URL = "/controller/layoutFile/upload";
+        this.SAVE_UPLOAD_DATA_URL = "/controller/layoutFile/publish";
         /*ENV Variables*/
         this.GRIDS_PER_CHAIR = 1;
         this.CHAIR_BORDER_RADIUS_RATIO = 0.08;

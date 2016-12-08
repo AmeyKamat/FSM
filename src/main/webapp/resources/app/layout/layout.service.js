@@ -20,10 +20,10 @@ var LayoutService = (function () {
         this.chairService = chairService;
     }
     LayoutService.prototype.getLayout = function (layoutData) {
-        var floor = this.floorService.getFloor(layoutData);
+        var floor = this.floorService.getFloor(layoutData.floor);
         var tables = [];
         var chairs = [];
-        var tableList = layoutData.tables;
+        var tableList = layoutData.floor.tables;
         for (var _i = 0, tableList_1 = tableList; _i < tableList_1.length; _i++) {
             var tableData = tableList_1[_i];
             var table = this.tableService.getTable(tableData);
@@ -31,10 +31,12 @@ var LayoutService = (function () {
             var deskList = tableData.desks;
             for (var _a = 0, deskList_1 = deskList; _a < deskList_1.length; _a++) {
                 var deskData = deskList_1[_a];
-                var chair = this.chairService.getChair(tableData, deskData);
+                var chair = this.chairService.getChair(table, deskData);
                 chairs.push(chair);
             }
         }
+        console.log(tables);
+        console.log(chairs);
         return new layout_1.Layout(floor, tables, chairs);
     };
     LayoutService = __decorate([

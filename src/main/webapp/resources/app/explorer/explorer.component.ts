@@ -2,10 +2,11 @@ import {Component, Injectable, OnInit} from '@angular/core' ;
 import {ExplorerService} from "./explorer.service";
 import {Country} from "../region/country/country";
 import {Level} from "../region/level/level";
+import {count} from "rxjs/operator/count";
 
 @Component({
     moduleId:module.id,
-    selector:'explorer',
+    selector:'my-explorer',
     templateUrl:'explorer.component.html'
 })
 
@@ -15,33 +16,22 @@ export class ExplorerComponent implements OnInit {
     selectedLevel: Level;
 
     constructor(private explorerService: ExplorerService) {
+
     }
 
     ngOnInit(){
         this.explorerService.getCountries().
         subscribe((countries)=> {
             this.countries = countries;
-            for (var i = 0; i < this.countries.length; i++) {
-                console.log("Countries are:"+countries[i].name) ;
-                this.countries[i].cities=null ;
-            }
         });
     }
 
-    toggleCountry(country) {
-        // this.cities = !this.expanded;
-        console.log("toggle block") ;
+
+    getCities(country) {
         if(country.cities==null) {
-            console.log("Inside if block") ;
-            // country.cities=[new City("Pune",1,[])] ;
-            this.explorerService.getCities().
+            this.explorerService.getCities(country.id).
             subscribe((cities)=> {
                 country.cities=cities ;
-                for (var i = 0; i < country.cities.length; i++) {
-                    console.log("Countries are:"+cities[i].name) ;
-                    country.cities[i].expanded=false ;
-                    country.cities[i].locations=null ;
-                }
             }) ;
         }
         else {
@@ -49,17 +39,11 @@ export class ExplorerComponent implements OnInit {
         }
     }
 
-    toggleCity(city) {
-        console.log(" city toggle block") ;
+    getLocations(city) {
         if(city.locations==null) {
-
-            this.explorerService.getLocations().
+            this.explorerService.getLocations(city.id).
             subscribe((locations)=> {
                 city.locations=locations ;
-                for (var i = 0; i < city.locations.length; i++) {
-                    console.log("Countries are:"+city.locations[i].name) ;
-                    city.locations[i].levels=null ;
-                }
             }) ;
         }
         else {
@@ -67,18 +51,11 @@ export class ExplorerComponent implements OnInit {
         }
     }
 
-    toggleLocation(location) {
-        // this.cities = !this.expanded;
-        console.log(" location toggle block") ;
+    getLevels(location) {
         if(location.levels==null) {
-            console.log("Inside if block ") ;
-            this.explorerService.getLevels().
+            this.explorerService.getLevels(location.id).
             subscribe((levels)=> {
                 location.levels=levels ;
-                for (var i = 0; i < location.levels.length; i++) {
-                    console.log("levels are:"+location.levels[i].name) ;
-                    // location.locations[i].locations=null ;
-                }
             }) ;
         }
         else {
@@ -87,7 +64,6 @@ export class ExplorerComponent implements OnInit {
     }
 
     onSelect(id: number) {
-        console.log("on select called ") ;
         this.explorerService.drawLayout(id);
     }
 }

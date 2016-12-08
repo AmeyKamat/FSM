@@ -15,7 +15,7 @@ var CanvasService = (function () {
     function CanvasService(utilService, dataService) {
         this.utilService = utilService;
         this.dataService = dataService;
-        this.showPublish = true;
+        this.showPublish = false;
         this.panning = false;
     }
     CanvasService.prototype.initCanvas = function () {

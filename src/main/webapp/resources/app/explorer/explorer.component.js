@@ -19,59 +19,35 @@ var ExplorerComponent = (function () {
         this.explorerService.getCountries().
             subscribe(function (countries) {
             _this.countries = countries;
-            for (var i = 0; i < _this.countries.length; i++) {
-                console.log("Countries are:" + countries[i].name);
-                _this.countries[i].cities = null;
-            }
         });
     };
-    ExplorerComponent.prototype.toggleCountry = function (country) {
-        // this.cities = !this.expanded;
-        console.log("toggle block");
+    ExplorerComponent.prototype.getCities = function (country) {
         if (country.cities == null) {
-            console.log("Inside if block");
-            // country.cities=[new City("Pune",1,[])] ;
-            this.explorerService.getCities().
+            this.explorerService.getCities(country.id).
                 subscribe(function (cities) {
                 country.cities = cities;
-                for (var i = 0; i < country.cities.length; i++) {
-                    console.log("Countries are:" + cities[i].name);
-                    country.cities[i].expanded = false;
-                    country.cities[i].locations = null;
-                }
             });
         }
         else {
             country.cities = null;
         }
     };
-    ExplorerComponent.prototype.toggleCity = function (city) {
-        console.log(" city toggle block");
+    ExplorerComponent.prototype.getLocations = function (city) {
         if (city.locations == null) {
-            this.explorerService.getLocations().
+            this.explorerService.getLocations(city.id).
                 subscribe(function (locations) {
                 city.locations = locations;
-                for (var i = 0; i < city.locations.length; i++) {
-                    console.log("Countries are:" + city.locations[i].name);
-                    city.locations[i].levels = null;
-                }
             });
         }
         else {
             city.locations = null;
         }
     };
-    ExplorerComponent.prototype.toggleLocation = function (location) {
-        // this.cities = !this.expanded;
-        console.log(" location toggle block");
+    ExplorerComponent.prototype.getLevels = function (location) {
         if (location.levels == null) {
-            console.log("Inside if block ");
-            this.explorerService.getLevels().
+            this.explorerService.getLevels(location.id).
                 subscribe(function (levels) {
                 location.levels = levels;
-                for (var i = 0; i < location.levels.length; i++) {
-                    console.log("levels are:" + location.levels[i].name);
-                }
             });
         }
         else {
@@ -79,13 +55,12 @@ var ExplorerComponent = (function () {
         }
     };
     ExplorerComponent.prototype.onSelect = function (id) {
-        console.log("on select called ");
         this.explorerService.drawLayout(id);
     };
     ExplorerComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'explorer',
+            selector: 'my-explorer',
             templateUrl: 'explorer.component.html'
         }),
         core_1.Injectable(), 

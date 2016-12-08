@@ -21,14 +21,14 @@ var ExplorerService = (function () {
     ExplorerService.prototype.getCountries = function () {
         return this.dataService.getCountries();
     };
-    ExplorerService.prototype.getCities = function () {
-        return this.dataService.getCities();
+    ExplorerService.prototype.getCities = function (countryId) {
+        return this.dataService.getCities(countryId);
     };
-    ExplorerService.prototype.getLocations = function () {
-        return this.dataService.getLocations();
+    ExplorerService.prototype.getLocations = function (cityId) {
+        return this.dataService.getLocations(cityId);
     };
-    ExplorerService.prototype.getLevels = function () {
-        return this.dataService.getLevels();
+    ExplorerService.prototype.getLevels = function (locationId) {
+        return this.dataService.getLevels(locationId);
     };
     ExplorerService.prototype.drawLayout = function (floorId) {
         var _this = this;

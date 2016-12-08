@@ -26,7 +26,7 @@ var ExplorerComponent = (function () {
             }
         });
     };
-    ExplorerComponent.prototype.toggleCountry = function (country) {
+    ExplorerComponent.prototype.getCities = function (country) {
         // this.cities = !this.expanded;
         console.log("toggle block of country" + country.id);
         if (country.cities == null) {
@@ -46,7 +46,7 @@ var ExplorerComponent = (function () {
             country.cities = null;
         }
     };
-    ExplorerComponent.prototype.toggleCity = function (city) {
+    ExplorerComponent.prototype.getLocations = function (city) {
         // this.cities = !this.expanded;
         console.log(" city toggle block");
         if (city.locations == null) {
@@ -64,7 +64,7 @@ var ExplorerComponent = (function () {
             city.locations = null;
         }
     };
-    ExplorerComponent.prototype.toggleLocation = function (location) {
+    ExplorerComponent.prototype.getLevels = function (location) {
         // this.cities = !this.expanded;
         console.log(" location toggle block");
         if (location.levels == null) {

@@ -8,15 +8,17 @@
 	<name>FSM</name>
 	<url>http://maven.apache.org</url>
 
-
 	<dependencies>
-
-
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<version>2.24.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -130,18 +132,19 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
-<<<<<<< HEAD
-					<workingDirectory>${basedir}/src/main/webapp/angular-fms/</workingDirectory>
-					<InstallDirectory>${basedir}/src/main/webapp/angular-fms/</InstallDirectory>
-=======
+
+
 					<workingDirectory>${basedir}/src/main/webapp/resources/</workingDirectory>
 					<installDirectory>${basedir}/src/main/webapp/resources/</installDirectory>
->>>>>>> 01b203acbe926f0a6af3a8d636bf00c13f440c3b
+					<!--Watch for changes from files in this directory-->
+					<srcdir>${basedir}/src/main/webapp/resources/app/</srcdir>
+					<!--Refresh the files in this directory if the files change-->
+					<outputdir>${basedir}/src/main/webapp/resources/app/</outputdir>
+
 				</configuration>
 				<executions>
-					
-					<execution>
-						<id>npm install</id>
+					<!--<execution>
+						<id>install node and npm</id>
 						<phase>generate-resources</phase>
 						<configuration>
 							<nodeVersion>v6.9.1</nodeVersion>
@@ -151,24 +154,24 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>install node and npm</id>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
+					</execution>-->
+					<execution>
+						<id>compile ts</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>compile ts</id>
 						<phase>compile</phase>
 						<configuration>
 							<arguments>run tsc</arguments>
 						</configuration>
-						<goals>
-							<goal>npm</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>

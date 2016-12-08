@@ -32,12 +32,12 @@ public class LoginController {
     @ResponseBody
     public ModelAndView login(final HttpServletRequest req, ModelMap map) {
 
-        System.out.println("Came here");
+        /* Commented for integrating backend to frontend. Consequently to be uncommented */
+        /*
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String result = userService.checkLogin(username, password);
-        /* Commented for integrating backend to frontend. Consequently to be uncommented */
-        /*
+
         if (result == null) {
             System.out.println("Exited here 1");
             return new ModelAndView("redirect:/controller/login");

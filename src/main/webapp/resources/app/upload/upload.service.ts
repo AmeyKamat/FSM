@@ -13,7 +13,7 @@ import {Layout} from "../layout/layout";
 
 @Injectable()
 export class UploadService{
-    public file: File;
+    file: File;
     formData:FormData ;
 
     constructor( private dataService:DataService,
@@ -25,30 +25,29 @@ export class UploadService{
         return this.dataService.getCountries() ;
     }
 
-    getCities():Observable<City[]> {
-        return this.dataService.getCities() ;
+    getCities(countryId:number):Observable<City[]> {
+        return this.dataService.getCities(countryId) ;
     }
 
-    getLocations():Observable<Location[]> {
-        return this.dataService.getLocations() ;
+    getLocations(cityId:number):Observable<Location[]> {
+        return this.dataService.getLocations(cityId) ;
     }
 
-    getLevels():Observable<Level[]> {
-        return this.dataService.getLevels() ;
+    getLevels(locationId:number):Observable<Level[]> {
+        return this.dataService.getLevels(locationId) ;
     }
-    changeListener($event): void {
-        console.log(" in service: "+$event.target.files[0].name) ;
-        this.formData = new FormData();
-        this.formData.append("name", "layout");
-        this.formData.append("file",  +$event.target.files[0]);
+    setUploadFile(file:File){
+        this.file=file;
     }
 
     acceptFormData(formGroup:FormGroup):void {
-        console.log('you submitted value: ', formGroup.get('country').value);
+        this.formData = new FormData();
+        this.formData.append("name", "layout");
         this.formData.append("country",formGroup.get('country').value) ;
         this.formData.append("city",formGroup.get('city').value) ;
         this.formData.append("location",formGroup.get('location').value) ;
-        this.formData.append("floor",formGroup.get('floor').value) ;
+        this.formData.append("floorId",formGroup.get('floorId').value) ;
+        this.formData.append("file",this.file);
         this.dataService.postUploadData(this.formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);

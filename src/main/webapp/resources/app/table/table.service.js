@@ -17,14 +17,14 @@ var TableService = (function () {
     }
     TableService.prototype.getTable = function (tableJSON) {
         // Why not JSON as type??
-        var orientation = this.getOrientation(tableJSON.width, tableJSON.height);
-        var topLeftPoint = new coordinate_1.Coordinate(this.adjustX(orientation, tableJSON.x), this.adjustY(orientation, tableJSON.y));
+        var orientation = this.getOrientation(tableJSON.length, tableJSON.width);
+        var topLeftPoint = new coordinate_1.Coordinate(this.adjustX(orientation, tableJSON.topLeftX), this.adjustY(orientation, tableJSON.topLeftY));
         var width = this.adjustWidth(orientation, tableJSON.width);
         var length = this.adjustLength(orientation, tableJSON.length);
         var noOfChairsInRow = this.getChairsInRow(orientation, tableJSON.desks);
         return new table_1.Table(topLeftPoint, length, width, noOfChairsInRow, orientation);
     };
-    TableService.prototype.getOrientation = function (width, length) {
+    TableService.prototype.getOrientation = function (length, width) {
         var orientation;
         if (length > width) {
             orientation = orientation_1.Orientation.Horizontal;

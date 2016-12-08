@@ -18,9 +18,9 @@ var ChairService = (function () {
         this.utilService = utilService;
     }
     ChairService.prototype.getChair = function (table, chairJSON) {
-        var topLeftPoint = new coordinate_1.Coordinate(this.getAbsoluteX(table, chairJSON.row, chairJSON.column), this.getAbsoluteY(table, chairJSON.row, chairJSON.column));
-        var chairId = chairJSON.chairId;
-        var angle = this.getChairAngle(table.getOrientation(), chairJSON.row);
+        var topLeftPoint = new coordinate_1.Coordinate(this.getAbsoluteX(table, chairJSON.tableRow, chairJSON.tableCol), this.getAbsoluteY(table, chairJSON.tableRow, chairJSON.tableCol));
+        var chairId = chairJSON.id;
+        var angle = this.getChairAngle(table.getOrientation(), chairJSON.tableRow);
         return new chair_1.Chair(topLeftPoint, angle, chairId, "");
     };
     ChairService.prototype.getAbsoluteX = function (table, row, column) {

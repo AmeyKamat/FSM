@@ -16,20 +16,36 @@ var DataService = (function () {
     function DataService(http, utilService) {
         this.http = http;
         this.utilService = utilService;
-        this.headers = new http_1.Headers();
-        this.headers.set('Content-Type', 'multipart/form-data');
     }
-    DataService.prototype.getLayoutData = function (floorId) {
-        var params = new http_1.URLSearchParams();
-        params.set('floorId', floorId.toString());
+    DataService.prototype.getCountries = function () {
         return this.http
-            .get(this.utilService.GET_LAYOUT_URL, { search: params })
+            .get("/controller/countries")
+            .map(function (response) { return response.json(); });
+    };
+    DataService.prototype.getCities = function (countryId) {
+        return this.http
+            .get("/controller/countries/" + countryId + "/cities")
+            .map(function (response) { return response.json(); });
+    };
+    DataService.prototype.getLocations = function (cityId) {
+        return this.http
+            .get("/controller/cities/" + cityId + "/locations")
+            .map(function (response) { return response.json(); });
+    };
+    DataService.prototype.getLevels = function (locationId) {
+        return this.http
+            .get("/controller/locations/" + locationId + "/floors")
+            .map(function (response) { return response.json(); });
+    };
+    DataService.prototype.getLayoutData = function (floorId) {
+        return this.http
+            .get(this.utilService.GET_LAYOUT_URL + "/" + floorId)
             .map(function (response) { return response.json(); });
     };
     DataService.prototype.postUploadData = function (formData) {
         return this.http
-            .post(this.utilService.POST_UPLOAD_URL, formData, {
-            headers: this.headers
+            .post("/controller/layoutFile/upload", formData, {
+            headers: new http_1.Headers()
         })
             .map(function (response) { return response.json(); });
     };
@@ -38,26 +54,6 @@ var DataService = (function () {
         params.set('decision', decision.toString());
         this.http
             .get(this.utilService.SAVE_UPLOAD_DATA_URL, { search: params });
-    };
-    DataService.prototype.getCountries = function () {
-        return this.http
-            .get(this.utilService.GET_COUNTRY_URL)
-            .map(function (response) { return response.json(); });
-    };
-    DataService.prototype.getCities = function () {
-        return this.http
-            .get(this.utilService.GET_CITY_URL)
-            .map(function (response) { return response.json(); });
-    };
-    DataService.prototype.getLocations = function () {
-        return this.http
-            .get(this.utilService.GET_LOCATION_URL)
-            .map(function (response) { return response.json(); });
-    };
-    DataService.prototype.getLevels = function () {
-        return this.http
-            .get(this.utilService.GET_LEVEL_URL)
-            .map(function (response) { return response.json(); });
     };
     DataService = __decorate([
         core_1.Injectable(), 

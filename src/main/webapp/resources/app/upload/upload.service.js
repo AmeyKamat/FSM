@@ -21,28 +21,27 @@ var UploadService = (function () {
     UploadService.prototype.getCountries = function () {
         return this.dataService.getCountries();
     };
-    UploadService.prototype.getCities = function () {
-        return this.dataService.getCities();
+    UploadService.prototype.getCities = function (countryId) {
+        return this.dataService.getCities(countryId);
     };
-    UploadService.prototype.getLocations = function () {
-        return this.dataService.getLocations();
+    UploadService.prototype.getLocations = function (cityId) {
+        return this.dataService.getLocations(cityId);
     };
-    UploadService.prototype.getLevels = function () {
-        return this.dataService.getLevels();
+    UploadService.prototype.getLevels = function (locationId) {
+        return this.dataService.getLevels(locationId);
     };
-    UploadService.prototype.changeListener = function ($event) {
-        console.log(" in service: " + $event.target.files[0].name);
-        this.formData = new FormData();
-        this.formData.append("name", "layout");
-        this.formData.append("file", +$event.target.files[0]);
+    UploadService.prototype.setUploadFile = function (file) {
+        this.file = file;
     };
     UploadService.prototype.acceptFormData = function (formGroup) {
         var _this = this;
-        console.log('you submitted value: ', formGroup.get('country').value);
+        this.formData = new FormData();
+        this.formData.append("name", "layout");
         this.formData.append("country", formGroup.get('country').value);
         this.formData.append("city", formGroup.get('city').value);
         this.formData.append("location", formGroup.get('location').value);
-        this.formData.append("floor", formGroup.get('floor').value);
+        this.formData.append("floorId", formGroup.get('floorId').value);
+        this.formData.append("file", this.file);
         this.dataService.postUploadData(this.formData).
             subscribe(function (layoutData) {
             var layout = _this.layoutService.getLayout(layoutData);
