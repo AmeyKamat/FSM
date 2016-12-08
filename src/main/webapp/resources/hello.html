@@ -9,12 +9,10 @@
 <body>
 
 	<h1 th:text="${message}">Welcome Page (Hardcoded)</h1>
-	
-	<!-- csrt for log out-->
+
+	<!-- form for log out-->
 	<form id="logoutForm" th:action="@{/logout}" method='POST'>
-	  <input type="hidden"
-		name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 	</form>
 	
 	<h2 th:if="${username}" th:text="${'Welcome : ' + username}">
