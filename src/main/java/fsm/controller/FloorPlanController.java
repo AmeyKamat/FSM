@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class AdminController {
+public class FloorPlanController {
 
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
+	@RequestMapping(value = "/floorPlan**", method = RequestMethod.GET)
 	public String adminPage(HttpServletRequest request, Model model) {
 		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

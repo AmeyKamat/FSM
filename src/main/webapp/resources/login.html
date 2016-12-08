@@ -153,8 +153,8 @@
 						<div class="form-wrap">
 							<h1>Log in</h1>
 
-							<p th:if="${errorMessage}" class="error" th:text="${errorMessage}" >Error !!!</p>
-							<p th:if="${logoutMessage}" class="logout" th:text="${logoutMessage}" >Logged out !!!</p>
+							<p th:if="${errorMessage}" class="error" th:text="${errorMessage}">Error !!!</p>
+							<p th:if="${logoutMessage}" class="logout" th:text="${logoutMessage}">Logged out !!!</p>
 
 							<form name="loginForm" role="form" th:action="@{/j_spring_security_check}" method="POST" id="login-form" autocomplete="off">
 								<div class="form-group">
