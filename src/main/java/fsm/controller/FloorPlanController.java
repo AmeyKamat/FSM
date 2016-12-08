@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class FloorPlanController {
 
-	@RequestMapping(value = "/floorPlan**", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/floorPlan**"}, method = RequestMethod.GET)
 	public String adminPage(HttpServletRequest request, Model model) {
 		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
