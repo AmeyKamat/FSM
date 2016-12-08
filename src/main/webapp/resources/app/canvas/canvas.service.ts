@@ -96,6 +96,7 @@ export class CanvasService{
     renderLayout(layout:Layout):void{
         this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
+
         for(let table of layout.getTables()) {
             this.drawTable(table);
         }
