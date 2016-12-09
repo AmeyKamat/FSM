@@ -49,14 +49,11 @@ export class DataService {
             .map((response: Response) => response.json());
     }
     saveUploadData(decision:boolean):void {
-        /*let params = new URLSearchParams();
-        params.append('toBePublished', decision.toString());*/
-        //let body = params.toString();
-        let formData:FormData = new FormData();
-        formData.append("toBePublished",decision);
+        let params = new URLSearchParams();
+        params.append('toBePublished', decision.toString());
         this.http
-            .post("/controller/layoutFile/publish", formData, {
+            .post("/controller/layoutFile/publish", params, {
                 headers : new Headers()
-            }).subscribe(()=>{});
+            });
     }
 }

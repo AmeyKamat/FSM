@@ -1,6 +1,6 @@
 <div class="context-bar">
     <a href="#" id="zoomin" class="btn-circle" (click)="zoomIn()"><i class="glyphicon glyphicon-zoom-in"></i></a>
-    <input id="sliderzoom" (change)="changeZoomLevel($event.target.value)" type="range" min=".1" max="1.9" step="0.1" orient="vertical">
+    <input id="sliderzoom" (change)="changeZoomLevel($event.target.value)" value={{zoomValue}} type="range" min=".1" max="1.9" step="0.1" orient="vertical">
     <a href="#" id="zoomout" class="btn-circle" (click)="zoomOut()"><i class="glyphicon glyphicon-zoom-out"></i></a>
     <div *ngIf="showPublish">
         <button class= "publish" (click)="publishDecision(true)">Publish <i class="glyphicon glyphicon-floppy-saved"></i></button>

@@ -62,36 +62,18 @@ export class CanvasService{
         }
         });
     }
-    zoomIn():void{
-        this.canvas.setZoom(this.canvas.getZoom()*1.1) ;
+    setZoom(value:number):void{
+        this.canvas.setZoom(value);
     }
-    zoomOut():void{
-        this.canvas.setZoom(this.canvas.getZoom()/1.1) ;
-    }
-    zoomReset():void{
-        this.canvas.setZoom(1);
-    }
-    zoom(e):boolean{
-        let evt = window.event || e;
-        let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
-        let curZoom = this.canvas.getZoom();
-        let newZoom = curZoom + delta/4000;
-        var x = e.offsetX, y = e.offsetY;
-        this.canvas.zoomToPoint({x: x, y: y}, newZoom);
-        if(e != null){
-            e.preventDefault();
-        }
-        return false;
-    }
-    publishDecision(decision:boolean):void{
-        this.showPublishToggle(false);
-        this.renderWelcomePage();
-        this.dataService.saveUploadData(decision);
+    zoomToPoint(x:number, y:number, value):void{
+        this.canvas.zoomToPoint({x: x, y: y}, value);
     }
 
-    changeZoomLevel(value:number):void{
-        this.canvas.setZoom(value);
-     }
+    publishDecision(decision:boolean):void{
+        this.dataService.saveUploadData(decision);
+        this.showPublishToggle(false);
+        this.renderWelcomePage();
+    }
 
     renderLayout(layout:Layout):void{
         this.clearCanvas();
