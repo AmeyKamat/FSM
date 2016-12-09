@@ -15,35 +15,35 @@ export class DataService {
 
     getCountries():Observable<Country[]> {
         return this.http
-            .get(`/controller/countries`)
+            .get(`/countries`)
             .map((response: Response) => <Country[]> response.json());
     }
 
     getCities(countryId: number):Observable<City[]> {
         return this.http
-            .get(`/controller/countries/${countryId}/cities`)
+            .get(`/countries/${countryId}/cities`)
             .map((response: Response) => <City[]> response.json());
     }
 
     getLocations(cityId:number):Observable<Location[]> {
         return this.http
-            .get(`/controller/cities/${cityId}/locations`)
+            .get(`/cities/${cityId}/locations`)
             .map((response: Response) => <Location[]> response.json());
     }
     getLevels(locationId:number):Observable<Level[]> {
         return this.http
-            .get(`/controller/locations/${locationId}/floors`)
+            .get(`/locations/${locationId}/floors`)
             .map((response: Response) => <Level[]> response.json());
     }
     getLayoutData(floorId:number): Observable<any> {
         return this.http
-            .get(`/controller/floors/${floorId}`)
+            .get(`/floors/${floorId}`)
             .map((response: Response) => response.json());
     }
 
     postUploadData(formData:FormData):Observable<any> {
         return this.http
-            .post("/controller/layoutFile/upload", formData, {
+            .post("/layoutFile/upload", formData, {
                 headers : new Headers()
             })
             .map((response: Response) => response.json());
@@ -52,6 +52,6 @@ export class DataService {
         let params = new URLSearchParams();
         params.set('decision', decision.toString());
         this.http
-            .get(`/controller/layoutFile/publish`,{search : params});
+            .get(`/layoutFile/publish`,{search : params});
     }
 }

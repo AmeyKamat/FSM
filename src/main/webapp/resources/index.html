@@ -35,7 +35,6 @@
   <body>
     <!-- form for log out-->
     <form id="logoutForm" th:action="@{/logout}" method='POST'>
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 
     <my-app>Loading...</my-app>

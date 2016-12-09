@@ -14,7 +14,7 @@
 		<form-login
 			login-processing-url="/j_spring_security_check"
 			login-page="/login"
-			default-target-url="/index"
+			default-target-url="/upload"
 			always-use-default-target="true"
 			authentication-failure-url="/login?error"
 			username-parameter="username"

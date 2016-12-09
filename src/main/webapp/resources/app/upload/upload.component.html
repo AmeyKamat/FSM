@@ -2,6 +2,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
+
+            <!--<form id="logoutForm" th:action="@{/logout}" method='POST'>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            </form>-->
+
             <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
                 <div class="modal-header">
                     <h4 class="modal-title">File Upload</h4>
@@ -76,6 +81,8 @@
                     <a class="btn" style="background-color:black; color:white" href="#" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</a>
                     <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="glyphicon glyphicon-upload"></i> Upload</button>
                 </div>
+
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             </form>
         </div>
     </div>
