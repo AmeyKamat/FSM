@@ -21,14 +21,6 @@ public class UploadController {
 
         model.addAttribute("username", name);
 
-        /*CsrfToken csrfToken = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("csrfTokenParameter", csrfToken.getParameterName());
-        model.addAttribute("csrfToken", csrfToken.getToken());
-
-        System.out.println("Token Parameter: " + csrfToken.getParameterName());
-        System.out.println("Token Header: " + csrfToken.getParameterName());
-        System.out.println("Token: " + csrfToken.getToken());*/
-
         return "upload";
     }
 

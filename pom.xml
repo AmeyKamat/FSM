@@ -120,6 +120,13 @@
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>${thymeleaf.version}</version>
 		</dependency>
+
+		<!-- For multipart filter -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>FSM</finalName>
