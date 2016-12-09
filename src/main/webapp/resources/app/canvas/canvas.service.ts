@@ -31,10 +31,10 @@ export class CanvasService{
         //this.setupFloor();
     }
 
-    showPublishToggle(value:boolean):void{
+    showPublish(value:boolean):void{
         this.showPublishEmitter.next(value);
     }
-    showLoaderToggle(value:boolean):void{
+    showLoader(value:boolean):void{
         this.showLoaderEmitter.next(value);
     }
 
@@ -71,7 +71,7 @@ export class CanvasService{
 
     publishDecision(decision:boolean):void{
         this.dataService.saveUploadData(decision);
-        this.showPublishToggle(false);
+        this.showPublish(false);
         this.renderWelcomePage();
     }
 

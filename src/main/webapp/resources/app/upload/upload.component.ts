@@ -76,12 +76,7 @@ export class UploadComponent implements OnInit{
     }
 
     onSubmit(formGroup: FormGroup): void {
-        console.log(formGroup);
         let formData = new FormData();
-        formData.append("name", "layout");
-        formData.append("country",formGroup.get('country').value) ;
-        formData.append("city",formGroup.get('city').value) ;
-        formData.append("location",formGroup.get('location').value) ;
         formData.append("floorId",formGroup.get('floorId').value) ;
         formData.append("file",this.file);
         this.uploadService.acceptFormData(formData) ;
