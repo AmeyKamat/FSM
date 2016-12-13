@@ -14,7 +14,8 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
-    myForm: FormGroup;
+
+    form: FormGroup;
     file:File;
     submitAttempt:boolean =false ;
     uploadFileName:string = "No File Selected";
@@ -24,7 +25,7 @@ export class UploadComponent implements OnInit{
     levels:Level[] ;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
-        this.myForm = fb.group({
+        this.form= fb.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],
@@ -42,6 +43,7 @@ export class UploadComponent implements OnInit{
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 this.countries[i].cities = null;
+
             }
         });
     }
@@ -69,6 +71,11 @@ export class UploadComponent implements OnInit{
             this.levels = levels;
         });
     }
+
+    onSubmit(formGroup: FormGroup): void {
+        this.uploadService.acceptFormData(formGroup) ;
+    }
+    /* Need bug fixing after which it will replace above code
 
     uploadFileListener($event): void {
         this.file = $event.target.files[0];

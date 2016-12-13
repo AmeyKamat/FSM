@@ -1,31 +1,28 @@
 <div class="explorer">
-    <ul class="explorer-list">
-        <li *ngFor="let country of countries">
-            <input type="checkbox" id="country-checkbox" class="example-five-checkbox" (click)="toggleCountry(country)"/>
-            <label id="country-icon" for="country-checkbox" class="example-five">+</label>
-            {{country.name}}
+    <ul class="exlorer-list">
+        <li *ngFor="let country of countries ; let i = index">
+                <input id="country_{{ i }}" type="checkbox" class="example-five-checkbox" (click)="getCities(country)">
+                <label [attr.for]="'country_' + i" class="example-five">+</label>
+                {{country.name}}
             <ul class="explorer-list">
-                <li *ngFor="let city of country.cities">
+                <li *ngFor="let city of country.cities ; let i=index">
+                    <input type="checkbox" id="city_{{i}}" class="example-five-checkbox" (click)="getLocations(city)"/>
                     &nbsp;&nbsp;
-                    <input type="checkbox" id="city-checkbox" class="example-five-checkbox" (click)="toggleCity(city)"/>
-                    <label id="city-icon" for="city-checkbox" class="example-five">+</label>
+                    <label  [attr.for]="'city_' + i" class="example-five">+</label>
                     {{city.name}}
-
                     <ul class="explorer-list">
-                        <li *ngFor="let location of city.locations">
+                        <li *ngFor="let location of city.locations ; let i=index">
+                            <input type="checkbox" id="location_{{i}}" class="example-five-checkbox"(click)="getLevels(location)"/>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" id="location-checkbox" class="example-five-checkbox"(click)="toggleLocation(location)"/>
-                            <label id="location-icon" for="location-checkbox" class="example-five">+</label>
+                            <label  [attr.for]="'location_' + i" class="example-five">+</label>
                             {{location.name}}
-
                             <ul class="explorer-list">
 
                                 <li *ngFor="let level of location.levels"
                                     [class.selected]="level === selectedLevel"
                                     (click)="onSelect(level.id)">
-
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {{level.floorCode}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Level {{level.floorCode}}
 
                                 </li>
                             </ul>
@@ -34,11 +31,9 @@
                 </li>
             </ul>
 
-            <!--&lt;!&ndash;<tree-view [directories]="dir.directories"></tree-view>&ndash;&gt;-->
-            <!--</div>-->
+
+
         </li>
     </ul>
+
 </div>
-<!--<span class="iconButton" (click)="dir.toggle()">{{dir.getIcon()}}</span>-->
-<!--&lt;!&ndash;<input type="checkbox" [checked]="dir.checked" (click)="dir.check()" /> &ndash;&gt;-->
-<!--{{ dir.floorCode }}-->
