@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
-            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
                 <div class="modal-header">
                     <h4 class="modal-title">File Upload</h4>
                 </div>
@@ -10,9 +10,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div>
-                                <div class="col-md-4" >
-                                    <label for="select-country">Country: </label>
-                                    <select  id="select-country" (change)="getCities($event.target.value)" class="form-control" [formControl]="myForm.controls['country']" >
+                                <div class="col-md-4">
+                                    <label for="select-country" >Country: </label>
+                                    <select  id="select-country" (change)="getCities($event.target.value)" class="form-control" [formControl]="form.controls['country']" >
                                         <option disabled selected></option>
                                         <option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</option>
                                     </select>
@@ -24,7 +24,7 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-city">City: </label>
-                                    <select id="select-city" (change)="getLocations($event.target.value)" class="form-control" [formControl]="myForm.controls['city']">
+                                    <select id="select-city" (change)="getLocations($event.target.value)" class="form-control" [formControl]="form.controls['city']">
                                         <option disabled selected></option>
                                         <option *ngFor="let city of cities" value={{city.id}}>{{city.name}}</option>
                                     </select>
@@ -36,7 +36,7 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-location">Location: </label>
-                                    <select id="select-location" (change)="getLevels($event.target.value)" class="form-control" [formControl]="myForm.controls['location']">
+                                    <select id="select-location" (change)="getLevels($event.target.value)" class="form-control" [formControl]="form.controls['location']">
                                         <option disabled selected></option>
                                         <option *ngFor="let location of locations" value={{location.id}}>{{location.name}}</option>
                                     </select>
@@ -48,7 +48,7 @@
                             <div>
                                 <div class="col-md-4">
                                     <label for="select-floor">Floor: </label>
-                                    <select id="select-floor" class="form-control" [formControl]="myForm.controls['floorId']">
+                                    <select id="select-floor" class="form-control" [formControl]="form.controls['floorId']">
                                         <option disabled selected></option>
                                         <option *ngFor="let level of levels" value={{level.id}}>{{level.floorCode}}</option>
                                     </select>
@@ -65,20 +65,17 @@
                                 </div>
                                 <div class="fileUpload btn-circle-sm">
                                     <i class="glyphicon glyphicon-folder-close"></i>
-                                    <input id="uploadBtn" type="file" class="upload" [formControl]="myForm.controls['upload']" (change)="uploadFileListener($event)"/>
+                                    <input id="uploadBtn" type="file" class="upload" [formControl]="form.controls['upload']" (change)="uploadFileListener($event)"/>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <a class="btn" style="background-color:black; color:white" href="#" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</a>
-
-                    <button type="submit" class="btn" value="submit" style="background-color:black; color:white"><i class="glyphicon glyphicon-upload"></i> Upload</button>
+                    <a class="btn"  href="#" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</a>
+                    <button type="submit" class="btn" value="submit"><i class="glyphicon glyphicon-upload"></i> Upload</button>
                 </div>
-
             </form>
         </div>
     </div>

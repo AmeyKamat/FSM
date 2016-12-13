@@ -14,6 +14,8 @@ export class CanvasService{
 
     showPublishEmitter: Subject<boolean> = new Subject<boolean>();
     showLoaderEmitter: Subject<boolean> = new Subject<boolean>();
+    showTooltipEmitter: Subject<any> = new Subject<any>();
+    hideTooltipEmitter: Subject<boolean> = new Subject<boolean>();
 
     panning:boolean = false;
 
@@ -25,12 +27,38 @@ export class CanvasService{
         this.canvas = new fabric.Canvas('workarea', {selection: false, defaultCursor: "move"});
         this.canvas.setHeight(window.innerHeight);
         this.canvas.setWidth(window.innerWidth);
-        this.mouseUpEvent();
-        this.mouseDownEvent();
-        this.mouseMoveEvent();
-        //this.setupFloor();
+        this.onMouseUp();
+        this.onMouseDown();
+        this.onMouseMove();
+        this.onMouseHover();
     }
 
+    onMouseUp():void{
+        this.canvas.on('mouse:up', (e)=> this.panning = false);
+    }
+    onMouseDown():void{
+        this.canvas.on('mouse:down',(e)=> this.panning = true);
+    }
+    onMouseMove():void{
+    this.canvas.on('mouse:move', (e)=> {if (this.panning && e && e.e) {
+        let delta = new fabric.Point(e.e.movementX, e.e.movementY);
+        this.canvas.relativePan(delta);
+        }
+        });
+    }
+    onMouseHover():void{
+        this.canvas.on('mouse:over', (e)=> {
+            if (e.target.entity == "chair") {
+                this.showTooltipEmitter.next(e);
+            }
+        });
+
+        this.canvas.on('mouse:out', (e)=> {
+            if(e.target.entity == 'chair') {
+                this.hideTooltipEmitter.next(false);
+            }
+        });
+    }
     showPublish(value:boolean):void{
         this.showPublishEmitter.next(value);
     }
@@ -38,29 +66,8 @@ export class CanvasService{
         this.showLoaderEmitter.next(value);
     }
 
-    renderWelcomePage(){
-        this.clearCanvas();
-        fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
-            (oImg)=> {
-                oImg.set({
-                    left: 500,
-                    selectable:false,
-                });
-            this.canvas.add(oImg);
-        });
-    }
-    mouseUpEvent():void{
-        this.canvas.on('mouse:up', (e)=> this.panning = false);
-    }
-    mouseDownEvent():void{
-        this.canvas.on('mouse:down',(e)=> this.panning = true);
-    }
-    mouseMoveEvent():void{
-    this.canvas.on('mouse:move', (e)=> {if (this.panning && e && e.e) {
-        let delta = new fabric.Point(e.e.movementX, e.e.movementY);
-        this.canvas.relativePan(delta);
-        }
-        });
+    setupFloor():void{
+        this.canvas.setBackgroundColor({source: this.utilService.IMG_PATH + this.utilService.FLOOR_PATTERN_FILE, repeat:'repeat'}, ()=>{});
     }
     setZoom(value:number):void{
         this.canvas.setZoom(value);
@@ -74,11 +81,24 @@ export class CanvasService{
         this.showPublish(false);
         this.renderWelcomePage();
     }
-
+    renderWelcomePage(){
+        this.clearCanvas();
+        fabric.Image.fromURL(this.utilService.IMG_PATH + this.utilService.WELCOME_SCREEN,
+            (oImg)=> {
+                oImg.set({
+                    left: 500,
+                    selectable:false,
+                });
+                this.canvas.add(oImg);
+            });
+    }
+    clearCanvas():void{
+        this.canvas.clear();
+    }
     renderLayout(layout:Layout):void{
         this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
-
+        //this.setupFloor();
         for(let table of layout.getTables()) {
             this.drawTable(table);
         }
@@ -86,10 +106,6 @@ export class CanvasService{
             this.drawChair(chair);
         }
         //this.canvas.renderAll();
-    }
-
-    clearCanvas():void{
-        this.canvas.clear();
     }
 
     drawTable(table:Table):void{
@@ -109,20 +125,14 @@ export class CanvasService{
         hoverCursor: 'move'
         }));
     });
-    //this.canvas.renderAll();
     }
 
     drawChair(chair: Chair):void{
         let seat = this.getChairSeat(chair);
-
         let leftArm = this.getLeftArm(chair);
-
         let rightArm = this.getRightArm(chair);
-
         let upperArm = this.getUpperArm(chair);
-
         let group = this.getChairGroup(chair, leftArm, rightArm, upperArm, seat);
-
         this.canvas.add(group);
     }
 

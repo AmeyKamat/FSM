@@ -18,6 +18,7 @@ import {ChairService} from "./chair/chair.service";
 import {TableService} from "./table/table.service";
 import {LayoutService} from "./layout/layout.service";
 import {DataService} from "./util/data.service";
+import {TooltipComponent} from "./tooltip/tooltip.component";
 
 @NgModule({
     imports: [ BrowserModule,
@@ -31,7 +32,8 @@ import {DataService} from "./util/data.service";
         AppComponent,
         UploadComponent,
         ExplorerComponent,
-        CanvasComponent
+        CanvasComponent,
+        TooltipComponent
     ],
     providers:[UploadService,
         ExplorerService,

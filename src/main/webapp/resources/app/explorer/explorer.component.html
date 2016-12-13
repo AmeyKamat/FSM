@@ -17,15 +17,12 @@
                             <input type="checkbox" id="location-checkbox" class="example-five-checkbox"(click)="toggleLocation(location)"/>
                             <label id="location-icon" for="location-checkbox" class="example-five">+</label>
                             {{location.name}}
-
                             <ul class="explorer-list">
-
                                 <li *ngFor="let level of location.levels"
                                     [class.selected]="level === selectedLevel"
                                     (click)="onSelect(level.id)">
-
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {{level.floorCode}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Level {{level.floorCode}}
 
                                 </li>
                             </ul>

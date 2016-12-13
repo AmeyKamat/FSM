@@ -14,7 +14,7 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
-    myForm: FormGroup;
+    form: FormGroup;
     file:File;
     submitAttempt:boolean =false ;
     uploadFileName:string = "No File Selected";
@@ -24,7 +24,7 @@ export class UploadComponent implements OnInit{
     levels:Level[] ;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
-        this.myForm = fb.group({
+        this.form = fb.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],

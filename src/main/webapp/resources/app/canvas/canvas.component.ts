@@ -11,7 +11,7 @@ import {CanvasService} from "./canvas.service";
 export class CanvasComponent implements OnInit{
     showPublish:boolean=false;
     showLoader:boolean=false;
-    zoomValue:number=1.0;
+    zoomValue:number=0.5;
 
     ngOnInit(): void {
         this.canvasService.initCanvas();
@@ -32,7 +32,7 @@ export class CanvasComponent implements OnInit{
         this.canvasService.setZoom(this.zoomValue);
     }
     zoomReset():void {
-        this.canvasService.setZoom(1.0);
+        this.canvasService.setZoom(0.5);
     }
 
     zoom(e):void {
