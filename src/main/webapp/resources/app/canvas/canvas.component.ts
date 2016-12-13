@@ -9,8 +9,9 @@ import {CanvasService} from "./canvas.service";
 
 @Injectable()
 export class CanvasComponent implements OnInit{
-    showPublish:boolean;
-    subscription:any;
+    showPublish:boolean=false;
+    showLoader:boolean=false;
+    zoomValue:number=1.0;
 
     ngOnInit(): void {
         this.canvasService.initCanvas();
@@ -18,23 +19,33 @@ export class CanvasComponent implements OnInit{
     }
 
     constructor( private canvasService:CanvasService) {
-        this.showPublish = canvasService.showPublish;
-        this.subscription = this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;
-        });
+        this.canvasService.showPublishEmitter.subscribe((value)=>{this.showPublish=value;});
+        this.canvasService.showLoaderEmitter.subscribe((value)=>{this.showLoader=value;});
     }
 
     zoomIn():void {
-        this.canvasService.zoomIn();
+        this.zoomValue = this.zoomValue * 1.1;
+        this.canvasService.setZoom(this.zoomValue);
     }
     zoomOut():void {
-        this.canvasService.zoomOut()
+        this.zoomValue = this.zoomValue / 1.1
+        this.canvasService.setZoom(this.zoomValue);
     }
     zoomReset():void {
-        this.canvasService.zoomReset();
+        this.canvasService.setZoom(1.0);
     }
 
-    zoom(e):boolean {
-    return this.canvasService.zoom(e);
+    zoom(e):void {
+        let evt = window.event || e;
+        let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
+        this.zoomValue = this.zoomValue + delta/4000;
+        let x = e.offsetX;
+        let y = e.offsetY;
+        this.canvasService.zoomToPoint(x, y, this.zoomValue);
+    }
+
+    changeZoomLevel(value:number):void{
+        this.canvasService.setZoom(value);
     }
 
     publishDecision(decision:boolean):void {

@@ -55,7 +55,6 @@ public class TableGenerator {
 
 			node.getDesk().setTableCol(node.getDesk().getX() - initialNode.getDesk().getX() + 1);
 			node.getDesk().setTableRow(node.getDesk().getY() - initialNode.getDesk().getY() + 1);
-			System.out.println(node.getDesk().getDeskCode());
 			table.addDesk(node.getDesk());
 			desksInTable.add(node.getDesk());
 			queue.addAll(this.getNeighbours(node));
