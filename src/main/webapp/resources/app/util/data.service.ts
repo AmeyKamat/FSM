@@ -73,27 +73,6 @@ export class DataService {
                 console.log("came here");
                 return response.json();
             });
-
-        /*return this.getAuthTokenHeaders()
-            .map((customHeaders) => {
-                /!*console.log("printing finally")
-                console.log(customHeaders);*!/
-                console.log("entered here");
-
-                this.http
-                    .get("/csrfToken")
-                    .map((response: Response) => {
-                        console.log("Hola");
-                        return response.json();
-                    });
-
-                /!*return this.http
-                    .post("/layoutFile/upload", formData, {headers: new Headers()})
-                    .map((response: Response) => {
-                        console.log("came here");
-                        return response.json();
-                    });*!/
-            });*/
     }
 
     saveUploadData(decision:boolean):void {

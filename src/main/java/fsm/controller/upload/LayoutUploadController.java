@@ -38,8 +38,6 @@ public class LayoutUploadController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public String uploadLayoutFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam("floorId") int floorId) {
 
-        System.out.println("********************************* Yup ***************************************");
-
         File file = null;
         if (!multipartFile.isEmpty()) {
             file = FileUploadHelper.storeFile(multipartFile, multipartFile.getOriginalFilename(), fileDirectory);
