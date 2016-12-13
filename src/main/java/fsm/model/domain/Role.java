@@ -1,6 +1,7 @@
 package fsm.model.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,11 +24,11 @@ public class Role {
 	
 	@NotNull
 	@Column(name = "role")
-	private String role;
+	private String roleName;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "role")
-	private List<UserRole> userRoles;
+	private Set<UserRole> userRoles;
 	
 	public Role() {
 		super();
@@ -41,19 +42,19 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public List<UserRole> getUserRoles() {
+	public Set<UserRole> getUserRoles() {
 		return userRoles;
 	}
 
-	public void setUserRoles(List<UserRole> userRoles) {
+	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
 

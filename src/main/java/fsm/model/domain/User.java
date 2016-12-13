@@ -1,6 +1,7 @@
 package fsm.model.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,24 +40,24 @@ public class User {
 	private String password;
 	
 	@NotNull
-	@Column(name = "enabled")
+	@Column(name = "enabled", columnDefinition = "BIT")
 	private boolean enabled;
 	
 	@NotNull
-	@Column(name = "accountNonExpired")
+	@Column(name = "accountNonExpired", columnDefinition = "BIT")
 	private boolean accountNonExpired;
 	
 	@NotNull
-	@Column(name = "accountNonLocked")
+	@Column(name = "accountNonLocked", columnDefinition = "BIT")
 	private boolean accountNonLocked;
 	
 	@NotNull
-	@Column(name = "credentialsNonExpired")
+	@Column(name = "credentialsNonExpired", columnDefinition = "BIT")
 	private boolean credentialsNonExpired;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
-	private List<UserRole> userRoles;
+	private Set<UserRole> userRoles;
 
 	/*@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToOne(mappedBy = "user")
@@ -130,11 +131,11 @@ public class User {
 		this.credentialsNonExpired = credentialsNonExpired;
 	}
 
-	public List<UserRole> getUserRoles() {
+	public Set<UserRole> getUserRoles() {
 		return userRoles;
 	}
 
-	public void setUserRoles(List<UserRole> userRoles) {
+	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
 

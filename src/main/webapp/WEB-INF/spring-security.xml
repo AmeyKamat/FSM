@@ -7,9 +7,12 @@
 
 	<http pattern="/resources/**" security="none"/>
 
-	<http auto-config="true">
+	<http auto-config="true"  use-expressions="true" >
 		<intercept-url pattern="/login*" access="hasRole('ROLE_ANONYMOUS')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+
+		<!-- access denied page -->
+		<access-denied-handler error-page="/403" />
 
 		<form-login
 			login-processing-url="/j_spring_security_check"
@@ -26,11 +29,7 @@
 	</http>
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="rohit" password="123456" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider user-service-ref="customUserDetailsService" />
 	</authentication-manager>
 
 </beans:beans>

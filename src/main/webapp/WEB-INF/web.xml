@@ -31,7 +31,8 @@
 		<param-value>
 			WEB-INF/applicationContext.xml,
 			/WEB-INF/spring-security.xml,
-			/WEB-INF/spring-web-multipart-context.xml
+			/WEB-INF/spring-web-multipart-context.xml,
+			/WEB-INF/spring-database.xml
 		</param-value>
 	</context-param>
 	

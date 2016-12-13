@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fsm.dao.UserDao;
+import fsm.model.domain.UserRole;
+import fsm.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,38 +15,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class MyUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserDao userDao;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
 
-        com.mkyong.users.model.User user = userDao.findByUserName(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
-
+        fsm.model.domain.User user = userService.getUserByUsername(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
         return buildUserForAuthentication(user, authorities);
-
-
-    }
-
-    // Converts com.mkyong.users.model.User user to
-    // org.springframework.security.core.userdetails.User
-    private User buildUserForAuthentication(com.mkyong.users.model.User user,
-                                            List<GrantedAuthority> authorities) {
-        return new User(user.getUsername(),
-                user.getPassword(), user.isEnabled(),
-                true, true, true, authorities);
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
-
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         // Build user's authorities
         for (UserRole userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+            setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName()));
         }
 
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
@@ -51,12 +41,20 @@ public class MyUserDetailsService implements UserDetailsService {
         return Result;
     }
 
-    public UserDao getUserDao() {
-        return userDao;
+    // Converts fsm.domain.User user to
+    // org.springframework.security.core.userdetails.User
+    private User buildUserForAuthentication(fsm.model.domain.User user,
+                                            List<GrantedAuthority> authorities) {
+        return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
+                user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), authorities);
     }
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 }
