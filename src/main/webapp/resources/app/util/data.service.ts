@@ -50,8 +50,10 @@ export class DataService {
     }
     saveUploadData(decision:boolean):void {
         let params = new URLSearchParams();
-        params.set('decision', decision.toString());
+        params.append('toBePublished', decision.toString());
         this.http
-            .get(`/controller/layoutFile/publish`,{search : params});
+            .post("/controller/layoutFile/publish", params, {
+                headers : new Headers()
+            });
     }
 }
