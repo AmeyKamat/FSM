@@ -25,6 +25,9 @@ public class CsrfRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getCsrfToken(HttpServletRequest request) throws JsonProcessingException {
+
+        System.out.println("********************************* Taken ***************************************");
+
         CsrfToken csrfToken = (CsrfToken) request.getAttribute("_csrf");
         String[] propsToBeIgnored = {};
         return JsonFilter.filter(csrfToken, propsToBeIgnored);

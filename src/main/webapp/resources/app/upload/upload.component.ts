@@ -69,6 +69,10 @@ export class UploadComponent implements OnInit{
             this.levels = levels;
         });
     }
+    /*getAuthToken():void{
+        this.uploadService.getAuthToken()
+            .subscribe()
+    }*/
     uploadFileListener($event): void {
         let file = $event.target.files[0];
         this.uploadFileName = file.name;
@@ -79,6 +83,7 @@ export class UploadComponent implements OnInit{
         this.submitAttempt=true ;
         this.uploadService.acceptFormData(formGroup) ;
     }
+
     /* Need bug fixing after which it will replace above code
     uploadFileListener($event): void {
         this.file = $event.target.files[0];

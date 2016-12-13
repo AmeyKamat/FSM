@@ -10,8 +10,15 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-    constructor(private http: Http,
-                private utilService:UtilService){}
+    private customHeaders = new Headers();
+
+    constructor(private http: Http, private utilService:UtilService){
+        this.getAuthTokenHeaders()
+            .subscribe((customHeaders) => {
+                console.log(customHeaders);
+                this.customHeaders = customHeaders;
+            });
+    }
 
     getCountries():Observable<Country[]> {
         return this.http
@@ -35,19 +42,60 @@ export class DataService {
             .get(`/locations/${locationId}/floors`)
             .map((response: Response) => <Level[]> response.json());
     }
+
     getLayoutData(floorId:number): Observable<any> {
         return this.http
             .get(`/floors/${floorId}`)
             .map((response: Response) => response.json());
     }
 
+    getAuthToken():Observable<any> {
+        return this.http
+            .get("/csrfToken")
+            .map((response: Response) =>response.json());
+    }
+
+    getAuthTokenHeaders(): Observable<any> {
+        return this.getAuthToken()
+            .map((csrfToken) => {
+                let headerName = csrfToken.headerName;
+                let token = csrfToken.token;
+                let customHeaders = new Headers();
+                customHeaders.append(headerName, token);
+                return customHeaders;
+            });
+    }
+
     postUploadData(formData:FormData):Observable<any> {
         return this.http
-            .post("/layoutFile/upload", formData, {
-                headers : new Headers()
-            })
-            .map((response: Response) => response.json());
+            .post("/layoutFile/upload", formData, {headers: this.customHeaders})
+            .map((response: Response) => {
+                console.log("came here");
+                return response.json();
+            });
+
+        /*return this.getAuthTokenHeaders()
+            .map((customHeaders) => {
+                /!*console.log("printing finally")
+                console.log(customHeaders);*!/
+                console.log("entered here");
+
+                this.http
+                    .get("/csrfToken")
+                    .map((response: Response) => {
+                        console.log("Hola");
+                        return response.json();
+                    });
+
+                /!*return this.http
+                    .post("/layoutFile/upload", formData, {headers: new Headers()})
+                    .map((response: Response) => {
+                        console.log("came here");
+                        return response.json();
+                    });*!/
+            });*/
     }
+
     saveUploadData(decision:boolean):void {
         let params = new URLSearchParams();
         params.set('decision', decision.toString());
