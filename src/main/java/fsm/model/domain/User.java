@@ -38,7 +38,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	/*@NotNull
+	@NotNull
 	@Column(name = "enabled")
 	private boolean enabled;
 	
@@ -52,13 +52,14 @@ public class User {
 	
 	@NotNull
 	@Column(name = "credentialsNonExpired")
-	private boolean credentialsNonExpired;*/
+	private boolean credentialsNonExpired;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
 	private List<UserRole> userRoles;
-	 
-	/*@OneToOne(mappedBy = "user")
+
+	/*@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToOne(mappedBy = "user")
 	private UserAttempt userAttempt;*/
 
 	public User() {
@@ -97,7 +98,7 @@ public class User {
 		this.password = password;
 	}
 
-	/*public boolean isEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 
@@ -127,7 +128,7 @@ public class User {
 
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
-	}*/
+	}
 
 	public List<UserRole> getUserRoles() {
 		return userRoles;
