@@ -39,6 +39,15 @@ html, body { width:100%; height:100%; margin:0px;}
   margin-left: 5px;
 }
 
+#sliderzoom{
+  width: 20px;
+  height: 100px;
+  border: solid rgba(0,0,0,0.3) 1px;
+  margin-top: 6px;
+  margin-left: 12px;
+  margin-bottom: 6px;
+  -webkit-appearance: slider-vertical;
+}
 .btn-circle-sm {
   width: 35px;
   height: 35px;
@@ -46,18 +55,19 @@ html, body { width:100%; height:100%; margin:0px;}
   font-size: 16px;
   line-height: 1.33;
   border-radius: 25px;
-  background-color: black;
+  background-color: #00395d;
   color: white;
 }
 
 .btn-circle {
   width: 50px;
   height: 50px;
-  padding: 15px 15px;
+  padding: 10px 10px;
   font-size: 25px;
   line-height: 1.33;
   border-radius: 50%;
-  background-color: black;
+  background-color: #00395d;
+
   color: white;
 }
 
@@ -122,7 +132,7 @@ html, body { width:100%; height:100%; margin:0px;}
 }
 
 .example-five-checkbox {
-  display:none;
+  display: none;
 }
 
 .example-five-checkbox:checked + .example-five:after {
@@ -132,4 +142,35 @@ html, body { width:100%; height:100%; margin:0px;}
   left: 0;
   right: 0;
   bottom: 0;
+  background: white;
 }
+.navbar{
+  background-color:#00395d;
+  color:#00395d ;
+
+  /*#00395d*/
+          /*#0074a6*/
+}
+.modal-content{
+  color:#00395d;
+ border-color: #00395d;
+}
+.modal-body{
+  color:#00395d;
+}
+.btn{
+background-color: #00395d;
+  color: white;
+
+}
+.navbar-default .navbar-nav>li>a {
+  color:white ;
+}
+.navbar-default :hover.navbar-nav>li>a:hover {
+  color:lightskyblue ;
+}
+
+.navbar-default .navbar-brand{
+  color:white ;
+}
+

@@ -77,8 +77,10 @@ export class DataService {
 
     saveUploadData(decision:boolean):void {
         let params = new URLSearchParams();
-        params.set('decision', decision.toString());
+        params.append('toBePublished', decision.toString());
         this.http
-            .get(`/layoutFile/publish`,{search : params});
+            .post("/layoutFile/publish", params, {
+                headers : new Headers()
+            });
     }
 }

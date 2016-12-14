@@ -36,37 +36,15 @@ export class UploadService{
     getLevels(locationId:number):Observable<Level[]> {
         return this.dataService.getLevels(locationId) ;
     }
-    /*getAuthToken():Observable<any> {
-        return this.dataService.getAuthToken();
-    }*/
-    setUploadFile(file:File){
-        this.file=file;
-    }
 
-    acceptFormData(formGroup:FormGroup):void {
-        this.formData = new FormData();
-        this.formData.append("name", "layout");
-        this.formData.append("country",formGroup.get('country').value) ;
-        this.formData.append("city",formGroup.get('city').value) ;
-        this.formData.append("location",formGroup.get('location').value) ;
-        this.formData.append("floorId",formGroup.get('floorId').value) ;
-        this.formData.append("file",this.file);
-        this.dataService.postUploadData(this.formData).
-        subscribe((layoutData)=> {
-            let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublishToggle();
-            this.canvasService.renderLayout(layout);
-        });
-    }
-
-    /*/* Need bug fixing after which it will replace above code
     acceptFormData(formData:FormData):void {
-        console.log(formData);
+        this.canvasService.showLoader(true);
         this.dataService.postUploadData(formData).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublish = true;
+            this.canvasService.showPublish(true);
+            this.canvasService.showLoader(false);
             this.canvasService.renderLayout(layout);
         });
-    }*/
+    }
 }

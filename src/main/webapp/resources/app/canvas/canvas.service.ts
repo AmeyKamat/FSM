@@ -12,8 +12,8 @@ declare var fabric:any;
 export class CanvasService{
     private canvas: any;
 
-    showPublish: boolean = false;
     showPublishEmitter: Subject<boolean> = new Subject<boolean>();
+    showLoaderEmitter: Subject<boolean> = new Subject<boolean>();
 
     panning:boolean = false;
 
@@ -31,9 +31,11 @@ export class CanvasService{
         //this.setupFloor();
     }
 
-    showPublishToggle():void{
-        this.showPublish = !this.showPublish;
-        this.showPublishEmitter.next(this.showPublish);
+    showPublish(value:boolean):void{
+        this.showPublishEmitter.next(value);
+    }
+    showLoader(value:boolean):void{
+        this.showLoaderEmitter.next(value);
     }
 
     renderWelcomePage(){
@@ -60,50 +62,23 @@ export class CanvasService{
         }
         });
     }
-    zoomIn():void{
-        this.canvas.setZoom(this.canvas.getZoom()*1.1) ;
+    setZoom(value:number):void{
+        this.canvas.setZoom(value);
     }
-    zoomOut():void{
-        this.canvas.setZoom(this.canvas.getZoom()/1.1) ;
+    zoomToPoint(x:number, y:number, value):void{
+        this.canvas.zoomToPoint({x: x, y: y}, value);
     }
-    zoomReset():void{
-        this.canvas.setZoom(1);
-    }
-    zoom(e):boolean{
-        console.log("mouse scroll event from canvas service");
-        let evt = window.event || e;
-        let delta = (evt.detail)?(evt.detail*(-120)):(evt.wheelDelta);
-        let curZoom = this.canvas.getZoom();
-        let newZoom = curZoom + delta/4000;
-        var x = e.offsetX, y = e.offsetY;
-        this.canvas.zoomToPoint({x: x, y: y}, newZoom);
-        if(e != null){
-            e.preventDefault();
-        }
-        return false;
-    }
+
     publishDecision(decision:boolean):void{
-        this.showPublishToggle();
-        this.renderWelcomePage();
         this.dataService.saveUploadData(decision);
+        this.showPublish(false);
+        this.renderWelcomePage();
     }
-    /* Used to add slider functionality
-    changeZoomLevel():void{
-     this.canvas.setZoom(1);
-     var value=(50-this.value)/100;
-     if (value < 0)
-     {
-     canvas.setZoom(canvas.getZoom() * (1 - value ));
-     }
-     else {
-     canvas.setZoom(canvas.getZoom() / (1 + value));
-     }
-     }*/
 
     renderLayout(layout:Layout):void{
         this.clearCanvas();
         this.utilService.calculateGridSize(layout.getFloor());
-        console.log(layout);
+
         for(let table of layout.getTables()) {
             this.drawTable(table);
         }
