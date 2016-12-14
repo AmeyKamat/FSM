@@ -8,7 +8,6 @@ import {Country} from "../region/country/country";
 import {City} from "../region/city/city";
 import {Level} from "../region/level/level";
 import {Location} from "../region/location/location";
-
 @Injectable()
 export class ExplorerService {
     constructor(private dataService:DataService,

@@ -14,6 +14,7 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
+
     form: FormGroup;
     file:File;
     submitAttempt:boolean =false ;
@@ -24,7 +25,7 @@ export class UploadComponent implements OnInit{
     levels:Level[] ;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
-        this.form = fb.group({
+        this.form= fb.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],
@@ -42,6 +43,7 @@ export class UploadComponent implements OnInit{
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 this.countries[i].cities = null;
+
             }
         });
     }

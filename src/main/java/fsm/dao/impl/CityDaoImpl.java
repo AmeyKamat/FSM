@@ -1,5 +1,9 @@
 package fsm.dao.impl;
 
+
+import fsm.dao.CityDao;
+import fsm.model.domain.City;
+import fsm.model.domain.Country;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -9,9 +13,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import fsm.dao.CityDao;
 import fsm.model.domain.City;
 import fsm.model.domain.Country;
+
 
 @Repository
 public class CityDaoImpl implements CityDao {
