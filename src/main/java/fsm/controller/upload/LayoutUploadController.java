@@ -56,7 +56,7 @@ public class LayoutUploadController {
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
-            floorService.updateFloor(floor);
+            floorService.updateFloor((Floor) floor);
         }
 
         unpublishedLayout.setFloor(null);

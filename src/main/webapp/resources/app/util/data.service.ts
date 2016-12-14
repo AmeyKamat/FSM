@@ -80,7 +80,10 @@ export class DataService {
         params.append('toBePublished', decision.toString());
         this.http
             .post("/layoutFile/publish", params, {
-                headers : new Headers()
+                headers : this.customHeaders
+            })
+            .subscribe(()=>{
+                console.log("publish triggered");
             });
     }
 }
