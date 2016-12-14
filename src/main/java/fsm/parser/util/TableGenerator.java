@@ -52,9 +52,9 @@ public class TableGenerator {
 
 		while (!queue.isEmpty()) {
 			Node node = queue.remove();
-			node.getDesk().setTableRow(node.getDesk().getX() - initialNode.getDesk().getX() + 1);
-			node.getDesk().setTableCol(node.getDesk().getY() - initialNode.getDesk().getY() + 1);
-			System.out.println(node.getDesk().getDeskCode());
+
+			node.getDesk().setTableCol(node.getDesk().getX() - initialNode.getDesk().getX() + 1);
+			node.getDesk().setTableRow(node.getDesk().getY() - initialNode.getDesk().getY() + 1);
 			table.addDesk(node.getDesk());
 			desksInTable.add(node.getDesk());
 			queue.addAll(this.getNeighbours(node));
@@ -114,8 +114,8 @@ public class TableGenerator {
 				maxRow = d.getTableRow();
 		}
 
-		table.setLength(maxCol + 1);
-		table.setWidth(maxRow + 1);
+		table.setLength(maxCol);
+		table.setWidth(maxRow);
 		table.setTopLeftX(initialDesk.getX());
 		table.setTopLeftY(initialDesk.getY());
 		floor.addTable(table);

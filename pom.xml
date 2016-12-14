@@ -127,12 +127,11 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.3</version>
 				<configuration>
+
+
 					<workingDirectory>${basedir}/src/main/webapp/resources/</workingDirectory>
 					<installDirectory>${basedir}/src/main/webapp/resources/</installDirectory>
-					<!--Watch for changes from files in this directory-->
-					<srcdir>${basedir}/src/main/webapp/resources/app/</srcdir>
-					<!--Refresh the files in this directory if the files change-->
-					<outputdir>${basedir}/target/FSM/resources/app/</outputdir>
+
 				</configuration>
 				<executions>
 					<!--<execution>
@@ -154,8 +153,8 @@
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
-					</execution>-->
-					<execution>
+					</execution>
+					--><execution>
 						<id>compile ts</id>
 						<goals>
 							<goal>npm</goal>

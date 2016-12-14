@@ -1,10 +1,10 @@
 package fsm.dao;
 
-import java.util.List;
 
 import fsm.model.domain.City;
 import fsm.model.domain.Country;
 
+import java.util.List;
 public interface CityDao {
 
 	public Integer addCity(City city);

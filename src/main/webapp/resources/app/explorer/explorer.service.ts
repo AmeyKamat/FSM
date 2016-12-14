@@ -8,7 +8,6 @@ import {Country} from "../region/country/country";
 import {City} from "../region/city/city";
 import {Level} from "../region/level/level";
 import {Location} from "../region/location/location";
-
 @Injectable()
 export class ExplorerService {
     constructor(private dataService:DataService,
@@ -33,10 +32,12 @@ export class ExplorerService {
     }
 
     drawLayout(floorId):void {
+        this.canvasService.showLoader(true);
+        this.canvasService.showPublish(false);
         this.dataService.getLayoutData(floorId).
         subscribe((layoutData)=> {
             let layout:Layout = this.layoutService.getLayout(layoutData);
-            this.canvasService.showPublish = false;
+            this.canvasService.showLoader(false);
             this.canvasService.renderLayout(layout);
         });
     }

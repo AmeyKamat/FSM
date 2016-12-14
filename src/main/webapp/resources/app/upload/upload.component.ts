@@ -14,7 +14,8 @@ import {Level} from "../region/level/level";
 
 @Injectable()
 export class UploadComponent implements OnInit{
-    myForm: FormGroup;
+
+    form: FormGroup;
     file:File;
     submitAttempt:boolean =false ;
     uploadFileName:string = "No File Selected";
@@ -24,7 +25,7 @@ export class UploadComponent implements OnInit{
     levels:Level[] ;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
-        this.myForm = fb.group({
+        this.form= fb.group({
             'country':['',Validators.required],
             'city':['',Validators.required],
             'location':['',Validators.required],
@@ -42,6 +43,7 @@ export class UploadComponent implements OnInit{
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 this.countries[i].cities = null;
+
             }
         });
     }
@@ -69,17 +71,12 @@ export class UploadComponent implements OnInit{
             this.levels = levels;
         });
     }
-    uploadFileListener($event): void {
-        let file = $event.target.files[0];
-        this.uploadFileName = file.name;
-        this.uploadService.setUploadFile(file);
-    }
 
     onSubmit(formGroup: FormGroup): void {
-        this.submitAttempt=true ;
         this.uploadService.acceptFormData(formGroup) ;
     }
     /* Need bug fixing after which it will replace above code
+
     uploadFileListener($event): void {
         this.file = $event.target.files[0];
         this.uploadFileName = this.file.name;
@@ -87,13 +84,8 @@ export class UploadComponent implements OnInit{
 
     onSubmit(formGroup: FormGroup): void {
         let formData = new FormData();
-        formData.append("name", "layout");
-        formData.append("country",formGroup.get('country').value) ;
-        formData.append("city",formGroup.get('city').value) ;
-        formData.append("location",formGroup.get('location').value) ;
-        formData.append("floor",formGroup.get('floor').value) ;
+        formData.append("floorId",formGroup.get('floorId').value) ;
         formData.append("file",this.file);
-
         this.uploadService.acceptFormData(formData) ;
-    }*/
+    }
 }
