@@ -1,30 +1,31 @@
-<!--<div class="explorer">-->
-    <ul>
+<div class="explorer">
+    <ul class="explorer-list">
         <li *ngFor="let country of countries">
             <input type="checkbox" id="country-checkbox" class="example-five-checkbox" (click)="toggleCountry(country)"/>
             <label id="country-icon" for="country-checkbox" class="example-five">+</label>
             {{country.name}}
-            <ul>
+            <ul class="explorer-list">
                 <li *ngFor="let city of country.cities">
-                    --
+                    &nbsp;&nbsp;
                     <input type="checkbox" id="city-checkbox" class="example-five-checkbox" (click)="toggleCity(city)"/>
                     <label id="city-icon" for="city-checkbox" class="example-five">+</label>
                     {{city.name}}
 
-                    <ul>
+                    <ul class="explorer-list">
                         <li *ngFor="let location of city.locations">
-                            ----
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="checkbox" id="location-checkbox" class="example-five-checkbox"(click)="toggleLocation(location)"/>
                             <label id="location-icon" for="location-checkbox" class="example-five">+</label>
                             {{location.name}}
 
-                            <ul>
+                            <ul class="explorer-list">
 
                                 <li *ngFor="let level of location.levels"
                                     [class.selected]="level === selectedLevel"
                                     (click)="onSelect(level.id)">
 
-                                    ------{{level.floorCode}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {{level.floorCode}}
 
                                 </li>
                             </ul>
@@ -37,7 +38,7 @@
             <!--</div>-->
         </li>
     </ul>
-<!--</div>-->
+</div>
 <!--<span class="iconButton" (click)="dir.toggle()">{{dir.getIcon()}}</span>-->
 <!--&lt;!&ndash;<input type="checkbox" [checked]="dir.checked" (click)="dir.check()" /> &ndash;&gt;-->
 <!--{{ dir.floorCode }}-->

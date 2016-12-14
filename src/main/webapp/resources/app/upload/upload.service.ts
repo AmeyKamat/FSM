@@ -36,7 +36,9 @@ export class UploadService{
     getLevels(locationId:number):Observable<Level[]> {
         return this.dataService.getLevels(locationId) ;
     }
-
+    /*getAuthToken():Observable<any> {
+        return this.dataService.getAuthToken();
+    }*/
     setUploadFile(file:File){
         this.file=file;
     }
@@ -56,6 +58,7 @@ export class UploadService{
             this.canvasService.renderLayout(layout);
         });
     }
+
     /*/* Need bug fixing after which it will replace above code
     acceptFormData(formData:FormData):void {
         console.log(formData);

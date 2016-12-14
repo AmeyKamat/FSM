@@ -34,7 +34,7 @@ hs_err_pid*
 /bin/
 
 # Restricting Accesss to app.properties File in Repository
-/config/app.properties
+config/app.properties
 
 # Temporarily Bolcking pom.xml
-/pom.xml
+pom.xml

@@ -12,18 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class FloorPlanController {
+public class RootController {
 
-	@RequestMapping(value = {"/", "/floorPlan**"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String adminPage(HttpServletRequest request, Model model) {
-		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
-			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String name = user.getUsername();
-			
-			model.addAttribute("username", name);
-		}
-		
-		model.addAttribute("message", "Admin Page (Through Model)");
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getUsername();
+
+		model.addAttribute("username", name);
 		
 		return "index";
 	}

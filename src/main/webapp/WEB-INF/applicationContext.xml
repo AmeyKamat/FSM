@@ -61,7 +61,7 @@
         <value>fsm.model.domain.Table</value>
         <value>fsm.model.domain.User</value>
         <value>fsm.model.domain.UserRole</value>
-        <value>fsm.model.domain.UserAttempt</value>
+        <!--<value>fsm.model.domain.UserAttempt</value>-->
       </list>
     </property>
 
