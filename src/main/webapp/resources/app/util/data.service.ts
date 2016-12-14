@@ -15,7 +15,6 @@ export class DataService {
     constructor(private http: Http, private utilService:UtilService){
         this.getAuthTokenHeaders()
             .subscribe((customHeaders) => {
-                console.log(customHeaders);
                 this.customHeaders = customHeaders;
             });
     }
@@ -70,7 +69,6 @@ export class DataService {
         return this.http
             .post("/layoutFile/upload", formData, {headers: this.customHeaders})
             .map((response: Response) => {
-                console.log("came here");
                 return response.json();
             });
     }
