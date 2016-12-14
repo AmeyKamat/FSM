@@ -10,50 +10,80 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-    constructor(private http: Http,
-                private utilService:UtilService){}
+    private customHeaders = new Headers();
+
+    constructor(private http: Http, private utilService:UtilService){
+        this.getAuthTokenHeaders()
+            .subscribe((customHeaders) => {
+                console.log(customHeaders);
+                this.customHeaders = customHeaders;
+            });
+    }
 
     getCountries():Observable<Country[]> {
         return this.http
-            .get(`/controller/countries`)
+            .get(`/countries`)
             .map((response: Response) => <Country[]> response.json());
     }
 
     getCities(countryId: number):Observable<City[]> {
         return this.http
-            .get(`/controller/countries/${countryId}/cities`)
+            .get(`/countries/${countryId}/cities`)
             .map((response: Response) => <City[]> response.json());
     }
 
     getLocations(cityId:number):Observable<Location[]> {
         return this.http
-            .get(`/controller/cities/${cityId}/locations`)
+            .get(`/cities/${cityId}/locations`)
             .map((response: Response) => <Location[]> response.json());
     }
     getLevels(locationId:number):Observable<Level[]> {
         return this.http
-            .get(`/controller/locations/${locationId}/floors`)
+            .get(`/locations/${locationId}/floors`)
             .map((response: Response) => <Level[]> response.json());
     }
+
     getLayoutData(floorId:number): Observable<any> {
         return this.http
-            .get(`/controller/floors/${floorId}`)
+            .get(`/floors/${floorId}`)
             .map((response: Response) => response.json());
+    }
+
+    getAuthToken():Observable<any> {
+        return this.http
+            .get("/csrfToken")
+            .map((response: Response) =>response.json());
+    }
+
+    getAuthTokenHeaders(): Observable<any> {
+        return this.getAuthToken()
+            .map((csrfToken) => {
+                let headerName = csrfToken.headerName;
+                let token = csrfToken.token;
+                let customHeaders = new Headers();
+                customHeaders.append(headerName, token);
+                return customHeaders;
+            });
     }
 
     postUploadData(formData:FormData):Observable<any> {
         return this.http
-            .post("/controller/layoutFile/upload", formData, {
-                headers : new Headers()
-            })
-            .map((response: Response) => response.json());
+            .post("/layoutFile/upload", formData, {headers: this.customHeaders})
+            .map((response: Response) => {
+                console.log("came here");
+                return response.json();
+            });
     }
+
     saveUploadData(decision:boolean):void {
         let params = new URLSearchParams();
         params.append('toBePublished', decision.toString());
         this.http
-            .post("/controller/layoutFile/publish", params, {
-                headers : new Headers()
+            .post("/layoutFile/publish", params, {
+                headers : this.customHeaders
+            })
+            .subscribe(()=>{
+                console.log("publish triggered");
             });
     }
 }

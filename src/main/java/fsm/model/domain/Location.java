@@ -17,7 +17,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
-@javax.persistence.Table(name="LOCATION")
+@javax.persistence.Table(name="fsm_location")
 @JsonFilter("filter")
 public class Location {
 

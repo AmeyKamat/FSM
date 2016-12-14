@@ -72,11 +72,6 @@ export class UploadComponent implements OnInit{
         });
     }
 
-    onSubmit(formGroup: FormGroup): void {
-        this.uploadService.acceptFormData(formGroup) ;
-    }
-    /* Need bug fixing after which it will replace above code
-
     uploadFileListener($event): void {
         this.file = $event.target.files[0];
         this.uploadFileName = this.file.name;

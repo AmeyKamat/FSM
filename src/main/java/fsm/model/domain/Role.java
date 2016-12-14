@@ -1,6 +1,7 @@
 package fsm.model.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
-@javax.persistence.Table(name="ROLE")
+@javax.persistence.Table(name="fsm_role")
 public class Role {
 
 	@Id
@@ -20,12 +23,13 @@ public class Role {
 	private int id;
 	
 	@NotNull
-	@Column(name = "name")
-	private String name;
-	
-	@OneToMany(mappedBy = "role")
-	private List<User> users;
+	@Column(name = "role")
+	private String roleName;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "role")
+	private Set<UserRole> userRoles;
+	
 	public Role() {
 		super();
 	}
@@ -38,20 +42,20 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
 
 }

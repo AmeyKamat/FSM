@@ -2,6 +2,7 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.parser.entities.ParsedFloor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -9,10 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
-@javax.persistence.Table(name="GROUP_S")
+@javax.persistence.Table(name="fsm_group")
 public class Group {
 
 	@Id
@@ -20,6 +21,7 @@ public class Group {
 	@Column(name = "id")
 	private int id;
 	
+	@NotNull
 	@Column(name = "name")
 	private String name;
 	

@@ -1,11 +1,11 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
-      <base href="/">
+      <base href="/" />
     <title>Angular QuickStart</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/resources/node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/resources/styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/resources/node_modules/bootstrap/dist/css/bootstrap.min.css" th:href="@{/resources/node_modules/bootstrap/dist/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/resources/styles.css" th:href="@{/resources/styles.css}" />
 
     <!-- 1. Load libraries -->
      <!-- Polyfill(s) for older browsers -->
@@ -18,6 +18,12 @@
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
+    <!-- Submit logout form on clicking logout link -->
+    <script>
+      function formSubmit() {
+        document.getElementById("logoutForm").submit();
+      }
+    </script>
 
     <!--Custom JS Files-->
     <script type="text/javascript" src="/resources/node_modules\jquery\dist\jquery.min.js"></script>
@@ -27,6 +33,10 @@
   <!-- 3. Display the application -->
     
   <body>
+    <!-- form for log out-->
+    <form id="logoutForm" th:action="@{/logout}" method='POST'>
+    </form>
+
     <my-app>Loading...</my-app>
   </body>
 </html>
