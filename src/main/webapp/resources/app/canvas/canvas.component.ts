@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {CanvasService} from "./canvas.service";
 
 export const maxZoom:number = 2.0;
+export const defaultZoom:number = 0.5;
 @Component({
     moduleId:module.id,
     selector:'my-canvas',
@@ -12,12 +13,12 @@ export class CanvasComponent implements OnInit{
 
     showPublish:boolean=false;
     showLoader:boolean=false;
-    zoomValue:number=1.0;
-
+    zoomValue:number=defaultZoom;
 
     ngOnInit(): void {
         this.canvasService.initCanvas();
         this.canvasService.renderWelcomePage();
+        this.zoomReset();
     }
 
     constructor( private canvasService:CanvasService) {
@@ -32,11 +33,11 @@ export class CanvasComponent implements OnInit{
         }
     }
     zoomOut():void {
-        this.zoomValue = this.zoomValue / 1.1
+        this.zoomValue = this.zoomValue / 1.1;
         this.canvasService.setZoom(this.zoomValue);
     }
     zoomReset():void {
-        this.canvasService.setZoom(0.5);
+        this.canvasService.setZoom(defaultZoom);
     }
 
     zoom(e):void {
@@ -49,7 +50,8 @@ export class CanvasComponent implements OnInit{
     }
 
     changeZoomLevel(value:number):void{
-        this.canvasService.setZoom(value);
+        this.zoomValue = value
+        this.canvasService.setZoom(this.zoomValue);
     }
 
     publishDecision(decision:boolean):void {

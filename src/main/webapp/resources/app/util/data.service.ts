@@ -54,6 +54,7 @@ export class DataService {
         this.http
             .post("/controller/layoutFile/publish", params, {
                 headers : new Headers()
-            });
+            })
+            .subscribe(()=>{});
     }
 }
