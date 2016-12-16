@@ -7,9 +7,13 @@ import fsm.model.domain.Desk;
 import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.LinkedList;
 import java.util.List;
 
+@Entity
+@DiscriminatorValue(value="parsing")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @JsonIgnoreProperties({"table"})
 public class ParsedTable extends Table {

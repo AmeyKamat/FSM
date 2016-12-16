@@ -38,6 +38,10 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	@Transactional
 	public Location getLocationById(int locationId) {
+		if (locationDao == null) {
+			System.out.println("Location dao is null");
+		}
+
 		return locationDao.getLocationById(locationId);
 	}
 

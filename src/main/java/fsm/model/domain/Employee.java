@@ -1,5 +1,7 @@
 package fsm.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="fsm_employee")
+@JsonIgnoreProperties("group")
 public class Employee {
 
 	@Id

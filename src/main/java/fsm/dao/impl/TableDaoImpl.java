@@ -5,9 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fsm.model.domain.Country;
+import fsm.model.domain.Floor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fsm.dao.TableDao;
@@ -39,6 +42,31 @@ public class TableDaoImpl implements TableDao {
 		if (table != null) {
 			session.delete(table);
 		}
+
+	}
+
+	@Override
+	public void removeTablesByFloorId(Floor floor) {
+
+		List<Table> tablesOnGivenFloor = getAllTablesByFloorId(floor);
+		System.out.println("Total tables to be deleted: " + tablesOnGivenFloor.size());
+		removeAllTables(tablesOnGivenFloor);
+
+	}
+
+	private void removeAllTables(List<Table> tablesToBeDeleted) {
+		Session session = sessionFactory.getCurrentSession();
+		for (Table table: tablesToBeDeleted) {
+			session.delete(table);
+		}
+	}
+
+	private List<Table> getAllTablesByFloorId(Floor floor) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Table.class);
+		criteria.add(Restrictions.eq("floor", floor));
+		return criteria.list();
 
 	}
 

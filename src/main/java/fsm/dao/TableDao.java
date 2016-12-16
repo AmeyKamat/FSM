@@ -3,6 +3,7 @@ package fsm.dao;
 import java.util.Collection;
 import java.util.List;
 
+import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
 
 public interface TableDao {
@@ -10,6 +11,8 @@ public interface TableDao {
 	public Integer addTable(Table table);
 
 	public void removeTable(int tableId);
+
+	public void removeTablesByFloorId(Floor floor);
 
 	public void updateTable(Table table);
 

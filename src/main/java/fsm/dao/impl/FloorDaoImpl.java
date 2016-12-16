@@ -44,8 +44,14 @@ public class FloorDaoImpl implements FloorDao {
 	@Override
 	public void updateFloor(Floor floor) {
 
+		System.out.println("In floor dao impl");
+		System.out.println("number of tables: " + floor.getTables().size());
+		System.out.println("floor code: " + floor.getFloorCode());
+		System.out.println("location id: " + floor.getLocation().getId());
+
 		Session session = sessionFactory.getCurrentSession();
 		session.update(floor);
+		System.out.println("Exiting floor dao impl");
 
 	}
 

@@ -3,6 +3,7 @@ package fsm.service.impl;
 import java.util.Collection;
 import java.util.List;
 
+import fsm.model.domain.Floor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,11 @@ public class TableServiceImpl implements TableService {
     @Transactional
     public void removeTable(int tableId) {
     	tableDao.removeTable(tableId);
+    }
+
+    @Override
+    public void removeTablesByFloorId(Floor floor) {
+        tableDao.removeTablesByFloorId(floor);
     }
 
     @Override

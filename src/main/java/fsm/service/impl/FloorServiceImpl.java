@@ -2,6 +2,8 @@ package fsm.service.impl;
 
 import java.util.List;
 
+import fsm.model.domain.Table;
+import fsm.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,9 @@ public class FloorServiceImpl implements FloorService {
 
     @Autowired
     private FloorDao floorDao;
+    @Autowired
+    private TableService tableService;
+
 
     @Transactional
     public Integer addFloor(Floor floor) {
@@ -31,6 +36,12 @@ public class FloorServiceImpl implements FloorService {
     @Override
     @Transactional
     public void updateFloor(Floor floor) {
+        System.out.println("****** Number of tables in this floor = " + floor.getTables().size());
+
+        // Delete tables already related to this floor
+        tableService.removeTablesByFloorId(floor);
+
+        // Finally deleting the floor
     	floorDao.updateFloor(floor);
     }
 

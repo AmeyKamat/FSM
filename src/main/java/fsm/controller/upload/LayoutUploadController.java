@@ -56,7 +56,10 @@ public class LayoutUploadController {
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
-            floorService.updateFloor((Floor) floor);
+            System.out.println("Calling floor update");
+            floorService.updateFloor(floor);
+            System.out.println("number of tables: " + floor.getTables().size());
+            System.out.println("Called floor update");
         }
 
         unpublishedLayout.setFloor(null);
