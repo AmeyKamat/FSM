@@ -35,11 +35,6 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public void removeTablesByFloorId(int floorId) {
-        tableDao.removeTablesByFloorId(floorId);
-    }
-
-    @Override
     @Transactional
     public void updateTable(Table table) {
     	tableDao.updateTable(table);

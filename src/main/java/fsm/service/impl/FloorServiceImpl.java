@@ -36,13 +36,7 @@ public class FloorServiceImpl implements FloorService {
     @Override
     @Transactional
     public void updateFloor(Floor floor) {
-        System.out.println("****** Number of tables in this floor = " + floor.getTables().size());
-
-        /*// Delete tables already related to this floor
-        tableService.removeTablesByFloorId(floor.getId());*/
-
-        // Finally deleting the floor
-    	floorDao.updateFloor(floor);
+        floorDao.updateFloor(floor);
     }
 
     @Override

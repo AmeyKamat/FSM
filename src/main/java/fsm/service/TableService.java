@@ -14,8 +14,6 @@ public interface TableService {
 
 	public void removeTable(int tableId);
 
-	public void removeTablesByFloorId(int floorId);
-
 	public void updateTable(Table table);
 
 	public Table getTableById(int tableId);

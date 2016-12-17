@@ -44,11 +44,6 @@ public class ExcelParser implements LayoutFileParser{
 		Sheet sheet = workbook.getSheet(0);
 		
 		ParsedFloor parsedFloor = this.getParsedFloor(sheet);
-
-		// TODO: Workaround for now
-		parsedFloor.setFloorCode("L3");
-		parsedFloor.setLocation(locationService.getLocationById(1));
-
 		List<ParsedDesk> parsedDesks = this.getParsedDesks(sheet);
 		List<ParsedTable> parsedTables = new TableGenerator().getParsedTables(parsedFloor, parsedDesks); 
 

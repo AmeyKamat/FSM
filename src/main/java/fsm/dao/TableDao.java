@@ -12,8 +12,6 @@ public interface TableDao {
 
 	public void removeTable(int tableId);
 
-	public void removeTablesByFloorId(int floorId);
-
 	public void updateTable(Table table);
 
 	public Table getTableById(int tableId);

@@ -2,6 +2,7 @@ package fsm.controller.upload;
 
 
 import fsm.model.domain.Floor;
+import fsm.model.domain.Table;
 import fsm.model.session.UnpublishedLayout;
 import fsm.service.FloorService;
 import fsm.service.ParsingService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 
 @RestController
 @Scope("request")
@@ -56,25 +58,20 @@ public class LayoutUploadController {
         if(toBePublished) {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
-            System.out.println("Calling floor update");
 
-            // Update floor
             Floor existingFloor = floorService.getFloorById(floor.getId());
-            System.out.println("Current number of tables: " + existingFloor.getTables().size());
             existingFloor.getTables().clear();
-            System.out.println("Current number of tables: " + existingFloor.getTables().size());
+            existingFloor.getTables().addAll(floor.getTables());
+            existingFloor.setMinX(floor.getMinX());
+            existingFloor.setMinY(floor.getMinY());
+            existingFloor.setMaxX(floor.getMaxX());
+            existingFloor.setMaxY(floor.getMaxY());
             floorService.updateFloor(existingFloor);
-            existingFloor.setTables(floor.getTables());
-            System.out.println("Current number of tables: " + existingFloor.getTables().size());
-            floorService.updateFloor(existingFloor);
-
-
-            System.out.println("number of tables: " + floor.getTables().size());
-            System.out.println("Called floor update");
         }
 
         unpublishedLayout.setFloor(null);
     }
+
 }
 
 

@@ -47,18 +47,8 @@ public class FloorDaoImpl implements FloorDao {
 	@Override
 	public void updateFloor(Floor floor) {
 
-		System.out.println("In floor dao impl");
-		System.out.println("number of tables: " + floor.getTables().size());
-		System.out.println("floor code: " + floor.getFloorCode());
-		System.out.println("location id: " + floor.getLocation().getId());
-
 		Session session = sessionFactory.getCurrentSession();
-
-		// Delete tables already related to this floor
-//		tableDao.removeTablesByFloorId(floor.getId());
-
 		session.update(floor);
-		System.out.println("Exiting floor dao impl");
 
 	}
 
@@ -66,7 +56,6 @@ public class FloorDaoImpl implements FloorDao {
 	public Floor getFloorById(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		// Floor floor = (Floor) session.get(Floor.class, floorId);
 		Criteria criteria = session.createCriteria(Floor.class);
 		criteria.add(Restrictions.eq("id", floorId));
 		Floor floor = (Floor) criteria.uniqueResult();

@@ -46,33 +46,6 @@ public class TableDaoImpl implements TableDao {
 	}
 
 	@Override
-	public void removeTablesByFloorId(int floorId) {
-
-		List<Table> tablesOnGivenFloor = getAllTablesByFloorId(floorId);
-		System.out.println("Total tables to be deleted: " + tablesOnGivenFloor.size());
-		removeAllTables(tablesOnGivenFloor);
-		System.out.println("Tables deleted: ");
-//		System.out.println("Total tables present now: " + getAllTablesByFloorId(floorId));
-
-	}
-
-	private void removeAllTables(List<Table> tablesToBeDeleted) {
-		Session session = sessionFactory.getCurrentSession();
-		for (Table table: tablesToBeDeleted) {
-			session.delete(table);
-		}
-	}
-
-	private List<Table> getAllTablesByFloorId(int floorId) {
-
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Table.class);
-		criteria.add(Restrictions.eq("floor.id", floorId));
-		return criteria.list();
-
-	}
-
-	@Override
 	public void updateTable(Table table) {
 
 		Session session = sessionFactory.getCurrentSession();
