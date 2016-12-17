@@ -58,7 +58,7 @@ public class Floor {
 	private int maxY;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "floor")
+	@OneToMany(mappedBy = "floor", orphanRemoval=true)
 	@Cascade({SAVE_UPDATE, DELETE})
 	private List<Table> tables;
 

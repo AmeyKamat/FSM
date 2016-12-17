@@ -2,6 +2,7 @@ package fsm.dao.impl;
 
 import java.util.List;
 
+import fsm.dao.TableDao;
 import fsm.parser.entities.ParsedFloor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -19,6 +20,8 @@ public class FloorDaoImpl implements FloorDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private TableDao tableDao;
 
 	@Override
 	public Integer addFloor(Floor floor) {
@@ -50,6 +53,10 @@ public class FloorDaoImpl implements FloorDao {
 		System.out.println("location id: " + floor.getLocation().getId());
 
 		Session session = sessionFactory.getCurrentSession();
+
+		// Delete tables already related to this floor
+//		tableDao.removeTablesByFloorId(floor.getId());
+
 		session.update(floor);
 		System.out.println("Exiting floor dao impl");
 

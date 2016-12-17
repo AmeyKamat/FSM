@@ -57,7 +57,18 @@ public class LayoutUploadController {
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
             System.out.println("Calling floor update");
-            floorService.updateFloor(floor);
+
+            // Update floor
+            Floor existingFloor = floorService.getFloorById(floor.getId());
+            System.out.println("Current number of tables: " + existingFloor.getTables().size());
+            existingFloor.getTables().clear();
+            System.out.println("Current number of tables: " + existingFloor.getTables().size());
+            floorService.updateFloor(existingFloor);
+            existingFloor.setTables(floor.getTables());
+            System.out.println("Current number of tables: " + existingFloor.getTables().size());
+            floorService.updateFloor(existingFloor);
+
+
             System.out.println("number of tables: " + floor.getTables().size());
             System.out.println("Called floor update");
         }

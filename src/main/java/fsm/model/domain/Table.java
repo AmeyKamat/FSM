@@ -49,7 +49,7 @@ public class Table {
 
 	@OrderBy("tableRow,tableCol")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "table")
+	@OneToMany(mappedBy = "table", orphanRemoval=true)
 	@Cascade({SAVE_UPDATE, DELETE})
 	private List<Desk> desks;
 

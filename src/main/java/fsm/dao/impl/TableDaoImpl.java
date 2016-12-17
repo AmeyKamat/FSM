@@ -46,11 +46,13 @@ public class TableDaoImpl implements TableDao {
 	}
 
 	@Override
-	public void removeTablesByFloorId(Floor floor) {
+	public void removeTablesByFloorId(int floorId) {
 
-		List<Table> tablesOnGivenFloor = getAllTablesByFloorId(floor);
+		List<Table> tablesOnGivenFloor = getAllTablesByFloorId(floorId);
 		System.out.println("Total tables to be deleted: " + tablesOnGivenFloor.size());
 		removeAllTables(tablesOnGivenFloor);
+		System.out.println("Tables deleted: ");
+//		System.out.println("Total tables present now: " + getAllTablesByFloorId(floorId));
 
 	}
 
@@ -61,11 +63,11 @@ public class TableDaoImpl implements TableDao {
 		}
 	}
 
-	private List<Table> getAllTablesByFloorId(Floor floor) {
+	private List<Table> getAllTablesByFloorId(int floorId) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Table.class);
-		criteria.add(Restrictions.eq("floor", floor));
+		criteria.add(Restrictions.eq("floor.id", floorId));
 		return criteria.list();
 
 	}
