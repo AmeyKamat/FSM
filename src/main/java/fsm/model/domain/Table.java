@@ -10,8 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
+import static org.hibernate.annotations.CascadeType.DELETE;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+
 @Entity
-@javax.persistence.Table(name = "WORKTABLE")
+@javax.persistence.Table(name = "fsm_table")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator_column", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("domain")
 @JsonIgnoreProperties("floor")
 public class Table {
 
@@ -43,7 +49,8 @@ public class Table {
 
 	@OrderBy("tableRow,tableCol")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "table")
+	@OneToMany(mappedBy = "table", orphanRemoval=true)
+	@Cascade({SAVE_UPDATE, DELETE})
 	private List<Desk> desks;
 
 	public Table() {

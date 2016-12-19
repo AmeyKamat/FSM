@@ -19,24 +19,44 @@
 
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>/controller/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-	<context-param>
-		<param-name> contextConfigLocation</param-name>
-		<param-value>WEB-INF/applicationContext.xml</param-value>
-	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<context-param>
+		<param-name> contextConfigLocation</param-name>
+		<param-value>
+			WEB-INF/applicationContext.xml,
+			/WEB-INF/spring-security.xml,
+			/WEB-INF/spring-web-multipart-context.xml,
+			/WEB-INF/spring-database.xml
+		</param-value>
+	</context-param>
+	
+	<!-- Spring Security -->
+	<filter>
+		<display-name>springMultipartFilter</display-name>
+		<filter-name>springMultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springMultipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-	<!-- home page for the application -->
-	<welcome-file-list>
-		<welcome-file>resources/login.html</welcome-file>
-	</welcome-file-list>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+	</filter>
 
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
 

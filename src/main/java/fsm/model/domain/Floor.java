@@ -2,26 +2,29 @@ package fsm.model.domain;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import static org.hibernate.annotations.CascadeType.DELETE;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+
 
 @Entity
-@javax.persistence.Table(name="FLOOR")
+@javax.persistence.Table(name="fsm_floor")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator_column", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("domain")
 @JsonRootName(value = "Floor")
 @JsonFilter(value = "filter")
+@JsonIgnoreProperties("location")
 public class Floor {
 
 	@Id
@@ -55,7 +58,8 @@ public class Floor {
 	private int maxY;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "floor")
+	@OneToMany(mappedBy = "floor", orphanRemoval=true)
+	@Cascade({SAVE_UPDATE, DELETE})
 	private List<Table> tables;
 
 	public Floor() {

@@ -60,6 +60,11 @@
         <value>fsm.model.domain.Role</value>
         <value>fsm.model.domain.Table</value>
         <value>fsm.model.domain.User</value>
+        <value>fsm.model.domain.UserRole</value>
+        <!--<value>fsm.model.domain.UserAttempt</value>-->
+
+          <!-- Parsing entities -->
+          <value>fsm.parser.entities.ParsedFloor</value>
       </list>
     </property>
 
