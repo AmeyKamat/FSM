@@ -3,6 +3,7 @@ package fsm.dao;
 import java.util.Collection;
 import java.util.List;
 
+import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
 
 public interface TableDao {

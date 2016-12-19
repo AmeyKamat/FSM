@@ -7,6 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import fsm.dao.LocationDao;
+import fsm.dao.impl.FloorDaoImpl;
+import fsm.dao.impl.LocationDaoImpl;
+import fsm.model.domain.Location;
+import fsm.service.LocationService;
+import fsm.service.impl.LocationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fsm.parser.LayoutFileParser;
@@ -22,9 +29,13 @@ import jxl.Range;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class ExcelParser implements LayoutFileParser{
+
+	@Autowired
+	private LocationService locationService;
 
 	@Override
 	public Layout parse(File file) {
@@ -35,7 +46,7 @@ public class ExcelParser implements LayoutFileParser{
 		ParsedFloor parsedFloor = this.getParsedFloor(sheet);
 		List<ParsedDesk> parsedDesks = this.getParsedDesks(sheet);
 		List<ParsedTable> parsedTables = new TableGenerator().getParsedTables(parsedFloor, parsedDesks); 
-		
+
 		return new Layout(parsedFloor, parsedTables, parsedDesks);
 	}
 
@@ -43,7 +54,8 @@ public class ExcelParser implements LayoutFileParser{
 	private List<ParsedDesk> getParsedDesks(Sheet sheet) {
 		List<ParsedDesk> parsedDesks = new LinkedList<ParsedDesk>();
 		Set<String> deskCodesOfMergedCells = new HashSet<String>();
-		
+
+		// Adding merged cells to desk list
 		for (Range cell : sheet.getMergedCells()) {
             Cell topLeftCell = cell.getTopLeft();
             Cell bottomRightCell = cell.getBottomRight();
@@ -62,7 +74,8 @@ public class ExcelParser implements LayoutFileParser{
 	            );
             }
         }
-		
+
+		// Adding non-merged cells to desk list
 		for (int row = 0; row < sheet.getRows(); row++) {
             for (int column = 0; column < sheet.getColumns(); column++) {
                 Cell cell = sheet.getCell(column, row);
@@ -89,18 +102,33 @@ public class ExcelParser implements LayoutFileParser{
         
         int minimumX = 0;
         int minimumY = 0;
-        
-        for (int row = 0; row < sheet.getRows(); row++) {
-            for (int column = 0; column < sheet.getColumns(); column++) {
+
+		// Calculating minimumX: Column number of First valid cell hit when doing DEPTH FIRST SEARCH
+		boolean minFound = false;
+
+		for (int column = 0; (column < sheet.getColumns()) && (!minFound); column++) {
+			for (int row = 0; (row < sheet.getRows()) && (!minFound); row++) {
+				Cell cell = sheet.getCell(column, row);
+				if (isCellAValidDesk(cell)) {
+					minimumX = column;
+					minFound = true;
+				}
+			}
+		}
+
+		// Calculating minimumY: Row number of First valid cell hit when doing BREADTH FIRST SEARCH
+		minFound = false;
+
+        for (int row = 0; (row < sheet.getRows()) && (!minFound); row++) {
+            for (int column = 0; (column < sheet.getColumns()) && (!minFound); column++) {
                 Cell cell = sheet.getCell(column, row);
                 if (isCellAValidDesk(cell)) {
-                    minimumX = row;
-                    minimumY = column;
-                    break;
+                    minimumY = row;
+                    minFound = true;
                 }
             }
         }
-        
+
         return new ParsedFloor(minimumX, minimumY, maximumX, maximumY);
 	}
 

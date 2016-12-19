@@ -1,5 +1,7 @@
 package fsm.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,10 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
-@javax.persistence.Table(name="GROUP_S")
+@javax.persistence.Table(name="fsm_group")
+@JsonIgnoreProperties("parentGroup")
 public class Group {
 
 	@Id
@@ -20,6 +24,7 @@ public class Group {
 	@Column(name = "id")
 	private int id;
 	
+	@NotNull
 	@Column(name = "name")
 	private String name;
 	

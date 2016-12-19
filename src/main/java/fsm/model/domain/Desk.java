@@ -1,19 +1,20 @@
 package fsm.model.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+
+import static org.hibernate.annotations.CascadeType.DELETE;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 
 @Entity
-@javax.persistence.Table(name="DESK")
+@javax.persistence.Table(name="fsm_desk")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator_column", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("domain")
 @JsonIgnoreProperties({"table"})
 public class Desk {
 

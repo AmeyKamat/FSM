@@ -1,60 +1,34 @@
 package fsm.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import fsm.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import fsm.util.HashGenerator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(HttpServletRequest request, @RequestParam(value = "error", required = false) String error,
+						@RequestParam(value = "logout", required = false) String logout, Model model) {
 
-    @Autowired
-    UserService userService;
+		if (error != null) {
+			model.addAttribute("errorMessage", "Invalid username and password !!!");
+		}
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView showLoginPage() {
-        return new ModelAndView("login.html");
-    }
-
-
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public ModelAndView login(final HttpServletRequest req, ModelMap map) {
-
-        /* Commented for integrating backend to frontend. Consequently to be uncommented */
-        /*
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String result = userService.checkLogin(username, password);
-
-        if (result == null) {
-            System.out.println("Exited here 1");
-            return new ModelAndView("redirect:/controller/login");
-        } else {
-            if (result.equals("EQUAL")) {
-
-                HttpSession session = req.getSession();
-                session.setAttribute("id", username);
-                System.out.println("Exited here 2");
-                return new ModelAndView("redirect:/controller/uploadFile");
-            } else {
-                System.out.println("Exited here 3");
-                return new ModelAndView("redirect:/controller/login");
-            }
-        }*/
-        return new ModelAndView("index.html");
-
-    }
-
+		if (logout != null) {
+			model.addAttribute("logoutMessage", "You've been logged out successfully !!!");
+		}
+		
+		return "login";
+	}
+	
 }

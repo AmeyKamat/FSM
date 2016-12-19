@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Submit logout form on clicking logout link -->
+    <script>
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
+</head>
+<body>
+<h1>HTTP Status 403 - Access is denied</h1>
+
+    <h2 th:if="${username}" th:text="${username}"></h2>
+    <h2>You do not have permission to access this page!</h2>
+
+    <!-- form for log out-->
+    <form id="logoutForm" th:action="@{/logout}" method='POST'>
+    </form>
+
+    <a href="javascript:formSubmit()">Logout</a>
+
+</body>
+</html>

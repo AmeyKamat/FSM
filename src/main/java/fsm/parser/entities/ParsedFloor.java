@@ -6,8 +6,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.LinkedList;
 
+@Entity
+@DiscriminatorValue(value="parsing")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @JsonIgnoreProperties({"floor"})
 public class ParsedFloor extends Floor {

@@ -9,6 +9,7 @@
 		">
 
     <context:annotation-config/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 	<context:property-placeholder location="classpath:app.properties" />
 
     <mvc:annotation-driven />
@@ -17,16 +18,29 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" ></context:include-filter>
 	</context:component-scan>
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-
-		<property name="prefix">
-			<value>/resources/</value>
-		</property>
-	</bean>
-
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="${upload.max-file-size}" />
 	</bean>
+	
+	<!-- **************************************************************** -->
+    <!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+    <!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+    <!-- **************************************************************** -->
+
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/resources/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+    </bean>
+
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>
 
 </beans>
