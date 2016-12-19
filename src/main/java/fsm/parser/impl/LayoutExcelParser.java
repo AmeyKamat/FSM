@@ -10,6 +10,7 @@ import java.util.Set;
 import fsm.dao.LocationDao;
 import fsm.dao.impl.FloorDaoImpl;
 import fsm.dao.impl.LocationDaoImpl;
+import fsm.model.domain.Floor;
 import fsm.model.domain.Location;
 import fsm.service.LocationService;
 import fsm.service.impl.LocationServiceImpl;
@@ -32,13 +33,13 @@ import jxl.read.biff.BiffException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class ExcelParser implements LayoutFileParser{
+public class LayoutExcelParser implements LayoutFileParser{
 
 	@Autowired
 	private LocationService locationService;
 
 	@Override
-	public Layout parse(File file) {
+	public Floor parseLayout(File file) {
 		
 		Workbook workbook = this.getWorkbook(file);
 		Sheet sheet = workbook.getSheet(0);
@@ -47,7 +48,7 @@ public class ExcelParser implements LayoutFileParser{
 		List<ParsedDesk> parsedDesks = this.getParsedDesks(sheet);
 		List<ParsedTable> parsedTables = new TableGenerator().getParsedTables(parsedFloor, parsedDesks); 
 
-		return new Layout(parsedFloor, parsedTables, parsedDesks);
+		return parsedFloor;
 	}
 
     /* TODO: Needs Restructuring */

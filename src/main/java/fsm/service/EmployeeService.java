@@ -14,6 +14,8 @@ public interface EmployeeService {
 
 	public Employee getEmployeeById(int employeeId);
 
+	public Employee getEmployeeByBrid(String brid);
+
 	public List<Employee> getAllEmployees();
 	
 }

@@ -41,6 +41,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
+    public Employee getEmployeeByBrid(String brid) {
+        return employeeDao.getEmployeeByBrid(brid);
+    }
+
+    @Override
+    @Transactional
     public List<Employee> getAllEmployees() {
         return employeeDao.getAllEmployees();
     }

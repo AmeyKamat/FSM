@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="fsm_employee")
-@JsonIgnoreProperties("group")
+@JsonIgnoreProperties({ "group", "desk", "user" })
 public class Employee {
 
 	@Id
@@ -29,8 +29,7 @@ public class Employee {
 	@NotNull
 	@Column(name = "name")
 	private String name;
-	
-	@NotNull
+
 	@ManyToOne
 	@JoinColumn(name = "group_id")
 	private Group group;
@@ -43,6 +42,11 @@ public class Employee {
 
 	public Employee() {
 		super();
+	}
+
+	public Employee(String brid, String name) {
+		this.brid = brid;
+		this.name = name;
 	}
 
 	public int getId() {
