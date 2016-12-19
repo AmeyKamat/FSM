@@ -1,8 +1,8 @@
 #Eclipse Config Files
 /.settings/
-.classpath
-.project
-.springBeans
+/.classpath
+/.project
+/.springBeans
 
 #Idea Config Files
 /.idea/
@@ -29,12 +29,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/target/
 
+# Build files
+/target/
 /bin/
+*.class
 
 # Restricting Accesss to app.properties File in Repository
 /config/app.properties
 
-# Temporarily Bolcking pom.xml
+# Temporarily Blocking pom.xml
 /pom.xml
