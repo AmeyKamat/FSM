@@ -17,7 +17,6 @@
                             <label  [attr.for]="'location_' + i" class="example-five">+</label>
                             {{location.name}}
                             <ul class="explorer-list">
-
                                 <li *ngFor="let level of location.levels"
                                     [class.selected]="level === selectedLevel"
                                     (click)="onSelect(level.id)">
@@ -30,9 +29,6 @@
                     </ul>
                 </li>
             </ul>
-
-
-
         </li>
     </ul>
 

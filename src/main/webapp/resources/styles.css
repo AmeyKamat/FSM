@@ -16,38 +16,32 @@ body {
 
 html, body { width:100%; height:100%; margin:0px;}
 
-.tooltip {
-  text-decoration:none;
-  position:relative;
-}
-.tooltip span {
-  display:none;
-}
-.tooltip:hover span {
-  display:block;
-  position:fixed;
-  overflow:hidden;
-}
-
 .context-bar{
   padding: 10px;
   border-radius: 1px;
   position: fixed;
   bottom:0%;
-  width:100%;
+  width:7%;
   opacity: 1;
   margin-left: 5px;
 }
-
+.publish{
+  padding: 15px 15px;
+  font-size: 15px;
+  background-color: black;
+  color: white;
+  float:right;
+}
 #sliderzoom{
   width: 20px;
   height: 100px;
   border: solid rgba(0,0,0,0.3) 1px;
-  margin-top: 6px;
-  margin-left: 12px;
-  margin-bottom: 6px;
+  margin-top: 8px;
+  margin-left: 16px;
+  margin-bottom: 8px;
   -webkit-appearance: slider-vertical;
 }
+
 .btn-circle-sm {
   width: 35px;
   height: 35px;
@@ -62,12 +56,11 @@ html, body { width:100%; height:100%; margin:0px;}
 .btn-circle {
   width: 50px;
   height: 50px;
-  padding: 10px 10px;
+  padding: 15px 15px;
   font-size: 25px;
   line-height: 1.33;
   border-radius: 50%;
   background-color: #00395d;
-
   color: white;
 }
 
@@ -82,6 +75,7 @@ html, body { width:100%; height:100%; margin:0px;}
   position: relative;
   overflow: hidden;
 }
+
 .fileUpload input.upload {
   position: absolute;
   top: 0;
@@ -94,13 +88,6 @@ html, body { width:100%; height:100%; margin:0px;}
   filter: alpha(opacity=0);
 }
 
-.publish{
-  padding: 15px 15px;
-  font-size: 15px;
-  background-color: black;
-  color: white;
-  float:right;
-}
 .explorer{
   top: 50px;
   right: 0%;
@@ -112,7 +99,18 @@ html, body { width:100%; height:100%; margin:0px;}
 }
 
 .explorer-list{
-    list-style: none;
+  list-style: none;
+}
+
+#tooltip-span{
+  display:block;
+  position:fixed;
+  overflow:hidden;
+  background-color: black;
+  color:white;
+  padding:10px;
+  box-shadow: 1px 1px 2px grey;
+  border-radius:5px
 }
 
 #logout{
@@ -147,19 +145,16 @@ html, body { width:100%; height:100%; margin:0px;}
 .navbar{
   background-color:#00395d;
   color:#00395d ;
-
-  /*#00395d*/
-          /*#0074a6*/
 }
 .modal-content{
   color:#00395d;
- border-color: #00395d;
+  border-color: #00395d;
 }
 .modal-body{
   color:#00395d;
 }
 .btn{
-background-color: #00395d;
+  background-color: #00395d;
   color: white;
 
 }
@@ -173,4 +168,3 @@ background-color: #00395d;
 .navbar-default .navbar-brand{
   color:white ;
 }
-
