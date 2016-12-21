@@ -1,16 +1,17 @@
 package fsm.service.impl;
 
 import fsm.model.domain.Desk;
+import fsm.model.domain.Employee;
 import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
-import fsm.parser.EmployeeLocationFileParser;
+import fsm.parser.EmployeeFileParser;
 import fsm.parser.LayoutFileParser;
-import fsm.parser.impl.EmployeeLocationExcelParser;
 import fsm.service.ParsingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.Map;
 
 @Service
 public class ParsingServiceImpl implements ParsingService{
@@ -18,20 +19,25 @@ public class ParsingServiceImpl implements ParsingService{
     @Autowired
     LayoutFileParser layoutFileParser;
     @Autowired
-    EmployeeLocationFileParser employeeLocationFileParser;
+    EmployeeFileParser employeeFileParser;
 
     @Override
     public Floor parseLayout(File file) {
         Floor floor = layoutFileParser.parseLayout(file);
-        employeeLocationFileParser.parseEmployeeLocation(file, floor);
+        Map<String, Employee> deskEmployeeMap = employeeFileParser.parseEmployee(file);
+        mapEmployeeToDesk(floor, deskEmployeeMap);
+        return floor;
+    }
 
-        System.out.println("Printing parsed floor");
+    private void mapEmployeeToDesk(Floor floor, Map<String, Employee> deskEmployeeMap) {
+
         for (Table table: floor.getTables()) {
             for (Desk desk: table.getDesks()) {
-                System.out.println("Desk code: " + desk.getDeskCode() + ", Employee: " + desk.getDeskEmployee().getName());
+                Employee employee = deskEmployeeMap.get(desk.getDeskCode());
+                desk.setDeskEmployee(employee);
+                employee.setDesk(desk);
             }
         }
 
-        return floor;
     }
 }

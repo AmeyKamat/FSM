@@ -1,12 +1,11 @@
 package fsm.parser;
 
 import java.io.File;
-
-import fsm.model.domain.Floor;
-import fsm.parser.entities.Layout;
+import fsm.parser.entities.ParsedFloor;
 
 
 public interface LayoutFileParser {
 
-	public Floor parseLayout(File file);
+	public ParsedFloor parseLayout(File file);
+
 }
