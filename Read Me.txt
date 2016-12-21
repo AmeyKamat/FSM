@@ -1,6 +1,0 @@
-1. Create Database layout_parser in mysql
-2. Import layout_parser.sql
-3. Import this project in intelij and setup tomcat Server. (Click Edit configurations, add tomcat, in deployment tab, add fsm artifact)
-4. Change your database username and password in FSM\src\resources\hibernate.cfg.xml
-5. If you are using eclipse, Make sure your web application context root is Empty
-6. Run

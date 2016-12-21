@@ -1,7 +1,7 @@
 # Floor Space Management
 
 ## Installation:
-1. Create database (see [mydb.sql](https://github.com/AmeyKamat/FSM/blob/master/mydb.sql))
+1. Create database (see [fsm.sql](https://github.com/AmeyKamat/FSM/blob/master/fsm.sql))
 2. Ensure that `src/main` and `src/config` are in classpath
 3. Do `maven clean install`
 4. Edit [app.properties](https://github.com/AmeyKamat/FSM/blob/master/config/app.properties) file for upload location and database properties. 
