@@ -1,14 +1,12 @@
 package fsm.dao.impl;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import fsm.dao.LocationDao;
 import fsm.model.domain.City;
 import fsm.model.domain.Location;

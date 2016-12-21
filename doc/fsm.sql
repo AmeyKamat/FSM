@@ -331,8 +331,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`, `discriminator_column`) VALUES (1, 'L2', 0, 0, 100, 100, "DOMAIN");
-INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`, `discriminator_column`) VALUES (1, 'L3', -1, -1, -1, -1, "DOMAIN");
+INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`, `discriminator_column`) VALUES (1, 'L2', 0, 0, 100, 100, "domain");
+INSERT INTO `mydb`.`fsm_floor` (`location_id`, `floor_code`, `min_x`, `min_y`, `max_x`, `max_y`, `discriminator_column`) VALUES (1, 'L3', -1, -1, -1, -1, "domain");
 
 COMMIT;
 
@@ -342,8 +342,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`, `discriminator_column`) VALUES (1, 20, 20, 3, 2, "DOMAIN");
-INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`, `discriminator_column`) VALUES (1, 40, 50, 2, 3, "DOMAIN");
+INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`, `discriminator_column`) VALUES (1, 20, 20, 3, 2, "domain");
+INSERT INTO `mydb`.`fsm_table` (`floor_id`, `top_left_x`, `top_left_y`, `length`, `width`, `discriminator_column`) VALUES (1, 40, 50, 2, 3, "domain");
 
 COMMIT;
 
@@ -377,17 +377,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 1, 1, '2-101', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 1, 2, '2-102', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 1, '2-103', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 2, '2-104', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 3, '2-105', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 1, '2-106', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 2, '2-107', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 3, '2-108', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 1, '2-109', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 2, '2-110', "DOMAIN");
-INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 3, '2-111', "DOMAIN");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 1, 1, '2-101', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 1, 2, '2-102', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 1, '2-103', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 2, '2-104', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (1, NULL, 2, 3, '2-105', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 1, '2-106', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 2, '2-107', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 1, 3, '2-108', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 1, '2-109', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 2, '2-110', "domain");
+INSERT INTO `mydb`.`fsm_desk` (`table_id`, `employee_id`, `table_row`, `table_col`, `desk_code`, `discriminator_column`) VALUES (2, NULL, 2, 3, '2-111', "domain");
 
 COMMIT;
 

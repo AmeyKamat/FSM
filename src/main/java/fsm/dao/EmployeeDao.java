@@ -1,7 +1,6 @@
 package fsm.dao;
 
 import java.util.List;
-
 import fsm.model.domain.Employee;
 
 public interface EmployeeDao {
@@ -13,6 +12,8 @@ public interface EmployeeDao {
 	public void updateEmployee(Employee employee);
 
 	public Employee getEmployeeById(int employeeId);
+
+	public Employee getEmployeeByBrid(String brid);
 
 	public List<Employee> getAllEmployees();
 	

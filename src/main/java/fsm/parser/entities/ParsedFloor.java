@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fsm.model.domain.Floor;
 import fsm.model.domain.Table;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.LinkedList;

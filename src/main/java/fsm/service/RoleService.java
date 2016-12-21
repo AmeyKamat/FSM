@@ -1,7 +1,6 @@
 package fsm.service;
 
 import java.util.List;
-
 import fsm.model.domain.Role;
 
 public interface RoleService {

@@ -6,18 +6,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import fsm.dao.LocationDao;
-import fsm.dao.impl.FloorDaoImpl;
-import fsm.dao.impl.LocationDaoImpl;
-import fsm.model.domain.Location;
+import fsm.parser.enums.ExcelSheetIdentity;
+import fsm.parser.util.ParsingResourceProvider;
 import fsm.service.LocationService;
-import fsm.service.impl.LocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import fsm.parser.LayoutFileParser;
-import fsm.parser.entities.Layout;
 import fsm.parser.entities.ParsedDesk;
 import fsm.parser.entities.ParsedFloor;
 import fsm.parser.entities.ParsedTable;
@@ -29,25 +23,24 @@ import jxl.Range;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class ExcelParser implements LayoutFileParser{
+public class LayoutExcelParser implements LayoutFileParser{
 
 	@Autowired
 	private LocationService locationService;
 
 	@Override
-	public Layout parse(File file) {
+	public ParsedFloor parseLayout(File file) {
 		
-		Workbook workbook = this.getWorkbook(file);
-		Sheet sheet = workbook.getSheet(0);
+		Workbook workbook = ParsingResourceProvider.getWorkbook(file);
+		Sheet sheet = workbook.getSheet(ExcelSheetIdentity.FLOOR_PLAN_SHEET.getSheetNumber());
 		
 		ParsedFloor parsedFloor = this.getParsedFloor(sheet);
 		List<ParsedDesk> parsedDesks = this.getParsedDesks(sheet);
 		List<ParsedTable> parsedTables = new TableGenerator().getParsedTables(parsedFloor, parsedDesks); 
 
-		return new Layout(parsedFloor, parsedTables, parsedDesks);
+		return parsedFloor;
 	}
 
     /* TODO: Needs Restructuring */

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import fsm.dao.UserDao;
 import fsm.model.domain.UserRole;
 import fsm.service.UserService;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,13 +1,11 @@
 package fsm.dao.impl;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import fsm.dao.GroupDao;
 import fsm.model.domain.Group;
 

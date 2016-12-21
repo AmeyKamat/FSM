@@ -2,7 +2,6 @@ package fsm.model.session;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import fsm.model.domain.Floor;
 
 @Component

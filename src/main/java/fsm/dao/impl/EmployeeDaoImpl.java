@@ -1,13 +1,12 @@
 package fsm.dao.impl;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import fsm.dao.EmployeeDao;
 import fsm.model.domain.Employee;
 
@@ -53,6 +52,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Employee employee = (Employee) session.get(Employee.class, employeeId);
 		return employee;
 
+	}
+
+	@Override
+	public Employee getEmployeeByBrid(String brid) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Employee.class);
+		criteria.add(Restrictions.eq("brid", brid));
+		Employee employee = (Employee) criteria.uniqueResult();
+		return employee;
 	}
 
 	@Override

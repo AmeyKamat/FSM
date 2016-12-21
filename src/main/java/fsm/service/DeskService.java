@@ -2,7 +2,6 @@ package fsm.service;
 
 import java.util.Collection;
 import java.util.List;
-
 import fsm.model.domain.Desk;
 
 public interface DeskService {

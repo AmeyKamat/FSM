@@ -4,12 +4,12 @@ import {CanvasComponent} from "./canvas/canvas.component";
 import {UploadComponent} from "./upload/upload.component";
 import {ExplorerComponent} from "./explorer/explorer.component";
 
-const routes: Routes = [
+const routes: Routes = [/*
     { path: '', component:CanvasComponent},
     //{ path: 'controller/login', redirectTo: '', pathMatch: 'full' },
     { path: 'upload',  component: UploadComponent },
     { path: 'explorer',  component: ExplorerComponent },
-    { path: 'canvas',  component: CanvasComponent }];
+    { path: 'canvas',  component: CanvasComponent }*/];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

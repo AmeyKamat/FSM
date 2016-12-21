@@ -8,11 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-/**
- * Created by Rohit Singh on 13-12-2016.
- */
 
 @Controller
 public class StatusCode403Controller {

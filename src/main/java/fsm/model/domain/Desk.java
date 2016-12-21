@@ -2,11 +2,10 @@ package fsm.model.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
-
-import static org.hibernate.annotations.CascadeType.DELETE;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 
@@ -29,7 +28,9 @@ public class Desk {
 	private Table table;
 
 	@OneToOne
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "employee_id")
+	@Cascade({SAVE_UPDATE})
 	private Employee deskEmployee;
 	
 	@NotNull
