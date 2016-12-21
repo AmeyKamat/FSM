@@ -27,4 +27,10 @@ public class FloorRestController {
         String[] propsToBeIgnored = {"location"};
         return JsonFilter.filter(floor, propsToBeIgnored);
     }
+
+    @RequestMapping(value = "/{floorId}/doesPlanExist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean doesFloorPlanExist(@PathVariable("floorId") int floorId) throws JsonProcessingException {
+        int countTables = floorService.getFloorById(floorId).getTables().size();
+        return (countTables > 0);
+    }
 }

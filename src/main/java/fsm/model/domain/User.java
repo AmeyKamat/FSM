@@ -20,7 +20,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @javax.persistence.Table(name="fsm_user")
-@JsonIgnoreProperties("userEmployee")
 public class User {
 
 	@Id

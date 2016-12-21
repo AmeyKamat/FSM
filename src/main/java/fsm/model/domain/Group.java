@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @javax.persistence.Table(name="fsm_group")
-@JsonIgnoreProperties("parentGroup")
+@JsonIgnoreProperties({"childGroups", "employees"})
 public class Group {
 
 	@Id
