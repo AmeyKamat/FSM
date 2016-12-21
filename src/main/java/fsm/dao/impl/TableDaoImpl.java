@@ -1,21 +1,13 @@
 package fsm.dao.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import fsm.model.domain.Country;
-import fsm.model.domain.Floor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import fsm.dao.TableDao;
 import fsm.model.domain.Table;
-
 import org.springframework.stereotype.Repository;
 
 @Repository

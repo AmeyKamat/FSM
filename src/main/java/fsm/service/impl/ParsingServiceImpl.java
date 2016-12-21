@@ -9,7 +9,6 @@ import fsm.parser.LayoutFileParser;
 import fsm.service.ParsingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.util.Map;
 

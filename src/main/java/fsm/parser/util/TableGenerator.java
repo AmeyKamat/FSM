@@ -5,12 +5,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
 import org.springframework.stereotype.Component;
-
 import fsm.model.domain.Desk;
-import fsm.model.domain.Floor;
-import fsm.model.domain.Table;
 import fsm.parser.entities.ParsedDesk;
 import fsm.parser.entities.ParsedFloor;
 import fsm.parser.entities.ParsedTable;

@@ -1,7 +1,6 @@
 package fsm.dao;
 
 import java.util.List;
-
 import fsm.model.domain.Group;
 
 public interface GroupDao {

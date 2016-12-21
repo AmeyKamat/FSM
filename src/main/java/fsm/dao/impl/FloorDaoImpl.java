@@ -1,16 +1,13 @@
 package fsm.dao.impl;
 
 import java.util.List;
-
 import fsm.dao.TableDao;
-import fsm.parser.entities.ParsedFloor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import fsm.dao.FloorDao;
 import fsm.model.domain.Floor;
 import fsm.model.domain.Location;

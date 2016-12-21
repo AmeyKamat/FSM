@@ -1,7 +1,6 @@
 package fsm.service;
 
 import java.util.List;
-
 import fsm.model.domain.Employee;
 
 public interface EmployeeService {

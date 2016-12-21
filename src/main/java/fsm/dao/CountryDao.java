@@ -1,7 +1,6 @@
 package fsm.dao;
 
 import java.util.List;
-
 import fsm.model.domain.Country;
 
 public interface CountryDao {

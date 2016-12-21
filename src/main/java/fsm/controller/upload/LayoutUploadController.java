@@ -2,7 +2,6 @@ package fsm.controller.upload;
 
 
 import fsm.model.domain.Floor;
-import fsm.model.domain.Table;
 import fsm.model.session.UnpublishedLayout;
 import fsm.service.FloorService;
 import fsm.service.ParsingService;
@@ -15,9 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.util.List;
 
 @RestController
 @Scope("request")

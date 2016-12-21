@@ -1,17 +1,13 @@
 package fsm.dao.impl;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import fsm.dao.UserDao;
-import fsm.model.domain.Location;
 import fsm.model.domain.User;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
