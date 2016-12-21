@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import fsm.parser.enums.ExcelSheetIdentity;
 import fsm.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +34,7 @@ public class LayoutExcelParser implements LayoutFileParser{
 	public ParsedFloor parseLayout(File file) {
 		
 		Workbook workbook = this.getWorkbook(file);
-		Sheet sheet = workbook.getSheet(ExcelSheetNameEnum.FLOOR_PLAN_SHEET.getSheetNumber());
+		Sheet sheet = workbook.getSheet(ExcelSheetIdentity.FLOOR_PLAN_SHEET.getSheetNumber());
 		
 		ParsedFloor parsedFloor = this.getParsedFloor(sheet);
 		List<ParsedDesk> parsedDesks = this.getParsedDesks(sheet);

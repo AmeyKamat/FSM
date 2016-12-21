@@ -2,6 +2,8 @@ package fsm.parser.impl;
 
 import fsm.model.domain.Employee;
 import fsm.parser.EmployeeFileParser;
+import fsm.parser.enums.ExcelEmployeeSheetColumnIdentity;
+import fsm.parser.enums.ExcelSheetIdentity;
 import fsm.parser.exception.AmbigousEmployeeException;
 import fsm.service.EmployeeService;
 import fsm.util.ParsingResourceProvider;
@@ -24,7 +26,7 @@ public class EmployeeExcelParser implements EmployeeFileParser {
     @Override
     public Map<String, Employee> parseEmployee(File file) {
         Workbook workbook = ParsingResourceProvider.getWorkbook(file);
-        Sheet sheet = workbook.getSheet(ExcelSheetNameEnum.EMPLOYEE_DESK_MAP_SHEET.getSheetNumber());
+        Sheet sheet = workbook.getSheet(ExcelSheetIdentity.EMPLOYEE_DESK_MAP_SHEET.getSheetNumber());
 
         return this.parseDeskEmployeeInfo(sheet);
     }
@@ -33,13 +35,15 @@ public class EmployeeExcelParser implements EmployeeFileParser {
         Map<String, Employee> deskEmployeeMap = new HashMap<String, Employee>();
 
         for (int row = 1; row < sheet.getRows(); row++) {
-            Cell deskCodeCell = sheet.getCell(0, row);
+            Cell deskCodeCell = sheet.getCell(ExcelEmployeeSheetColumnIdentity.DESK_CODE_COLUMN.getColumnNumber(),
+                    row);
 
             if (isCellValidDeskEntry(deskCodeCell)) {
                 String deskCode = deskCodeCell.getContents();
-                String brid = sheet.getCell(1, row).getContents();
-                String employeeName = sheet.getCell(2, row).getContents();
-
+                String brid = sheet.getCell(ExcelEmployeeSheetColumnIdentity.BRID_COLUMN.getColumnNumber(),
+                        row).getContents();
+                String employeeName = sheet.getCell(ExcelEmployeeSheetColumnIdentity.EMPLOYEE_NAME_COLUMN.getColumnNumber(),
+                        row).getContents();
                 Employee employee = this.getEmployee(brid, employeeName);
                 deskEmployeeMap.put(deskCode, employee);
             }

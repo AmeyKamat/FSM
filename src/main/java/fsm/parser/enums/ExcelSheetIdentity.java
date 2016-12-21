@@ -1,13 +1,13 @@
-package fsm.parser.impl;
+package fsm.parser.enums;
 
-public enum  ExcelSheetNameEnum {
+public enum ExcelSheetIdentity {
 
     FLOOR_PLAN_SHEET(0),
     EMPLOYEE_DESK_MAP_SHEET(1);
 
     private final int sheetNumber;
 
-    private ExcelSheetNameEnum(int sheetNumber) {
+    private ExcelSheetIdentity(int sheetNumber) {
         this.sheetNumber = sheetNumber;
     }
 
