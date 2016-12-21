@@ -6,7 +6,7 @@ import fsm.parser.enums.ExcelEmployeeSheetColumnIdentity;
 import fsm.parser.enums.ExcelSheetIdentity;
 import fsm.parser.exception.AmbigousEmployeeException;
 import fsm.service.EmployeeService;
-import fsm.util.ParsingResourceProvider;
+import fsm.parser.util.ParsingResourceProvider;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Sheet;

@@ -1,4 +1,4 @@
-package fsm.util;
+package fsm.parser.util;
 
 import fsm.parser.exception.ParserException;
 import jxl.Workbook;
