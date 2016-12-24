@@ -46,13 +46,14 @@
 
                         <div class="col-md-12">
                             <div>
-                                <div class="col-md-4">
+                                <span class="col-md-4">
                                     <label for="select-floor">Floor: </label>
-                                    <select id="select-floor" class="form-control" [formControl]="form.controls['floorId']">
+                                    <select id="select-floor" (change)="getPlanExistStatus($event.target.value)" class="form-control" [formControl]="form.controls['floorId']">
                                         <option disabled selected></option>
                                         <option *ngFor="let level of levels" value={{level.id}}>{{level.floorCode}}</option>
                                     </select>
-                                </div>
+                                </span>
+                                <span class="layout-status" *ngIf="planExistStatus">Floor Layout Already Exists</span>
                             </div>
                         </div>
 
@@ -73,7 +74,7 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn"  href="#" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</a>
-                    <button type="submit" class="btn" value="submit"><i class="glyphicon glyphicon-upload"></i> Upload</button>
+                    <button type="submit" class="btn" value="submit"><i class="glyphicon glyphicon-upload"></i> Preview</button>
                 </div>
             </form>
         </div>

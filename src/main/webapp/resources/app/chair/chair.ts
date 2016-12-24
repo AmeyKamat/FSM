@@ -1,16 +1,17 @@
 import { Coordinate } from "../util/coordinate";
+import {Employee} from "../util/employee";
 
 export class Chair{
   private topLeftPoint: Coordinate;
   private angle: number;
   private deskId: number;
-  private brid: string;
+  private employee: Employee;
   
-  constructor(topLeftPoint: Coordinate, angle: number, deskId: number, brid: string) {
+  constructor(topLeftPoint: Coordinate, angle: number, deskId: number, employee: Employee) {
         this.topLeftPoint = topLeftPoint;
         this.angle = angle;
         this.deskId = deskId;
-        this.brid = brid;
+        this.employee = employee;
   }
   
   getTopLeftPoint(): Coordinate{
@@ -25,7 +26,7 @@ export class Chair{
     return this.deskId;
   }
   
-  getBrid(): string{
-    return this.brid;
+  getEmployee(): Employee{
+    return this.employee;
   }
 }

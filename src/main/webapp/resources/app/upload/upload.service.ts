@@ -36,6 +36,9 @@ export class UploadService{
     getLevels(locationId:number):Observable<Level[]> {
         return this.dataService.getLevels(locationId) ;
     }
+    getPlanExistStatus(floorId:number):Observable<boolean> {
+        return this.dataService.getPlanExistStatus(floorId);
+    }
 
     acceptFormData(formData:FormData):void {
         this.canvasService.showLoader(true);

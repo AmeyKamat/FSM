@@ -1,8 +1,14 @@
 <span id="tooltip-span" *ngIf="showTooltip" [style.top]="top" [style.left]="left">
     <span id="desk-info">
-        Desk Id: {{deskId}}
+        Desk Id: {{deskId}} <br>
     </span>
     <span id="employee-info">
-        Employee Id: Undefined
+        <span *ngIf="employee!=null">
+        Name : {{employee.name}}<br>
+        BRID : {{employee.brid}}
+        </span>
+        <span *ngIf="employee==null">
+        Not Alloted
+        </span>
     </span>
 </span>

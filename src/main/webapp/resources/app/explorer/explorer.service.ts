@@ -31,6 +31,10 @@ export class ExplorerService {
         return this.dataService.getLevels(locationId) ;
     }
 
+    getPlanExistStatus(floorId:number):Observable<boolean> {
+        return this.dataService.getPlanExistStatus(floorId);
+    }
+
     drawLayout(floorId):void {
         this.canvasService.showLoader(true);
         this.canvasService.showPublish(false);

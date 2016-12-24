@@ -200,7 +200,8 @@ export class CanvasService{
             angle : chair.getAngle(),
             fill: "#cccccc",
             entity : "chair",
-            deskid: chair.getDeskId()
+            deskid: chair.getDeskId(),
+            employee: chair.getEmployee()
         });
         return group;
     }

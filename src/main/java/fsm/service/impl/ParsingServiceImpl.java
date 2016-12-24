@@ -33,8 +33,10 @@ public class ParsingServiceImpl implements ParsingService{
         for (Table table: floor.getTables()) {
             for (Desk desk: table.getDesks()) {
                 Employee employee = deskEmployeeMap.get(desk.getDeskCode());
-                desk.setDeskEmployee(employee);
-                employee.setDesk(desk);
+                if (employee != null) {
+                    desk.setDeskEmployee(employee);
+                    employee.setDesk(desk);
+                }
             }
         }
 
