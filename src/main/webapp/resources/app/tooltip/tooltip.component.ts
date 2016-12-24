@@ -1,6 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {CanvasService} from "../canvas/canvas.service";
-import {Employee} from "../employee/employee";
+import {Employee} from "../util/employee";
 @Component({
     moduleId:module.id,
     selector:'my-tooltip',
@@ -21,6 +21,7 @@ export class TooltipComponent implements OnInit{
         this.canvasService.showTooltipEmitter.subscribe((e)=>{
             this.showTooltip = true;
             this.deskId = e.target.deskid;
+            this.employee = e.target.employee;
             e= e.e;
             this.left = (e.clientX + 20) + 'px';
             this.top = (e.clientY + 20) + 'px';

@@ -159,7 +159,7 @@
 
 				</configuration>
 				<executions>
-					<execution>
+					<!--<execution>
 						<id>install node and npm</id>
 						<phase>generate-resources</phase>
 						<configuration>
@@ -178,7 +178,7 @@
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
-					</execution>
+					</execution>-->
 					<execution>
 						<id>compile ts</id>
 						<goals>

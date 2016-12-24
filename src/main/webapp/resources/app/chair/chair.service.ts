@@ -7,6 +7,8 @@ import { Chair } from "../chair/chair";
 
 import { Coordinate } from "../util/coordinate";
 import { Orientation } from "../util/orientation";
+import {Employee} from "../util/employee";
+import {Group} from "../util/group";
 
 @Injectable()
 export class ChairService {
@@ -25,8 +27,14 @@ export class ChairService {
         );
         let chairId = chairJSON.deskCode;
         let angle = this.getChairAngle(table.getOrientation(), row, column);
-
-        return new Chair(topLeftPoint, angle, chairId, "");
+        let deskEmployee = chairJSON.deskEmployee;
+        let employee:Employee;
+        if(deskEmployee!=null) {
+            employee = new Employee(deskEmployee.id, deskEmployee.brid, deskEmployee.name, deskEmployee.group);
+        }
+        else
+            employee = null;
+        return new Chair(topLeftPoint, angle, chairId, employee);
     }
 
     private applyCorrectionToRow(table: Table, tableRow: number) {

@@ -42,6 +42,11 @@ export class DataService {
             .map((response: Response) => <Level[]> response.json());
     }
 
+    getPlanExistStatus(floorId:number): Observable<boolean>{
+        return this.http
+            .get(`/floors/${floorId}/doesPlanExist`)
+            .map((response:Response)=> <boolean> response.json() );
+    }
     getLayoutData(floorId:number): Observable<any> {
         return this.http
             .get(`/floors/${floorId}`)
@@ -81,7 +86,6 @@ export class DataService {
                 headers : this.customHeaders
             })
             .subscribe(()=>{
-                console.log("publish triggered");
             });
     }
 }

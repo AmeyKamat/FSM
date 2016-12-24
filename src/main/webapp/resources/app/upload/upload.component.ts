@@ -23,6 +23,7 @@ export class UploadComponent implements OnInit{
     cities:City[] ;
     locations:Location[] ;
     levels:Level[] ;
+    planExistStatus:boolean;
 
     constructor(fb: FormBuilder, private uploadService:UploadService) {
         this.form= fb.group({
@@ -43,7 +44,6 @@ export class UploadComponent implements OnInit{
             this.countries = countries;
             for (var i = 0; i < this.countries.length; i++) {
                 this.countries[i].cities = null;
-
             }
         });
     }
@@ -69,6 +69,11 @@ export class UploadComponent implements OnInit{
     getLevels(locationId:number) {
         this.uploadService.getLevels(locationId).subscribe((levels)=> {
             this.levels = levels;
+        });
+    }
+    getPlanExistStatus(floorId:number):void{
+        this.uploadService.getPlanExistStatus(floorId).subscribe((status)=>{
+            this.planExistStatus = status;
         });
     }
 

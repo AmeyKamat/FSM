@@ -63,7 +63,15 @@ export class ExplorerComponent implements OnInit {
         }
     }
 
-    onSelect(id: number) {
-        this.explorerService.drawLayout(id);
+    onSelect(floorId: number) {
+        this.explorerService.getPlanExistStatus(floorId)
+            .subscribe((status)=>{
+            if(status == true){
+                this.explorerService.drawLayout(floorId);
+            }
+            else {
+                //TODO: Disable this floor
+            }
+        });
     }
 }
