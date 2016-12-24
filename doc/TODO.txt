@@ -1,7 +1,7 @@
 Frontend:
-#1: center canvas
-#2: explorer buttons
-#3: publish button overlay
+#1: center canvas amey
+#2: explorer buttons ishrat
+#3: publish button overlay amey
 #4: show floor exist on upload menu
 #5: override confirmation on publish
 #6: disable floor in explorer if floor plan doesnt exist
