@@ -70,7 +70,7 @@ export class ExplorerComponent implements OnInit {
                 this.explorerService.drawLayout(floorId);
             }
             else {
-
+                //TODO: Disable this floor
             }
         });
     }
