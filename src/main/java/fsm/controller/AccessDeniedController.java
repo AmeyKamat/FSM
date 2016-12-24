@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class StatusCode403Controller {
+public class AccessDeniedController {
 
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
