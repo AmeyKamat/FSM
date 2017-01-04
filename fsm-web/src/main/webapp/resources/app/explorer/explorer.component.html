@@ -1,0 +1,41 @@
+<div class="explorer">
+    <ul class="explorer-list">
+        <li *ngFor="let country of countries ; let i = index">
+                <div class="explorer-node" (click)="getCities(country)">
+                    <input id="country_{{ i }}" type="checkbox" class="example-five-checkbox">
+                    <label [attr.for]="'country_' + i" class="example-five">+</label>
+                    {{country.name}}
+                </div>
+            <ul class="explorer-list">
+                <li *ngFor="let city of country.cities ; let i=index">
+                    <div class="explorer-node" (click)="getLocations(city)">
+                        <input type="checkbox" id="city_{{i}}" class="example-five-checkbox" />
+                        &nbsp;&nbsp;
+                        <label  [attr.for]="'city_' + i" class="example-five">+</label>
+                        {{city.name}}
+                    </div>
+                    <ul class="explorer-list">
+                        <li *ngFor="let location of city.locations ; let i=index">
+                            <div class="explorer-node" (click)="getLevels(location)">
+                                <input type="checkbox" id="location_{{i}}" class="example-five-checkbox"/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <label  [attr.for]="'location_' + i" class="example-five">+</label>
+                                {{location.name}}
+                            </div>
+                            <ul class="explorer-list">
+                                <li *ngFor="let level of location.levels"
+                                    [class.selected]="level === selectedLevel">
+                                    <div class="explorer-node" (click)="onSelect(level.id)">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Level {{level.floorCode}}</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>

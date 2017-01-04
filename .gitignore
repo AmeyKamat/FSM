@@ -23,15 +23,15 @@
 /src/main/webapp/resources/app/**/*.js
 
 # Node and NPM Files
-/src/main/webapp/resources/node_modules/
-/src/main/webapp/resources/node/
-/src/main/webapp/resources/npm-debug.log
+node_modules/
+node/
+*.log
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
 # Build files
-/target/
+target/
 /bin/
 *.class
 
